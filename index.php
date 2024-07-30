@@ -10,7 +10,7 @@
 </head>
 <?php
 include "partials/_login_header.php";
-//Sushanta
+//Anjali
 include "database/config.php";
 if (isset($_POST["user_login"])) {
 
