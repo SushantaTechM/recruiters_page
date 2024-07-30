@@ -1,0 +1,64 @@
+.dashboard-tabs {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+}
+ 
+.dashboard-tab-content {
+  margin: 1rem 2rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 3px solid skyblue;
+  background-color: transparent;
+  color: white;
+  backdrop-filter: blur(15px);
+}
+ 
+.dashboard-tab-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+ 
+.dashboard-tab-content table,
+.dashboard-tab-content th,
+.dashboard-tab-content td {
+  border: 3px solid skyblue;
+  border-radius: 1rem;
+}
+ 
+.dashboard-tab-content th,
+.tab-content td {
+  padding: 10px;
+  text-align: left;
+  color: white;
+}
+ 
+.btn {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+ 
+.btn:hover {
+  background: red;
+  color: white;
+}
+ 
+.currently_set{
+  border: 3px solid skyblue;
+}
+ 
+.dashboard-tabs >button{
+  border-radius:50px;
+  margin: 0px 10px;
+  color:black;
+  font-weight:bold;
+  background: white;
+  width: 180px;
+  height: 40px;
+  cursor: pointer;
+}
+
+ 

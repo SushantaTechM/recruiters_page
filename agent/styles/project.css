@@ -1,0 +1,31 @@
+form{
+    background: transparent;
+    color: white;
+    border: 3px solid skyblue;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+}
+.table{
+    background: transparent;
+    color: white;
+    border: 3px solid skyblue;
+    border-radius: 110px;
+    font-weight: 600;
+    padding: 2rem;
+    backdrop-filter: blur(120px);
+
+}
+#customerid{
+    background: transparent;
+    color: white;
+    padding: 0.2rem 0.3rem;
+    border: 2px solid skyblue;
+}
+#title2{
+    background: transparent;
+    color: white;
+    padding: 0.2rem 0.3rem;
+    border: 2px solid skyblue;
+}
