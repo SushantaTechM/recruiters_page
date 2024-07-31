@@ -73,21 +73,25 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 
 </body> -->
 <body>
-    <div class="navbar">
+<div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button  class="tab active">Home</button></a>
-            <a href="project.php"><button class="tab">Project</button></a>
-            <a href="search.php"><button class="tab">Search</button></a>
-            <a href="search.php"><button class="tab">Customer</button></a>
-            <a href="search.php"><button class="tab">Skill</button></a>
-            <a href="search.php"><button class="tab">Location</button></a>
+            <a href="dashboard.php"><button  style="color: white;"  class="tab active">Dashboard</button></a>
+            <a href="project.php"><button style="color: white;" class="tab">Project</button></a>
+            <a href="search.php"><button style="color: white;" class="tab">Search</button></a>
+            <div class="skill-dropdown">
+                <button class="dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <div id="dropdown-content" class="dropdown-content">
+                    <a href="skill.php">Create Skills</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+            </div>
+    </div>
         </div>
         <div class="user-menu" onclick="toggleDropdown()">
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
+                <a href="#" id="log-out">Log Out</a>
             </div>
         </div>
     </div>
