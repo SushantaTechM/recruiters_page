@@ -12,6 +12,9 @@ function showNotification(message, type = "success") {
     });
   }, 3000);
 }
+function toggleSkillDropdown(){
+  document.getElementById("dropdown-content").classList.toggle("show");
+}
 
 function toggleDropdown() {
   const dropdown = document.getElementById("userDropdown");
