@@ -62,6 +62,21 @@ if ($conn->query($customermaster) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
 
+
+//                       userDetails table
+$userdetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userdetails` ( 
+`SlNo` INT(50) NOT NULL AUTO_INCREMENT, `UserId` INT(50) NOT NULL , 
+`FirstName` VARCHAR(50) NOT NULL , 
+`LastName` VARCHAR(50) NOT NULL , `Age` INT(2) NOT NULL , `Location` INT(10) NOT NULL , `Email` VARCHAR(25) NOT NULL , `HighestQualification` VARCHAR(25) NOT NULL , `Experience` VARCHAR(25) NOT NULL , `About` VARCHAR(300) NOT NULL , 
+`Image` LONGBLOB NOT NULL , 
+`Resume` LONGBLOB NOT NULL , 
+`Gender` VARCHAR(1) NOT NULL,
+PRIMARY KEY (`SlNo`),FOREIGN KEY (`Email`) REFERENCES `users`(`Email`),FOREIGN KEY (`UserId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`Location`) REFERENCES `locationmaster`(`LocationId`)) ENGINE = InnoDB";
+
+if ($conn->query($userdetails) === FALSE) {
+  echo "Error creating table: " . $conn->error;
+}
+
 //                       project table
 $project = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`project` ( `ProjectId` INT(20) NOT NULL AUTO_INCREMENT , `CustomerId` INT(20) NOT NULL , `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL , `Location` INT(20) NOT NULL , `ProjectName` VARCHAR(50) NOT NULL , PRIMARY KEY (`ProjectId`) ,FOREIGN KEY (`CustomerId`) REFERENCES `customermaster`(`CustomerId`) , FOREIGN KEY (`Location`) REFERENCES `locationmaster`(`LocationId`)) ENGINE = InnoDB
 ";
