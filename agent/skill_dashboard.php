@@ -94,11 +94,11 @@ $outcome1 = mysqli_query($conn, $sql1);
             <input type="hidden" name="editSkillId" id="editSkillId">
 
             <div class="form-group">
-              <label for="editSkillName">ProjectName</label>
+              <label for="editSkillName">SkillName</label>
               <input name="editSkillName" class="form-control" id="editSkillName" rows="3"
                 placeholder="please add description..."></input>
             </div>
-            <button type="submit" class="btn btn-primary" name="update">Update Note</button>
+            <button type="submit" class="btn btn-primary" name="update">Update Skill</button>
           </form>
         </div>
 
@@ -143,7 +143,7 @@ $outcome1 = mysqli_query($conn, $sql1);
         $result = mysqli_query($conn, $SQL);
         if ($result) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project Updated Succesfully.
+              <strong>Success!</strong> Your Skill Updated Succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
