@@ -46,6 +46,22 @@ $customermaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`customermaster`
 if ($conn->query($customermaster) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
+
+//VerticalMaster
+$verticalmaster = "CREATE TABLE if not exists `recruitmentpage`.`verticalmaster` ( `id` INT NOT NULL AUTO_INCREMENT ,  `Vertical` VARCHAR(100) NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;";
+
+if ($conn->query($verticalmaster) === FALSE) {
+  echo "Error creating table: " . $conn->error;
+}
+
+//IBU master
+$ibumaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`ibumaster` ( `id` INT(20) NOT NULL AUTO_INCREMENT , `verticalid` int(11) NOT NULL , `IBUname` varchar(100) NOT NULL , `owner` varchar(100) NOT NULL,  `status` varchar(100) NOT NULL, PRIMARY KEY (`id`) , FOREIGN KEY (`verticalid`) REFERENCES `verticalmaster`(`id`)) ENGINE = InnoDB;
+";
+
+if ($conn->query($ibumaster) === FALSE) {
+  echo "Error creating table: " . $conn->error;
+}
+
 //                       userDetails table
 $userdetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userdetails` ( 
 `SlNo` INT(50) NOT NULL AUTO_INCREMENT, `UserId` INT(50) NOT NULL , 
@@ -95,6 +111,13 @@ if ($conn->query($userprojectdetail) === FALSE) {
 $userskilldetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userskilldetails` ( `SlNo` INT(25) NOT NULL AUTO_INCREMENT , `UserId` INT(25) NOT NULL , `SkillId` INT(25) NOT NULL , `SkillType` VARCHAR(25) NOT NULL , PRIMARY KEY (`SlNo`), FOREIGN KEY (`UserId`) REFERENCES `users`(`UserId`), FOREIGN KEY (`SkillId`) REFERENCES `skillmaster`(`SkillId`)) ENGINE = InnoDB;";
 
 if ($conn->query($userskilldetails) === FALSE) {
+  echo "Error creating table: " . $conn->error;
+}
+
+//project skill details
+$projectskilldetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`projectskilldetails` ( `slno` INT(50) NOT NULL AUTO_INCREMENT , `project` int(20) NOT NULL , `skill` int(20) NOT NULL , `requeired_headcount` VARCHAR(100) NOT NULL , `fullfill_headcount` VARCHAR(100) NOT NULL , PRIMARY KEY(`slno`), FOREIGN KEY (`project`) REFERENCES `project`(`ProjectId`), FOREIGN KEY (`skill`) REFERENCES `skillmaster`(`SkillId`))";
+
+if ($conn->query($projectskilldetails) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
 

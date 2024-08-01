@@ -1,17 +1,17 @@
 <?php
 
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
     // Start Session it is not started yet
     session_start();
 }
-if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
-{
+if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
     header('location:../index.php');
     exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +24,20 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/notification.css">
 </head>
-<body >
+
+<body>
     <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab">Home</button></a>
-            <a href="project.php"><button class="tab">Project</button></a>
+            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <div class="project-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <div id="project-dropdown-content" class="dropdown-menu">
+                    <a href="project.php">Create Project</a>
+                    <a href="project.php">Dashboard</a>
+                </div>
+            </div>
             <a href="search.php"><button class="tab active">Search</button></a>
             <div class="skill-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
@@ -63,7 +71,7 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
     </div>
 
     <div class="tab-content active" id="search-content">
-        <div class="search-container" >
+        <div class="search-container">
             <input type="text" id="search-bar" placeholder="Search..." onkeyup="filterResults()">
             <div class="filters">
                 <select id="location-filter" onchange="filterResults()">
@@ -84,17 +92,29 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
     </div>
     <div class="smallModal" id="project-softlock-modal">
         <div class="smallModal-content">
-            <span class="close-btn" onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
+            <span class="close-btn"
+                onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
-            <select class="smallModalDropdown" id="softlockprojectDropdown">
-
-            </select>
+            <select class="smallModalDropdown" id="softlockprojectDropdown"></select>
+            <select class="smallModalDropdown" id="softlockSkillDropdown"></select>
+            <div class="form-group">
+                <label for="title4">Start Date</label>
+                    <input name="title4" type="date" class="form-control" id="title4" aria-describedby="emailHelp"
+                        placeholder="Enter Starting Date">
+            </div>
+            <div class="form-group">
+                <label for="title5">End Date</label>
+                <input name="title5" type="date" class="form-control" id="title5" aria-describedby="emailHelp"
+                        placeholder="Enter Ending Date">
+            </div>
+            
             <button id="softlock-project-button">Softlock</button>
         </div>
     </div>
     <div class="smallModal" id="project-confirm-modal">
         <div class="smallModal-content">
-            <span class="close-btn" onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
+            <span class="close-btn"
+                onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
             <select class="smallModalDropdown" id="confirmprojectDropdown">
 
@@ -102,9 +122,10 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
             <button id="confirm-project-button">Confirm</button>
         </div>
     </div>
-    
+
     <script src="script/search.js"></script>
     <script src="script/script.js"></script>
-    
+
 </body>
+
 </html>
