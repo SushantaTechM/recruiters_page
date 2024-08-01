@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 }
 // session_start();
 if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
-    header('location:../index.php');
+    header('location:../indexCopy.php');
     exit;
 }
 

@@ -22,7 +22,7 @@
                     <span id="user-login-label" class="active">USER LOGIN</span> -->
                     
                     <!-- toggle button -->
-                    <li>
+                    <!-- <li>
                         <div class="header">
                             <div class="login-toggle">
                             <span id="user-login-label" class="active">USER LOGIN</span>
@@ -34,7 +34,7 @@
                             </label>
                             <span id="agent-login-label" style="color: white;">AGENT LOGIN</span>
                         </div>
-                    </li>
+                    </li> -->
                 
     </div>
 
