@@ -26,7 +26,14 @@
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab ">Home</button></a>
-            <a href="project.php"><button class="tab">Project</button></a>
+            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <div class="project-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <div id="project-dropdown-content" class="dropdown-menu">
+                    <a href="project.php">Create Project</a>
+                    <a href="project.php">Dashboard</a>
+                </div>
+            </div>
             <a href="search.php"><button class="tab">Search</button></a>
             <div class="skill-dropdown">
                 <button class="dashboard-dropbtn tab active" onclick="toggleSkillDropdown()">Skills</button>

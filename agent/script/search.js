@@ -100,8 +100,8 @@ function filterResults() {
                 <td>${user.LocationName}</td>
                 <td>${user.SkillName}</td>
                 
-                <td>${user.UserName==null?'-------':user.UserName}</td>
-                <td>${user.ProjectName==null?'-------':user.ProjectName}</td>
+                <td id="agentName">${user.UserName==null?'-------':user.UserName}</td>
+                <td id="projectName">${user.ProjectName==null?'-------':user.ProjectName}</td>
                 <td>
                     ${user.Status=='confirm'?'<img class="search_user_status confirm" src="../images/confirm.svg" />':
                     user.Status=='softlock'?'<img class="search_user_status lock" src="../images/softlock.svg" />':
@@ -133,9 +133,18 @@ function filterResults() {
       document.querySelectorAll(".search-confirm-btn").forEach((button) => {
         button.addEventListener("click", (event) => {
         //   if (confirm("Are you really want to confirm the Employee")) {
+          parentRow=event.currentTarget.closest('tr');
+          projectname=parentRow.querySelector('#projectName').textContent;
+          agentname=parentRow.querySelector('#agentName').textContent;
+          if(projectname!='-------' && agentname!='-------'){
+            if (confirm("Are you really want to confirm the Employee")) {
+              // console.log(event.target.dataset.userEmail);
+              confirmSoftlockUser(event.target.dataset.userEmail);
+            }
+          }
+          else{
             showConfirmModal(event.currentTarget.dataset.userEmail);
-        //   }
-        //   console.log(event.currentTarget.dataset.userEmail);
+          }
         });
       });
     });
@@ -149,6 +158,22 @@ function fetchProjectNames(){
     .then(data=>{
         return data.projects;
     })
+}
+function fetchSkillNames(projectid){
+  console.log(projectid);
+  fetch("fetch/fetch_get_skills.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      projectid: projectid,
+    }),
+  })
+  .then(response=>response.json())
+  .then(data=>{
+      return data.skills;
+  })
 }
 function showConfirmModal(UserId){
     const modal=document.getElementById('project-confirm-modal');
@@ -182,6 +207,7 @@ function showSoftlockModal(UserId){
     const modal=document.getElementById('project-softlock-modal');
     const projectDropdown=document.getElementById('softlockprojectDropdown');
     const softlockBtn=document.getElementById('softlock-project-button');
+    const skillDropdown=document.getElementById('softlockSkillDropdown');
 
     fetchProjectNames().then(projects=>{
         projectDropdown.innerHTML='';
@@ -196,6 +222,28 @@ function showSoftlockModal(UserId){
         })
         // console.log(projectDropdown);
     })
+
+    projectDropdown.addEventListener("change",(event)=>{
+      // console.log(projectDropdown.value)
+      projectid=projectDropdown.value;
+      if(projectid!=null){
+        fetchSkillNames(projectid).then(skills=>{
+          skillDropdown.innerHTML='';
+          // console.log(projects);
+          skills.forEach(skill=>{
+              const option=document.createElement("option");
+              option.className='smallModalDropdownOption';
+              option.value=skill.SkillId;
+              option.textContent=skill.SkillName;
+              
+              skillDropdown.appendChild(option);
+          })
+          // console.log(skillDropdown);
+      })
+      }
+    })
+    
+    
     modal.style.display="block";
 
     softlockBtn.onclick=()=>{
@@ -237,9 +285,15 @@ function softlockUser(UserId,projectId) {
         //change the class and text of softlock button
         const softlockBtn = userElement.querySelector("#search-softlock-btn");
         softlockBtn.disabled=true;
+
         const softlockImage=userElement.querySelector(".search_user_status");
         softlockImage.src="../images/softlock.svg";
 
+        const agentname=userElement.querySelector('#agentName');
+        agentname.textContent=data.agentname;
+
+        const projectname=userElement.querySelector('#projectName');
+        projectname.textContent=data.projectname;
 
       } else {
         showNotification("Error: " + data.message, "error");
@@ -293,4 +347,45 @@ function confirmUser(UserId,projectId) {
     });
 }
 
+function confirmSoftlockUser(UserId) {
+  // console.log("confirmDashboardUser called");
+  if (UserId != null) {
+    const AgentId=getcookie('AgentId');
+    // const AgentId = 2;
 
+    fetch("fetch/fetch_save_softlock_confirmation.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        UserId: UserId,
+        AgentId: AgentId,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status == "success") {
+          showNotification("Employee Confirmed");
+
+          const userElement = document.getElementById(`row${UserId}`);
+          const confirmBtn = userElement.querySelector(".search-confirm-btn");
+          confirmBtn.disabled=true;
+          const confirmImage=userElement.querySelector(".search_user_status");
+          confirmImage.src="../images/confirm.svg";
+
+          
+        } else {
+          showNotification("Error: " + data.message, "error");
+        }
+      })
+      .catch((error) => {
+        showNotification("Error: " + error.message, "error");
+      });
+  }
+}
