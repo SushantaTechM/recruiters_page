@@ -25,36 +25,39 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
     <link rel="stylesheet" href="styles/notification.css">
 </head>
 <body >
-    <!-- <div class="navbar">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: red;">HireHub</span></div>
+    <div class="navbar" style="padding-bottom: 100px;">
+        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="index.php"><button class="tab">Dashboard</button></a>
+            <a href="dashboard.php"><button class="tab">Home</button></a>
             <a href="project.php"><button class="tab">Project</button></a>
             <a href="search.php"><button class="tab active">Search</button></a>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
+            <div class="skill-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <div id="dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Skills</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="location-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <div id="location-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Location</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="customer-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+                <div id="customer-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Customer</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
             </div>
         </div>
-    </div> -->
-    <div class="navbar">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button class="tab">Dashboard</button></a>
-            <a href="project.php"><button class="tab">Project</button></a>
-            <a href="search.php"><button class="tab active">Search</button></a>
-            <a href="search.php"><button class="tab">Customer</button></a>
-            <a href="search.php"><button class="tab">Skill</button></a>
-            <a href="search.php"><button class="tab">Location</button></a>
-        </div>
         <div class="user-menu" onclick="toggleDropdown()">
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
+                <a href="#" id="log-out">Log Out</a>
             </div>
         </div>
     </div>

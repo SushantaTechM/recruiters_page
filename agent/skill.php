@@ -9,7 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Recruitment Portal</title>
   <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="styles/dashboard.css">
+   <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+   <link rel="stylesheet" href="styles/index.css">
+   <link rel="stylesheet" href="styles/navbar.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,20 +21,34 @@
   <title>Skill</title>
 </head>
 
-<body style="background:url('../images/p (1).jpg') no-repeat; background-size: cover; background-position: center;">
+<body>
 <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button  style="color: white;"  class="tab active">Dashboard</button></a>
-            <a href="project.php"><button style="color: white;" class="tab">Project</button></a>
-            <a href="search.php"><button style="color: white;" class="tab">Search</button></a>
+            <a href="dashboard.php"><button class="tab ">Home</button></a>
+            <a href="project.php"><button class="tab">Project</button></a>
+            <a href="search.php"><button class="tab">Search</button></a>
             <div class="skill-dropdown">
-                <button class="dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-content">
+                <button class="dashboard-dropbtn tab active" onclick="toggleSkillDropdown()">Skills</button>
+                <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
                     <a href="skill_dashboard.php">Dashboard</a>
+                </div>
             </div>
-    </div>
+            <div class="location-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <div id="location-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Location</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="customer-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+                <div id="customer-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Customer</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
         </div>
         <div class="user-menu" onclick="toggleDropdown()">
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">

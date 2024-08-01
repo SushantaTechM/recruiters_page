@@ -1,10 +1,9 @@
 <?php
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
   // Start Session it is not started yet
   session_start();
 }
-if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
-{
+if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
   header('location:../index.php');
   exit;
 }
@@ -50,19 +49,33 @@ $outcome1 = mysqli_query($conn, $sql1);
       </div>
     </div>
   </div> -->
-  <div class="navbar">
+  <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button  style="color: white;"  class="tab active">Dashboard</button></a>
-            <a href="project.php"><button style="color: white;" class="tab">Project</button></a>
-            <a href="search.php"><button style="color: white;" class="tab">Search</button></a>
+            <a href="dashboard.php"><button class="tab ">Home</button></a>
+            <a href="project.php"><button class="tab">Project</button></a>
+            <a href="search.php"><button class="tab">Search</button></a>
             <div class="skill-dropdown">
-                <button class="dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-content">
+                <button class="dashboard-dropbtn tab active" onclick="toggleSkillDropdown()">Skills</button>
+                <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
                     <a href="skill_dashboard.php">Dashboard</a>
+                </div>
             </div>
-    </div>
+            <div class="location-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <div id="location-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Location</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="customer-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+                <div id="customer-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Customer</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
         </div>
         <div class="user-menu" onclick="toggleDropdown()">
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
@@ -74,7 +87,7 @@ $outcome1 = mysqli_query($conn, $sql1);
     </div>
 
 
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -104,10 +117,10 @@ $outcome1 = mysqli_query($conn, $sql1);
 
       </div>
     </div>
-    </div>
+  </div>
 
-    <?php
-    if (isset($_GET["delete"])) {
+  <?php
+  if (isset($_GET["delete"])) {
     $id = $_GET["delete"];
     $cid = "SELECT * FROM `skillmaster` where `skillmaster`.`skillId` = '$id'";
     $res4 = mysqli_query($conn, $cid);
@@ -115,7 +128,7 @@ $outcome1 = mysqli_query($conn, $sql1);
     $query = "DELETE FROM `skillmaster` where `skillmaster`.`skillId` = '$id'";
     $result = mysqli_query($conn, $query);
 
-    if(!$result){
+    if (!$result) {
       die(mysqli_error($conn));
     }
     // $result = mysqli_query($conn, $query);
@@ -126,22 +139,22 @@ $outcome1 = mysqli_query($conn, $sql1);
     //   if (!$result) {
     //     die(mysqli_error($conn));
     //   }
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Success!</strong> Your Skill Deleted Succesfully.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>';
-    }
-    if ($_SERVER['REQUEST_METHOD'] == "POST"){
-      if (isset($_POST["update"])) {
+  }
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST["update"])) {
 
-        $editSkillName = $_POST['editSkillName'];
-        $editSkillId = $_POST['editSkillId'];
+      $editSkillName = $_POST['editSkillName'];
+      $editSkillId = $_POST['editSkillId'];
 
-        $SQL = "UPDATE `skillmaster` SET `SkillName` = '$editSkillName' WHERE `skillmaster`.`SkillId` = '$editSkillId'";
-        $result = mysqli_query($conn, $SQL);
-        if ($result) {
+      $SQL = "UPDATE `skillmaster` SET `SkillName` = '$editSkillName' WHERE `skillmaster`.`SkillId` = '$editSkillId'";
+      $result = mysqli_query($conn, $SQL);
+      if ($result) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
               <strong>Success!</strong> Your Skill Updated Succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -151,12 +164,12 @@ $outcome1 = mysqli_query($conn, $sql1);
       } else {
         echo mysqli_error($conn);
       }
-      }
     }
-    
-  
+  }
+
+
   ?>
- 
+
   <div class="container">
     <hr style="margin-bottom: 2rem;">
 
@@ -185,11 +198,11 @@ $outcome1 = mysqli_query($conn, $sql1);
                   <td>" . $row['SkillName'] . "</td>
                   
                   <td>
-                  <button class='edit btn btn-primary' id='edit-".$row['SkillId']. "'>Edit</button>
+                  <button class='edit btn btn-primary' id='edit-" . $row['SkillId'] . "'>Edit</button>
                   <button class='delete btn btn-danger' id='" . $row['SkillId'] . "'>Delete</button></td>
                 </tr>";
-               
-                
+
+
             }
           } else {
             echo "0 results";
@@ -201,7 +214,7 @@ $outcome1 = mysqli_query($conn, $sql1);
     </div>
   </div>
 
- 
+
 
 
   <!-- Optional JavaScript -->
@@ -236,7 +249,7 @@ $outcome1 = mysqli_query($conn, $sql1);
         $('#myModal').modal('toggle')
       })
     })
-       
+
     deletes = document.getElementsByClassName("delete");
     console.log(deletes);
     Array.from(deletes).forEach((element) => {

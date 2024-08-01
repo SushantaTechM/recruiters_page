@@ -102,7 +102,18 @@
     border: 3px solid skyblue;
     cursor: pointer;
 }
-
+.search-confirm-btn:disabled{
+    background-color:rgb(13, 16, 65);
+}
+.search-softlock-btn:disabled{
+    background-color:rgb(13, 16, 65);
+}
+.search-confirm-btn:hover{
+    background-color:rgb(13, 16, 65);
+}
+.search-softlock-btn:hover{
+    background-color:rgb(13, 16, 65);
+}
 
 
 .smallModal{
