@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 }
 if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
 {
-  header('location:../index.php');
+  header('location:../indexCopy.php');
   exit;
 }
 include ("../database/dbconnect.php");
