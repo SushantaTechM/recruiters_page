@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
     // Start Session it is not started yet
     session_start();
 }
@@ -29,63 +29,41 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
     <link rel="stylesheet" href="styles/dashboard.css">
 </head>
 
-<!-- <body>
-
-    <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Confirmed data</button>
-    </div>
-
-    <div class="dashboard-tab-content">
-        <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
-        <div class="dashboard-confirm-content"></div>
-    </div>
-
-    <div class="modal" id="user-modal">
-            <div class="modal-content">
-                <span class="close-btn"
-                    onclick="document.getElementById('user-modal').style.display='none'">&times;</span>
-                <div class="head">
-                    <img id="modal-image" height="200px" width="200px" src="" alt="user-image" />
-                    <span class="about">
-                        <p id="modal-name"></p>
-                        <p id="modal-about"></p>
-                    </span>
-                </div>
-                <div class="details">
-                    <span>
-                        <p id="modal-email"></p>
-                        <p id="modal-qualification"></p>
-                        <p id="modal-skill"></p>
-                    </span>
-                    <span id="left">
-                        <p id="modal-gender"></p>
-                        <p id="modal-age"></p>
-                        <p id="modal-location"></p>
-                    </span>
-                </div>
-                <a href="#" id="modal-resume" download><button>Download Resume</button>
-                </a>
-            </div>
-        </div>
-
-    <script src="script/dashboard.js"></script>
-
-</body> -->
 <body>
-<div class="navbar" style="padding-bottom: 100px;">
+    <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button  style="color: white;"  class="tab active">Dashboard</button></a>
-            <a href="project.php"><button style="color: white;" class="tab">Project</button></a>
-            <a href="search.php"><button style="color: white;" class="tab">Search</button></a>
+            <a href="dashboard.php"><button class="tab active">Home</button></a>
+            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <div class="project-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <div id="project-dropdown-content" class="dropdown-menu">
+                    <a href="project.php">Create Project</a>
+                    <a href="project.php">Dashboard</a>
+                </div>
+            </div>
+            <a href="search.php"><button class="tab">Search</button></a>
             <div class="skill-dropdown">
-                <button class="dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-content">
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
                     <a href="skill_dashboard.php">Dashboard</a>
+                </div>
             </div>
-    </div>
+            <div class="location-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <div id="location-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Location</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="customer-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+                <div id="customer-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Customer</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
         </div>
         <div class="user-menu" onclick="toggleDropdown()">
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
@@ -95,17 +73,17 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             </div>
         </div>
     </div>
- 
+
     <div class="dashboard-tabs">
         <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
         <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Confirmed data</button>
     </div>
- 
+
     <div class="dashboard-tab-content">
         <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
         <div class="dashboard-confirm-content"></div>
- 
- 
+
+
         <div class="modal" id="user-modal">
             <div class="modal-content">
                 <span class="close-btn"
@@ -132,7 +110,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
                 <a href="#" id="modal-resume" download><button>Download Resume</button></a>
             </div>
         </div>
- 
+
     </div>
 
 
@@ -140,4 +118,5 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
     <script src="script/modal.js"></script>
     <script src="script/dashboard.js"></script>
 </body>
+
 </html>
