@@ -16,6 +16,16 @@ $outcome1 = mysqli_query($conn, $sql1);
 $sql2 = "SELECT * from `locationmaster`";
 $outcome2 = mysqli_query($conn, $sql2);
 
+$skill_query = "SELECT * FROM `skillmaster`";
+$skill_outcome = mysqli_query($conn,$skill_query);
+
+$vertical_query = "SELECT * FROM `verticalmaster`";
+$vertical_outcome = mysqli_query($conn,$vertical_query);
+
+$IBU_query = "SELECT * FROM `IBUmaster`";
+$IBU_outcome = mysqli_query($conn,$IBU_query);
+
+
 
 ?>
 
@@ -214,6 +224,13 @@ $outcome2 = mysqli_query($conn, $sql2);
       $custid = $row8['CustomerId'];
 
       $location = $_POST['title2'];
+
+      $verticalid = $_POST['Vertical'];
+
+      $IBUid = $_POST['IBU'];
+
+
+
       //.....................
       // $locationid="SELECT `LocationId` FROM `LocationMaster` where `LocationName` like '$location'";
       // $res5=mysqli_query($conn,$locationid);
@@ -221,15 +238,47 @@ $outcome2 = mysqli_query($conn, $sql2);
       // $location5=$row['LocationId'];
       //...............
       $query5 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$location'";
+      // $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$vertical'";
+      // $query7 = "SELECT * FROM `IBUmaster` WHERE `IBUname` LIKE '$IBUmaster'";
+      
       $result5 = mysqli_query($conn, $query5);
       $row5 = mysqli_fetch_assoc($result5);
+
+      // $result6 = mysqli_query($conn, $query6);
+      // $row6 = mysqli_fetch_assoc($result6);
+
+      // $result7 = mysqli_query($conn, $query7);
+      // $row7 = mysqli_fetch_assoc($result7);
+
+
       $locationid = $row5['LocationId'];
+
+      // $verticalid = $row6['id'];
+
+      // $IBUid = $row7['id'];
+
 
       $Startdate = $_POST['title4'];
       $Enddate = $_POST['title5'];
       $projectname = $_POST['title'];
+      $skillname = $_POST['title3'];
+      $requiredHeadcount = $_POST['headcount'];
 
-      $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`ProjectName`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$projectname')";
+      // $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
+      // $project_result = mysqli_query($conn,$project_query);
+      // $project_row = mysqli_fetch_assoc($project_result);
+      // $projectid = $project_row['ProjectId'];
+      // echo "Project id" . $projectid . "<br>";
+
+      // $skill_id
+      $skill_query2 = "SELECT `SkillId` from `skillmaster` WHERE `SkillName` LIKE '$skillname'";
+      $skill_result = mysqli_query($conn, $skill_query2);
+      $skill_row = mysqli_fetch_assoc($skill_result);
+      $skillid = $skill_row['SkillId'];
+      // echo "Skill id" . $skillid . "<br>";
+
+      $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`VerticalId`,`IBUId`,`ProjectName`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$verticalid','$IBUid','$projectname')";
+      // var_dump($query);
       $result = mysqli_query($conn, $query);
 
       if ($result) {
@@ -241,6 +290,22 @@ $outcome2 = mysqli_query($conn, $sql2);
             </div>';
       } else {
         echo mysqli_error($conn);
+      }
+
+      $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
+      $project_result = mysqli_query($conn,$project_query);
+      $project_row = mysqli_fetch_assoc($project_result);
+      $projectid = $project_row['ProjectId'];
+      // echo "Project id" . $projectid . "<br>";
+
+      $query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`) VALUES ('$projectid', '$skillid', '$requiredHeadcount')";
+
+      // var_dump($query2);
+      $result2 = mysqli_query($conn, $query2);
+
+      if (!$result2) {
+        echo mysqli_error($conn);
+        
       }
     }
 
@@ -290,6 +355,107 @@ $outcome2 = mysqli_query($conn, $sql2);
           ?>
         </select>
       </div>
+      <div class="form-group">
+        <label for="Vertical">Vertical Name</label>
+        <select name="Vertical" id="Vertical">
+          <option value="" disabled selected hidden>Please select Vertical Name</option>
+          <?php
+          while ($row = mysqli_fetch_assoc($vertical_outcome)) {
+            $Customer = $row['id'];
+            $vertiical_name=$row['Vertical'];
+            echo "<option value='$Customer'>$vertiical_name</option>";
+          }
+          ?>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="IBU">IBU Head</label>
+        <select name="IBU" id="IBU">
+          <option value="" disabled selected hidden>Please select IBU head</option>
+          <?php
+          while ($row = mysqli_fetch_assoc($IBU_outcome)) {
+            $Customer = $row['id'];
+            $IBU_name=$row['IBUname'];
+            echo "<option value='$Customer'>$IBU_name</option>";
+          }
+          ?>
+        </select>
+      </div>
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+
+      <!-- <div class="form-group">
+        <label for="title3">Skill</label>
+        <select name="title3" id="title3" multiple>
+          <option value="" disabled selected hidden>Please select your skill</option> -->
+          <?php
+          // while ($row = mysqli_fetch_assoc($skill_outcome)) {
+          //   $skilll = $row['SkillName'];
+          //   echo "<option value='$skilll'>$skilll</option>";
+          //   // echo $row;
+          // }
+          ?>
+        <!-- </select> -->
+      <!-- </div> -->
+      <div class="form-group">
+          <label for="skills">Skills</label>
+          <select name="skills[]" id="skills" multiple>
+              <option value="" disabled hidden>Please select your skills</option>
+              <?php
+              while ($row = mysqli_fetch_assoc($skill_outcome)) {
+                  $skillName = $row['SkillName'];
+                  $skillID = $row['SkillID']; // Assuming there's a SkillID in your database
+                  echo "<option value='$skillID'>$skillName</option>";
+              }
+              ?>
+          </select>
+      </div>
+
+      <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          $projectid = $_POST['projectid']; // Assuming you have this in your form
+          $skills = $_POST['skills'];
+          $headcounts = $_POST['headcount'];
+      
+          // Check if the arrays have the same length
+          if (count($skills) === count($headcounts)) {
+              foreach ($skills as $index => $skillid) {
+                  $requiredHeadcount = $headcounts[$index];
+                  $query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`) VALUES ('$projectid', '$skillid', '$requiredHeadcount')";
+      
+                  if (mysqli_query($conn, $query2)) {
+                      echo "New record created successfully for skill ID: $skillid";
+                  } else {
+                      echo "Error: " . $query2 . "<br>" . mysqli_error($conn);
+                  }
+              }
+          } else {
+              echo "Error: Skills and headcounts must have the same number of items.";
+          }
+      }
+
+      ?>
+
+      <div class="form-group">
+          <label for="headcount">Required Headcount for each skill</label>
+          <input type="number" name="headcount[]" id="headcount" multiple>
+      </div>
+
+      <button type="submit">Submit</button>
+ 
+      <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+      <script>
+          new MultiSelectTag('title3')  // id
+      </script>
+      
+<div id="headcount-fields">
+
+</div>
+      <!-- <div class="form-group">
+        <label for="title">Required Headcount</label>
+        <input name="headcount" type="title" class="form-control" id="title" aria-describedby="emailHelp"
+          placeholder="Enter Required Headcount">
+      </div> -->
 
       <button type="submit" class="btn btn-primary">Add Project</button>
     </form>
@@ -306,13 +472,16 @@ $outcome2 = mysqli_query($conn, $sql2);
             <th scope="col">Start Date</th>
             <th scope="col">End Date</th>
             <th scope="col">Location</th>
+            <th scope="col">Vertical</th>
+            <th scope="col">IBU</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
 
         <b>
           <?php
-          $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c WHERE p.CustomerId=c.CustomerId and p.Location=l.LocationId";
+          // $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c, `verticalmaster` v, `IBUmaster` i WHERE p.CustomerId=c.CustomerId, p.Location=l.LocationId", ;
+          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
             $no = 0;
@@ -320,15 +489,17 @@ $outcome2 = mysqli_query($conn, $sql2);
             while ($row = $result->fetch_assoc()) {
               $no++;
               echo "<tr>
-                  <td>" . $row['ProjectId'] . "</td>
+                  <td>" . $row['ProjectID'] . "</td>
                   <td>" . $row['ProjectName'] . "</td>
                   <td>" . $row['CustomerName'] . "</td>
                   <td>" . $row['StartDate'] . "</td>
                   <td>" . $row['EndDate'] . "</td>
                   <td>" . $row['LocationName'] . "</td>
+                  <td>" . $row['Vertical'] . "</td>
+                  <td>" . $row['IBUname'] . "</td>
                   <td>
                   <button class='edit btn btn-primary'>Edit</button>
-                  <button class='delete btn btn-danger' id='" . $row['ProjectId'] . "'>Delete</button></td>
+                  <button class='delete btn btn-danger' id='" . $row['ProjectID'] . "'>Delete</button></td>
                 </tr>";
             }
           } else {
@@ -402,7 +573,29 @@ $outcome2 = mysqli_query($conn, $sql2);
 
       })
     })
+
+    document.getElementById('title').addEventListener('change', function() {
+    const selectedSkills = Array.from(this.selectedOptions).map(option => option.value);
+    const headcountFieldsDiv = document.getElementById('headcount-fields');
+    
+    // Clear any existing headcount fields
+    headcountFieldsDiv.innerHTML = '';
+
+    selectedSkills.forEach(skill => {
+        const label = document.createElement('label');
+        label.innerHTML = `Headcount for ${skill}: `;
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.name = `headcount[${skill}]`;
+        input.required = true;
+        headcountFieldsDiv.appendChild(label);
+        headcountFieldsDiv.appendChild(input);
+        headcountFieldsDiv.appendChild(document.createElement('br'));
+    });
+});
   </script>
+
+
   <script src="script/script.js"></script>
   <!-- sushanta -->
 </body>

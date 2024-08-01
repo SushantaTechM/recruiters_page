@@ -71,9 +71,9 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 
     <script src="script/dashboard.js"></script>
 
-</body> -->
-<body>
-    <div class="navbar">
+</bodstyle="background:url('../images/p (1).jpg') no-repeat; background-size: cover; background-position: center;"y> -->
+<body >
+    <div class="navbar" >
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button  class="tab active">Home</button></a>
