@@ -45,15 +45,15 @@
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Location</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="add_location.php">Create Location</a>
+                    <a href="view_location.php">Dashboard</a>
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Customer</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="customer_creation.php">Create Customer</a>
+                    <a href="customer_view.php">Dashboard</a>
                 </div>
             </div>
         </div>

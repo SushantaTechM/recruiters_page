@@ -79,10 +79,10 @@ function filterResults() {
       <table id="myTable">
         <thead>
            <tr>
-                <th>Employee name</th>
-                <th>Experience</th>
-                <th>Location</th>
-                <th>Skill</th>
+                <th>Name</th>
+                <th>Exp</th>
+                <th>Loc</th>
+                <th>Primary Skill</th>
                 <th>Acted by</th>
                 <th>Project</th>
                 <th>Status</th>
@@ -98,7 +98,8 @@ function filterResults() {
                 
                 <td>${user.Experience} </td>
                 <td>${user.LocationName}</td>
-                <td>${user.SkillName}</td>
+                <input type="hidden" id="skillName" value="${user.SkillId}">
+                <td >${user.SkillName}</td>
                 
                 <td id="agentName">${user.UserName==null?'-------':user.UserName}</td>
                 <td id="projectName">${user.ProjectName==null?'-------':user.ProjectName}</td>
@@ -124,7 +125,10 @@ function filterResults() {
       document.querySelectorAll(".search-softlock-btn").forEach((button) => {
         button.addEventListener("click", (event) => {
         //   if (confirm("Are you really want to soft lock the Employee")) {
-            showSoftlockModal(event.target.dataset.userEmail);
+          parentRow=event.target.closest('tr');
+          skillname=parentRow.querySelector('#skillName').value;
+          // console.log(skillname);
+          showSoftlockModal(event.target.dataset.userEmail,skillname);
         //   }
         //   console.log(event.target.dataset.userEmail);
         });
@@ -160,8 +164,8 @@ function fetchProjectNames(){
     })
 }
 function fetchSkillNames(projectid){
-  console.log(projectid);
-  fetch("fetch/fetch_get_skills.php", {
+  // console.log(projectid);
+  return fetch("fetch/fetch_get_skills.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -203,14 +207,14 @@ function showConfirmModal(UserId){
     }
 
 }
-function showSoftlockModal(UserId){
+function showSoftlockModal(UserId,skillname){
     const modal=document.getElementById('project-softlock-modal');
     const projectDropdown=document.getElementById('softlockprojectDropdown');
     const softlockBtn=document.getElementById('softlock-project-button');
     const skillDropdown=document.getElementById('softlockSkillDropdown');
 
     fetchProjectNames().then(projects=>{
-        projectDropdown.innerHTML='';
+        projectDropdown.innerHTML='<option value="">Select Project</option>';
         // console.log(projects);
         projects.forEach(project=>{
             const option=document.createElement("option");
@@ -226,7 +230,7 @@ function showSoftlockModal(UserId){
     projectDropdown.addEventListener("change",(event)=>{
       // console.log(projectDropdown.value)
       projectid=projectDropdown.value;
-      if(projectid!=null){
+      if(projectid){
         fetchSkillNames(projectid).then(skills=>{
           skillDropdown.innerHTML='';
           // console.log(projects);
@@ -248,7 +252,16 @@ function showSoftlockModal(UserId){
 
     softlockBtn.onclick=()=>{
         const projectId=projectDropdown.value;
-        softlockUser(UserId,projectId);
+        const skillDropdownName=skillDropdown.value;
+        // console.log(skillDropdownName);
+        // console.log(skillname);
+        if(skillDropdownName!==skillname){
+          // console.log("Hello");
+            if (confirm("The required skill and the employee's primary skill does not match....Are you really want to proceed")) {
+              // softlockUser(UserId,projectId);
+            }
+        }
+        
         modal.style.display="none";
 
     }

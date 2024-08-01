@@ -26,7 +26,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 </head>
 
 <body>
-    <div class="navbar" style="padding-bottom: 100px;">
+<div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab">Home</button></a>
@@ -49,15 +49,15 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Location</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="add_location.php">Create Location</a>
+                    <a href="view_location.php">Dashboard</a>
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Customer</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="customer_creation.php">Create Customer</a>
+                    <a href="customer_view.php">Dashboard</a>
                 </div>
             </div>
         </div>

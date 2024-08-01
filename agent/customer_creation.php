@@ -80,8 +80,15 @@ if (isset($_POST["btn"])) {
 <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button class="tab ">Home</button></a>
-            <a href="project.php"><button class="tab">Project</button></a>
+            <a href="dashboard.php"><button class="tab">Home</button></a>
+            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <div class="project-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <div id="project-dropdown-content" class="dropdown-menu">
+                    <a href="project.php">Create Project</a>
+                    <a href="project.php">Dashboard</a>
+                </div>
+            </div>
             <a href="search.php"><button class="tab">Search</button></a>
             <div class="skill-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
@@ -93,15 +100,15 @@ if (isset($_POST["btn"])) {
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Location</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="add_location.php">Create Location</a>
+                    <a href="view_location.php">Dashboard</a>
                 </div>
             </div>
             <div class="customer-dropdown">
-                <button class="dashboard-dropbtn tab tab active" onclick="toggleCustomerDropdown()">Customer</button>
+                <button class="dashboard-dropbtn tab active" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Customer</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="customer_creation.php">Create Customer</a>
+                    <a href="customer_view.php">Dashboard</a>
                 </div>
             </div>
         </div>
@@ -148,6 +155,7 @@ if (isset($_POST["btn"])) {
                 
                 <button type='submit' id='btn' name='btn' class="btn btn-primary" style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px;">Create</button>
         </form>
+        <script src="script/script.js"></script>
 </div>
 </body>
 </html>

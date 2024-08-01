@@ -53,8 +53,8 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="create_location.php">Create Location</a>
-                    <a href="location.php">Dashboard</a>
+                    <a href="add_location.php">Create Location</a>
+                    <a href="view_location.php">Dashboard</a>
                 </div>
             </div>
             <div class="customer-dropdown">
