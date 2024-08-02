@@ -5,8 +5,11 @@ $data=json_decode(file_get_contents("php://input"),true);
 $UserId = $data["UserId"];
 $AgentId = $data["AgentId"];
 $projectId = $data["projectId"];
+$skillId = $data["skillId"];
+$startDate = $data["startDate"];
+$endDate = $data["endDate"];
 
-$sql="INSERT INTO `userprojectdetails` (`SlNo`, `Status`, `UserId`, `AgentId`, `ProjectId`) VALUES (NULL, 'softlock', '$UserId', '$AgentId', '$projectId');";
+$sql="INSERT INTO `userprojectdetails` (`SlNo`, `Status`, `UserId`, `AgentId`, `ProjectId`,`SkillId`,`StartDate`,`EndDate`) VALUES (NULL, 'softlock', '$UserId', '$AgentId', '$projectId','$skillId','$startDate','$endDate');";
 $result = $conn->query($sql);
 
 $sql="Select * from `project` where `ProjectId`='$projectId';";

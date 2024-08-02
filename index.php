@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +23,7 @@ if (isset($_POST["Login"])) {
     if (!$connection) {
         echo "Something went wrong";
     }
-    $sql = "SELECT Type FROM `Users` WHERE Email LIKE '$email' AND Password = '$password'";
+    $sql = "SELECT Type,UserId FROM `Users` WHERE Email LIKE '$email' AND Password = '$password'";
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
     // if($result->num_rows > 0){
@@ -40,58 +41,62 @@ if (isset($_POST["Login"])) {
     // }else{
     //     echo "Invalid username or Password";
     // }
-   
 
-    
-     
-    if ($result){
-        
-            session_start();
-           
-            // $_SESSION['UserId']= $row['Id'];
-            $type = $row['Type'];
-            $_SESSION['type'] = $row['Type'];
-            // $sqlid = "SELECT * FROM `userdetails` WHERE Email='$email'";
-            // $result1 = mysqli_query($connection,$sqlid);
-            // if($result1->num_rows > 0){
-            //     header("location:user/landing.php");
-               
-            // }else{
-            //     header("location:user/fill_data.php");
-            // }
-            
+
+
+
+    if ($result) {
+
+        session_start();
+
+        $_SESSION['UserId'] = $row['UserId'];
+        $type = $row['Type'];
+        $_SESSION['type'] = $row['Type'];
+        // $sqlid = "SELECT * FROM `userdetails` WHERE Email='$email'";
+        // $result1 = mysqli_query($connection,$sqlid);
+        // if($result1->num_rows > 0){
+        //     header("location:user/landing.php");
+
+        // }else{
+        //     header("location:user/fill_data.php");
+        // }
+
         // } else {
         //     echo"<h1 class='popup1'>Email/Password not matched !</h1>";
 
         // }
-        if($type == 'Admin'){
-                $_SESSION['agentLogin'] = true;
-                header("location: agent/dashboard.php"); 
-             }else if($type == 'User'){
-                $_SESSION['login'] = true;
-                $sqlid = "SELECT * FROM `userdetails` WHERE Email='$email'";
-               $result1 = mysqli_query($connection,$sqlid);
-               if($result1->num_rows > 0){
-                     header("location:user/landing.php");
-               
-                }else{
-                header("location:user/fill_data.php");
-                }
-               
-            }else if($type == "Agent"){
-                $_SESSION['agentLogin'] = true;
-                header("location: agent/dashboard.php");
-            }else{
-                echo "Invalid user type";
-             }
-            }
-            else{
-                echo "Invalid username or password";
-                }
+        if ($type == 'Admin') {
+            $_SESSION['agentLogin'] = true;
+            $expiry = time() + (3600 * 24);
+            setcookie("AgentId", $row['UserId'], $expiry);
+            header("location: agent/admin.php");
+        } else if ($type == 'User') {
+            $_SESSION['login'] = true;
+            $sqlid = "SELECT * FROM `userdetails` WHERE Email='$email'";
+            $result1 = mysqli_query($connection, $sqlid);
+            if ($result1->num_rows > 0) {
+                header("location:user/landing.php");
 
-        
-    } 
- 
+            } else {
+                header("location:user/fill_data.php");
+            }
+
+        } else if ($type == "Agent") {
+            $_SESSION['agentLogin'] = true;
+            $expiry = time() + (3600 * 24);
+            setcookie("AgentId", $row['UserId'], $expiry);
+            // header("location: agent/dashboard.php");
+            header("location: agent/dashboard.php");
+        } else {
+            echo "Invalid user type";
+        }
+    } else {
+        echo "Invalid username or password";
+    }
+
+
+}
+
 
 
 
@@ -110,14 +115,14 @@ if (isset($_POST["Login"])) {
 //     $result = mysqli_query($connection, $sql);
 //     $row = $result->fetch_assoc();
 //     // var_dump($row);
-       
-    
+
+
 
 //     if ($result) {
 //         if ($password == $row['Password']) {
 //             session_start();
 //             $_SESSION['agentLogin'] = true;
-            
+
 //             $expiry=time()+(3600*24);
 //             // $path=
 //             setcookie("AgentId",$row['UserId'],$expiry);
@@ -208,29 +213,30 @@ if (isset($_POST["Login"])) {
             <form action="index.php" method="post">
                 <h1> Login</h1>
                 <div class="input-box">
-                    <input type="text"  name="email" placeholder="Email Id" required>
+                    <input type="text" name="email" placeholder="Email Id" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password"  placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <input type="hidden" id="type" name="type">
                 <div class="remeber-forgot">
-                
+
                     <a href="reset_password_user.php" class="forgot-password"> Forgot password ?</a>
                 </div>
-                <button type="submit" class="btn" name="Login" >Login</button>
+                <button type="submit" class="btn" name="Login">Login</button>
                 <div class="register-link">
-                    <p>Don't have an account ? 
-                    <a href="user_registration.php">Signup</a></p>
+                    <p>Don't have an account ?
+                        <a href="user_registration.php">Signup</a>
+                    </p>
                 </div>
             </form>
         </div>
-        
+
 
         <!-- <div id="agent-login-box" class="login-box" style="display: none;"> -->
-            <!-- <form action="index.php" method="post">
+        <!-- <form action="index.php" method="post">
                 <h1> Agent login</h1>
                 <div class="input-box">
                     <input type="text"  name="email" placeholder="Email Id" required>
@@ -243,7 +249,7 @@ if (isset($_POST["Login"])) {
                 <input type="hidden" id="Type" name="Type" value="Admin">
                 <div class="remeber-forgot">
                     <label><input type="checkbox">Remember me</label>  -->
-                    <!-- <a href="reset_password_agent.php" class="forgot-password"> Forgot password ?</a>
+        <!-- <a href="reset_password_agent.php" class="forgot-password"> Forgot password ?</a>
                 </div>
                 <button   type="submit" class="btn" name="agent_login" >Login</button>
                 <div class="register-link">
@@ -257,12 +263,11 @@ if (isset($_POST["Login"])) {
 
 
 
-        
+
 
     </div>
 
-<script src="scripts/script.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>
-

@@ -65,7 +65,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="#" id="log-out">Log Out</a>
+                <a href="agent_logout.php" id="log-out">Log Out</a>
             </div>
         </div>
     </div>
@@ -98,14 +98,12 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <select class="smallModalDropdown" id="softlockprojectDropdown"></select>
             <select class="smallModalDropdown" id="softlockSkillDropdown"></select>
             <div class="form-group">
-                <label for="title4">Start Date</label>
-                    <input name="title4" type="date" class="form-control" id="title4" aria-describedby="emailHelp"
-                        placeholder="Enter Starting Date">
+                <label for="employeeStartDate">Start Date</label>
+                    <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDate" aria-describedby="emailHelp" placeholder="Enter Starting Date">
             </div>
             <div class="form-group">
-                <label for="title5">End Date</label>
-                <input name="title5" type="date" class="form-control" id="title5" aria-describedby="emailHelp"
-                        placeholder="Enter Ending Date">
+                <label for="employeeEndDate">End Date</label>
+                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDate" aria-describedby="emailHelp" placeholder="Enter Ending Date">
             </div>
             
             <button id="softlock-project-button">Softlock</button>

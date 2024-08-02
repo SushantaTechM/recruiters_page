@@ -116,7 +116,7 @@ if (isset($_POST["btn"])) {
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="#" id="log-out">Log Out</a>
+                <a href="agent_logout.php" id="log-out">Log Out</a>
             </div>
         </div>
     </div>
