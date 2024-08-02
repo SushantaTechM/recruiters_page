@@ -94,7 +94,7 @@ if ($conn->query($userdetails) === FALSE) {
 }
 
 //                       project table
-$project = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`project` ( `ProjectId` INT(20) NOT NULL AUTO_INCREMENT , `CustomerId` INT(20) NOT NULL , `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL , `Location` INT(20) NOT NULL , `ProjectName` VARCHAR(50) NOT NULL UNIQUE , PRIMARY KEY (`ProjectId`) ,FOREIGN KEY (`CustomerId`) REFERENCES `customermaster`(`CustomerId`) , FOREIGN KEY (`Location`) REFERENCES `locationmaster`(`LocationId`)) ENGINE = InnoDB
+$project = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`project` ( `ProjectId` INT(20) NOT NULL AUTO_INCREMENT , `CustomerId` INT(20) NOT NULL , `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL , `Location` INT(20) NOT NULL , `ProjectName` VARCHAR(50) NOT NULL UNIQUE ,`VerticalId` int(11) not null,`IBUId` int(20) not null, status varchar(100) not null, PRIMARY KEY (`ProjectId`) ,FOREIGN KEY (`CustomerId`) REFERENCES `customermaster`(`CustomerId`) , FOREIGN KEY (`Location`) REFERENCES `locationmaster`(`LocationId`),FOREIGN KEY (`VerticalId`) REFERENCES `verticalmaster`(`id`),FOREIGN KEY (`IBUId`) REFERENCES `ibumaster`(`id`)) ENGINE = InnoDB;
 ";
 if ($conn->query($project) === FALSE) {
   echo "Error creating table: " . $conn->error;
