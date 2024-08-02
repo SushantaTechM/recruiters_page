@@ -370,6 +370,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
             <th scope="col">Location</th>
             <th scope="col">Vertical</th>
             <th scope="col">IBU</th>
+            <th scope="col">Status</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -377,7 +378,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
         <b>
           <?php
           // $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c, `verticalmaster` v, `IBUmaster` i WHERE p.CustomerId=c.CustomerId, p.Location=l.LocationId", ;
-          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
+          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
             $no = 0;
@@ -393,6 +394,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
                   <td>" . $row['LocationName'] . "</td>
                   <td>" . $row['Vertical'] . "</td>
                   <td>" . $row['IBUname'] . "</td>
+                  <td>" . $row['status'] . "</td>
                   <td>
                   <button class='edit btn btn-primary'>Edit</button>
                   <button class='delete btn btn-danger' id='" . $row['ProjectID'] . "'>Delete</button></td>

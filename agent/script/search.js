@@ -83,7 +83,7 @@ function filterResults() {
                 <th>Exp</th>
                 <th>Loc</th>
                 <th>Primary Skill</th>
-                <th>Acted by</th>
+                <th>Recruiter</th>
                 <th>Project</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -99,6 +99,7 @@ function filterResults() {
                 <td>${user.Experience} </td>
                 <td>${user.LocationName}</td>
                 <input type="hidden" id="skillName" value="${user.SkillId}">
+                <input type="hidden" id="projectskill" value="">
                 <td >${user.SkillName}</td>
                 
                 <td id="agentName">${
@@ -160,13 +161,15 @@ function filterResults() {
           parentRow = event.currentTarget.closest("tr");
           projectname = parentRow.querySelector("#projectName").textContent;
           agentname = parentRow.querySelector("#agentName").textContent;
+          projectskill=parentRow.querySelector('#projectskill').value;
+          skillname = parentRow.querySelector("#skillName").value;
           if (projectname != "-------" && agentname != "-------") {
             if (confirm("Are you really want to confirm the Employee")) {
               // console.log(event.target.dataset.userEmail);
-              confirmSoftlockUser(event.target.dataset.userEmail);
+              confirmSoftlockUser(event.target.dataset.userEmail, projectname,projectskill);
             }
           } else {
-            showConfirmModal(event.currentTarget.dataset.userEmail);
+            showConfirmModal(event.currentTarget.dataset.userEmail,skillname);
           }
         });
       });
@@ -214,13 +217,16 @@ function fetchProjectDates(projectid) {
       return [data.StartDate,data.EndDate];
     });
 }
-function showConfirmModal(UserId) {
+function showConfirmModal(UserId,skillname) {
   const modal = document.getElementById("project-confirm-modal");
   const projectDropdown = document.getElementById("confirmprojectDropdown");
   const confirmBtn = document.getElementById("confirm-project-button");
+  const skillDropdown = document.getElementById("confirmSkillDropdown");
+  const employeeStartDate = document.getElementById("employeeStartDateConfirm");
+  const employeeEndDate = document.getElementById("employeeEndDateConfirm");
 
   fetchProjectNames().then((projects) => {
-    projectDropdown.innerHTML = "";
+    projectDropdown.innerHTML = '<option value="">Select Project</option>';
     // console.log(projects);
     projects.forEach((project) => {
       const option = document.createElement("option");
@@ -232,11 +238,81 @@ function showConfirmModal(UserId) {
     });
     // console.log(projectDropdown);
   });
+  projectDropdown.addEventListener("change", (event) => {
+    // console.log(projectDropdown.value)
+    projectid = projectDropdown.value;
+    if (projectid) {
+      fetchSkillNames(projectid).then((skills) => {
+        skillDropdown.innerHTML = "";
+        // console.log(projects);
+        skills.forEach((skill) => {
+          const option = document.createElement("option");
+          option.className = "smallModalDropdownOption";
+          option.value = skill.SkillId;
+          option.textContent = skill.SkillName;
+
+          skillDropdown.appendChild(option);
+        });
+        // console.log(skillDropdown);
+      });
+  
+      let project_date;
+      fetchProjectDates(projectid).then((date) => {
+        project_date=date;
+      });
+      
+      setTimeout(()=>{
+        projectStartDate=project_date[0];
+        projectEndDate=project_date[1];
+        // console.log(projectStartDate,projectEndDate);
+      },1000);
+    }
+    
+  });
+
+  employeeStartDate.addEventListener("change", (event) => {
+    employeeStartDateValue = employeeStartDate.value;
+    const firstDate = new Date(employeeStartDateValue)
+    const secondDate = new Date(projectStartDate)
+    if(firstDate < secondDate){
+      alert('you cannot select employee start date before project start date')
+      employeeStartDate.value='';
+      employeeStartDate.dispatchEvent(new Event('input'));
+    }
+  });
+  employeeEndDate.addEventListener("change", (event) => {
+    employeeEndDateValue = employeeEndDate.value;
+    const thirdDate = new Date(employeeEndDateValue)
+    const fourthDate = new Date(projectEndDate)
+    if(thirdDate > fourthDate){
+      alert('you cannot select employee end date after project end date')
+      employeeEndDate.value='';
+      employeeEndDate.dispatchEvent(new Event('input'));
+    }
+  });
+
+
+
+
   modal.style.display = "block";
 
   confirmBtn.onclick = () => {
     const projectId = projectDropdown.value;
-    confirmUser(UserId, projectId);
+    const skillDropdownName = skillDropdown.value;
+    // console.log(projectId);
+    // console.log(skillname);
+    if (skillDropdownName !== skillname) {
+      if (confirm("The required skill and the employee's primary skill does not match....Are you really want to proceed")){
+          confirmUser(UserId, projectId,skillDropdownName,employeeStartDateValue,employeeEndDateValue);
+
+      }
+
+    }
+    else{
+        confirmUser(UserId, projectId,skillDropdownName,employeeStartDateValue,employeeEndDateValue);
+    }
+
+    
     modal.style.display = "none";
   };
 }
@@ -379,6 +455,9 @@ function softlockUser(UserId, projectId,skillId,startDate,endDate) {
 
         const projectname = userElement.querySelector("#projectName");
         projectname.textContent = data.projectname;
+
+        const skillid = userElement.querySelector("#projectskill");
+        skillid.value = data.skillId;
       } else {
         showNotification("Error: " + data.message, "error");
       }
@@ -388,7 +467,7 @@ function softlockUser(UserId, projectId,skillId,startDate,endDate) {
     });
 }
 
-function confirmUser(UserId, projectId) {
+function confirmUser(UserId, projectId,skillId,startDate,endDate) {
   const AgentId = getcookie("AgentId");
   // const AgentId=2;
 
@@ -401,6 +480,9 @@ function confirmUser(UserId, projectId) {
       UserId: UserId,
       AgentId: AgentId,
       projectId: projectId,
+      skillId: skillId,
+      startDate: startDate,
+      endDate: endDate,
     }),
   })
     .then((response) => {
@@ -421,6 +503,15 @@ function confirmUser(UserId, projectId) {
         confirmBtn.disabled = true;
         const confirmImage = userElement.querySelector(".search_user_status");
         confirmImage.src = "../images/confirm.svg";
+
+        const softlockBtn = userElement.querySelector("#search-softlock-btn");
+        softlockBtn.disabled = true;
+
+        const agentname = userElement.querySelector("#agentName");
+        agentname.textContent = data.agentname;
+
+        const projectname = userElement.querySelector("#projectName");
+        projectname.textContent = data.projectname;
       } else {
         showNotification("Error: " + data.message, "error");
       }
@@ -430,7 +521,7 @@ function confirmUser(UserId, projectId) {
     });
 }
 
-function confirmSoftlockUser(UserId) {
+function confirmSoftlockUser(UserId,projectname,projectskill) {
   // console.log("confirmDashboardUser called");
   if (UserId != null) {
     const AgentId = getcookie("AgentId");
@@ -444,6 +535,8 @@ function confirmSoftlockUser(UserId) {
       body: JSON.stringify({
         UserId: UserId,
         AgentId: AgentId,
+        projectname:projectname,
+        projectskill:projectskill
       }),
     })
       .then((response) => {
@@ -459,6 +552,7 @@ function confirmSoftlockUser(UserId) {
           const userElement = document.getElementById(`row${UserId}`);
           const confirmBtn = userElement.querySelector(".search-confirm-btn");
           confirmBtn.disabled = true;
+
           const confirmImage = userElement.querySelector(".search_user_status");
           confirmImage.src = "../images/confirm.svg";
         } else {

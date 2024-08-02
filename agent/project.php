@@ -19,6 +19,12 @@ $outcome2 = mysqli_query($conn, $sql2);
 $skill_query = "SELECT * FROM `skillmaster`";
 $skill_outcome = mysqli_query($conn,$skill_query);
 
+// $skillOptions = "";
+// while ($row = mysqli_fetch_assoc($skill_outcome)) {
+// $Customer = $row['SkillName'];
+// $skillOptions .= "<option value='$Customer'>$Customer</option>";
+// }
+
 $skillOptions = "";
 while ($row = mysqli_fetch_assoc($skill_outcome)) {
 $Customer = $row['SkillName'];
@@ -128,7 +134,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
+                <a href="#" id="log-out">Log Out</a>
             </div>
         </div>
     </div>
@@ -277,7 +283,6 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       $verticalid = $_POST['Vertical'];
 
       $IBUid = $_POST['IBU'];
-      // print_r($location);
 
 
 
@@ -288,7 +293,6 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       // $location5=$row['LocationId'];
       //...............
       $query5 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$location'";
-      // var_dump($query5);
       // $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$vertical'";
       // $query7 = "SELECT * FROM `IBUmaster` WHERE `IBUname` LIKE '$IBUmaster'";
       
@@ -307,19 +311,16 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       // $verticalid = $row6['id'];
 
       // $IBUid = $row7['id'];
-      // echo "<br>";
-      // print_r($_POST);
-      // echo "<br>";
-      // print_r($_POST['title3']);
-      // echo "<br>";
-      // print_r($_POST['headcount']);
-      // echo "<br>";
+
 
       $Startdate = $_POST['title4'];
       $Enddate = $_POST['title5'];
       $projectname = $_POST['title'];
       $skillname = $_POST['title3'];
       $requiredHeadcount = $_POST['headcount'];
+      $status=$_POST['status'];
+
+      // print_r($_POST['status']);
 
       // $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
       // $project_result = mysqli_query($conn,$project_query);
@@ -328,14 +329,13 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       // echo "Project id" . $projectid . "<br>";
 
       // $skill_id
-      // print_r($skillname);
       // $skill_query2 = "SELECT `SkillId` from `skillmaster` WHERE `SkillName` LIKE '$skillname'";
       // $skill_result = mysqli_query($conn, $skill_query2);
       // $skill_row = mysqli_fetch_assoc($skill_result);
       // $skillid = $skill_row['SkillId'];
       // echo "Skill id" . $skillid . "<br>";
 
-      $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`VerticalId`,`IBUId`,`ProjectName`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$verticalid','$IBUid','$projectname')";
+      $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`VerticalId`,`IBUId`,`ProjectName`,`status`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$verticalid','$IBUid','$projectname','$status')";
       // var_dump($query);
       $result = mysqli_query($conn, $query);
 
@@ -360,24 +360,24 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
 }
 
 // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $skills = $_POST['title3'];
-    $headcounts = $_POST['headcount'];
+    // $skills = $_POST['title3'];
+    // $headcounts = $_POST['headcount'];
 
-    for ($x = 0; $x < count($skills); $x++) {
-        $project_query2="INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]')";
-        $project_result2 = mysqli_query($conn,$project_query2);
-          // echo($skills[$x]);
-      }
-
-    
-
-    // $stmt = $conn->prepare("INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`) VALUES ('$projectid', ? ,?)");
-    // $stmt->bind_param("si", $skills, $headcounts);
+    // $stmt = $conn->prepare("INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`) VALUES ('$projectid', '$skills', '$headcounts')");
+    // $stmt->bind_param("si",$projectid, $skills, $headcounts);
 
     // foreach ($skills as $index => $skill) {
     //     $headcount = $headcounts[$index];
     //     $stmt->execute();
     // }
+    $skills = $_POST['title3'];
+    $headcounts = $_POST['headcount'];
+ 
+    for ($x = 0; $x < count($skills); $x++) {
+        $project_query2="INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
+        $project_result2 = mysqli_query($conn,$project_query2);
+          // echo($skills[$x]);
+      }
 
     // $stmt->close();
     // $conn->close();
@@ -395,9 +395,6 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
         
       // }
     }
-
-
-  
 
   ?>
   <div class="container">
@@ -479,6 +476,10 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     }
     .skill-entry select, .skill-entry input {
       margin-right: 10px;
+      background: transparent;
+    color: white;
+    padding: 0.2rem 0.3rem;
+    border: 2px solid skyblue;
     }
     .skill-entry button {
       margin-left: 10px;
@@ -486,20 +487,31 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   </style>
       <div id="skillsContainer">
       <div class="form-group skill-entry">
-        <label for="title3">Skill</label>
-        <select name="title3[]" class="skill-select">
-          <option value="" disabled selected hidden>Please select Skill</option>
+        <label for="title3">Skill</label>&emsp;
+        <select name="title3[]" class="skill-select" id="skill">
+          <option value="" disabled selected hidden id="skill">Please select Skill</option>
           <?php echo $skillOptions; ?>
-        </select>
-        <label for="headcount">Required Headcount</label>
-        <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount">
+        </select>&emsp;&emsp;&emsp;
+        <label for="headcount">Required Headcount</label>&emsp;
+        <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount" id="skill">
         <button type="button" class="remove-skill-btn">Remove</button>
       </div> 
     </div>
-    <button type="button" id="addSkillBtn">Add Skill</button>
-    <button type="submit">Submit</button>
+    <button type="button" id="addSkillBtn">Add Skill</button><br><br>
 
-
+    <div class="form-group">
+        <label for="status">Project Status</label>
+        <select name="status" id="status">
+          <option value="" disabled selected hidden>Please select Status</option>
+          <option value="active">Active</option>
+          <option value="close">Closed</option>
+        </select>
+      </div>
+    <!-- <label for="status">Choose Project Status:</label>
+    <select name="status" id="status" placeholder="Choose Ststus">
+      <option value="active">Active</option>
+      <option value="close">Closed</option>
+    </select> -->
       <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
 
       <div class="form-group">
@@ -551,7 +563,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
         <b>
           <!-- <?php
           // $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c, `verticalmaster` v, `IBUmaster` i WHERE p.CustomerId=c.CustomerId, p.Location=l.LocationId", ;
-          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
+          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
             $no = 0;
@@ -567,6 +579,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
                   <td>" . $row['LocationName'] . "</td>
                   <td>" . $row['Vertical'] . "</td>
                   <td>" . $row['IBUname'] . "</td>
+                  <td>" . $row['status'] . "</td>
                   <td>
                   <button class='edit btn btn-primary'>Edit</button>
                   <button class='delete btn btn-danger' id='" . $row['ProjectID'] . "'>Delete</button></td>
@@ -667,12 +680,12 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     document.getElementById('addSkillBtn').addEventListener('click', function() {
       const skillEntryTemplate = `
         <div class="form-group skill-entry">
-          <label for="title3">Skill</label>
+          <label for="title3">Skill</label>&emsp;
           <select name="title3[]" class="skill-select">
             <option value="" disabled selected hidden>Please select Skill</option>
             ${skillOptions}
-          </select>
-          <label for="headcount">Required Headcount</label>
+          </select>&emsp;&emsp;&emsp;
+          <label for="headcount">Required Headcount</label>&emsp;
           <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount">
           <button type="button" class="remove-skill-btn">Remove</button>
         </div>

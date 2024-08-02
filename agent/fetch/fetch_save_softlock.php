@@ -26,7 +26,8 @@ if($result){
     echo json_encode([
         "status"=> "success",
         "projectname"=>$projectname,
-        "agentname"=>$agentname
+        "agentname"=>$agentname,
+        "skillId"=>$skillId
     ]);
 }
 else{

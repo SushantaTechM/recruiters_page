@@ -114,9 +114,18 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <span class="close-btn"
                 onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
-            <select class="smallModalDropdown" id="confirmprojectDropdown">
+            <select class="smallModalDropdown" id="confirmprojectDropdown"></select>
+            <select class="smallModalDropdown" id="confirmSkillDropdown"></select>
+            <div class="form-group">
+                <label for="employeeStartDate">Start Date</label>
+                    <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDateConfirm" aria-describedby="emailHelp" placeholder="Enter Starting Date">
+            </div>
+            <div class="form-group">
+                <label for="employeeEndDate">End Date</label>
+                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDateConfirm" aria-describedby="emailHelp" placeholder="Enter Ending Date">
+            </div>
 
-            </select>
+            
             <button id="confirm-project-button">Confirm</button>
         </div>
     </div>
