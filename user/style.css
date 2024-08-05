@@ -575,7 +575,7 @@ h2{
 
 #profile-form {
     background: transparent;
-    color: white;
+    /* color: white; */
     border: 2px solid skyblue;
     border-radius: 0.8rem;
     backdrop-filter: blur(15px);
@@ -590,18 +590,18 @@ h2{
 }
 .form-group select {
     background: transparent;
-    color: white;
+    /* color: white; */
     border: 2px solid skyblue;
     border-radius: 0.5rem;
     padding: 0.5rem;
 }
 .form-group textarea {
     background: transparent;
-    color: white;
+    /* color: white; */
     border: 2px solid skyblue;
     border-radius: 0.5rem;
 }
 .form-group select option{
     background: black;
-    color: white;
+    /* color: white; */
 }

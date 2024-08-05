@@ -1,17 +1,17 @@
 <?php
 
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
     // Start Session it is not started yet
     session_start();
 }
-if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
-{
+if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
     header('location:../index.php');
     exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +24,20 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/notification.css">
 </head>
-<body >
-    <div class="navbar" style="padding-bottom: 100px;">
+
+<body>
+<div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab">Home</button></a>
-            <a href="project.php"><button class="tab">Project</button></a>
+            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <div class="project-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <div id="project-dropdown-content" class="dropdown-menu">
+                    <a href="project.php">Create Project</a>
+                    <a href="project.php">Dashboard</a>
+                </div>
+            </div>
             <a href="search.php"><button class="tab active">Search</button></a>
             <div class="skill-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
@@ -41,15 +49,15 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Location</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="add_location.php">Create Location</a>
+                    <a href="view_location.php">Dashboard</a>
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Customer</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="customer_creation.php">Create Customer</a>
+                    <a href="customer_view.php">Dashboard</a>
                 </div>
             </div>
         </div>
@@ -57,13 +65,13 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="#" id="log-out">Log Out</a>
+                <a href="agent_logout.php" id="log-out">Log Out</a>
             </div>
         </div>
     </div>
 
     <div class="tab-content active" id="search-content">
-        <div class="search-container" >
+        <div class="search-container">
             <input type="text" id="search-bar" placeholder="Search..." onkeyup="filterResults()">
             <div class="filters">
                 <select id="location-filter" onchange="filterResults()">
@@ -84,27 +92,47 @@ if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
     </div>
     <div class="smallModal" id="project-softlock-modal">
         <div class="smallModal-content">
-            <span class="close-btn" onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
+            <span class="close-btn"
+                onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
-            <select class="smallModalDropdown" id="softlockprojectDropdown">
-
-            </select>
+            <select class="smallModalDropdown" id="softlockprojectDropdown"></select>
+            <select class="smallModalDropdown" id="softlockSkillDropdown"></select>
+            <div class="form-group">
+                <label for="employeeStartDate">Start Date</label>
+                    <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDate" aria-describedby="emailHelp" placeholder="Enter Starting Date">
+            </div>
+            <div class="form-group">
+                <label for="employeeEndDate">End Date</label>
+                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDate" aria-describedby="emailHelp" placeholder="Enter Ending Date">
+            </div>
+            
             <button id="softlock-project-button">Softlock</button>
         </div>
     </div>
     <div class="smallModal" id="project-confirm-modal">
         <div class="smallModal-content">
-            <span class="close-btn" onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
+            <span class="close-btn"
+                onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
-            <select class="smallModalDropdown" id="confirmprojectDropdown">
+            <select class="smallModalDropdown" id="confirmprojectDropdown"></select>
+            <select class="smallModalDropdown" id="confirmSkillDropdown"></select>
+            <div class="form-group">
+                <label for="employeeStartDate">Start Date</label>
+                    <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDateConfirm" aria-describedby="emailHelp" placeholder="Enter Starting Date">
+            </div>
+            <div class="form-group">
+                <label for="employeeEndDate">End Date</label>
+                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDateConfirm" aria-describedby="emailHelp" placeholder="Enter Ending Date">
+            </div>
 
-            </select>
+            
             <button id="confirm-project-button">Confirm</button>
         </div>
     </div>
-    
+
     <script src="script/search.js"></script>
     <script src="script/script.js"></script>
-    
+
 </body>
+
 </html>

@@ -18,7 +18,7 @@ if (isset($_POST["login"])) {
     $password = $_POST['password'];
     $c_password = $_POST['c_password'];
     $mobile = $_POST['mobile_no'];
-    $type = $_POST['Type'];
+    $type = $_POST['type'];
 
 
     $connection = mysqli_connect('localhost', 'root', '', 'recruitmentpage');
@@ -123,7 +123,7 @@ if (isset($_POST["login"])) {
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
             <!-- <img src="images\computer-1331579_640.webp" width="100" height="100"> -->
-            <h1>User Registration</h1>
+            <h1>Registration</h1>
             <form method="post">
                 <div class="input-box">
                     <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name" required>
@@ -137,9 +137,25 @@ if (isset($_POST["login"])) {
                     <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
                     <i class='bx bxs-phone'></i>
                 </div>
-                    <input type="hidden" id="Type" name="Type" value="User">
+                    <!-- <input type="hidden" id="Type" name="Type" value="User">
                 <div class="input-box">
                     <input type="text" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
+                    <i class='bx bxs-lock'></i>
+                </div> -->
+                <!-- <div class="input-box">
+                <label for="type" class="input-box">Type</label>
+                    <select name="type" class="type" id="type" required>
+                                <option value="">Select Type</option>
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                                <option value="Agent">Agent</option>
+                                <option value="User">User</option> -->
+                            <!-- </select> -->
+                    <!-- <i class='bx bxs-user'></i> -->
+                <!-- </div> -->
+                 <input type="hidden" name="type" value="User">
+                <div class="input-box">
+                    <input type="password" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <div class="input-box">
