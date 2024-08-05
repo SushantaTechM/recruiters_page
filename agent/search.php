@@ -26,38 +26,39 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 </head>
 
 <body>
-<div class="navbar" style="padding-bottom: 100px;">
+    <!-- ----------------- Navbar --------------- -->
+
+    <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab">Home</button></a>
-            <!-- <a href=""><button class="tab">Project</button></a> -->
             <div class="project-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
                     <a href="project.php">Create Project</a>
-                    <a href="project.php">Dashboard</a>
+                    <a href="project_dashboard.php">Search Project</a>
                 </div>
             </div>
-            <a href="search.php"><button class="tab active">Search</button></a>
+            <a href="search.php"><button class="tab active">Employee</button></a>
             <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
                 <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="skill_dashboard.php">Search Skill</a>
                 </div>
             </div>
             <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <button class="dashboard-dropbtn tab " onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
                     <a href="add_location.php">Create Location</a>
-                    <a href="view_location.php">Dashboard</a>
+                    <a href="view_location.php">Search Location</a>
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
                     <a href="customer_creation.php">Create Customer</a>
-                    <a href="customer_view.php">Dashboard</a>
+                    <a href="customer_view.php">Search Customer</a>
                 </div>
             </div>
         </div>
@@ -99,13 +100,15 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <select class="smallModalDropdown" id="softlockSkillDropdown"></select>
             <div class="form-group">
                 <label for="employeeStartDate">Start Date</label>
-                    <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDate" aria-describedby="emailHelp" placeholder="Enter Starting Date">
+                <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDate"
+                    aria-describedby="emailHelp" placeholder="Enter Starting Date">
             </div>
             <div class="form-group">
                 <label for="employeeEndDate">End Date</label>
-                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDate" aria-describedby="emailHelp" placeholder="Enter Ending Date">
+                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDate"
+                    aria-describedby="emailHelp" placeholder="Enter Ending Date">
             </div>
-            
+
             <button id="softlock-project-button">Softlock</button>
         </div>
     </div>
@@ -118,14 +121,16 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             <select class="smallModalDropdown" id="confirmSkillDropdown"></select>
             <div class="form-group">
                 <label for="employeeStartDate">Start Date</label>
-                    <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDateConfirm" aria-describedby="emailHelp" placeholder="Enter Starting Date">
+                <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDateConfirm"
+                    aria-describedby="emailHelp" placeholder="Enter Starting Date">
             </div>
             <div class="form-group">
                 <label for="employeeEndDate">End Date</label>
-                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDateConfirm" aria-describedby="emailHelp" placeholder="Enter Ending Date">
+                <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDateConfirm"
+                    aria-describedby="emailHelp" placeholder="Enter Ending Date">
             </div>
 
-            
+
             <button id="confirm-project-button">Confirm</button>
         </div>
     </div>

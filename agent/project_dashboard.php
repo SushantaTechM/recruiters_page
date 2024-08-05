@@ -1,10 +1,9 @@
 <?php
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
   // Start Session it is not started yet
   session_start();
 }
-if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
-{
+if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
   header('location:../index.php');
   exit;
 }
@@ -17,13 +16,13 @@ $sql2 = "SELECT * from `locationmaster`";
 $outcome2 = mysqli_query($conn, $sql2);
 
 $skill_query = "SELECT * FROM `skillmaster`";
-$skill_outcome = mysqli_query($conn,$skill_query);
+$skill_outcome = mysqli_query($conn, $skill_query);
 
 $vertical_query = "SELECT * FROM `verticalmaster`";
-$vertical_outcome = mysqli_query($conn,$vertical_query);
+$vertical_outcome = mysqli_query($conn, $vertical_query);
 
 $IBU_query = "SELECT * FROM `IBUmaster`";
-$IBU_outcome = mysqli_query($conn,$IBU_query);
+$IBU_outcome = mysqli_query($conn, $IBU_query);
 
 
 
@@ -82,49 +81,50 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
             </div>
         </div>
   </div> -->
+  <!-- ----------------- Navbar --------------- -->
+
   <div class="navbar" style="padding-bottom: 100px;">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button class="tab">Home</button></a>
-            <!-- <a href=""><button class="tab">Project</button></a> -->
-            <div class="project-dropdown">
-                <button class="dashboard-dropbtn tab active" onclick="toggleProjectDropdown()">Project</button>
-                <div id="project-dropdown-content" class="dropdown-menu">
-                    <a href="project.php">Create Project</a>
-                    <a href="project_dashboard.php">Dashboard</a>
-                </div>
-            </div>
-            <a href="search.php"><button class="tab">Search</button></a>
-            <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Skills</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-                </div>
-            </div>
-            <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
-                <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Location</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-                </div>
-            </div>
-            <div class="customer-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
-                <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Customer</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-                </div>
-            </div>
+    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
+    <div class="nav-links">
+      <a href="dashboard.php"><button class="tab">Home</button></a>
+      <div class="project-dropdown">
+        <button class="dashboard-dropbtn tab active" onclick="toggleProjectDropdown()">Project</button>
+        <div id="project-dropdown-content" class="dropdown-menu">
+          <a href="project.php">Create Project</a>
+          <a href="project_dashboard.php">Search Project</a>
         </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="#" id="log-out">Log Out</a>
-            </div>
+      </div>
+      <a href="search.php"><button class="tab">Employee</button></a>
+      <div class="skill-dropdown">
+        <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
+        <div id="dropdown-content" class="dropdown-menu">
+          <a href="skill.php">Create Skills</a>
+          <a href="skill_dashboard.php">Search Skill</a>
         </div>
+      </div>
+      <div class="location-dropdown">
+        <button class="dashboard-dropbtn tab " onclick="toggleLocationDropdown()">Location</button>
+        <div id="location-dropdown-content" class="dropdown-menu">
+          <a href="add_location.php">Create Location</a>
+          <a href="view_location.php">Search Location</a>
+        </div>
+      </div>
+      <div class="customer-dropdown">
+        <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+        <div id="customer-dropdown-content" class="dropdown-menu">
+          <a href="customer_creation.php">Create Customer</a>
+          <a href="customer_view.php">Search Customer</a>
+        </div>
+      </div>
     </div>
+    <div class="user-menu" onclick="toggleDropdown()">
+      <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
+      <div class="dropdown-menu" id="userDropdown">
+        <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
+        <a href="agent_logout.php" id="log-out">Log Out</a>
+      </div>
+    </div>
+  </div>
   <!-- Modal -->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -282,23 +282,23 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       $query5 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$location'";
       // $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$vertical'";
       // $query7 = "SELECT * FROM `IBUmaster` WHERE `IBUname` LIKE '$IBUmaster'";
-      
+  
       $result5 = mysqli_query($conn, $query5);
       $row5 = mysqli_fetch_assoc($result5);
 
       // $result6 = mysqli_query($conn, $query6);
       // $row6 = mysqli_fetch_assoc($result6);
-
+  
       // $result7 = mysqli_query($conn, $query7);
       // $row7 = mysqli_fetch_assoc($result7);
-
+  
 
       $locationid = $row5['LocationId'];
 
       // $verticalid = $row6['id'];
-
+  
       // $IBUid = $row7['id'];
-
+  
 
       $Startdate = $_POST['title4'];
       $Enddate = $_POST['title5'];
@@ -311,14 +311,14 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       // $project_row = mysqli_fetch_assoc($project_result);
       // $projectid = $project_row['ProjectId'];
       // echo "Project id" . $projectid . "<br>";
-
+  
       // $skill_id
       $skill_query2 = "SELECT `SkillId` from `skillmaster` WHERE `SkillName` LIKE '$skillname'";
       $skill_result = mysqli_query($conn, $skill_query2);
       $skill_row = mysqli_fetch_assoc($skill_result);
       $skillid = $skill_row['SkillId'];
       // echo "Skill id" . $skillid . "<br>";
-
+  
       $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`VerticalId`,`IBUId`,`ProjectName`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$verticalid','$IBUid','$projectname')";
       // var_dump($query);
       $result = mysqli_query($conn, $query);
@@ -335,11 +335,11 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       }
 
       $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
-      $project_result = mysqli_query($conn,$project_query);
+      $project_result = mysqli_query($conn, $project_query);
       $project_row = mysqli_fetch_assoc($project_result);
       $projectid = $project_row['ProjectId'];
       // echo "Project id" . $projectid . "<br>";
-
+  
       $query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`) VALUES ('$projectid', '$skillid', '$requiredHeadcount')";
 
       // var_dump($query2);
@@ -347,7 +347,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
 
       if (!$result2) {
         echo mysqli_error($conn);
-        
+
       }
     }
 
@@ -357,35 +357,35 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   ?>
 
 
-<div class="projectContainer">
-      <table class="table " id="myTable">
-        <thead>
-          <tr>
+  <div class="projectContainer">
+    <table class="table " id="myTable">
+      <thead>
+        <tr>
 
-            <th scope="col">ProjectId</th>
-            <th scope="col">Project</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Location</th>
-            <th scope="col">Vertical</th>
-            <th scope="col">IBU</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
+          <th scope="col">ProjectId</th>
+          <th scope="col">Project</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Location</th>
+          <th scope="col">Vertical</th>
+          <th scope="col">IBU</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
 
-        <b>
-          <?php
-          // $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c, `verticalmaster` v, `IBUmaster` i WHERE p.CustomerId=c.CustomerId, p.Location=l.LocationId", ;
-          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            $no = 0;
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-              $no++;
-              echo "<tr>
+      <b>
+        <?php
+        // $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c, `verticalmaster` v, `IBUmaster` i WHERE p.CustomerId=c.CustomerId, p.Location=l.LocationId", ;
+        $sql = "SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+          $no = 0;
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+            $no++;
+            echo "<tr>
                   <td>" . $row['ProjectID'] . "</td>
                   <td>" . $row['ProjectName'] . "</td>
                   <td>" . $row['CustomerName'] . "</td>
@@ -399,20 +399,20 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
                   <button class='edit btn btn-primary'>Edit</button>
                   <button class='delete btn btn-danger' id='" . $row['ProjectID'] . "'>Delete</button></td>
                 </tr>";
-            }
-          } else {
-            echo "0 results";
           }
-          ?>
+        } else {
+          echo "0 results";
+        }
+        ?>
 
-          </tbody>
-      </table>
-    </div>
+        </tbody>
+    </table>
+  </div>
   </div>
 
 
 
-<!-- Optional JavaScript -->
+  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -441,9 +441,9 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
         StartDate = tr.getElementsByTagName("td")[3].innerText;
         EndDate = tr.getElementsByTagName("td")[4].innerText;
         Location = tr.getElementsByTagName("td")[5].innerText;
-        
-        
-       
+
+
+
 
         // console.log(title,description,sno);
         editCustomerId.value = CustomerId;
