@@ -7,6 +7,9 @@ form{
     padding: 2rem;
     backdrop-filter: blur(20px);
 }
+.form-group{
+    display:inline-block;
+}
 .table{
     background: transparent;
     color: white;

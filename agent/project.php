@@ -366,10 +366,11 @@ $IBU_outcome = mysqli_query($conn, $IBU_query);
   ?>
   <div class="container">
 
-    <form action="Project.php" class="" method="post" style="margin-top: 35px;">
+    
+    <form action="Project.php" class="" method="post">
       <div class="form-group">
         <label for="title">Project Name</label>
-        <input name="title" type="title" class="form-control" id="title" aria-describedby="emailHelp"
+        <input style="background-color: transparent; color : white;"  name="title" type="title" class="form-control" id="title" aria-describedby="emailHelp"
           placeholder="Enter Project Name">
       </div>
       <div class="form-group">
@@ -384,16 +385,18 @@ $IBU_outcome = mysqli_query($conn, $IBU_query);
           ?>
         </select>
       </div>
+      <br>
       <div class="form-group">
         <label for="title4">Start Date</label>
-        <input name="title4" type="date" class="form-control" id="title4" aria-describedby="emailHelp"
+        <input  style="background-color: transparent; color: white;"  name="title4" type="date" class="form-control" id="title4" aria-describedby="emailHelp"
           placeholder="Enter Starting Date">
       </div>
       <div class="form-group">
         <label for="title5">End Date</label>
-        <input name="title5" type="date" class="form-control" id="title5" aria-describedby="emailHelp"
+        <input  style="background-color: transparent; color: white;" name="title5" type="date" class="form-control" id="title5" aria-describedby="emailHelp"
           placeholder="Enter Ending Date">
       </div>
+      <br>
       <div class="form-group">
         <label for="title2">Location</label>
         <select name="title2" id="title2">
