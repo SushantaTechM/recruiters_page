@@ -1,26 +1,25 @@
 <?php
-    if (isset($_POST["add"])){
-        $location = $_POST["location"];
+if (isset($_POST["add"])) {
+    $location = $_POST["location"];
 
-        $conn = mysqli_connect('localhost','root','','recruitmentpage');
-        if(!$conn){
-            echo "Something went wrong!";
-        }
-        else{
-            $query = "INSERT INTO locationmaster (`LocationName`) VALUES ('$location');";
-            $result = mysqli_query($conn,$query);
-            if ($result){
-                echo "<script>alert('Location Added Successfully!');</script>";
-            }
-            else{
-                echo "Not added!";
-            }
+    $conn = mysqli_connect('localhost', 'root', '', 'recruitmentpage');
+    if (!$conn) {
+        echo "Something went wrong!";
+    } else {
+        $query = "INSERT INTO locationmaster (`LocationName`) VALUES ('$location');";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo "<script>alert('Location Added Successfully!');</script>";
+        } else {
+            echo "Not added!";
         }
     }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,13 +33,14 @@
         background-size: cover;
         background-repeat: no-repeat;
     } */
-    .login-box h1{
+    .login-box h1 {
         color: white;
         font-weight: 600;
         font-size: 40px;
         text-align: center;
     }
-    .input-box input{
+
+    .input-box input {
         color: white;
         font-weight: 200;
         font-size: 30px;
@@ -51,34 +51,39 @@
         width: 70%;
         padding: 1.2rem;
     }
-    .input-box{
-        text-align: center;  
+
+    .input-box {
+        text-align: center;
     }
-    .btn{
-        display:block;
-        margin:50px auto;
-        width:fit-content;
+
+    .btn {
+        display: block;
+        margin: 50px auto;
+        width: fit-content;
         font-size: 20px;
-        border:1px solid #0fe9e9;
-        padding:14px 50px;
-        border-radius:50px;
-        text-decoration:none;
-        color:rgb(0, 0, 0);
-        transition:transform 0.5s;
+        border: 1px solid #0fe9e9;
+        padding: 14px 50px;
+        border-radius: 50px;
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        transition: transform 0.5s;
         cursor: pointer;
     }
-    .btn:hover{
-        background:#0acad8;
+
+    .btn:hover {
+        background: #0acad8;
     }
-    .wrapper{
+
+    .wrapper {
         border: 2px solid white;
-        box-shadow:  1px 1px #0acad8;
+        box-shadow: 1px 1px #0acad8;
         margin: auto;
         width: 50%;
         margin-top: 10%;
         backdrop-filter: blur(20px);
     }
 </style>
+
 <body>
     <!-- ----------------- Navbar --------------- -->
 
@@ -86,34 +91,33 @@
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab">Home</button></a>
-            <!-- <a href=""><button class="tab">Project</button></a> -->
             <div class="project-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
                     <a href="project.php">Create Project</a>
-                    <a href="project.php">Dashboard</a>
+                    <a href="project_dashboard.php">Search Project</a>
                 </div>
             </div>
-            <a href="search.php"><button class="tab">Search</button></a>
+            <a href="search.php"><button class="tab">Employee</button></a>
             <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
                 <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="skill_dashboard.php">Search Skill</a>
                 </div>
             </div>
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab active" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
                     <a href="add_location.php">Create Location</a>
-                    <a href="view_location.php">Dashboard</a>
+                    <a href="view_location.php">Search Location</a>
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
                     <a href="customer_creation.php">Create Customer</a>
-                    <a href="customer_view.php">Dashboard</a>
+                    <a href="customer_view.php">Search Customer</a>
                 </div>
             </div>
         </div>
@@ -127,7 +131,7 @@
     </div>
 
     <!-- ------------- Form --------------- -->
-     
+
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
             <h1>Add Location</h1>
@@ -139,8 +143,9 @@
                 <button type="submit" name="add" class="login-btn btn">Add</button>
             </form>
         </div>
-    </div>  
+    </div>
 
     <script src="script/script.js"></script>
 </body>
+
 </html>

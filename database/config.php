@@ -28,7 +28,7 @@ if ($conn->query($skillmaster) === FALSE) {
 }
 
 //                       LocationMaster table
-$locationmaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`locationmaster` ( `LocationId` INT(20) NOT NULL AUTO_INCREMENT , `LocationName` VARCHAR(20) NOT NULL , PRIMARY KEY (`LocationId`)) ENGINE = InnoDB";
+$locationmaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`locationmaster` ( `LocationId` INT(20) NOT NULL AUTO_INCREMENT , `LocationName` VARCHAR(20) NOT NULL ,`LocationState` VARCHAR(20) NOT NULL,`LocationHeadName` VARCHAR(50) NOT NULL,`LocationHeadEmail`VARCHAR(50) NOT NULL,`LocationHeadMobile`VARCHAR(15) NOT NULL, PRIMARY KEY (`LocationId`)) ENGINE = InnoDB";
 
 if ($conn->query($locationmaster) === FALSE) {
   echo "Error creating table: " . $conn->error;

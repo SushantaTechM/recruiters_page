@@ -60,40 +60,41 @@
 </style>
 <body>
 
+
+
     <!-- ----------------- Navbar --------------- -->
 
     <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button class="tab ">Home</button></a>
-            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <a href="dashboard.php"><button class="tab">Home</button></a>
             <div class="project-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
                     <a href="project.php">Create Project</a>
-                    <a href="project.php">Dashboard</a>
+                    <a href="project_dashboard.php">Search Project</a>
                 </div>
             </div>
-            <a href="search.php"><button class="tab">Search</button></a>
+            <a href="search.php"><button class="tab">Employee</button></a>
             <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
                 <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
+                    <a href="skill_dashboard.php">Search Skill</a>
                 </div>
             </div>
             <div class="location-dropdown">
                 <button class="dashboard-dropbtn tab active" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
                     <a href="add_location.php">Create Location</a>
-                    <a href="view_location.php">Dashboard</a>
+                    <a href="view_location.php">Search Location</a>
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
                     <a href="customer_creation.php">Create Customer</a>
-                    <a href="customer_view.php">Dashboard</a>
+                    <a href="customer_view.php">Search Customer</a>
                 </div>
             </div>
         </div>
@@ -105,7 +106,6 @@
             </div>
         </div>
     </div>
-
     <!-- ----------- Modal -------------- -->
 
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -193,7 +193,7 @@
     <!-- ----------------------------- Table -------------------------------- -->
 
     <h1>Location Details</h1>
-    <table class="table" id="my-table">
+    <table class="table" id="myTable">
         <thead>
             <tr>
                 <th>Sl No.</th>
