@@ -3,9 +3,17 @@ dashboardConfirmTab = document.querySelector(".dashboard-confirm-tab");
 
 dashboardSoftlockTab.addEventListener("click", () => {
   // console.log('softlock clicked');
-  dashboardSoftlockFetch();
-  dashboardSoftlockTab.classList.add("currently_set");
-  dashboardConfirmTab.classList.remove("currently_set");
+  // dashboardSoftlockFetch();
+  // dashboardSoftlockTab.classList.add("currently_set");
+  // dashboardConfirmTab.classList.remove("currently_set");
+  // dashboardConfirmTab.style.display = "block";
+//  document.getElementsByClassName().style.display="block";
+   var section = document.getElementsByClassName('dashboard-container');
+   if(section.style.display === "none" || section.style.display === "") {
+    section.style.display = "block";
+   }else{
+    section.style.display = "none";
+   }
 });
 
 dashboardConfirmTab.addEventListener("click", () => {
