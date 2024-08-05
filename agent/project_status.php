@@ -54,24 +54,49 @@ $outcome2 = mysqli_query($conn, $sql2);
       </div>
     </div>
   </div> -->
-  <div class="navbar">
-  <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
+  <div class="navbar" style="padding-bottom: 100px;">
+        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
-            <a href="dashboard.php"><button  class="tab ">Dashboard</button></a>
-            <a href="project.php"><button  class="tab active">Project</button></a>
-            <a href="search.php"><button  class="tab">Search</button></a>
-            <a href="search.php"><button class="tab">Customer</button></a>
-            <a href="search.php"><button class="tab">Skill</button></a>
-            <a href="search.php"><button class="tab">Location</button></a>
+            <a href="dashboard.php"><button class="tab active">Home</button></a>
+            <!-- <a href=""><button class="tab">Project</button></a> -->
+            <div class="project-dropdown">
+                <button class="dashboard-dropbtn tab " onclick="toggleProjectDropdown()">Project</button>
+                <div id="project-dropdown-content" class="dropdown-menu">
+                    <a href="project.php">Create Project</a>
+                    <a href="project_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <a href="search.php"><button class="tab">Search</button></a>
+            <div class="skill-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
+                <div id="dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Skills</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="location-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <div id="location-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Location</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
+            <div class="customer-dropdown">
+                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+                <div id="customer-dropdown-content" class="dropdown-menu">
+                    <a href="skill.php">Create Customer</a>
+                    <a href="skill_dashboard.php">Dashboard</a>
+                </div>
+            </div>
         </div>
         <div class="user-menu" onclick="toggleDropdown()">
             <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
             <div class="dropdown-menu" id="userDropdown">
                 <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
+                <a href="#" id="log-out">Log Out</a>
             </div>
         </div>
-  </div>
+    </div>
 
   <!-- Modal -->
   
@@ -151,7 +176,7 @@ $outcome2 = mysqli_query($conn, $sql2);
                   <td>" . $row['StartDate'] . "</td>
                   <td>" . $row['EndDate'] . "</td>
                   <td>" . $row['LocationName'] . "</td>
-                  <td>" . $row['Status'] . "</td>
+                  <td>" . $row['status'] . "</td>
 
                   
                 </tr>";

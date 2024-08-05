@@ -142,17 +142,18 @@ if (isset($_POST["login"])) {
                     <input type="text" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
                     <i class='bx bxs-lock'></i>
                 </div> -->
-                <div class="input-box">
+                <!-- <div class="input-box">
                 <label for="type" class="input-box">Type</label>
                     <select name="type" class="type" id="type" required>
                                 <option value="">Select Type</option>
                                 <option value="Admin">Admin</option>
                                 <option value="User">User</option>
                                 <option value="Agent">Agent</option>
-                                <!-- <option value="User">User</option> -->
-                            </select>
-                    <i class='bx bxs-user'></i>
-                </div>
+                                <option value="User">User</option> -->
+                            <!-- </select> -->
+                    <!-- <i class='bx bxs-user'></i> -->
+                <!-- </div> -->
+                 <input type="hidden" name="type" value="User">
                 <div class="input-box">
                     <input type="password" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
                     <i class='bx bxs-lock'></i>

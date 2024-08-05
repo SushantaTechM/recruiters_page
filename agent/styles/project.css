@@ -18,20 +18,20 @@ form{
 
 }
 #customerid{
-    background: transparent;
+    background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;
 }
 #title2{
-    background: transparent;
+    background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;
 }
 
 #Vertical{
-    background: transparent;
+    background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;
@@ -39,21 +39,21 @@ form{
 
 
 #IBU{
-    background: transparent;
+    background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;
 }
 
 #status{
-    background: transparent;
+    background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;
 }
 
 #skill{
-    background: transparent;
+    background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;

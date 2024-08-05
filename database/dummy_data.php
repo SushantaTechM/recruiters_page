@@ -25,19 +25,19 @@ $sql="INSERT INTO `locationmaster` (`LocationId`, `LocationName`) VALUES (NULL, 
       INSERT INTO `ibumaster` (`id`, `verticalid`, `IBUname`, `owner`, `status`) VALUES (NULL, '1', 'XDS-4002', 'Shawshank Tamotia', 'Open');
       INSERT INTO `ibumaster` (`id`, `verticalid`, `IBUname`, `owner`, `status`) VALUES (NULL, '1', 'XDS-4003', 'Shawshank Tamotia', 'Open');
 
-      INSERT INTO `project` (`ProjectId`, `CustomerId`, `StartDate`, `EndDate`, `Location`, `ProjectName`, `VerticalId`, `IBUId`, `status`) VALUES (NULL, '1', '2024-07-15', '2024-08-31', '3', 'Born', '1', '1', '');
-     INSERT INTO `project` (`ProjectId`, `CustomerId`, `StartDate`, `EndDate`, `Location`, `ProjectName`, `VerticalId`, `IBUId`, `status`) VALUES (NULL, '2', '2024-07-15', '2024-08-31', '3', 'SBI-Banking', '1', '1', '');
-      INSERT INTO `project` (`ProjectId`, `CustomerId`, `StartDate`, `EndDate`, `Location`, `ProjectName`, `VerticalId`, `IBUId`, `status`) VALUES (NULL, '3', '2024-07-15', '2024-08-31', '3', 'Redbull', '1', '1', '');
+      INSERT INTO `project` (`ProjectId`, `CustomerId`, `StartDate`, `EndDate`, `Location`, `ProjectName`, `VerticalId`, `IBUId`, `status`) VALUES (NULL, '1', '2024-07-15', '2024-08-31', '1', 'Born', '1', '1', '');
+      INSERT INTO `project` (`ProjectId`, `CustomerId`, `StartDate`, `EndDate`, `Location`, `ProjectName`, `VerticalId`, `IBUId`, `status`) VALUES (NULL, '2', '2024-07-15', '2024-08-31', '2', 'SBI-Banking', '2', '2', '');
+      INSERT INTO `project` (`ProjectId`, `CustomerId`, `StartDate`, `EndDate`, `Location`, `ProjectName`, `VerticalId`, `IBUId`, `status`) VALUES (NULL, '3', '2024-07-15', '2024-08-31', '3', 'Redbull', '3', '3', '');
 
-      INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `requeired_headcount`, `fullfill_headcount`) VALUES (NULL, '2', '1', '20', '');
-      INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `requeired_headcount`, `fullfill_headcount`) VALUES (NULL, '2', '2', '10', '');
-      INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `requeired_headcount`, `fullfill_headcount`) VALUES (NULL, '2', '3', '15', '');
+      INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `required_headcount`, `fullfill_headcount`) VALUES (NULL, '2', '1', '20', '');
+      INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `required_headcount`, `fullfill_headcount`) VALUES (NULL, '2', '2', '10', '');
+      INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `required_headcount`, `fullfill_headcount`) VALUES (NULL, '2', '3', '15', '');
 
     ";
-// if ($conn->multi_query($sql) === TRUE) {
-//     echo "New records created successfully";
-//   } else {
-//     echo "Error: " . $sql . "<br>" . $conn->error;
-//   }
+if ($conn->multi_query($sql) === TRUE) {
+    echo "New records created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
   
-//   $conn->close();
+  $conn->close();

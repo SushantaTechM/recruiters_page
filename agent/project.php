@@ -19,12 +19,6 @@ $outcome2 = mysqli_query($conn, $sql2);
 $skill_query = "SELECT * FROM `skillmaster`";
 $skill_outcome = mysqli_query($conn,$skill_query);
 
-// $skillOptions = "";
-// while ($row = mysqli_fetch_assoc($skill_outcome)) {
-// $Customer = $row['SkillName'];
-// $skillOptions .= "<option value='$Customer'>$Customer</option>";
-// }
-
 $skillOptions = "";
 while ($row = mysqli_fetch_assoc($skill_outcome)) {
 $Customer = $row['SkillName'];
@@ -62,39 +56,9 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
 </head>
 
 <body>
-  <!-- <div class="navbar">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: red;">HireHub</span></div>
-    <div class="nav-links">
-      <a href="index.php"><button class="tab ">Dashboard</button></a>
-      <a href="project.php"><button class="tab active">Project</button></a>
-      <a href="search.php"><button class="tab">Search</button></a>
-    </div>
-    <div class="user-menu" onclick="toggleDropdown()">
-      <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-      <div class="dropdown-menu" id="userDropdown">
-        <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-        <a href="agent_logout.php" id="log-out">Log Out</a>
-      </div>
-    </div>
-  </div> -->
-  <!-- <div class="navbar">
-  <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button  class="tab ">Dashboard</button></a>
-            <a href="project.php"><button  class="tab active">Project</button></a>
-            <a href="search.php"><button  class="tab">Search</button></a>
-            <a href="search.php"><button class="tab">Customer</button></a>
-            <a href="search.php"><button class="tab">Skill</button></a>
-            <a href="search.php"><button class="tab">Location</button></a>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
-            </div>
-        </div>
-  </div> -->
+  
+
+  <!-- navbar -->
   <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
@@ -372,10 +336,14 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     // }
     $skills = $_POST['title3'];
     $headcounts = $_POST['headcount'];
+
+    // var_dump($skills);
  
     for ($x = 0; $x < count($skills); $x++) {
         $project_query2="INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
+        // var_dump($project_query2);
         $project_result2 = mysqli_query($conn,$project_query2);
+        
           // echo($skills[$x]);
       }
 
@@ -476,7 +444,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     }
     .skill-entry select, .skill-entry input {
       margin-right: 10px;
-      background: transparent;
+      background: black;
     color: white;
     padding: 0.2rem 0.3rem;
     border: 2px solid skyblue;

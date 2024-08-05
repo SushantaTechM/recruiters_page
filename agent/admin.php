@@ -1,14 +1,14 @@
 <?php
 
-if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
-}
-// session_start();
-if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
-    header('location:../index.php');
-    exit;
-}
+// if (!isset($_SESSION)) {
+//     // Start Session it is not started yet
+//     session_start();
+// }
+// // session_start();
+// if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
+//     header('location:../index.php');
+//     exit;
+// }
 include ("../database/dbconnect.php");
 
 
@@ -171,7 +171,7 @@ include ("../database/dbconnect.php");
           $editUserId = $_POST['editUserId'];
           // echo $editTitle,$editDescription,$editSno;
       
-          $SQL = "UPDATE `users` SET `Type` = '$editType',`Vertical`='$locationid6',`IBU`='$IBU' WHERE `Users`.`UserId` = '$editUserId'";
+          $SQL = "UPDATE `users` SET `Type` = '$editType',`VerticalId`='$locationid6',`IBUId`='$IBU' WHERE `Users`.`UserId` = '$editUserId'";
           $result = mysqli_query($conn, $SQL);
           if ($result) {
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -228,7 +228,7 @@ include ("../database/dbconnect.php");
         </thead>
         <b>
           <?php
-          $sql = "SELECT u.UserId,u.UserName,u.Email,u.Phone,u.Type,v.Vertical,i.IBUname FROM `users` u LEFT JOIN `verticalmaster` v on u.Vertical=v.id LEFT join `ibumaster` i on u.IBU=i.id where (u.vertical is NULL or u.vertical is not NULL ) and (u.IBU is NULL or u.IBU is not NULL )";
+          $sql = "SELECT u.UserId,u.UserName,u.Email,u.Phone,u.Type,v.Vertical,i.IBUname FROM `users` u LEFT JOIN `verticalmaster` v on u.VerticalId=v.id LEFT join `ibumaster` i on u.IBUId=i.id where (u.VerticalId is NULL or u.VerticalId is not NULL ) and (u.IBUId is NULL or u.IBUId is not NULL )";
           $result = $conn->query($sql);
           if ($result->num_rows > 0){
             $no = 0;
