@@ -155,11 +155,11 @@ if (isset($_POST["login"])) {
                 <!-- </div> -->
                  <input type="hidden" name="type" value="User">
                 <div class="input-box">
-                    <input type="password" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
+                    <input type="password" name="password" id="password" minlength="6" maxlength="25" placeholder="Enter Password" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="c_password" id="c_password" minlength="6" maxlength="10" placeholder="Confirm Password" required>
+                    <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25" placeholder="Confirm Password" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <p id="error-message" style="color: red;"></p>

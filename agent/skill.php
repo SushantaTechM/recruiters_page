@@ -1,4 +1,15 @@
 <?php
+
+
+if (!isset($_SESSION)) {
+    // Start Session it is not started yet
+    session_start();
+}
+if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+    header('location:../index.php');
+    exit;
+}
+
  
 $showAlert = false;
 $conn = new mysqli("localhost", "root", "", "recruitmentpage");
@@ -9,9 +20,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
   $addSkill=$_POST["skillName"];
   $skillDescription=$_POST["skillDescription"];
- 
-  $query = "INSERT INTO `skillmaster`( `SkillName`, `SkillDescription`) VALUES ('$addSkill','$skillDescription')";
-  $result = mysqli_query($conn, $query);
+
+  $checkSkillName = "SELECT * FROM `skillmaster` WHERE `SkillName`='$addSkill'";
+  $res7 = mysqli_query($conn, $checkSkillName);
+  if($res7->num_rows>0){
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Alert!</strong> The skill name already exists so you can not add the same skill.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>';
+  }else{
+    $query = "INSERT INTO `skillmaster`( `SkillName`, `SkillDescription`) VALUES ('$addSkill','$skillDescription')";
+    $result = mysqli_query($conn, $query);
+
  
   if ($result) {
     $showAlert=true;
@@ -27,7 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>';
         // echo "<a href='/recruiters_page/agent/dashboard.php'>back</a>";
     }
- 
+
+  }
+
 }
  
 ?>
@@ -43,50 +67,46 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <!-- Bootstrap CSS -->
    <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
    <link rel="stylesheet" href="styles/index.css">
-   <link rel="stylesheet" href="styles/navbar.css">
+   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    
     <!-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script> -->
   <!-- <script src="script/dashboard.js"></script> -->
+
  
   <title>Skill</title>
 </head>
  
 <body>
+
   <!---------------- Navbar  -----------==-->
-  <div class="navbar" style="padding-bottom: 30px;">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button class="tab ">Home</button></a>
-            <div class="project-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
-                <div id="project-dropdown-content" class="dropdown-menu">
-                    <a href="project.php">Create Project</a>
-                    <a href="project.php">Search Project</a>
+
+  <?php  include('navbar.php') ?>
+ 
+  <div class="container" style="width: 40%;
+    height:60%;  
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: white;
+    border-radius: 10px;
+    padding: 30px 40px;">
+    <h2 style="text-align:center; "> Create Skill</h2>
+            <form action="skill.php" class="" method="post">
+                <div style="margin-top:12%;">
+                <label for="skillName" style="font-size:20px">Skill: </label>
+                <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:75%;" required>
+
                 </div>
-            </div>
-            <a href="search.php"><button class="tab">Search</button></a>
-            <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab active" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Skill</a>
-                    <a href="skill_dashboard.php">Search Skill</a>
+                <div style="margin-top:6%;">
+                <label for="SkillDescription" style="font-size:20px">Description: </label>
+                <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;" required></textarea>
                 </div>
-            </div>
-            <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
-                <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="add_location.php">Create Location</a>
-                    <a href="view_location.php">Search Location</a>
-                </div>
-            </div>
-            <div class="customer-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
-                <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="customer_creation.php">Create Customer</a>
-                    <a href="customer_view.php">Search Customer</a>
-                </div>
+
             </div>
         </div>
         <div class="user-menu" onclick="toggleDropdown()">
@@ -96,8 +116,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <a href="agent_logout.php" id="log-out">Log Out</a>
             </div>
         </div>
-  </div>
+    </div>
  
+  <!-- <div class="container" style="margin-left: 500px;">
+    <form action="skill.php" class="" method="post">
+      <div class="form-group">
+        <label for="title" style="color: white;">Skill</label>
+        <input name="skillName" type="title" class="form-control" id="title" aria-describedby="emailHelp"
+          placeholder="Enter Skill" style="max-width: 500px;">
+      </div>
+      <button type="submit" class="btn btn-primary">Add Skill</button>
+    </form>
+    <hr style="margin-bottom: 2rem;">
+  </div> -->
   <div class="container" style="width: 40%;
     height:60%;  
     background: transparent;
@@ -107,7 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     color: white;
     border-radius: 10px;
     padding: 30px 40px;">
+
     <h2 style="text-align:center; text-shadow: 2px 2px grey"> Create Skill</h2>
+
             <form action="skill.php" class="" method="post">
                 <div style="margin-top:12%;">
                 <label for="skillName" style="font-size:20px">Skill: </label>
@@ -117,8 +150,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <label for="SkillDescription" style="font-size:20px">Description: </label>
                 <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: transparent;border: 2px solid skyblue; color:white;padding:0.2rem; text-align:center" required></textarea>
                 </div>
+
                 <button type="submit" class="btn btn-primary" style="margin-top:10%; margin-left: 33%; width:30%; font-size:25px;border-radius:10px; border:2px solid skyblue;background-color:transparent">Create</button>
                 
+
         </form>
         <script src="script/script.js"></script>
 </div>
