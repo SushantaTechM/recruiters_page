@@ -22,13 +22,13 @@
             }
         }
     }
-}
+ 
 ?>
  
-
+ 
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,28 +47,27 @@
         font-weight: 600;
         font-size: 40px;
         text-align: center;
-        margin: 2rem 0; 
-        text-shadow:4px 4px grey;
-
+        margin: 2rem 0;
+        /* text-shadow:4px 4px grey; */
+ 
     }
-
+ 
     .input-box input {
         color: white;
         font-weight: 200;
         font-size: 20px;
         /* text-align: center; */
-        background-color: transparent;
+       
         border: 2px solid white;
-        border-radius: 10px;
+        /* border-radius: 10px; */
         width: 50%;
-        padding:0.5rem;
+        padding:0.3rem;
         margin-bottom: 12px;
     }
-
-    .input-box {
-        text-align: center;
+    .input-box{
+        /* text-align: center;   */
     }
-
+ 
     .btn {
         display: block;
         margin: 50px auto;
@@ -82,30 +81,31 @@
         transition:transform 0.5s;
         cursor: pointer;
     }
-
+ 
     .btn:hover {
         background: #0acad8;
     }
-
+ 
     .wrapper{
         border: 2px solid skyblue;
         box-shadow:  1px 1px #0acad8;
-
+        /* height: 450px; */
         margin: auto;
-        width: 30%;
+        width: 40%;
         padding: 1rem;
         margin-top: 2%;
         backdrop-filter: blur(20px);
     }
     label{
         color: white;
-        
+        font-size: 20px;
+       
     }
 </style>
-
+ 
 <body>
     <!-- ----------------- Navbar --------------- -->
-
+ 
     <div class="navbar" style="padding-bottom: 30px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
@@ -113,7 +113,7 @@
             <div class="project-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
-
+ 
                     <a href="project.php">Create Project</a>
                     <a href="project_dashboard.php">Search Project</a>
                 </div>
@@ -149,35 +149,35 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- ------------- Form --------------- -->
-
+ 
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
         <h1>Create Location</h1>
             <form method="post" action="add_location.php">
                 <div class="input-box">
-                    <!-- <label for="locationName">Loc Name  &nbsp;</label> -->
+                    <label for="locationName">Loc Name  &nbsp;</label>
                     <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <!-- <label for="locationState">Loc State &nbsp;</label> -->
+                    <label for="locationState">Loc State &nbsp;</label>
                     <input type="text" name="locationState" placeholder="Loc State" id="locationState" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <!-- <label for="locationHeadName">Loc Head Name &nbsp;</label> -->
+                    <label for="locationHeadName">Loc Head Name &nbsp;</label>
                     <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <!-- <label for="locationHeadEmail">Loc Head Email &nbsp;</label> -->
+                    <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
                     <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <!-- <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label> -->
+                    <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
                     <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number" id="locationHeadMobile" required>
                     <i class='bx bxs-user'></i>
                 </div>
@@ -185,10 +185,10 @@
             </form>
         </div>
     </div>  
-  
-
-
+ 
+ 
+ 
     <script src="script/script.js"></script>
 </body>
-
+ 
 </html>

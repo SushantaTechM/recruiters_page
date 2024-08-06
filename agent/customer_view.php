@@ -6,9 +6,61 @@ if (!$conn) {
 }
 
 $sql4 = "SELECT * from `locationmaster`";
-$outcome4 = mysqli_query($conn, $sql4);
+$location_outcome = mysqli_query($conn, $sql4);
 ?>
+<?php
+if (isset($_GET["delete"])) {
+  $id = $_GET["delete"];
+  $cid = "SELECT * FROM `Project` where `Project`.`CustomerId` = '$id'";
+  $res4 = mysqli_query($conn, $cid);
 
+  $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
+  $result = mysqli_query($conn, $query);
+  if ($res4->num_rows > 0) {
+    $message = "There are some users assigned to this project, so you can not delete it!";
+    echo "<script type='text/javascript'>alert('$message');</>";
+  } else {
+    if (!$result) {
+      die(mysqli_error($conn));
+    }
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Your Project Deleted Succesfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>';
+  }
+}
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  if (isset($_POST["update"])) {
+    $editCustomerId = $_POST["editCustomerId"];
+
+
+
+    $editCustomerName = $_POST['editCustomerName'];
+    $editLocationName = $_POST['editLocationName'];
+    $query6 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$editLocationName'";
+    $result6 = mysqli_query($conn, $query6);
+    $row6 = mysqli_fetch_assoc($result6);
+    $locationid6 = $row6['LocationId'];
+
+
+
+    $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6' WHERE CustomerId='$editCustomerId'";
+    $result = mysqli_query($conn, $SQL);
+    if ($result) {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success!</strong> Your Project Updated Succesfully.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>';
+    } else {
+      echo mysqli_error($conn);
+    }
+  }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,11 +97,24 @@ $outcome4 = mysqli_query($conn, $sql4);
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <style>
+    .wrapper {
+      border: 2px solid skyblue;
+      box-shadow: 1px 1px #0acad8;
+      /* height: 450px; */
+      margin: auto;
+      width: 40%;
+      padding: 1rem;
+      margin-top: 2%;
+      backdrop-filter: blur(20px);
+    }
+  </style>
 
 </head>
 
 <body>
 
+  <!------------------ Modal  ------------------>
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -80,7 +145,7 @@ $outcome4 = mysqli_query($conn, $sql4);
               <select name="editLocationName" id="editLocationName" class="js-example-basic-single">
                 <option value="" disabled selected hidden>Please select Location</option>
                 <?php
-                while ($row = mysqli_fetch_assoc($outcome4)) {
+                while ($row = mysqli_fetch_assoc($location_outcome)) {
                   $location = $row['LocationName'];
                   echo "<option value='$location'>$location</option>";
                 }
@@ -97,59 +162,7 @@ $outcome4 = mysqli_query($conn, $sql4);
     </div>
   </div>
 
-  <?php
-  if (isset($_GET["delete"])) {
-    $id = $_GET["delete"];
-    $cid = "SELECT * FROM `Project` where `Project`.`CustomerId` = '$id'";
-    $res4 = mysqli_query($conn, $cid);
 
-    $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
-    $result = mysqli_query($conn, $query);
-    if ($res4->num_rows > 0) {
-      $message = "There are some users assigned to this project, so you can not delete it!";
-      echo "<script type='text/javascript'>alert('$message');</>";
-    } else {
-      if (!$result) {
-        die(mysqli_error($conn));
-      }
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Your Project Deleted Succesfully.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
-    }
-  }
-  if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST["update"])) {
-      $editCustomerId = $_POST["editCustomerId"];
-
-
-
-      $editCustomerName = $_POST['editCustomerName'];
-      $editLocationName = $_POST['editLocationName'];
-      $query6 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$editLocationName'";
-      $result6 = mysqli_query($conn, $query6);
-      $row6 = mysqli_fetch_assoc($result6);
-      $locationid6 = $row6['LocationId'];
-
-
-
-      $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6' WHERE CustomerId='$editCustomerId'";
-      $result = mysqli_query($conn, $SQL);
-      if ($result) {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project Updated Succesfully.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>';
-      } else {
-        echo mysqli_error($conn);
-      }
-    }
-  }
-  ?>
 
   <!-- ----------------- Navbar --------------- -->
 
@@ -197,7 +210,8 @@ $outcome4 = mysqli_query($conn, $sql4);
   </div>
 
   <div>
-    <table id="example" class="display" style="width:100%">
+    <h1 style="text-align:center;">Customer Details</h1>
+    <table id="example" class="display wrapper" style=>
       <thead>
         <tr>
           <th>CustomerId</th>
@@ -235,15 +249,7 @@ $outcome4 = mysqli_query($conn, $sql4);
       </tbody>
     </table>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script> -->
+    
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script>
       let table = new DataTable('#example');
@@ -284,7 +290,6 @@ $outcome4 = mysqli_query($conn, $sql4);
         })
       })
     </script>
-    <script src="script/script.js"></script>
   </div>
   <script>
     // .js-example-basic-single declare this class into your select box

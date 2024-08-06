@@ -83,10 +83,8 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 
     <div class="dashboard-tab-content">
         <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
-        <!-- <div class="dashboard-confirm-content"></div>
-        <div class="dashboard-available-content" id="dashboard-available-content"></div> -->
-
-
+        
+        <!------------------- Modal  --------------------->
         <div class="modal" id="user-modal">
             <div class="modal-content">
                 <span class="close-btn"

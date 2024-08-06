@@ -1,4 +1,4 @@
-
+ 
 <?php
     // include "partials/_registration_header.php";
     $conn = mysqli_connect('localhost','root','','recruitmentpage');
@@ -6,6 +6,62 @@
         die("Something went wrong!");
     }
 ?>
+
+<!-- -------------- Edit php code --------------- -->
+ 
+<?php
+        if($_SERVER['REQUEST_METHOD'] == "POST") {
+            if(isset($_POST["update"])) {
+                $editLocationId = $_POST['editLocationId'];
+                $editLocationName = $_POST["editLocationName"];
+                $editLocationState = $_POST["editLocationState"];
+                $editLocationHeadName = $_POST["editLocationHeadName"];
+                $editLocationHeadEmail = $_POST["editLocationHeadEmail"];
+                $editLocationHeadMobile = $_POST["editLocationHeadMobile"];
+               
+                
+                $sql = "UPDATE `locationmaster` SET `LocationName` = '$editLocationName',`LocationState` = '$editLocationState',`LocationHeadName` = '$editLocationHeadName',`LocationHeadEmail` = '$editLocationHeadEmail',`LocationHeadMobile` = '$editLocationHeadMobile' where `LocationId` = '$editLocationId'";
+                $result = mysqli_query($conn, $sql);
+                if ($result) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> Location Updated Succesfully!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>';
+                }
+                else {
+                    echo mysqli_error($conn);
+                }
+            }
+        }
+    ?>
+ 
+    <!-- ------------------------- Delete php code --------------------------------- -->
+ 
+    <?php
+        if(isset($_GET["delete"])) {
+            $id= $_GET["delete"];
+            $cid="SELECT LocationName FROM `locationmaster` where `LocationId` = '$id'";
+            $res4=mysqli_query($conn,$cid);
+       
+            $query="DELETE FROM `locationmaster` WHERE `LocationId` = '$id'";
+            $result = mysqli_query($conn, $query);
+            if (!$result) {
+                $message="This location is assigned to somewhere, so you cannot delete it!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                // die(mysqli_error($conn));
+            }
+            else {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>Success!</strong> Location Deleted Succesfully!
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>';
+            }
+        }
+    ?>
  
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +73,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="styles/navbar.css">
-
+ 
     <title>Project</title>
 </head>
 <style>
@@ -56,30 +112,28 @@
         font-weight: 600;
         font-size: 40px;
         text-align:center;
-        text-shadow:4px 4px grey;
+        /* text-shadow:4px 4px grey; */
     }
 </style>
 <body>
-
+    
     <!-- ----------------- Navbar --------------- -->
  
     <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab">Home</button></a>
-
-            <!-- <a href=""><button class="tab">Project</button></a> -->
-
+ 
             <div class="project-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <button class="dashboard-dropbtn tab " onclick="toggleProjectDropdown()">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
                     <a href="project.php">Create Project</a>
                     <a href="project_dashboard.php">Search Project</a>
                 </div>
             </div>
-
+ 
             <a href="search.php"><button class="tab">Employee</button></a>
-
+ 
             <div class="skill-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
                 <div id="dropdown-content" class="dropdown-menu">
@@ -88,21 +142,21 @@
                 </div>
             </div>
             <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
+                <button class="dashboard-dropbtn tab active" onclick="toggleLocationDropdown()">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
-
+ 
                     <a href="add_location.php">Create Location</a>
                     <a href="view_location.php">Search Location</a>
-
+ 
                 </div>
             </div>
             <div class="customer-dropdown">
                 <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
-
+ 
                     <a href="customer_creation.php">Create Customer</a>
                     <a href="customer_view.php">Search Customer</a>
-
+ 
                 </div>
             </div>
         </div>
@@ -114,7 +168,7 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- ----------- Modal -------------- -->
  
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -159,66 +213,6 @@
         </div>
     </div>
  
-    <!-- -------------- Edit php code --------------- -->
- 
-    <?php
-        if($_SERVER['REQUEST_METHOD'] == "POST") {
-            if(isset($_POST["update"])) {
-                $editLocationId = $_POST['editLocationId'];
-                $editLocationName = $_POST["editLocationName"];
-                $editLocationState = $_POST["editLocationState"];
-                $editLocationHeadName = $_POST["editLocationHeadName"];
-                $editLocationHeadEmail = $_POST["editLocationHeadEmail"];
-                $editLocationHeadMobile = $_POST["editLocationHeadMobile"];
-               
-                // $query1 = "SELECT `LocationName` FROM `locationmaster` WHERE `LocationId` = '$editLocationId'";
-                // $result1 = mysqli_query($conn,$query1);
-                // $row = mysqli_fetch_assoc($result1);
-                // $editLocationName = $row['editLocationName'];
- 
-                $sql = "UPDATE `locationmaster` SET `LocationName` = '$editLocationName',`LocationState` = '$editLocationState',`LocationHeadName` = '$editLocationHeadName',`LocationHeadEmail` = '$editLocationHeadEmail',`LocationHeadMobile` = '$editLocationHeadMobile' where `LocationId` = '$editLocationId'";
-                $result = mysqli_query($conn, $sql);
-                if ($result) {
-                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Success!</strong> Location Updated Succesfully!
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>';
-                }
-                else {
-                    echo mysqli_error($conn);
-                }
-            }
-        }
-    ?>
- 
-    <!-- ------------------------- Delete php code --------------------------------- -->
- 
-    <?php
-        if(isset($_GET["delete"])) {
-            $id= $_GET["delete"];
-            $cid="SELECT LocationName FROM `locationmaster` where `LocationId` = '$id'";
-            $res4=mysqli_query($conn,$cid);
-       
-            $query="DELETE FROM `locationmaster` WHERE `LocationId` = '$id'";
-            $result = mysqli_query($conn, $query);
-            if (!$result) {
-                $message="This location is assigned to somewhere, so you cannot delete it!";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-                // die(mysqli_error($conn));
-            }
-            else {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                      <strong>Success!</strong> Location Deleted Succesfully!
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>';
-            }
-        }
-    ?>
- 
     <!-- ----------------------------- Table -------------------------------- -->
  
     <h1>Location Details</h1>
@@ -252,7 +246,7 @@
                                 <td>" .$row['LocationHeadEmail']. "</td>
                                 <td>" .$row['LocationHeadMobile']. "</td>
                                 <td>
-                                <button class='edit btn btn-success' id='".$row['LocationId']."'>Edit</button>    
+                                <button class='edit btn btn-primary' id='".$row['LocationId']."'>Edit</button>    
                                 <button class='delete btn btn-danger' id='".$row['LocationId']."'>Delete</button></td>
                                 </td>
                             </tr>";
@@ -328,6 +322,6 @@
             })
         })
     </script>
+    <script src="script/script.js"></script>
 </body>
 </html>
- 

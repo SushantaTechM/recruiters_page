@@ -53,10 +53,7 @@ if (isset($_POST["btn"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Customer</title>
-    <link rel="stylesheet" href="/recruiters_page/agent/styles/dashboard.css">
-    <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
-    <link rel="stylesheet" href="styles/customer_creation.css">
-    <script src="script/dashboard.js"></script>
+ 
     <link rel="stylesheet" href="styles/navbar.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -69,9 +66,8 @@ if (isset($_POST["btn"])) {
         });
     </script>
     <!-- add -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="styles/index.css">
 
 </head>
@@ -121,14 +117,10 @@ if (isset($_POST["btn"])) {
             </div>
         </div>
     </div>
-    <div class="container" style="width: 40%; 
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px;">
+
+    <!-------------------- Content ----------------->
+    <div class="container"
+        style="width: 40%;background: transparent;border: 2px solid rgba(255, 255, 255, .2);backdrop-filter: blur(20px);box-shadow: 0 0 10px rgba(0, 0, 0, .2);color: white;border-radius: 10px;padding: 30px 40px;">
         <h2 style="text-align:center; font-weight:bold;">Create Customer</h2>
         <form action="customer_creation.php" class="" method="post">
             <div style="margin-top:12%;">
