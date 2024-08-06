@@ -97,8 +97,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <title>Project</title>
   <style>
-    .form-group {
+    .form-group{
       margin-bottom: 15px;
+      padding : 6px;
+    }
+    .form-group select{
+      border-radius: 10px;
+      height: 2rem;
+    }
+    .container{
+      width: 60%;
+
+    }
+    .form{
+      margin-left: 90px;
     }
 
     .skill-entry {
@@ -114,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       color: white;
       padding: 0.2rem 0.3rem;
       border: 2px solid skyblue;
+      border-radius: 10px;
     }
 
     .skill-entry button {
@@ -127,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <!-- ----------------- Navbar --------------- -->
 
-  <div class="navbar" style="padding-bottom: 100px;">
+  <div class="navbar" style="padding-bottom: 30px;">
     <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
     <div class="nav-links">
       <a href="dashboard.php"><button class="tab">Home</button></a>
@@ -169,13 +182,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
     </div>
   </div>
+<!--                                     FORM STARTS                                   -->
 
-
-  <h1 style="text-align:center;">Create Project</h1>
   <div class="container">
-
-
-    <form action="Project.php" class="" method="post">
+    <form action="Project.php" class="form" method="post">
+      <h1 style="text-align:center; text-shadow: 2px 2px grey;">Create Project</h1>
       <div class="form-group">
         <label for="title">Project Name</label>
         <input style="background-color: transparent; color : white;" name="title" type="title" class="form-control"
@@ -206,7 +217,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input style="background-color: transparent; color: white;" name="title5" type="date" class="form-control"
           id="title5" aria-describedby="emailHelp" placeholder="Enter Ending Date">
       </div>
-      <br>
       <div class="form-group">
         <label for="title2">Location</label>
         <select name="title2" id="title2">
@@ -221,6 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           ?>
         </select>
       </div>
+      <br>
       <div class="form-group">
         <label for="Vertical">Vertical Name</label>
         <select name="Vertical" id="Vertical">
@@ -313,7 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       });
     </script>
     <script src="script/script.js"></script>
-    <!-- sushanta -->
+  </div> <!-- sushanta -->
 </body>
 
 </html>

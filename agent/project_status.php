@@ -118,7 +118,7 @@ $outcome2 = mysqli_query($conn, $sql2);
       <div class="form-group">
         <label for="setstatus">Status</label>
         <select name="setstatus" id="setstatus">
-          <option value="" disabled selected hidden>Please select Project</option>
+          <option value="" disabled selected hidden >Please select Project</option>
           <option value="open">Open</option>
           <option value="closed">Closed</option>
 

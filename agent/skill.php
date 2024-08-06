@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
 <body>
   <!---------------- Navbar  -----------==-->
-  <div class="navbar" style="padding-bottom: 100px;">
+  <div class="navbar" style="padding-bottom: 30px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab ">Home</button></a>
@@ -101,23 +101,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <div class="container" style="width: 40%;
     height:60%;  
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid skyblue;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: white;
     border-radius: 10px;
     padding: 30px 40px;">
-    <h2 style="text-align:center; "> Create Skill</h2>
+    <h2 style="text-align:center; text-shadow: 2px 2px grey"> Create Skill</h2>
             <form action="skill.php" class="" method="post">
                 <div style="margin-top:12%;">
                 <label for="skillName" style="font-size:20px">Skill: </label>
-                <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:75%;" required>
+                <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:75%; background-color: transparent;border: 2px solid skyblue; color:white;padding:0.2rem; text-align:center" required>
                 </div>
                 <div style="margin-top:6%;">
                 <label for="SkillDescription" style="font-size:20px">Description: </label>
-                <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;" required></textarea>
+                <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: transparent;border: 2px solid skyblue; color:white;padding:0.2rem; text-align:center" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px;">Create</button>
+                <button type="submit" class="btn btn-primary" style="margin-top:10%; margin-left: 33%; width:30%; font-size:25px;border-radius:10px; border:2px solid skyblue;background-color:transparent">Create</button>
                 
         </form>
         <script src="script/script.js"></script>

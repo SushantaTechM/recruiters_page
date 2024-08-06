@@ -32,11 +32,30 @@ include ("../database/dbconnect.php");
   <link rel="stylesheet" href="styles/project.css">
 
 </head>
+<style>
+  .dashboard-tabs{
+    text-align: center;
+  }
+  .dashboard-tabs button{
+    background-color: transparent;
+    text-decoration: none;
+    border: 2px solid skyblue;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+  .dashboard-tabs a{
+    color: white;
+    text-decoration: none;
+  }
+
+
+</style>
 
 <body>
   <!-- ----------------- Navbar --------------- -->
 
-  <div class="navbar" style="padding-bottom: 100px;">
+  <div class="navbar" style="padding-bottom: 30px;">
     <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
     <div class="nav-links">
       <a href="dashboard.php"><button class="tab active">Home</button></a>
