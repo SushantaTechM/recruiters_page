@@ -1,4 +1,13 @@
 <?php
+
+if (!isset($_SESSION)) {
+    // Start Session it is not started yet
+    session_start();
+}
+if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+    header('location:../index.php');
+    exit;
+}
  
 $showAlert = false;
 $conn = new mysqli("localhost", "root", "", "recruitmentpage");
@@ -43,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <!-- Bootstrap CSS -->
    <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
    <link rel="stylesheet" href="styles/index.css">
-   <link rel="stylesheet" href="styles/navbar.css">
+   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -55,48 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
 <body>
   <!---------------- Navbar  -----------==-->
-  <div class="navbar" style="padding-bottom: 100px;">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button class="tab ">Home</button></a>
-            <div class="project-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
-                <div id="project-dropdown-content" class="dropdown-menu">
-                    <a href="project.php">Create Project</a>
-                    <a href="project.php">Search Project</a>
-                </div>
-            </div>
-            <a href="search.php"><button class="tab">Search</button></a>
-            <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab active" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Skill</a>
-                    <a href="skill_dashboard.php">Search Skill</a>
-                </div>
-            </div>
-            <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
-                <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="add_location.php">Create Location</a>
-                    <a href="view_location.php">Search Location</a>
-                </div>
-            </div>
-            <div class="customer-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
-                <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="customer_creation.php">Create Customer</a>
-                    <a href="customer_view.php">Search Customer</a>
-                </div>
-            </div>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
-            </div>
-        </div>
-  </div>
+  <?php  include('navbar.php') ?>
  
   <div class="container" style="width: 40%;
     height:60%;  
