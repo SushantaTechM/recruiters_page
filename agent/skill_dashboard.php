@@ -147,64 +147,7 @@ $outcome1 = mysqli_query($conn, $sql1);
 <?php  include('navbar.php') ?>
 
 
-  <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content" style="  
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px; font-weight: 500;">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-            style="color:red; width: 80px; padding: 5px;">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="skill_dashboard.php" class="" method="post">
-
-            
-            <div class="form-group">
-              <label for="editSkillId">SkillId</label>
- 
-              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly>
- 
-            </div>
-            <div class="form-group">
-             
-              <label for="editdescription">Description</label>
-              <input name="editdescription" class="form-control" id="editdescription" rows="3"
-              value='<?php $desc ?>'></input>
-            </div>
-           
- 
-            <div class="form-group">
-             
-              <label for="editSkillName">SkillName</label>
-              <input name="editSkillName" class="form-control" id="editSkillName" rows="3"
-                placeholder="please add Skill..."></input>
-
-            </div>
-            <div class="form-group">
-
-              <label for="editDescription">Skill Description</label>
-              <input name="editDescription" class="form-control" id="editDescription" rows="3"
-                placeholder="please update description..."></input>
-            </div>
-            <button type="submit" class="btn btn-primary" name="update" style="border-radius:none; padding: 5px;">Update
-              Skill</button>
-          </form>
-        </div>
- 
-      </div>
-    </div>
-  </div> -->
+  
  
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
