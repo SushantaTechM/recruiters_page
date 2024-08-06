@@ -50,43 +50,45 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         </div>
         <div id="results"></div>
     </div>
-    <div class="smallModal" id="project-softlock-modal">
-        <div class="smallModal-content">
+    <div class="smallModal" id="project-softlock-modal" >
+        <div class="smallModal-content" style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white;backdrop-filter: blur(120px)">
             <span class="close-btn"
                 onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
-            <select class="smallModalDropdown" id="softlockprojectDropdown"></select>
-            <select class="smallModalDropdown" id="softlockSkillDropdown"></select>
+            <select class="smallModalDropdown" id="softlockprojectDropdown"  style="border-radius:10px; color:white; background-color:transparent " ></select>
+            <select class="smallModalDropdown" id="softlockSkillDropdown"   style="border-radius:10px; color:white; background-color:transparent" ></select>
             <div class="form-group">
                 <label for="employeeStartDate">Start Date</label>
-                <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDate"
-                    aria-describedby="emailHelp" placeholder="Enter Starting Date">
+                <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDate"  style="border-radius:10px; color:white; background-color:transparent"  >
             </div>
             <div class="form-group">
                 <label for="employeeEndDate">End Date</label>
                 <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDate"
-                    aria-describedby="emailHelp" placeholder="Enter Ending Date">
+                    aria-describedby="emailHelp" placeholder="Enter Ending Date"  style="border-radius:10px; color:white; background-color:transparent"  >
             </div>
 
             <button id="softlock-project-button">Softlock</button>
         </div>
     </div>
+
+
+
     <div class="smallModal" id="project-confirm-modal">
-        <div class="smallModal-content">
+        <div class="smallModal-content" style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white;backdrop-filter: blur(120px)">
             <span class="close-btn"
                 onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
-            <select class="smallModalDropdown" id="confirmprojectDropdown"></select>
-            <select class="smallModalDropdown" id="confirmSkillDropdown"></select>
+            <select class="smallModalDropdown" id="confirmprojectDropdown" style="border-radius:10px; color:white; background-color:transparent " ></select>
+            <select class="smallModalDropdown" id="confirmSkillDropdown" style="border-radius:10px; color:white; background-color:transparent "  ></select>
             <div class="form-group">
                 <label for="employeeStartDate">Start Date</label>
                 <input name="employeeStartDate" type="date" class="form-control" id="employeeStartDateConfirm"
-                    aria-describedby="emailHelp" placeholder="Enter Starting Date">
+                    aria-describedby="emailHelp" placeholder="Enter Starting Date"  style="border-radius:10px; color:white; background-color:transparent">
             </div>
             <div class="form-group">
                 <label for="employeeEndDate">End Date</label>
                 <input name="employeeEndDate" type="date" class="form-control" id="employeeEndDateConfirm"
-                    aria-describedby="emailHelp" placeholder="Enter Ending Date">
+                    aria-describedby="emailHelp" placeholder="Enter Ending Date"  style="border-radius:10px; color:white; background-color:transparent">
             </div>
 
 

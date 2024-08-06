@@ -103,10 +103,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
+
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 
   <title>Project</title>
 </head>
+<style>
+  .tbl{
+    width: 60%;
+  }
+</style>
 
 <body>
   
@@ -222,9 +228,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </div>
 
 
-<h1 style="text-align:center;">Project Details</h1>
+<h1 style="text-align:center; text-shadow: 2px 2px grey;">Project Details</h1>
 <div class="projectContainer">
-      <table class="table " id="myTable">
+      <table class="table tbl" id="myTable">
         <thead>
           <tr>
 
@@ -240,8 +246,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <th scope="col">Action</th>
           </tr>
         </thead>
-
-        <b>
           <?php
 
           $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";

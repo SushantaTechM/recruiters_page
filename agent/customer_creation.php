@@ -88,13 +88,13 @@ if (isset($_POST["btn"])) {
 
     <!-------------------- Content ----------------->
     <div class="container"
-        style="width: 40%;background: transparent;border: 2px solid rgba(255, 255, 255, .2);backdrop-filter: blur(20px);box-shadow: 0 0 10px rgba(0, 0, 0, .2);color: white;border-radius: 10px;padding: 30px 40px;">
+        style="width: 40%;background: transparent;border: 2px solid skyblue;backdrop-filter: blur(20px);box-shadow: 0 0 10px rgba(0, 0, 0, .2);color: white;border-radius: 10px;padding: 30px 40px;">
         <h2 style="text-align:center; font-weight:bold;">Create Customer</h2>
         <form action="customer_creation.php" class="" method="post">
             <div style="margin-top:12%;">
-                <label for="Name" style="font-size:20px">Name: </label>
+                <label for="Name" style="font-size:20px; ">Name: </label>
                 <input type="text" name="Customername" id="Customername" maxlength="30" placeholder="Enter Name"
-                    style="max-width: 500px; width:60%;" required>
+                    style="max-width: 500px; width:60%; background-color:transparent; border-radius:10px; color:white;border: 2px solid skyblue;" required>
             </div>
 
 
@@ -116,7 +116,7 @@ if (isset($_POST["btn"])) {
             </div>
 
             <button type='submit' id='btn' name='btn' class="btn btn-primary"
-                style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px;">Create</button>
+                style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px;background-color:transparent; border-radius:10px; color:white; padding: 1rem;font-size:20px">Create</button>
         </form>
         <script src="script/script.js"></script>
     </div>

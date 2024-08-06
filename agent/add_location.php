@@ -90,14 +90,11 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         padding:14px 50px;
         border-radius:40px;
         text-decoration:none;
-        color:rgb(0, 0, 0);
-        transition:transform 0.5s;
+        background-color: transparent;
+        color:white;
         cursor: pointer;
     }
  
-    .btn:hover {
-        background: #0acad8;
-    }
  
     .wrapper{
         border: 2px solid skyblue;
@@ -113,6 +110,11 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         color: white;
         font-size: 20px;
        
+    }
+    .input-box input{
+        border-radius: 10px;
+        background-color: transparent;
+
     }
 </style>
  

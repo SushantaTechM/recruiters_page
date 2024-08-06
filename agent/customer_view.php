@@ -125,12 +125,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <!------------------ Modal  ------------------>
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" style="background: transparent;">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" style="background-color: transparent;backdrop-filter: blur(120px);color: white;">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style='color:black;'>Edit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="exampleModalLabel" style='color:white;'>Edit</h5>
+          <button type="button" class="close" data-dismiss="modal"  style='color:white;' aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -139,13 +139,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="form-group">
               <label for="editCustomerId">Customer</label>
 
-              <input id='editCustomerId' name='editCustomerId' value='<?php $id ?>' readonly>
+              <input id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
 
             </div>
 
             <div class="form-group">
               <label for="editCustomerName">Customer Name</label>
-              <input name="editCustomerName" type="text" class="form-control" id="editCustomerName"
+              <input name="editCustomerName"  style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white"  type="text" class="form-control" id="editCustomerName"
                 aria-describedby="emailHelp" placeholder="Enter Customer Name">
             </div>
 

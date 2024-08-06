@@ -31,11 +31,31 @@ include ("../database/dbconnect.php");
   <link rel="stylesheet" href="styles/project.css">
 
 </head>
+<style>
+  .dashboard-tabs{
+    text-align: center;
+  }
+  .dashboard-tabs button{
+    background-color: transparent;
+    text-decoration: none;
+    border: 2px solid skyblue;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+  .dashboard-tabs a{
+    color: white;
+    text-decoration: none;
+  }
+
+
+</style>
 
 <body>
   <!-- ----------------- Navbar --------------- -->
    
   <?php  include('navbar.php') ?>
+
 
   <div class="dashboard-tabs">
     <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'><a href="project_status.php">Project
