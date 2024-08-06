@@ -20,7 +20,7 @@ if ($conn->query($dbCreationSQL) === FALSE) {
 
 
 //                       SkillMaster table
-$skillmaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`skillmaster` ( `SkillId` INT(20) NOT NULL AUTO_INCREMENT , `SkillName` VARCHAR(50) NOT NULL , PRIMARY KEY (`SkillId`)) ENGINE = InnoDB
+$skillmaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`skillmaster` ( `SkillId` INT(20) NOT NULL AUTO_INCREMENT , `SkillName` VARCHAR(50) NOT NULL ,`SkillDescription` VARCHAR(200) NOT NULL, PRIMARY KEY (`SkillId`)) ENGINE = InnoDB
 ";
 
 if ($conn->query($skillmaster) === FALSE) {

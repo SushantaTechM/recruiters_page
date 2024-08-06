@@ -38,29 +38,14 @@ $outcome2 = mysqli_query($conn, $sql2);
 </head>
 
 <body>
-  <!-- <div class="navbar">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: red;">HireHub</span></div>
-    <div class="nav-links">
-      <a href="index.php"><button class="tab ">Dashboard</button></a>
-      <a href="project.php"><button class="tab active">Project</button></a>
-      <a href="search.php"><button class="tab">Search</button></a>
-    </div>
-    <div class="user-menu" onclick="toggleDropdown()">
-      <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-      <div class="dropdown-menu" id="userDropdown">
-        <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-        <a href="agent_logout.php" id="log-out">Log Out</a>
-      </div>
-    </div>
-  </div> -->
   <!-- ----------------- Navbar --------------- -->
 
   <div class="navbar" style="padding-bottom: 100px;">
     <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
     <div class="nav-links">
-      <a href="dashboard.php"><button class="tab">Home</button></a>
+      <a href="dashboard.php"><button class="tab active">Home</button></a>
       <div class="project-dropdown">
-        <button class="dashboard-dropbtn tab active" onclick="toggleProjectDropdown()">Project</button>
+        <button class="dashboard-dropbtn tab " onclick="toggleProjectDropdown()">Project</button>
         <div id="project-dropdown-content" class="dropdown-menu">
           <a href="project.php">Create Project</a>
           <a href="project_dashboard.php">Search Project</a>
