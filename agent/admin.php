@@ -1,14 +1,15 @@
 <?php
 
-// if (!isset($_SESSION)) {
-//     // Start Session it is not started yet
-//     session_start();
-// }
-// // session_start();
-// if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
-//     header('location:../index.php');
-//     exit;
-// }
+if (!isset($_SESSION)) {
+    // Start Session it is not started yet
+    session_start();
+}
+if ( !isset($_SESSION['adminLogin'])  )  {
+    header('location:../index.php');
+    exit;
+}
+
+
 include ("../database/dbconnect.php");
 
 
@@ -48,44 +49,8 @@ include ("../database/dbconnect.php");
 
 <body>
 
-    <div class="navbar" style="padding-bottom: 100px;">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-        
-            <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Skills</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-                </div>
-            </div>
-            <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleLocationDropdown()">Location</button>
-                <div id="location-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Location</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-                </div>
-            </div>
-            <div class="customer-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
-                <div id="customer-dropdown-content" class="dropdown-menu">
-                    <a href="skill.php">Create Customer</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-                </div>
-            </div>
-            <div class="user">
-            <a href="admin.php"><button class="dashboard-dropbtn tab">Users</button></a>
-                
-            </div>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
-            </div>
-        </div>
-    </div>
+    <?php  include('navbar.php') ?>
+
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">

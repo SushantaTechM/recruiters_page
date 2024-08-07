@@ -1,11 +1,14 @@
 <?php
- 
-session_start();
-if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
-{
+
+if (!isset($_SESSION)) {
+    // Start Session it is not started yet
+    session_start();
+}
+if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     header('location:../index.php');
     exit;
 }
+ 
 include "../database/dbconnect.php";
  
  
@@ -58,54 +61,6 @@ if(isset($_POST['update'])){
     <link rel="stylesheet" href="styles/agent_profile.css">
    
 </head>
-<!-- <body style="background-image: url('../images/p (1).jpg'); background-size: cover;  color: black; font-size : 20px;">
-    <div class="navbar">
-        <div class="navbar-brand">Tech <br> <span style="color: red;">HireHub</span></div>
-        <div class="dropdown">
-            <button class="dropbtn" >
-            <img src="../images/hamburger_icon.png" alt="Menu">
-        </button>
-            <div class="dropdown-content" style="right:0px;">
-                <a href="index.php">Dashboard</a>
-                <a href="agent_logout.php">Logout</a>
-            </div>
-        </div>
-    </div>
- 
-    <div class="profile-container">
-        <div class="profile-header">
-            <div class="profile-icon">👤</div>
-            <div class="profile-title">Hi, <?php  //echo $row['UserName'] ?></div>
-        </div>
-        <form class="profile-form" action="agent_profile.php" method="post">
-
-            <div class="form-group">
-                <label for="user_name">Full name:</label>
-                <input name="user_name" type="text" id="user_name" value= <?php //echo $row['UserName'];  ?>  readonly>
-                <button type="button" class="edit-btn" onclick="toggleEdit('user_name')">✏️</button>
-            </div>
-
-            <div class="form-group-email">
-                <label for="email">Email ID:</label>
-                <input name="agent_email" type="email" id="email" value= <?php //echo $row['Email'];  ?> readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone no:</label>
-                <input name="agent_phone" type="tel" id="phone" value= <?php //echo $row['Phone'];  ?> readonly>
-                <button type="button" class="edit-btn" onclick="toggleEdit('phone')">✏️</button>
-            </div>
-
- 
-            <div class="center-div">
-                <input type="submit" name="update" value="Update" class="update-btn" style="border-radius:10px" id="agent-profile-update-btn">
-            </div>
-           
-        </form>
-    </div>
- 
-    <script src="script/agent_profile.js"></script>
-</body> -->
 
 <body style="background-image: url('../images/p (1).jpg'); background-size: cover;  color: black; font-size : 20px;">
     <div  style="background: transparent;"  class="navbar">
