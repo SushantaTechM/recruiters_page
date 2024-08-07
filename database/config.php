@@ -101,7 +101,7 @@ if ($conn->query($project) === FALSE) {
 }
 
 //                       UserProjectDetails table
-$userprojectdetail = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userprojectdetails` ( `SlNo` INT(20) NOT NULL AUTO_INCREMENT , `Status` VARCHAR(25) NOT NULL , `UserId` INT(25) NOT NULL , `AgentId` INT(25) NOT NULL , `ProjectId` INT(25) NOT NULL ,`SkillId` INT(20) NOT NULL, `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL , PRIMARY KEY (`SlNo`),FOREIGN KEY (`UserId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`AgentId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`ProjectId`) REFERENCES `Project`(`ProjectId`),FOREIGN KEY (`SkillId`) REFERENCES `skillmaster`(`SkillId`)) ENGINE = InnoDB;
+$userprojectdetail = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userprojectdetails` ( `SlNo` INT(20) NOT NULL AUTO_INCREMENT , `Status` VARCHAR(25) NOT NULL , `UserId` INT(25) NOT NULL , `AgentId` INT(25) NOT NULL , `ProjectId` INT(25) NOT NULL ,`SkillId` INT(20) NOT NULL, `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL ,`CreatedAt` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`SlNo`),FOREIGN KEY (`UserId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`AgentId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`ProjectId`) REFERENCES `Project`(`ProjectId`),FOREIGN KEY (`SkillId`) REFERENCES `skillmaster`(`SkillId`)) ENGINE = InnoDB;
 ";
 if ($conn->query($userprojectdetail) === FALSE) {
   echo "Error creating table: " . $conn->error;
@@ -121,3 +121,37 @@ if ($conn->query($projectskilldetails) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
 
+
+
+
+$curr = date("Y-m-d");
+$query5 = "SELECT * FROM `recruitmentpage`.`userprojectdetails` WHERE `Status`='softlock'";
+
+$result5 = mysqli_query($conn, $query5);
+
+if ($result5->num_rows > 0) {
+    
+    while ($row5 = $result5->fetch_assoc()) {
+         
+
+       
+        $date1 = new DateTime($curr);
+        $date2 = new DateTime($row5["CreatedAt"]);
+
+       
+        $interval = $date2->diff($date1);
+
+        
+       
+        if($interval->format('%R%a')>=5){
+          $sql="DELETE FROM `recruitmentpage`.`userprojectdetails` WHERE `SlNo`=$row5[SlNo]";
+          if ($conn->query($sql) === FALSE) {
+            echo "Error deleting record: " . $conn->error;
+        }
+    }
+    }
+} else {
+    echo "Error";
+}
+
+// echo $curr;
