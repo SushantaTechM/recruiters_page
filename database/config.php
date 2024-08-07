@@ -101,7 +101,7 @@ if ($conn->query($project) === FALSE) {
 }
 
 //                       UserProjectDetails table
-$userprojectdetail = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userprojectdetails` ( `SlNo` INT(20) NOT NULL AUTO_INCREMENT , `Status` VARCHAR(25) NOT NULL , `UserId` INT(25) NOT NULL , `AgentId` INT(25) NOT NULL , `ProjectId` INT(25) NOT NULL ,`SkillId` INT(20) NOT NULL, `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL , PRIMARY KEY (`SlNo`),FOREIGN KEY (`UserId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`AgentId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`ProjectId`) REFERENCES `Project`(`ProjectId`),FOREIGN KEY (`SkillId`) REFERENCES `skillmaster`(`SkillId`)) ENGINE = InnoDB;
+$userprojectdetail = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userprojectdetails` ( `SlNo` INT(20) NOT NULL AUTO_INCREMENT , `Status` VARCHAR(25) NOT NULL , `UserId` INT(25) NOT NULL , `AgentId` INT(25) NOT NULL , `ProjectId` INT(25) NOT NULL ,`SkillId` INT(20) NOT NULL, `StartDate` DATE NOT NULL , `EndDate` DATE NOT NULL ,`CreatedAt` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`SlNo`),FOREIGN KEY (`UserId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`AgentId`) REFERENCES `users`(`UserId`),FOREIGN KEY (`ProjectId`) REFERENCES `Project`(`ProjectId`),FOREIGN KEY (`SkillId`) REFERENCES `skillmaster`(`SkillId`)) ENGINE = InnoDB;
 ";
 if ($conn->query($userprojectdetail) === FALSE) {
   echo "Error creating table: " . $conn->error;

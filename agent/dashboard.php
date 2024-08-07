@@ -57,16 +57,13 @@ include ("../database/dbconnect.php");
   <?php  include('navbar.php') ?>
 
 
-  <div class="dashboard-tabs">
-    <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'><a href="project_status.php">Project
-        Status</a></button>
-    <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'><a
-        href="associate.php">Associates</a></button>
-  </div>
+  <div class="dashboard-main-tabs">
+        <a href="dashboard.php"><button class=''>Project</button></a>
+        <a href="associate.php"><button class=''>Associates</button></a>
+    </div>
 
   <!--------------- Modal -------------------->
   
-
 
   <div class="container">
 

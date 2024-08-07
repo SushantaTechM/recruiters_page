@@ -1,14 +1,13 @@
 <?php
-
-if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+if(!isset($_SESSION)){
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
+{
+  header('location:../index.php');
+  exit;
 }
-
 include ("../database/dbconnect.php");
 
 $sql1 = "SELECT * from `customermaster`";
@@ -62,39 +61,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
 </head>
 
 <body>
-  <!-- <div class="navbar">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: red;">HireHub</span></div>
-    <div class="nav-links">
-      <a href="index.php"><button class="tab ">Dashboard</button></a>
-      <a href="project.php"><button class="tab active">Project</button></a>
-      <a href="search.php"><button class="tab">Search</button></a>
-    </div>
-    <div class="user-menu" onclick="toggleDropdown()">
-      <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-      <div class="dropdown-menu" id="userDropdown">
-        <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-        <a href="agent_logout.php" id="log-out">Log Out</a>
-      </div>
-    </div>
-  </div> -->
-  <!-- <div class="navbar">
-  <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button  class="tab ">Dashboard</button></a>
-            <a href="project.php"><button  class="tab active">Project</button></a>
-            <a href="search.php"><button  class="tab">Search</button></a>
-            <a href="search.php"><button class="tab">Customer</button></a>
-            <a href="search.php"><button class="tab">Skill</button></a>
-            <a href="search.php"><button class="tab">Location</button></a>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
-            </div>
-        </div>
-  </div> -->
+
   <div class="navbar" style="padding-bottom: 100px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
@@ -188,8 +155,8 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
         <button type="button" class="remove-skill-btn">Remove</button>
       </div> 
     </div>
-    <button type="button" id="addSkillBtn">Add Skill</button><br><br>
-    <button type="submit" id="updateSkillBtn" name="updateSkillBtn">Update</button><br><br>
+    <button type="button" id="addSkillBtn">+</button><br><br>
+    <button type="submit" id="updateSkillBtn" name="updateSkillBtn" style="color: #fff;background-color: #007bff;border-color: #007bff;border-radius: .25rem;width: 80px;height: 40px;">Map Skill</button><br><br>
     <?php
     $skill_query = "SELECT * FROM `skillmaster`";
     $skill_outcome = mysqli_query($conn,$skill_query);
@@ -230,7 +197,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     }
  
     // for ($x = 0; $x < count($skills); $x++) {
-    //     $project_query2="INSERT INTO `projectskilldetails` (`project`, `skill`, `requeired_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
+    //     $project_query2="INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
     //     $project_result2 = mysqli_query($conn,$project_query2);
     // }
 }
@@ -291,7 +258,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
               <input name="editFullfillHeadcount" class="form-control" id="editFullfillHeadcount" rows="3"
                 placeholder="please add description..."></input>
             </div>
-            <button type="submit" class="btn btn-primary" name="update">Update Note</button>
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
           </form>
         </div>
 
@@ -300,30 +267,34 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   </div>
 
   <?php
+  
   if (isset($_GET["projectid"])&& isset($_GET["skillid"])) {
     $projectId = $_GET["projectid"];
     $skillid = $_GET["skillid"];
-  
-    $cid = "SELECT * FROM `Projectskilldetails` where `UserProjectDetails`.`ProjectId` = '$id'";
-    $res4 = mysqli_query($conn, $cid);
+    
+   $query1="SELECT * FROM `projectskilldetails` WHERE `Project`='$projectId' and `skill`='$skillid' and `fullfill_headcount`='0'";
+   $result1 = mysqli_query($conn, $query1);
+    if($result1->num_rows > 0){
+    $query = "DELETE FROM `projectskilldetails` WHERE `Projectskilldetails`.`Project` = '$projectId' and `Projectskilldetails`.`skill`='$skillid' and `Projectskilldetails`.`fullfill_headcount`='0'";
 
-    $query = "DELETE FROM `Project` WHERE `Project`.`ProjectId` = '$id'";
     $result = mysqli_query($conn, $query);
-    if ($res4->num_rows > 0) {
-      $message = "There are some users assigned to this project, so you can not delete it!";
-      echo "<script type='text/javascript'>alert('$message');</script>";
-    } else {
-      if (!$result) {
-        die(mysqli_error($conn));
-      }
+
+    if ($result) {
       echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Your Project Deleted Succesfully.
+                <strong>Success!</strong> Skill Deleted Succesfully.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>';
     }
   }
+  else{
+    
+        $message = "There are some users assigned to this Skill, so you can not delete it!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+     
+  }
+}
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST["update"])) {
         // $id = $_GET["edit"];
@@ -343,13 +314,20 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       $result6 = mysqli_query($conn, $query6);
       $row6 = mysqli_fetch_assoc($result6);
       $Skillid = $row6['SkillId'];
+
       $RequiredHeadcount = $_POST['editRequiredHeadcount'];
       $FullfillHeadcount = $_POST['editFullfillHeadcount'];
-    //   $editProjectName = $_POST['editProjectName'];
+    
       $editProjectId = $_POST['editProjectId'];
-      // echo $editTitle,$editDescription,$editSno;
-    //   $editSkill = $_POST['editProjectId'];
-      $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
+     
+        $check1="SELECT skill from `projectskilldetails` where `Project`='$editProjectId' and `skill`='$Skillid'";
+        $project_result11 = mysqli_query($conn,$check1);
+        if($project_result11->num_rows > 0){
+            $message = "Skill already exist!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+        else{
+            $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
       $result = mysqli_query($conn, $SQL);
       if ($result) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -361,9 +339,13 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       } else {
         echo mysqli_error($conn);
       }
+           
+
+     
     } 
 
   }
+}
 
   ?>
 
@@ -376,8 +358,8 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
             <th scope="col">ProjectId</th>
             <th scope="col">Project</th>
             <th scope="col">SkillName</th>
-            <th scope="col">Required count</th>
-            <th scope="col">fullfill count</th>
+            <th scope="col">RequiredHeadcount</th>
+            <th scope="col">fullfill_headcount</th>
           
             
             <th scope="col">Action</th>
@@ -469,20 +451,18 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
         id = e.target.id.substr();
-        // console.log(id);
+        console.log(id);
         // const id='skillid=1projectid=1';
         const regex=/skillid=(\d+)projectid=(\d+)/i;
         const match=id.match(regex);
-        let skillid,projectid;
         // console.log(match)
         if(match){
-            skillid=match[1];
-            projectid=match[2];
-            // console.log(skillid,projectid)
+            var skillid=match[1];
+            var projectid=match[2];
+            console.log(skillid,projectid)
         }
-        // console.log(skillid,projectid)
         if (confirm('Are you sure to delete')) {
-          window.location = "project_view.php?projectid=" + projectid +"&skillid="+skillid;
+            window.location = "project_view.php?projectid=" + projectid +"&skillid="+skillid;
         }
         else {
           console.log('no');

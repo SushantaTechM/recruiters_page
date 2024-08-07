@@ -31,8 +31,9 @@ if (!empty($skill)) {
 }
 
 if (!empty($experience)) {
-    $query .= " AND ud.Experience='$experience'";
+    $query .= " AND ud.Experience between $experience";
 }
+// var_dump($query);
 // $query .= "Limit 3";
 $result = $conn->query($query);
 

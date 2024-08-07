@@ -69,8 +69,8 @@ form{
 
 
 #addSkillBtn{
-    color: #fff;
-    background-color: #007bff;
+    /* color: #fff;
+    background-color: #007bff; */
     border-color: #007bff;
     display: inline-block;
     font-weight: 400;

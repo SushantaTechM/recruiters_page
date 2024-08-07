@@ -14,7 +14,7 @@ function populateFilters() {
     .then((data) => {
       const locationFilter = document.getElementById("location-filter");
       const skillFilter = document.getElementById("skill-filter");
-      const experienceFilter = document.getElementById("experience-filter");
+      // const experienceFilter = document.getElementById("experience-filter");
 
       data.locations.forEach((location) => {
         const option = document.createElement("option");
@@ -30,12 +30,12 @@ function populateFilters() {
         skillFilter.appendChild(option);
       });
 
-      data.experiences.forEach((experience) => {
-        const option = document.createElement("option");
-        option.value = experience;
-        option.textContent = experience;
-        experienceFilter.appendChild(option);
-      });
+      // data.experiences.forEach((experience) => {
+      //   const option = document.createElement("option");
+      //   option.value = experience;
+      //   option.textContent = experience;
+      //   experienceFilter.appendChild(option);
+      // });
     })
     .catch((error) => {
       console.error(

@@ -74,7 +74,10 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
             </div>
         </div>
     </div>
-
+    <div class="dashboard-main-tabs">
+        <a href="dashboard.php"><button class=''>Project</button></a>
+        <a href="associate.php"><button class=''>Associates</button></a>
+    </div>
     <div class="dashboard-tabs">
         <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
         <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Confirmed data</button>
@@ -83,7 +86,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 
     <div class="dashboard-tab-content">
         <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
-        
+
         <!------------------- Modal  --------------------->
         <div class="modal" id="user-modal">
             <div class="modal-content">

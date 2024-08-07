@@ -44,6 +44,11 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                 </select>
                 <select id="experience-filter" onchange="filterResults()">
                     <option value="">Select Experience</option>
+                    <option value="0 AND 3">0-3 yrs</option>
+                    <option value="3 AND 6">3-6 yrs</option>
+                    <option value="6 AND 10">6-10 yrs</option>
+                    <option value="10 AND 25">10+ yrs</option>
+
                     <!-- Options will be dynamically populated -->
                 </select>
             </div>
