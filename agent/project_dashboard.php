@@ -20,10 +20,12 @@ if (isset($_GET["delete"])) {
 
   $query = "DELETE FROM `Project` WHERE `Project`.`ProjectId` = '$id'";
   $result = mysqli_query($conn, $query);
+
   if ($res4->num_rows > 0) {
     $message = "There are some users assigned to this project, so you can not delete it!";
     echo "<script type='text/javascript'>alert('$message');</script>";
-  } else {
+  } 
+  else {
     if (!$result) {
       die(mysqli_error($conn));
     }
@@ -296,22 +298,41 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
               $no++;
-              echo "<tr>
-                  <td>" . $row['ProjectID'] . "</td>
-                  <td>" . $row['ProjectName'] . "</td>
-                  <td>" . $row['CustomerName'] . "</td>
-                  <td>" . $row['StartDate'] . "</td>
-                  <td>" . $row['EndDate'] . "</td>
-                  <td>" . $row['LocationName'] . "</td>
-                  <td>" . $row['Vertical'] . "</td>
-                  <td>" . $row['IBUname'] . "</td>
-                  <td>" . $row['status'] . "</td>
-                  <td>
-                  <button class='edit btn btn-primary'>Edit</button>
-                  <button class='delete btn btn-danger' id='" . $row['ProjectID'] . "'>Delete</button></td>
-                </tr>";
+              if ($row['status']=='active') {
+                echo "<tr>
+                    <td>" . $row['ProjectID'] . "</td>
+                    <td>" . $row['ProjectName'] . "</td>
+                    <td>" . $row['CustomerName'] . "</td>
+                    <td>" . $row['StartDate'] . "</td>
+                    <td>" . $row['EndDate'] . "</td>
+                    <td>" . $row['LocationName'] . "</td>
+                    <td>" . $row['Vertical'] . "</td>
+                    <td>" . $row['IBUname'] . "</td>
+                    <td>" . $row['status'] . "</td>
+                    <td>
+                    <button class='edit btn btn-primary'>Edit</button>
+                    <button class='delete btn btn-danger'  id='" . $row['ProjectID'] . "' disabled>Delete</button></td>
+                  </tr>";
+              }
+              else {
+                echo "<tr>
+                    <td>" . $row['ProjectID'] . "</td>
+                    <td>" . $row['ProjectName'] . "</td>
+                    <td>" . $row['CustomerName'] . "</td>
+                    <td>" . $row['StartDate'] . "</td>
+                    <td>" . $row['EndDate'] . "</td>
+                    <td>" . $row['LocationName'] . "</td>
+                    <td>" . $row['Vertical'] . "</td>
+                    <td>" . $row['IBUname'] . "</td>
+                    <td>" . $row['status'] . "</td>
+                    <td>
+                    <button class='edit btn btn-primary'>Edit</button>
+                    <button class='delete btn btn-danger'  id='" . $row['ProjectID'] . "'>Delete</button></td>
+                  </tr>";
+              }
             }
-          } else {
+          } 
+          else {
             echo "0 results";
           }
           ?>
