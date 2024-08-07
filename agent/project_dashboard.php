@@ -137,7 +137,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
           </button>
         </div>
         <div class="modal-body">
-          <form action="Project.php" class="" method="post">
+          <form action="project_dashboard.php" class="" method="post">
             <!-- <div class="form-group">
               <label for="editTitle">ProjectId</label>
               <input name="editTitle" type="editTitle" class="form-control" name="editTitle" id="editTitle" aria-describedby="emailHelp"
@@ -148,7 +148,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
               <label for="editCustomerId">Customer</label>
               <!-- <input name="editCustomerId" type="editTitle" class="form-control" name="editCustomerId" id="editCustomerId" aria-describedby="emailHelp"
                 placeholder="Enter Customer Id"> -->
-              <select name="editCustomerId" id="editCustomerId">
+              <select name="editCustomerId" id="editCustomerId" disabled>
                 <option value="" disabled selected hidden>Please select CustomerId</option>
                 <?php
                 $sql3 = "SELECT * from `customermaster`";
@@ -227,11 +227,11 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   }
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST["update"])) {
-      $editCustomerId = $_POST["editCustomerId"];
-      $query7 = "SELECT * FROM `CustomerMaster` WHERE `CustomerName` LIKE '$editCustomerId'";
-      $result7 = mysqli_query($conn, $query7);
-      $row7 = mysqli_fetch_assoc($result7);
-      $editcustid = $row7['CustomerId'];
+      // $editCustomerId = $_POST["editCustomerId"];
+      // $query7 = "SELECT * FROM `CustomerMaster` WHERE `CustomerName` LIKE '$editCustomerId'";
+      // $result7 = mysqli_query($conn, $query7);
+      // $row7 = mysqli_fetch_assoc($result7);
+      // $editcustid = $row7['CustomerId'];
 
       $editStart = $_POST["editStart"];
       $editEnd = $_POST["editEnd"];
@@ -246,7 +246,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       $editProjectId = $_POST['editProjectId'];
       // echo $editTitle,$editDescription,$editSno;
   
-      $SQL = "UPDATE `Project` SET `CustomerId` = '$editcustid',`StartDate` = '$editStart',`EndDate` = '$editEnd',`Location`='$locationid6',`ProjectName`='$editProjectName' WHERE `Project`.`ProjectId` = '$editProjectId'";
+      $SQL = "UPDATE `Project` SET `StartDate` = '$editStart',`EndDate` = '$editEnd',`Location`='$locationid6',`ProjectName`='$editProjectName' WHERE `Project`.`ProjectId` = '$editProjectId'";
       $result = mysqli_query($conn, $SQL);
       if ($result) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

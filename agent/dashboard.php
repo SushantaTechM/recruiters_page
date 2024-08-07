@@ -276,7 +276,7 @@ $outcome2 = mysqli_query($conn, $sql2);
                   <td>" . $row['StartDate'] . "</td>
                   <td>" . $row['EndDate'] . "</td>
                   <td>" . $row['LocationName'] . "</td>
-                  <td>" . $row['status'] . "</td>
+                  <td>" . $row['Status'] . "</td>
  
                   
                   
