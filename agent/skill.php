@@ -87,50 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <?php  include('navbar.php') ?>
  
   <div class="container" style="width: 40%;
-    height:60%;  
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px;">
-    <h2 style="text-align:center; "> Create Skill</h2>
-            <form action="skill.php" class="" method="post">
-                <div style="margin-top:12%;">
-                <label for="skillName" style="font-size:20px">Skill: </label>
-                <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:75%;" required>
-
-                </div>
-                <div style="margin-top:6%;">
-                <label for="SkillDescription" style="font-size:20px">Description: </label>
-                <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;" required></textarea>
-                </div>
-
-            </div>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="agent_logout.php" id="log-out">Log Out</a>
-            </div>
-        </div>
-    </div>
- 
-  <!-- <div class="container" style="margin-left: 500px;">
-    <form action="skill.php" class="" method="post">
-      <div class="form-group">
-        <label for="title" style="color: white;">Skill</label>
-        <input name="skillName" type="title" class="form-control" id="title" aria-describedby="emailHelp"
-          placeholder="Enter Skill" style="max-width: 500px;">
-      </div>
-      <button type="submit" class="btn btn-primary">Add Skill</button>
-    </form>
-    <hr style="margin-bottom: 2rem;">
-  </div> -->
-  <div class="container" style="width: 40%;
-    height:60%;  
     background: transparent;
     border: 2px solid skyblue;
     backdrop-filter: blur(20px);

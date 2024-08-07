@@ -55,7 +55,8 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
-  <link rel="stylesheet" href="styles/navbar.css">
+  <!-- <link rel="stylesheet" href="styles/modal.css"> -->
+  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 
   <title>Project</title>
 </head>
@@ -65,7 +66,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   <!------------------------ Navbar  ------------->
   <?php  include('navbar.php') ?>
 
-  
+
     <div class="add_skill">
         <form action="project_view.php" method="post">
             <div class="form-group">
@@ -173,7 +174,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" style="background-color: transparent;border: 2px solid white;color: white;backdrop-filter: blur(20px);font-size: 20px;">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
