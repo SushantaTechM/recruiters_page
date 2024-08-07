@@ -31,7 +31,22 @@ if (!empty($skill)) {
 }
 
 if (!empty($experience)) {
-    $query .= " AND ud.Experience='$experience'";
+    $query .= " AND ud.Experience between $experience";
+    // $expRange=$_POST[$experience];
+    // switch($expRange){
+    //     case "0 AND 3":
+    //         $query.= " AND ud.Experience between 0 AND 3";
+    //     case "3 AND 6":
+    //         $query.= " AND ud.Experience between 3 AND 6";
+    //     case "6 AND 9":
+    //         $query.= " AND ud.Experience between 6 AND 9";
+    //     case "10 AND 20":
+    //         $query.= " AND ud.Experience between 10 AND 20";
+    //         break;
+    //     default:
+    //         echo "Invalid Selection";
+    //         exit();
+    // }
 }
 // $query .= "Limit 3";
 $result = $conn->query($query);
