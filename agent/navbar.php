@@ -10,11 +10,11 @@ $filename=basename($actual_link);
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab <?= ($filename=='dashboard.php')?'active':'' ?>">Home</button></a>
             <div class="project-dropdown">
-                <button class="dashboard-dropbtn tab <?= ($filename=='project.php')?'active':($filename=='project_dashboard.php')?'active':'' ?>" onclick="toggleProjectDropdown()">Project</button>
+                <button class="dashboard-dropbtn tab <?= ($filename=='project.php')?'active':($filename=='project_dashboard.php')?'active':($filename=='project_view.php')?'active':'' ?>" onclick="toggleProjectDropdown()">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
- 
                     <a href="project.php">Create </a>
                     <a href="project_dashboard.php">Search </a>
+                    <a href="project_view.php">Skill mapping </a>
                 </div>
             </div>
             <a href="search.php"><button class="tab <?= ($filename=='search.php')?'active':'' ?>">Employee</button></a>

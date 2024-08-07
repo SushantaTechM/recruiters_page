@@ -154,6 +154,9 @@
     height: 38px;
     margin-bottom: 10px;
 }
+.smallModalDropdown>option{
+    background-color: black;
+}
 
 .smallModal.show.modal-content{
     transform: translateY(0);

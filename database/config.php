@@ -121,3 +121,8 @@ if ($conn->query($projectskilldetails) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
 
+//delete 5days softlock
+$deleteFiveDaysSoftlock="DELETE FROM `recruitmentpage`.`userprojectdetails` WHERE DATEDIFF(NOW(), CreatedAt) >= 5 AND Status='softlock';";
+if ($conn->query($deleteFiveDaysSoftlock) === FALSE) {
+  echo "Error deleting data: " . $conn->error;
+}
