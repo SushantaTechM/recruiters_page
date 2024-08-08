@@ -105,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       border-radius: 10px;
       height: 2rem;
     }
-    .container{
+    /* .container{
       width: 60%;
 
-    }
+    } */
     .form{
       margin-left: 90px;
     }

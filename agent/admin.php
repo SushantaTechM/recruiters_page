@@ -54,7 +54,7 @@ include ("../database/dbconnect.php");
     <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" >
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Assign</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -108,7 +108,7 @@ include ("../database/dbconnect.php");
             </div>
 
            
-            <button type="submit" class="btn btn-primary" name="update">Update Note</button>
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
           </form>
         </div>
       </div>
