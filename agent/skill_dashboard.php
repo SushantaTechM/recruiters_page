@@ -142,6 +142,7 @@ $outcome1 = mysqli_query($conn, $sql1);
  
 <body style="background-image: url('../images/p (1).jpg'); background-size: cover; color: white; font-size : 20px;">
 
+
   
 <!------------------ Navbar  --------------->
 <?php  include('navbar.php') ?>

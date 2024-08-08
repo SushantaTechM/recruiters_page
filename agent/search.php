@@ -5,6 +5,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+
     header('location:../index.php');
     exit;
 }
@@ -26,9 +27,11 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 </head>
 
 <body>
+
     <!-- ----------------- Navbar --------------- -->
 
     <?php  include('navbar.php') ?>
+
 
     <div class="tab-content active" id="search-content">
         <div class="search-container">
@@ -55,6 +58,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         </div>
         <div id="results"></div>
     </div>
+
     <div class="smallModal" id="project-softlock-modal" >
         <div class="smallModal-content" style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white;backdrop-filter: blur(120px)">
             <span class="close-btn"
@@ -72,6 +76,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                     aria-describedby="emailHelp" placeholder="Enter Ending Date"  style="border-radius:10px; color:white; background-color:transparent"  >
             </div>
 
+
             <button id="softlock-project-button">Softlock</button>
         </div>
     </div>
@@ -79,7 +84,9 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 
 
     <div class="smallModal" id="project-confirm-modal">
+
         <div class="smallModal-content" style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white;backdrop-filter: blur(120px)">
+
             <span class="close-btn"
                 onclick="document.getElementById('project-confirm-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>

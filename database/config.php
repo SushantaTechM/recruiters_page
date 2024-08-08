@@ -56,12 +56,14 @@ $ibumaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`ibumaster` ( `id` IN
 if ($conn->query($ibumaster) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
+
 //                        users table
 $usertablecreation = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`users` ( `UserId` INT(50) NOT NULL AUTO_INCREMENT , `UserName` VARCHAR(50) NOT NULL , `Password` VARCHAR(25) NOT NULL , `Type` VARCHAR(25) NOT NULL , `Email` VARCHAR(50) NOT NULL UNIQUE , `Phone` VARCHAR(15) NOT NULL ,`VerticalId` int(11) not null,`IBUId` int(20) not null, PRIMARY KEY (`UserId`)) ENGINE = InnoDB";
 
 if ($conn->query($usertablecreation) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
+
 //                       userDetails table
 $userdetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`userdetails` ( 
 `SlNo` INT(50) NOT NULL AUTO_INCREMENT, `UserId` INT(50) NOT NULL , 
@@ -115,11 +117,14 @@ if ($conn->query($userskilldetails) === FALSE) {
 }
 
 //project skill details
+
 $projectskilldetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`projectskilldetails` ( `slno` INT(50) NOT NULL AUTO_INCREMENT , `project` int(20) NOT NULL , `skill` int(20) NOT NULL , `required_headcount` VARCHAR(100) NOT NULL , `fullfill_headcount` VARCHAR(100) NOT NULL , PRIMARY KEY(`slno`), FOREIGN KEY (`project`) REFERENCES `project`(`ProjectId`), FOREIGN KEY (`skill`) REFERENCES `skillmaster`(`SkillId`))";
+
 
 if ($conn->query($projectskilldetails) === FALSE) {
   echo "Error creating table: " . $conn->error;
 }
+
 
 //delete 5days softlock
 $deleteFiveDaysSoftlock="DELETE FROM `recruitmentpage`.`userprojectdetails` WHERE DATEDIFF(NOW(), CreatedAt) >= 5 AND Status='softlock';";
