@@ -4,7 +4,9 @@ include ('../../database/dbconnect.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $projectid = $data['projectid'];
 
-$sql="Select * from skillmaster sm join projectskilldetails psd on psd.skill=sm.SkillId where psd.project='$projectId';";
+
+$sql="Select * from skillmaster sm join projectskilldetails psd on psd.skill=sm.SkillId where psd.project='$projectid';";
+
 $result = $conn->query($sql);
 
 $skill=[];

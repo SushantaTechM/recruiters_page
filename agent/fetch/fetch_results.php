@@ -8,7 +8,7 @@ $location = $data['location'];
 $skill = $data['skill'];
 $experience = $data['experience'];
 
-$query = "SELECT ud.UserId,ud.FirstName, ud.LastName, ud.Experience, upd.Status,lm.LocationName,sm.SkillName,u.UserName, p.ProjectName,upd.AgentId
+$query = "SELECT ud.UserId,ud.FirstName, ud.LastName, ud.Experience, upd.Status,lm.LocationName,sm.SkillName,sm.SkillId,u.UserName, p.ProjectName,upd.AgentId
 from userdetails ud 
 left join userprojectdetails upd on upd.UserId=ud.UserId
 left join users u on upd.AgentId=u.UserId
@@ -31,8 +31,9 @@ if (!empty($skill)) {
 }
 
 if (!empty($experience)) {
-    $query .= " AND ud.Experience='$experience'";
+    $query .= " AND ud.Experience between $experience";
 }
+// var_dump($query);
 // $query .= "Limit 3";
 $result = $conn->query($query);
 
