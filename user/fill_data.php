@@ -1,4 +1,6 @@
 <?php
+include "../partials/_login_header.php";
+
 session_start();
 if(!isset($_SESSION['login']))
 {
@@ -7,8 +9,7 @@ if(!isset($_SESSION['login']))
 }
 include 'fetch_data.php';
  
-// $userId = 2;
-// $mail="riya@gmail.com";
+
 $userId=$_SESSION['UserId'];
 //Fetch user details
 
@@ -140,6 +141,11 @@ $conn->close();
        });
     </script>
     <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            
+        }
          .skill-item1{
             margin-right: 5px;
             padding: 5px;
@@ -160,10 +166,10 @@ $conn->close();
             padding: 5px;
             margin: 5px;
             font-size: 15px;
-            border: none;
+            border: 2px solid skyblue;
             border-radius: 5px;
-            color: #fff;
-            background: linear-gradient(135deg, #fda1a1 0%, #ff0000 100%);
+            color: white;
+            background-color: transparent;
          }
          #addSkillButton:hover{
             background:linear-gradient(135deg, #ff0000 0%,#fda1a1  100%);
@@ -171,33 +177,52 @@ $conn->close();
             transform: translateY(-5px);
             cursor: pointer;           
         }
-        .profile-card{
-            max-width:600px;
-            margin: 60px;
-            padding:40px;
-            background : white;
+        form{
+            /* background-color : yellow; */
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid lightblue;
+            backdrop-filter: blur(120px);
+            color: white;
+            width: 120%;
+            /* width: 180%; */
+
+            /* text-align: center; */
+            /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); */
  
+       }
+       .form-group input{
+        background-color: transparent;
+        color: white;
+       }
+       .form-group select{
+        background-color: transparent;
+        color: white;
+       }
+       .form-group option{
+        background-color: transparent;
+        color: white;
        }
      
        .form-control{
-       
-        border: 1px solid lightgrey;
+        
+        border: 2px solid lightblue;
         border-radius: 10px;
+        color: white;
+        background-color: transparent;
        }
        body{
-        background: lightgrey;
+        /* background: lightgrey; */
         font-family:'New Times Roman, sans-seriff';
+        background-position: center;
        }
     </style>
 </head>
-<body>
+<body background="../images/p (1).jpg">
 <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center>
             <div class="col-md-8">
                 <div class="profile-card">
-                    <h2 class="text-center mb-4">Fill Details</h2>
+                    <h2 class="mb-4" style="color: white;text-align:center;">User Details Form</h2>
                     <!-- <button class="btn btn-primary edit-button" onclick="enableEditing()">Edit Profile</button> -->
                     <form id="profile-form" action="userdetails.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="userId" value="<?php echo $userId; ?>">
