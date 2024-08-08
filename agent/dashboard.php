@@ -52,6 +52,7 @@ include ("../database/dbconnect.php");
 </style>
 
 <body>
+
   <!-- ----------------- Navbar --------------- -->
    
   <?php  include('navbar.php') ?>

@@ -9,6 +9,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     exit;
 }
 
+
 $showAlert = false;
 
 
@@ -22,6 +23,7 @@ $outcome2 = mysqli_query($connection, $sql2);
 if (isset($_POST["btn"])) {
 
     $Customer_name = $_POST["Customername"];
+
     $location = $_POST['location'];
 
 
@@ -43,13 +45,16 @@ if (isset($_POST["btn"])) {
 
     if ($showAlert) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+
             <strong>Success!</strong> Customer is created succesfully.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
             </div>';
+
         // echo "<a href='/recruiters_page/agent/dashboard.php'>back</a>";
     }
+
 
 
 
@@ -62,13 +67,15 @@ if (isset($_POST["btn"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Customer</title>
- 
+
     <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+
         // .js-example-basic-single declare this class into your select box
         $(document).ready(function () {
             $('.js-example-basic-single').select2();

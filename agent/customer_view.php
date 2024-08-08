@@ -139,12 +139,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="form-group">
               <label for="editCustomerId">Customer</label>
 
+
               <input id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
+
 
             </div>
 
             <div class="form-group">
               <label for="editCustomerName">Customer Name</label>
+
               <input name="editCustomerName"  style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white"  type="text" class="form-control" id="editCustomerName"
                 aria-describedby="emailHelp" placeholder="Enter Customer Name">
             </div>
@@ -155,6 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <option value="" disabled selected hidden>Please select Location</option>
                 <?php
                 while ($row = mysqli_fetch_assoc($location_outcome)) {
+
                   $location = $row['LocationName'];
                   echo "<option value='$location'>$location</option>";
                 }
@@ -169,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
       </div>
     </div>
+
   </div>
 
 
@@ -267,5 +272,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </script>
   <script src="script/script.js"></script>
 </body>
+
 
 </html>

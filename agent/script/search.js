@@ -102,12 +102,14 @@ function filterResults() {
                 <input type="hidden" id="projectskill" value="">
                 <td >${user.SkillName}</td>
                 
+
                 <td id="agentName">${
                   user.UserName == null ? "-------" : user.UserName
                 }</td>
                 <td id="projectName">${
                   user.ProjectName == null ? "-------" : user.ProjectName
                 }</td>
+
                 <td>
                     ${
                       user.Status == "confirm"
@@ -157,6 +159,7 @@ function filterResults() {
 
       document.querySelectorAll(".search-confirm-btn").forEach((button) => {
         button.addEventListener("click", (event) => {
+
           //   if (confirm("Are you really want to confirm the Employee")) {
           parentRow = event.currentTarget.closest("tr");
           projectname = parentRow.querySelector("#projectName").textContent;
@@ -170,6 +173,7 @@ function filterResults() {
             }
           } else {
             showConfirmModal(event.currentTarget.dataset.userEmail,skillname);
+
           }
         });
       });
@@ -217,6 +221,7 @@ function fetchProjectDates(projectid) {
       return [data.StartDate,data.EndDate];
     });
 }
+
 function showConfirmModal(UserId,skillname) {
   const modal = document.getElementById("project-confirm-modal");
   const projectDropdown = document.getElementById("confirmprojectDropdown");
@@ -233,6 +238,7 @@ function showConfirmModal(UserId,skillname) {
       option.className = "smallModalDropdownOption";
       option.value = project.ProjectId;
       option.textContent = project.ProjectName;
+
 
       projectDropdown.appendChild(option);
     });
@@ -316,6 +322,7 @@ function showConfirmModal(UserId,skillname) {
     modal.style.display = "none";
   };
 }
+
 function showSoftlockModal(UserId, skillname) {
   const modal = document.getElementById("project-softlock-modal");
   const projectDropdown = document.getElementById("softlockprojectDropdown");
@@ -338,6 +345,7 @@ function showSoftlockModal(UserId, skillname) {
     // console.log(projectDropdown);
   });
 
+
   projectDropdown.addEventListener("change", (event) => {
     // console.log(projectDropdown.value)
     projectid = projectDropdown.value;
@@ -345,6 +353,7 @@ function showSoftlockModal(UserId, skillname) {
       fetchSkillNames(projectid).then((skills) => {
         skillDropdown.innerHTML = "";
         // console.log(projects);
+
         skills.forEach((skill) => {
           const option = document.createElement("option");
           option.className = "smallModalDropdownOption";
@@ -390,6 +399,7 @@ function showSoftlockModal(UserId, skillname) {
       employeeEndDate.dispatchEvent(new Event('input'));
     }
   });
+
 
 
   modal.style.display = "block";
@@ -445,10 +455,12 @@ function softlockUser(UserId, projectId,skillId,startDate,endDate) {
 
         //change the class and text of softlock button
         const softlockBtn = userElement.querySelector("#search-softlock-btn");
+
         softlockBtn.disabled = true;
 
         const softlockImage = userElement.querySelector(".search_user_status");
         softlockImage.src = "../images/softlock.svg";
+
 
         const agentname = userElement.querySelector("#agentName");
         agentname.textContent = data.agentname;
@@ -521,10 +533,12 @@ function confirmUser(UserId, projectId,skillId,startDate,endDate) {
     });
 }
 
+
 function confirmSoftlockUser(UserId,projectname,projectskill) {
   // console.log("confirmDashboardUser called");
   if (UserId != null) {
     const AgentId = getcookie("AgentId");
+
     // const AgentId = 2;
 
     fetch("fetch/fetch_save_softlock_confirmation.php", {
@@ -535,8 +549,10 @@ function confirmSoftlockUser(UserId,projectname,projectskill) {
       body: JSON.stringify({
         UserId: UserId,
         AgentId: AgentId,
+
         projectname:projectname,
         projectskill:projectskill
+
       }),
     })
       .then((response) => {
@@ -549,12 +565,14 @@ function confirmSoftlockUser(UserId,projectname,projectskill) {
         if (data.status == "success") {
           showNotification("Employee Confirmed");
 
+
           const userElement = document.getElementById(`row${UserId}`);
           const confirmBtn = userElement.querySelector(".search-confirm-btn");
           confirmBtn.disabled = true;
 
           const confirmImage = userElement.querySelector(".search_user_status");
           confirmImage.src = "../images/confirm.svg";
+
         } else {
           showNotification("Error: " + data.message, "error");
         }
