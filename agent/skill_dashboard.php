@@ -26,7 +26,7 @@ $outcome1 = mysqli_query($conn, $sql1);
     if($res4->num_rows>0){
       echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-          <strong>Alert!</strong> There are some projects assigned with this skill so you can not delete this skill.
+          There are some projects assigned with this skill so you can not delete this skill.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -40,7 +40,7 @@ $outcome1 = mysqli_query($conn, $sql1);
         }else{
           echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
 
-          <strong>Success!</strong> Your Skill Deleted Succesfully.
+         Your Skill Deleted Succesfully.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -69,7 +69,7 @@ $outcome1 = mysqli_query($conn, $sql1);
       if($res4->num_rows>0){
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-            <strong>Alert!</strong> There are some projects assigned with this skill so you can not edit this skill.
+            There are some projects assigned with this skill so you can not edit this skill.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -90,7 +90,7 @@ $outcome1 = mysqli_query($conn, $sql1);
         if($res7->num_rows>0){
           echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-          <strong>Alert!</strong> The skill name already exists so you can not add the same skill.
+          The skill name already exists so you can not add the same skill.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -103,7 +103,7 @@ $outcome1 = mysqli_query($conn, $sql1);
             if ($result) {
               echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
 
-                    <strong>Success!</strong> Your Skill Updated Succesfully.
+                    Your Skill Updated Succesfully.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

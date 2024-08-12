@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,13 +40,13 @@ if (isset($_POST["login"])) {
                 $showAlert = true;
             } else {
                 if (substr($connection->error, 0, 10) == 'Duplicate ') {
-                    echo"<h1 class='popup1'>User already exists !</h1>";
+                    echo "<h1 id='popup1'class='popup1'>User already exists !</h1>";
                 } else {
                     echo $connection->error;
                 }
             }
         } else {
-            echo"<h1 class='popup1'>Password not matched !</h1>";
+            echo "<h1  id='popup1' class='popup1'>Password not matched !</h1>";
             $showError = true;
         }
     }
@@ -116,8 +117,7 @@ if (isset($_POST["login"])) {
 <div class="container">
     <?php
     if ($showAlert) {
-        echo"<h1 class='popup'>Account created successfully !</h1>";
-
+        echo "<h1 class='popup'>Account created successfully !</h1>";
     }
     ?>
     <div class="wrapper">
@@ -126,7 +126,8 @@ if (isset($_POST["login"])) {
             <h1>Registration</h1>
             <form method="post">
                 <div class="input-box">
-                    <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name" required>
+                    <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
+                        required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
@@ -137,7 +138,7 @@ if (isset($_POST["login"])) {
                     <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
                     <i class='bx bxs-phone'></i>
                 </div>
-                    <!-- <input type="hidden" id="Type" name="Type" value="User">
+                <!-- <input type="hidden" id="Type" name="Type" value="User">
                 <div class="input-box">
                     <input type="text" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
                     <i class='bx bxs-lock'></i>
@@ -150,46 +151,60 @@ if (isset($_POST["login"])) {
                                 <option value="User">User</option>
                                 <option value="Agent">Agent</option>
                                 <option value="User">User</option> -->
-                            <!-- </select> -->
-                    <!-- <i class='bx bxs-user'></i> -->
+                <!-- </select> -->
+                <!-- <i class='bx bxs-user'></i> -->
                 <!-- </div> -->
-                 <input type="hidden" name="type" value="User">
+                <input type="hidden" name="type" value="User">
                 <div class="input-box">
-                    <input type="password" name="password" id="password" minlength="6" maxlength="25" placeholder="Enter Password" required>
+                    <input type="password" name="password" id="password" minlength="6" maxlength="25"
+                        placeholder="Enter Password" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25" placeholder="Confirm Password" required>
+                    <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25"
+                        placeholder="Confirm Password" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <p id="error-message" style="color: red;"></p>
                 <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
                 <!-- <button type="reset" class="login-btn btn">RESET</button> -->
- 
- 
+
+
             </form>
             <script>
                 var password = document.getElementById("password");
                 var confirmPassword = document.getElementById("c_password");
- 
- 
+
+
                 function checkPasswordMatch() {
                     // console.log(confirmPassword.value);
- 
+
                     var errorMessage = document.getElementById("error-message");
- 
+
                     if (password.value !== confirmPassword.value) {
                         errorMessage.textContent = "Passwords do not match!";
                         return false; // Prevent form submission
                     }
- 
+
                     errorMessage.textContent = ""; // Clear any previous error message
                     return true; // Allow form submission
                 }
- 
+
                 confirmPassword.addEventListener('input', checkPasswordMatch);
- 
- 
+
+                //hiding notification
+                document.addEventListener('DOMContentLoaded', function () {
+                    setTimeout(function () {
+                        var popups1 = document.querySelectorAll('.popup1');
+                        popups1.forEach(function (popup1) {
+                            popup1.remove();
+                        });
+                        var popups = document.querySelectorAll('.popup');
+                        popups.forEach(function (popup) {
+                            popup.remove();
+                        });
+                    }, 3000); // 3000 milliseconds = 3 seconds
+                });
             </script>
         </div>
     </div>

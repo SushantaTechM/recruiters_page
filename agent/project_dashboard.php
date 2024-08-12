@@ -26,14 +26,19 @@ if (isset($_GET["delete"])) {
   } 
   else {
     if (!$result) {
-      die(mysqli_error($conn));
+      // die(mysqli_error($conn));
+      $message = "There are some skill assigned to this project, so you can not delete it!";
+      echo "<script type='text/javascript'>alert('$message');</script>";
+
     }
+    else{
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
               <strong>Success!</strong> Your Project Deleted Succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>';
+    }
   }
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

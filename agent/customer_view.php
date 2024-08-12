@@ -26,18 +26,21 @@ if (isset($_GET["delete"])) {
   $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
   $result = mysqli_query($conn, $query);
   if ($res4->num_rows > 0) {
-    $message = "There are some users assigned to this project, so you can not delete it!";
+    $message = "There are some project given by this customer, so you can not delete it!";
     echo "<script type='text/javascript'>alert('$message');</>";
   } else {
     if (!$result) {
-      die(mysqli_error($conn));
+      $message = "There are some project given by this customer, so you can not delete it!";
+      echo "<script type='text/javascript'>alert('$message');</>";
     }
+    else{
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Success!</strong> Your Project Deleted Succesfully.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>';
+    }
   }
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -254,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           id = e.target.id.substr();
           // console.log(id);
           if (confirm('Are you sure to delete')) {
-            window.location = "Customer_view.php?delete=" + id;
+            window.location = "customer_view.php?delete=" + id;
           }
           else {
             console.log('no');

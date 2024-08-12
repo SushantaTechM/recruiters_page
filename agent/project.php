@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   if ($result) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project added succesfully.
+              <strong>Success!</strong> Your Project created succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

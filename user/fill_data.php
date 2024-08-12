@@ -87,7 +87,7 @@ $conn->close();
             skillDiv.textContent = skillName;
  
             var removeButton = document.createElement('button');
-            removeButton.textContent = 'X';
+            removeButton.textContent = '✖';
             removeButton.className = "delbtn";
             removeButton.type = 'button';
             removeButton.onclick = function(){
@@ -243,6 +243,7 @@ $conn->close();
                         <div class="form-group">
                             <label for="location">Location</label>
                             <select name="location" id="location" class="form-select">
+                            <option value="" >Select Location</option>
                                 <?php foreach($locations as $location) { ?>
                                     <option value="<?php echo $location['LocationId']; ?>" >
                                         <?php echo $location['LocationName']; ?>
@@ -266,8 +267,8 @@ $conn->close();
                         </div>
                         <div class="form-group">
                             <label for="primarySkill" class="form-label">Primary Skill</label>
-                            <select name="primarySkill" id="primarySkill"  class="form-control >
-                               <option value="">Select Primary Skill</option>
+                            <select name="primarySkill" id="primarySkill"  class="form-control" >
+                               <option value="" >Select Primary Skill </option>
                                <?php foreach ($allSkills as $skill) { ?>
                                     <option value="<?php echo $skill['SkillId']; ?>" >
                                         <?php echo $skill['SkillName']; ?>
@@ -280,6 +281,7 @@ $conn->close();
                             <input type="hidden" id="secondarySkills" name="secondarySkills" value="<?php echo implode(", ", $secondarySkillIds); ?>">
                             <div id="selectedSkills"></div>
                                 <select  id="secondarySkillSelect">
+                                <option value="">Select Secondary Skill</option>
                                     <?php foreach ($allSkills as $skill){ ?>
                                         <option value="<?php echo $skill['SkillId']; ?>"><?php echo $skill['SkillName']; ?></option>
                                         <?php } ?>

@@ -268,9 +268,9 @@ $conn->close();
                         <div class="form-group">
                             <label for="gender" class="form-label">Gender</label>
                             <select name="gender" class="form-control" id="gender" required>
-                                <option value="">Select your gender</option>
-                                <option value="M">M</option>
-                                <option value="F">F</option>
+                                <!-- <option value="">Select your gender</option> -->
+                                <option <?php echo $userData['Gender'] == 'M' ? 'selected' : ''; ?> value="M">M</option>
+                                <option <?php echo $userData['Gender'] == 'F' ? 'selected' : ''; ?> value="F">F</option>
                                 <!-- <option value="other">Other</option> -->
                             </select>
                         </div>

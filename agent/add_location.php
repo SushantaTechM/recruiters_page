@@ -27,7 +27,7 @@ if (isset($_POST["add"])) {
         if ($result) {
             echo "<script>alert('Location Added Successfully!');</script>";
         } else {
-            echo "Not added!";
+            echo "<script>alert('Same name location exists already!');</script>";
         }
     }
 }
