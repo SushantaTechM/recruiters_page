@@ -140,19 +140,39 @@ $conn->close();
        });
     </script>
     <style>
-         .skill-items{
+        .profile-card label{
+            color: white;
+        }
+        .profile-card select{
+            color: white;
+            background-color: transparent;
+        }
+        .form-group select{
+            color: white;
+            background-color: transparent;
+        }
+        .profile-card input{
+            color: white;
+            background-color: transparent;
+        }
+        .form-group textarea{
+            color: white;
+            background-color: transparent;
+        }
+        .skill-items{
             margin-right: 5px;
             padding: 5px;
             border: 1px solid #ccc;
             display: inline-block;
-         }
-         .delbtn1{
+        }
+        .delbtn1{
             border: none;
             border-radius: 50%;
             font-size: 10px;
             margin: 5px;
             padding: 5px;
-         }
+        }
+
     </style>
 </head>
 <body style="background: url('../images/p (1).jpg') no-repeat; background-size: cover; background-position: center;">
@@ -160,7 +180,7 @@ $conn->close();
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="profile-card">
-                    <h2 class="text-center mb-4">Edit Profile</h2>
+                    <h2 class="text-center mb-4" style="color: white;">Edit Profile</h2>
                     <!-- <button class="btn btn-primary edit-button" onclick="enableEditing()">Edit Profile</button> -->
                     <form id="profile-form" action="update_profile.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="userId" value="<?php echo $userId; ?>">
@@ -188,7 +208,7 @@ $conn->close();
                         </div>
                         <div class="form-group">
                             <label for="experience">Experience</label>
-                            <select name="experience" id="experience" class="form-control" required>
+                            <select name="experience" id="experience" class="form-control" required style="color:white">
                                 <?php for ($i = 1; $i <= 30; $i++): ?>
                                     <option value="<?php echo $i . ' year' . ($i > 1 ? 's' : ''); ?>" <?php if ($userData['Experience'] == $i) echo 'selected'; ?>>
                                         <?php echo $i . ' year' . ($i > 1 ? 's' : ''); ?>
@@ -202,8 +222,8 @@ $conn->close();
                         </div>
                         <div class="form-group">
                             <label for="primarySkill" class="form-label">Primary Skill</label>
-                            <select name="primarySkill" id="primarySkill"  class="form-control >
-                               <option value="">Select Primary Skill</option>
+                            <select name="primarySkill" id="primarySkill"  class="form-control style="color:white">
+                               <option value="" style="color:white">Select Primary Skill</option>
                                <?php foreach ($allSkills as $skill) { ?>
                                     <option value="<?php echo $skill['SkillId']; ?>" <?php if ($skill['SkillId']== $primarySkillId) echo 'selected'; ?>>
                                         <?php echo $skill['SkillName']; ?>
@@ -258,7 +278,7 @@ $conn->close();
                             <label for="gender">Gender</label>
                             <input type="text" class="form-control" id="gender" name="gender" value="<?php echo htmlspecialchars($gender); ?>" required>
                         </div> -->
-                        <button type="submit" class="btn btn-success btn-block" style="background-color:maroon;" id="btn-save">Save Changes</button>
+                        <button type="submit" class="btn btn-success btn-block" style="background-color: transparent;" id="btn-save">Save Changes</button>
                     </form>
                 </div>
             </div>    
