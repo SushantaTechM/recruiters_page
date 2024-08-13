@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $projectid = $data['projectid'];
 
 
-$sql="Select * from skillmaster sm join projectskilldetails psd on psd.skill=sm.SkillId where psd.project='$projectid';";
+$sql="Select * from skillmaster sm join projectskilldetails psd on psd.skill=sm.SkillId where psd.project='$projectid' and psd.required_headcount>psd.fullfill_headcount;";
 
 $result = $conn->query($sql);
 

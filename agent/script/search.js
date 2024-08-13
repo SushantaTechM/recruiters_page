@@ -398,6 +398,11 @@ function showSoftlockModal(UserId, skillname) {
       employeeEndDate.value='';
       employeeEndDate.dispatchEvent(new Event('input'));
     }
+    if(employeeEndDateValue < employeeStartDateValue){
+      alert('you cannot select employee end date before employee start date')
+      employeeEndDate.value='';
+      employeeEndDate.dispatchEvent(new Event('input'));
+    }
   });
 
 

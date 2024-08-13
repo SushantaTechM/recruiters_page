@@ -1,6 +1,8 @@
 <?php
 $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$filename = basename($actual_link);
+$totalurl = basename($actual_link);
+$parsedUrl = parse_url($totalurl, PHP_URL_PATH);
+$filename = basename($parsedUrl);
 // var_dump($filename);
 
 ?>
