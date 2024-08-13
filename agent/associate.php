@@ -28,6 +28,29 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
     <link rel="stylesheet" href="styles/notification.css">
     <link rel="stylesheet" href="styles/dashboard.css">
     <link rel="stylesheet" href="styles/associate.css">
+
+
+    <style>
+
+        .modal-content{
+            background-color: black;
+            border: 3px solid skyblue;
+            border-radius: 10px;
+        }
+        .details span p{
+            padding: 0.8rem;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .head img{
+            margin: 1rem;
+        }
+        .about p{
+            margin-top: 1.5rem;
+            font-size: 20px;
+            font-weight: 600;
+        }
+    </style
 </head>
 
 <body>
@@ -93,7 +116,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
         <div class="modal-content">
             <span class="close-btn" onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
             <div class="head">
-                <img id="modal-image" height="100px" src="" alt="user-image" />
+                <img id="modal-image" height="150px" width="150px" src="" alt="user-image" />
                 <span class="about">
                     <p id="modal-name"></p>
                     <p id="modal-about"></p>

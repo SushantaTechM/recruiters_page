@@ -69,7 +69,7 @@ $filename = basename($parsedUrl);
     </div>
     <div class="user-menu" onclick="toggleDropdown()">
         <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-        <div class="dropdown-menu" id="userDropdown">
+        <div class="dropdown-menu" id="userDropdown" style="margin-left: -120px;">
             <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
             <a href="agent_logout.php" id="log-out">Log Out</a>
         </div>
