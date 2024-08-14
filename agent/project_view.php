@@ -151,7 +151,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
                 <select name="ProjectName" id="ProjectName">
                     <option value="" disabled selected hidden>Please select Project</option>
                     <?php
-                    $sql10 = "SELECT * from `project`";
+                    $sql10 = "SELECT * from `project` where status='active'";
                     $outcome10 = mysqli_query($conn, $sql10);
                     while ($row = mysqli_fetch_assoc($outcome10)) {
                         $Customer = $row['ProjectName'];

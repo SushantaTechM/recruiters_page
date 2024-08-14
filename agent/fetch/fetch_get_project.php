@@ -2,7 +2,7 @@
 include ('../../database/dbconnect.php');
 
 
-$sql="Select * from project;";
+$sql="Select * from project where status='active';";
 $result = $conn->query($sql);
 
 $project=[];
