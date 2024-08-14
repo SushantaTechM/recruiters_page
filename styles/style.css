@@ -250,14 +250,14 @@ input:checked + .slider:before {
     color: black;
     background-color: transparent;
     font-size: 16px;;
-    position:fixed;
+    position:absolute;
     top:12%;
     left:50%;
     transform: translate(-50%, -50%);
     padding:20px;
     border-radius:10px;
     /* box-shadow : 10px 10px 5px rgb(224, 216, 216); */
-    z-index:1000;
+    /* z-index:1000; */
     border:  3px solid black;
     /* text-shadow: 0 0 3px #FF0000; */
 
@@ -268,14 +268,14 @@ input:checked + .slider:before {
     color: black;
     background-color: transparent;
     font-size: 16px;;
-    position:fixed;
+    position:absolute;
     top:12%;
     left:50%;
     transform: translate(-50%, -50%);
     padding:20px;
     border-radius:10px;
     /* box-shadow : 10px 10px 5px rgb(224, 216, 216); */
-    z-index:1000;
+    /* z-index:1000; */
     border:  3px solid black;
     /* text-shadow: 0 0 3px #FF0000; */
 
@@ -293,16 +293,16 @@ input:checked + .slider:before {
     background-color: transparent;
     animation-name: example;
     animation-duration: 1s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 3;
     /* animation-direction: r; */
 }
 
-.popup{
+.popup{ 
     /* width: 100px;
     height: 100px; */
     background-color: transparent;
     animation-name: example;
     animation-duration: 1s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 3;
 }
 

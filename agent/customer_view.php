@@ -20,20 +20,23 @@ $location_outcome = mysqli_query($conn, $sql4);
 <?php
 if (isset($_GET["delete"])) {
   $id = $_GET["delete"];
-  $cid = "SELECT * FROM `Project` where `Project`.`CustomerId` = '$id'";
+  $cid = "SELECT * FROM `Project` where `Project`.`CustomerId` = '$id' ;";
   $res4 = mysqli_query($conn, $cid);
 
-  $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
-  $result = mysqli_query($conn, $query);
+  // $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
+  // $result = mysqli_query($conn, $query);
   if ($res4->num_rows > 0) {
-    $message = "There are some users assigned to this project, so you can not delete it!";
-    echo "<script type='text/javascript'>alert('$message');</>";
-  } else {
+    $message = "There are some customer associated to this project, so you can not delete it!";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+  } 
+  else {
+    $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
+    $result = mysqli_query($conn, $query);
     if (!$result) {
       die(mysqli_error($conn));
     }
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Your Project Deleted Succesfully.
+                <strong>Success!</strong> Customer Deleted Succesfully.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $result = mysqli_query($conn, $SQL);
     if ($result) {
       echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project Updated Succesfully.
+              <strong>Success!</strong> Customer Updated Succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -254,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           id = e.target.id.substr();
           // console.log(id);
           if (confirm('Are you sure to delete')) {
-            window.location = "Customer_view.php?delete=" + id;
+            window.location = "customer_view.php?delete=" + id;
           }
           else {
             console.log('no');

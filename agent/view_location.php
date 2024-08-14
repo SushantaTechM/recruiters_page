@@ -145,11 +145,11 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                     <form action="view_location.php" method="post">
                         <div class="form-group">
                             <label for="editLocationId">Loc Id</label>
-                            <input id="editLocationId" name="editLocationId" value='<?php $id ?>' readonly>
+                            <input id="editLocationId" name="editLocationId" value='' readonly>
                         </div>
                         <div class="form-group">
                             <label for="editLocationName">Loc Name</label>
-                            <input name="editLocationName" class="form-control" id="editLocationName" placeholder="Loc Name">
+                            <input name="editLocationName" class="form-control" id="editLocationName" style="background-color: transparent;"readonly>
                         </div>
                         <div class="form-group">
                             <label for="editLocationState">Loc State</label>

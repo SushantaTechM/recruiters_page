@@ -36,7 +36,84 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     $skillid = $row['SkillId'];
     $skillOptions .= "<option value='$skillid'>$Customer</option>";
     }
-    
+    if (isset($_GET["projectid"])&& isset($_GET["skillid"])) {
+      $projectId = $_GET["projectid"];
+      $skillid = $_GET["skillid"];
+      
+     $query1="SELECT * FROM `projectskilldetails` WHERE `Project`='$projectId' and `skill`='$skillid' and `fullfill_headcount`='0'";
+     $result1 = mysqli_query($conn, $query1);
+      if($result1->num_rows > 0){
+      $query = "DELETE FROM `projectskilldetails` WHERE `Projectskilldetails`.`Project` = '$projectId' and `Projectskilldetails`.`skill`='$skillid' and `Projectskilldetails`.`fullfill_headcount`='0'";
+  
+      $result = mysqli_query($conn, $query);
+  
+      if ($result) {
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong>Success!</strong> Skill Deleted Succesfully.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
+      }
+    }
+    else{
+      
+          $message = "There are some users assigned to this Skill, so you can not delete it!";
+          echo "<script type='text/javascript'>alert('$message');</script>";
+       
+    }
+  }
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+      if (isset($_POST["update"])) {
+          // $id = $_GET["edit"];
+          // echo $id;
+        $editProjectName = $_POST["editProjectName"];
+        $query7 = "SELECT * FROM `project` WHERE `ProjectName` LIKE '$editProjectName'";
+        $result7 = mysqli_query($conn, $query7);
+        $row7 = mysqli_fetch_assoc($result7);
+        $editcustid = $row7['ProjectId'];
+  
+      
+          $skillid_old=$_POST['skillid_old'];
+          
+         $editSkillName1 = $_POST['editSkillName'];
+        $editSkillName = $_POST['editSkillName'];
+        $query6 = "SELECT * FROM `skillMaster` WHERE `SkillName` LIKE '$editSkillName'";
+        $result6 = mysqli_query($conn, $query6);
+        $row6 = mysqli_fetch_assoc($result6);
+        $Skillid = $row6['SkillId'];
+  
+        $RequiredHeadcount = $_POST['editRequiredHeadcount'];
+        $FullfillHeadcount = $_POST['editFullfillHeadcount'];
+      
+        $editProjectId = $_POST['editProjectId'];
+       
+          $check1="SELECT skill from `projectskilldetails` where `Project`='$editProjectId' and `skill`='$Skillid'";
+          $project_result11 = mysqli_query($conn,$check1);
+          if($project_result11->num_rows > 0){
+              $message = "Skill already exist!";
+              echo "<script type='text/javascript'>alert('$message');</script>";
+          }
+          else{
+              $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
+        $result = mysqli_query($conn, $SQL);
+        if ($result) {
+          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Your Project Updated Succesfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>';
+        } else {
+          echo mysqli_error($conn);
+        }
+             
+  
+       
+      } 
+  
+    }
+  }
 
 
 ?>
@@ -74,7 +151,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
                 <select name="ProjectName" id="ProjectName">
                     <option value="" disabled selected hidden>Please select Project</option>
                     <?php
-                    $sql10 = "SELECT * from `project`";
+                    $sql10 = "SELECT * from `project` where status='active'";
                     $outcome10 = mysqli_query($conn, $sql10);
                     while ($row = mysqli_fetch_assoc($outcome10)) {
                         $Customer = $row['ProjectName'];
@@ -228,88 +305,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
     </div>
   </div>
 
-  <?php
-  
-  if (isset($_GET["projectid"])&& isset($_GET["skillid"])) {
-    $projectId = $_GET["projectid"];
-    $skillid = $_GET["skillid"];
-    
-   $query1="SELECT * FROM `projectskilldetails` WHERE `Project`='$projectId' and `skill`='$skillid' and `fullfill_headcount`='0'";
-   $result1 = mysqli_query($conn, $query1);
-    if($result1->num_rows > 0){
-    $query = "DELETE FROM `projectskilldetails` WHERE `Projectskilldetails`.`Project` = '$projectId' and `Projectskilldetails`.`skill`='$skillid' and `Projectskilldetails`.`fullfill_headcount`='0'";
 
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Skill Deleted Succesfully.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
-    }
-  }
-  else{
-    
-        $message = "There are some users assigned to this Skill, so you can not delete it!";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-     
-  }
-}
-  if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST["update"])) {
-        // $id = $_GET["edit"];
-        // echo $id;
-      $editProjectName = $_POST["editProjectName"];
-      $query7 = "SELECT * FROM `project` WHERE `ProjectName` LIKE '$editProjectName'";
-      $result7 = mysqli_query($conn, $query7);
-      $row7 = mysqli_fetch_assoc($result7);
-      $editcustid = $row7['ProjectId'];
-
-    
-        $skillid_old=$_POST['skillid_old'];
-        
-       $editSkillName1 = $_POST['editSkillName'];
-      $editSkillName = $_POST['editSkillName'];
-      $query6 = "SELECT * FROM `skillMaster` WHERE `SkillName` LIKE '$editSkillName'";
-      $result6 = mysqli_query($conn, $query6);
-      $row6 = mysqli_fetch_assoc($result6);
-      $Skillid = $row6['SkillId'];
-
-      $RequiredHeadcount = $_POST['editRequiredHeadcount'];
-      $FullfillHeadcount = $_POST['editFullfillHeadcount'];
-    
-      $editProjectId = $_POST['editProjectId'];
-     
-        $check1="SELECT skill from `projectskilldetails` where `Project`='$editProjectId' and `skill`='$Skillid'";
-        $project_result11 = mysqli_query($conn,$check1);
-        if($project_result11->num_rows > 0){
-            $message = "Skill already exist!";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-        }
-        else{
-            $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
-      $result = mysqli_query($conn, $SQL);
-      if ($result) {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project Updated Succesfully.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>';
-      } else {
-        echo mysqli_error($conn);
-      }
-           
-
-     
-    } 
-
-  }
-}
-
-  ?>
 
 
 <div class="projectContainer">
@@ -441,7 +437,7 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
       const skillEntryTemplate = `
         <div class="form-group skill-entry">
           <label for="title3">Skill</label>&emsp;
-          <select name="title3[]" class="skill-select">
+          <select name="title3[]" class="skill-select" id="skill">
             <option value="" disabled selected hidden>Please select Skill</option>
             ${skillOptions}
           </select>&emsp;&emsp;&emsp;

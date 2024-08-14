@@ -1,6 +1,6 @@
 
 .modal{
-    margin: 0 4rem;
+    /* margin: 0 4rem; */
     display: none;
     position: fixed;
     z-index: 1;
@@ -12,7 +12,6 @@
     background-color: rgba(0,0,0,0.4);
 }
 .modal-content{
-    /* background-color: #d8c2c2; */
     background-color: black;
     backdrop-filter: blur(120px); 
     width:40%;
@@ -68,7 +67,7 @@
 }
 .close-btn:hover,
 .close-btn:focus{
-    color: black;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     cursor: pointer;
 }
@@ -88,6 +87,7 @@
     animation: fadeIn 0.5s;
     animation-fill-mode: forwards;
 }
+
 /* .btn2{
     padding: 0.5rem 0.5rem;
     border-radius: 0.5rem;

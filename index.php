@@ -23,7 +23,7 @@ if (isset($_POST["Login"])) {
         $_SESSION['UserId'] = $row['UserId'];
         $type = $row['Type'];
         // $_SESSION['type'] = $row['Type'];
-        
+
         if ($type == 'Admin') {
             $_SESSION['adminLogin'] = true;
             $expiry = time() + (3600 * 24);
@@ -47,10 +47,10 @@ if (isset($_POST["Login"])) {
             // header("location: agent/dashboard.php");
             header("location: agent/dashboard.php");
         } else {
-            echo "Invalid user type";
+            echo "<h1 class='popup'>Invalid username or password</h1>";
         }
     } else {
-        echo "Invalid username or password";
+        echo "<h1 class='popup'>Invalid username or password</h1>";
     }
 }
 
@@ -71,8 +71,8 @@ if (isset($_POST["Login"])) {
 
 
 <body>
-    
-    
+
+
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
             <form action="index.php" method="post">
@@ -104,6 +104,21 @@ if (isset($_POST["Login"])) {
     </div>
 
     <script src="scripts/script.js"></script>
+    <script>
+        //hiding notification
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var popups1 = document.querySelectorAll('.popup1');
+                popups1.forEach(function (popup1) {
+                    popup1.remove();
+                });
+                var popups = document.querySelectorAll('.popup');
+                popups.forEach(function (popup) {
+                    popup.remove();
+                });
+            }, 3000); // 3000 milliseconds = 3 seconds
+        });
+    </script>
 </body>
 
 </html>

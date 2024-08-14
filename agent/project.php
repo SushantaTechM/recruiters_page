@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   if ($result) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project added succesfully.
+              <strong>Success!</strong> Your Project created succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -97,6 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <title>Project</title>
   <style>
+    .container {
+      width: 60%;
+    }
     .form-group{
       margin-bottom: 15px;
       padding : 6px;
@@ -105,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       border-radius: 10px;
       height: 2rem;
     }
+
     /* .container{
       width: 60%;
 
@@ -169,12 +173,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <br>
       <div class="form-group">
         <label for="title4">Start Date</label>
-        <input style="background-color: transparent; color: white;" name="title4" type="date" class="form-control"
+        <input style="background-color: transparent; color: white;color-scheme: dark;" name="title4" type="date" class="form-control"
           id="title4" aria-describedby="emailHelp" placeholder="Enter Starting Date">
       </div>
       <div class="form-group">
         <label for="title5">End Date</label>
-        <input style="background-color: transparent; color: white;" name="title5" type="date" class="form-control"
+        <input style="background-color: transparent; color: white;color-scheme: dark;" name="title5" type="date" class="form-control"
           id="title5" aria-describedby="emailHelp" placeholder="Enter Ending Date">
       </div>
       <div class="form-group">
