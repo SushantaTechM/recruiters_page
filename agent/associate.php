@@ -5,12 +5,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 // session_start();
-if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
-    header('location:../indexCopy.php');
+if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+    header('location:../index.php');
     exit;
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +73,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
         </div>
     </div>
     <div class="dashboard-main-tabs">
-        <a href="dashboard.php"><button class=''>Project</button></a>
+        <a href="project_type.php"><button class=''>Project</button></a>
         <a href="associate.php"><button class=''>Associates</button></a>
     </div>
     <div class="dashboard-tabs">
