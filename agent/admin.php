@@ -193,7 +193,8 @@ include ("../database/dbconnect.php");
         </thead>
         <b>
           <?php
-          $sql = "SELECT u.UserId,u.UserName,u.Email,u.Phone,u.Type,v.Vertical,i.IBUname FROM `users` u LEFT JOIN `verticalmaster` v on u.VerticalId=v.id LEFT join `ibumaster` i on u.IBUId=i.id where (u.VerticalId is NULL or u.VerticalId is not NULL ) and (u.IBUId is NULL or u.IBUId is not NULL )";
+          $adminId = $_COOKIE['AgentId'];
+          $sql = "SELECT u.UserId,u.UserName,u.Email,u.Phone,u.Type,v.Vertical,i.IBUname FROM `users` u LEFT JOIN `verticalmaster` v on u.VerticalId=v.id LEFT join `ibumaster` i on u.IBUId=i.id where (u.VerticalId is NULL or u.VerticalId is not NULL ) and (u.IBUId is NULL or u.IBUId is not NULL ) and u.UserId!='$adminId'";
           $result = $conn->query($sql);
           if ($result->num_rows > 0){
             $no = 0;
