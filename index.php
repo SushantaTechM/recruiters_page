@@ -16,7 +16,7 @@ if (isset($_POST["Login"])) {
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
 
-    if ($result) {
+    if ($row) {
 
         session_start();
 
