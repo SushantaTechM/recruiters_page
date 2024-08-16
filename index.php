@@ -14,9 +14,10 @@ if (isset($_POST["Login"])) {
     }
     $sql = "SELECT Type,UserId FROM `Users` WHERE Email LIKE '$email' AND Password = '$password'";
     $result = $connection->query($sql);
+  
     $row = $result->fetch_assoc();
 
-    if ($result) {
+    if ($row) {
 
         session_start();
 
