@@ -118,7 +118,7 @@ if ($conn->query($userskilldetails) === FALSE) {
 
 //project skill details
 
-$projectskilldetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`projectskilldetails` ( `slno` INT(50) NOT NULL AUTO_INCREMENT , `project` int(20) NOT NULL , `skill` int(20) NOT NULL , `required_headcount` VARCHAR(100) NOT NULL , `fullfill_headcount` VARCHAR(100) NOT NULL , PRIMARY KEY(`slno`), FOREIGN KEY (`project`) REFERENCES `project`(`ProjectId`), FOREIGN KEY (`skill`) REFERENCES `skillmaster`(`SkillId`))";
+$projectskilldetails = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`projectskilldetails` ( `slno` INT(50) NOT NULL AUTO_INCREMENT , `project` int(20) NOT NULL , `skill` int(20) NOT NULL , `required_headcount` int(100) NOT NULL , `fullfill_headcount` int(100) NOT NULL , PRIMARY KEY(`slno`), FOREIGN KEY (`project`) REFERENCES `project`(`ProjectId`), FOREIGN KEY (`skill`) REFERENCES `skillmaster`(`SkillId`))";
 
 
 if ($conn->query($projectskilldetails) === FALSE) {

@@ -29,11 +29,6 @@ include ("../database/dbconnect.php");
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/project.css">
-  <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/notification.css">
-    <link rel="stylesheet" href="styles/dashboard.css">
 
 </head>
 <style>
@@ -62,50 +57,70 @@ include ("../database/dbconnect.php");
    
   <?php  include('navbar.php') ?>
 
-  <div class="dashboard-tabs" style="margin-bottom: 10px;" >
-        <a href="project_type.php" ><button  style="color:black; background: white; border:none;  font-size: 18px; padding: 7px;">Project</button></a>
-        <a href="associate.php" ><button  style="color:black; background: white; border:none;  font-size: 18px; padding: 7px;">Associates</button></a>
+
+  <div class="dashboard-main-tabs">
+        <a href="project_type.php"><button class='' style="color: black;  background: white;">Project</button></a>
+        <a href="associate.php"><button class='' style="color: black;  background: white;">Associates</button></a>
     </div>
-  
+
   <!--------------- Modal -------------------->
   
 
-  <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:black; background: white; border:none; font-size: 18px; padding: 7px;">Active Project</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:black; background: white;border:none; font-size: 18px; padding: 7px;" >Closed Project</button>
-        
+  <div class="container">
+
+
+    <hr style="margin-bottom: 2rem;">
+    <div class="projectContainer">
+      <table class="table " id="myTable">
+        <thead>
+          <tr>
+
+            <th scope="col">ProjectId</th>
+            <th scope="col">Project</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Location</th>
+            <th scope="col">Status</th>
+
+          </tr>
+        </thead>
+
+        <b>
+          <?php
+          $sql = "SELECT * FROM `Project` p,`LocationMaster` l,`CustomerMaster` c WHERE p.CustomerId=c.CustomerId and p.Location=l.LocationId";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            $no = 0;
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+              $no++;
+              echo "<tr>
+                  <td>" . $row['ProjectId'] . "</td>
+                  <td>" . $row['ProjectName'] . "</td>
+                  <td>" . $row['CustomerName'] . "</td>
+                  <td>" . $row['StartDate'] . "</td>
+                  <td>" . $row['EndDate'] . "</td>
+                  <td>" . $row['LocationName'] . "</td>
+                  <td>" . $row['status'] . "</td>
+ 
+                  
+                  
+                </tr>";
+            }
+          } else {
+            echo "0 results";
+          }
+          ?>
+
+          </tbody>
+      </table>
     </div>
+  </div>
 
-    <div class="dashboard-tab-content">
-        <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
 
-        <!------------------- Modal  --------------------->
-        <div class="modal" id="user-modal">
-            <div class="modal-content">
-                <span class="close-btn"
-                    onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
-                <div class="head">
-                    <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
-                    <span class="about">
-                        <p id="modal-name"></p>
-                        
-                    </span>
-                </div>
-                <div class="details">
-                    <span>
-                        <p id="modal-email"></p>
-                       
-                    </span>
-                    <span id="left">
-                        <p id="modal-gender"></p>
-                        
-                    </span>
-                </div>
-                
-            </div>
-        </div>
 
-    </div>
+
 
 
   <!-- Optional JavaScript -->
@@ -126,11 +141,8 @@ include ("../database/dbconnect.php");
   
 
   <script src="script/script.js"></script>
-  
-  <!-- <script src="script/project_modal.js"></script> -->
-  <script src="script/project_type.js"></script>
-    <script src="script/modal.js"></script>
-    <!-- <script src="script/dashboard.js"></script> -->
+  <script src="script/modal.js"></script>
+  <script src="script/dashboard.js"></script>
 </body>
 
 </html>
