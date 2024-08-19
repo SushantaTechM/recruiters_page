@@ -60,7 +60,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     </div>
 
     <div class="smallModal" id="project-softlock-modal" >
-        <div class="smallModal-content" style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white;backdrop-filter: blur(120px)">
+        <div class="smallModal-content" style="">
             <span class="close-btn"
                 onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>
