@@ -4,8 +4,8 @@
   justify-content: space-between;
   align-items: centre;
   padding: 10px 20px;
-  background-color: rgb(49, 47, 47);
-  background: transparent;
+  background: #0000af;
+  height: 24px;
 }
 .logo {
   font-size: 18px;
