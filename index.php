@@ -1,7 +1,7 @@
 <?php
 include "partials/_login_header.php";
 //Anjali
-include "database/config.php";
+// include "database/config.php";
 if (isset($_POST["Login"])) {
 
     $email = $_POST["email"];

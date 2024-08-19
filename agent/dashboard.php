@@ -1,15 +1,15 @@
 <?php
 
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
 
-include ("../database/dbconnect.php");
+include("../database/dbconnect.php");
 
 
 ?>
@@ -30,17 +30,18 @@ include ("../database/dbconnect.php");
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/project.css">
   <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/notification.css">
-    <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/modal.css">
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/notification.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
 
 </head>
 <style>
-  .dashboard-tabs{
+  .dashboard-tabs {
     text-align: center;
   }
-  .dashboard-tabs button{
+
+  .dashboard-tabs button {
     background-color: transparent;
     text-decoration: none;
     border: 2px solid skyblue;
@@ -48,64 +49,63 @@ include ("../database/dbconnect.php");
     border-radius: 10px;
     font-size: 20px;
   }
-  .dashboard-tabs a{
-    color: white;
+
+  .dashboard-tabs a {
+    color: transparent;
     text-decoration: none;
   }
-
-
 </style>
 
 <body>
 
   <!-- ----------------- Navbar --------------- -->
-   
-  <?php  include('navbar.php') ?>
 
-  <div class="dashboard-tabs" style="margin-bottom: 10px;" >
-        <a href="dashboard.php" ><button  style="color:black; background: white; border:none;  font-size: 18px; padding: 7px;">Project</button></a>
-        <a href="associate.php" ><button  style="color:black; background: white; border:none;  font-size: 18px; padding: 7px;">Associates</button></a>
-    </div>
-  
+  <?php include('navbar.php') ?>
+
+  <div class="dashboard-tabs" style="margin-bottom: 10px;">
+    <a href="dashboard.php"><button style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 7px;">Project</button></a>
+    <a href="associate.php"><button style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 7px;">Associates</button></a>
+  </div>
+
   <!--------------- Modal -------------------->
-  
+
 
   <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:black; background: white; border:none; font-size: 18px; padding: 7px;">Active Project</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:black; background: white;border:none; font-size: 18px; padding: 7px;" >Closed Project</button>
-        
-    </div>
+    <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:black; background: cyan; border:2px solid grey; font-size: 14px; padding: 7px;">Active Project</button>
+    <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:black; background: cyan;border:2px solid grey; font-size: 14px; padding: 7px;">Closed Project</button>
 
-    <div class="dashboard-tab-content">
-        <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
+  </div>
 
-        <!------------------- Modal  --------------------->
-        <div class="modal" id="user-modal">
-            <div class="modal-content">
-                <span class="close-btn"
-                    onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
-                <div class="head">
-                    <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
-                    <span class="about">
-                        <p id="modal-name"></p>
-                        
-                    </span>
-                </div>
-                <div class="details">
-                    <span>
-                        <p id="modal-email"></p>
-                       
-                    </span>
-                    <span id="left">
-                        <p id="modal-gender"></p>
-                        
-                    </span>
-                </div>
-                
-            </div>
+  <div class="dashboard-tab-content">
+    <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
+
+    <!------------------- Modal  --------------------->
+    <div class="modal" id="user-modal">
+      <div class="modal-content">
+        <span class="close-btn"
+          onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
+        <div class="head">
+          <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
+          <span class="about">
+            <p id="modal-name"></p>
+
+          </span>
+        </div>
+        <div class="details">
+          <span>
+            <p id="modal-email"></p>
+
+          </span>
+          <span id="left">
+            <p id="modal-gender"></p>
+
+          </span>
         </div>
 
+      </div>
     </div>
+
+  </div>
 
 
   <!-- Optional JavaScript -->
@@ -123,14 +123,14 @@ include ("../database/dbconnect.php");
   <script>
     let table = new DataTable('#myTable');
   </script>
-  
+
 
   <script src="script/script.js"></script>
-  
+
   <!-- <script src="script/project_modal.js"></script> -->
   <script src="script/project_type.js"></script>
-    <script src="script/modal.js"></script>
-    <!-- <script src="script/dashboard.js"></script> -->
+  <script src="script/modal.js"></script>
+  <!-- <script src="script/dashboard.js"></script> -->
 </body>
 
 </html>

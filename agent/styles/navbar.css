@@ -4,8 +4,8 @@
   justify-content: space-between;
   align-items: centre;
   padding: 10px 20px;
-  background-color: rgb(49, 47, 47);
-  background: transparent;
+  /* background-color: #e6ffff; */
+  background: black;
 }
 .logo {
   font-size: 18px;
@@ -31,7 +31,7 @@
   font-weight: bold;
 }
 .tab.active {
-  border-bottom: 3px solid skyblue;
+  border-bottom: 3px solid darkcyan;
 }
 /* .tab-content{
     display: none;
@@ -51,8 +51,8 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: white;
-  border: 1px solid#ddd;
+  background-color: rgb(192, 248, 255);
+  border: 1px solid#615e5e;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -97,7 +97,7 @@
 }
 .dashboard-dropbtn {
   /* background-color: #333; */
-  color: white;
+  color: black;
   padding: 10px 20px;
   border: none;
   cursor: pointer;

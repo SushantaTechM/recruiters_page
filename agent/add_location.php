@@ -45,6 +45,7 @@ if (isset($_POST["add"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Location</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 </head>
 <style>
@@ -54,22 +55,21 @@ if (isset($_POST["add"])) {
         background-repeat: no-repeat;
     } */
     .login-box h1 {
-        color: white;
+        color: black;
         font-weight: 600;
         font-size: 40px;
         text-align: center;
         margin: 2rem 0;
         /* text-shadow:4px 4px grey; */
-
     }
 
     .input-box input {
-        color: white;
+        color: black;
         font-weight: 200;
         font-size: 20px;
         /* text-align: center; */
 
-        border: 2px solid white;
+        border: 2px solid black;
         /* border-radius: 10px; */
         width: 50%;
         padding: 0.3rem;
@@ -82,32 +82,34 @@ if (isset($_POST["add"])) {
 
     .btn {
         display: block;
-        margin: 50px auto;
+        margin: 30px 5px;
         width: fit-content;
         font-size: 20px;
-        border: 1px solid #0fe9e9;
+        border: 2px solid darkcyan;
         padding: 14px 50px;
-        border-radius: 40px;
+        border-radius: 10px;
         text-decoration: none;
-        background-color: transparent;
+        background-color: darkcyan;
         color: white;
         cursor: pointer;
     }
 
 
     .wrapper {
-        border: 2px solid skyblue;
-        box-shadow: 1px 1px #0acad8;
+        border: 2px solid black;
+        /* box-shadow: 2px 2px gray; */
         /* height: 450px; */
+        border-radius: 10px;
         margin: auto;
         width: 40%;
         padding: 1rem;
         margin-top: 2%;
         backdrop-filter: blur(20px);
+        margin-bottom: 10%;
     }
 
     label {
-        color: white;
+        color: black;
         font-size: 20px;
 
     }
@@ -122,7 +124,7 @@ if (isset($_POST["add"])) {
 <body>
     <!-- ----------------- Navbar --------------- -->
 
-    <?php include ('navbar.php') ?>
+    <?php include('navbar.php') ?>
 
     <!-- ------------- Form --------------- -->
 
@@ -132,33 +134,36 @@ if (isset($_POST["add"])) {
             <form method="post" action="add_location.php">
                 <div class="input-box">
                     <label for="locationName">Loc Name &nbsp;</label>
-                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
-                    <i class='bx bxs-user'></i>
+                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required style="margin-left: 100px;">
+
                 </div>
                 <div class="input-box">
                     <label for="locationState">Loc State &nbsp;</label>
-                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required>
-                    <i class='bx bxs-user'></i>
+                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required style="margin-left: 107px;">
+
                 </div>
                 <div class="input-box">
                     <label for="locationHeadName">Loc Head Name &nbsp;</label>
                     <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName"
-                        required>
-                    <i class='bx bxs-user'></i>
+                        required style="margin-left: 47px;">
+
                 </div>
                 <div class="input-box">
                     <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
                     <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail"
-                        required>
-                    <i class='bx bxs-user'></i>
+                        required style="margin-left: 50px;">
+
                 </div>
                 <div class="input-box">
                     <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
                     <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number"
-                        id="locationHeadMobile" required>
-                    <i class='bx bxs-user'></i>
+                        id="locationHeadMobile" required style="margin-left: 19px;">
+
                 </div>
-                <button type="submit" name="add" class="login-btn btn">Create</button>
+                <div class="button-container" style="display:flex; margin: 0 90px;">
+                    <button type="submit" name="add" class="login-btn btn">Create</button>
+                    <button type="reset" class="login-btn btn">Reset</button>
+                </div>
             </form>
         </div>
     </div>

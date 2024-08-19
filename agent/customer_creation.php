@@ -95,21 +95,21 @@ if (isset($_POST["btn"])) {
 
     <!-------------------- Content ----------------->
     <div class="container"
-        style="width: 40%;background: transparent;border: 2px solid skyblue;backdrop-filter: blur(20px);box-shadow: 0 0 10px rgba(0, 0, 0, .2);color: white;border-radius: 10px;padding: 30px 40px;">
-        <h2 style="text-align:center; font-weight:bold;">Create Customer</h2>
+        style="width: 40%; border: 2px solid black; border-radius: 10px; padding: 30px 40px; margin-top:5%;">
+        <h2 style="text-align:center; font-weight:bold; margin:5%;">Create Customer</h2>
         <form action="customer_creation.php" class="" method="post">
             <div style="margin-top:12%;">
                 <label for="Name" style="font-size:20px; ">Name: </label>
                 <input type="text" name="Customername" id="Customername" maxlength="30" placeholder="Enter Name"
-                    style="max-width: 500px; width:60%; background-color:transparent; border-radius:10px; color:white;border: 2px solid skyblue;" required>
+                    style="max-width: 300px; width:51%; border-radius:5px; color:black; border: 1px solid black; padding: 3px; margin-left:20px;" required>
             </div>
 
 
             <div style="margin-top:6%;">
-                <label for="location" style="font-size:20px">Location: </label>
+                <label for="location" style="font-size:20px; color:black;">Location: </label>
 
                 <select name="location" id="location" class="js-example-basic-single"
-                    style="width:50%; margin-left:35px; ">
+                    style="width:50%; margin-left:35px; padding: 5px; border: 2px solid black; margin-left:20px;">
                     <option value="" disabled selected hidden>Select Location</option>
 
                     <?php
@@ -123,7 +123,7 @@ if (isset($_POST["btn"])) {
             </div>
 
             <button type='submit' id='btn' name='btn' class="btn btn-primary"
-                style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px;background-color:transparent; border-radius:10px; color:white; padding: 1rem;font-size:20px">Create</button>
+                style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px;background-color:darkcyan; border-radius:10px; color:white; padding: 0.8rem;font-size:20px">Create</button>
         </form>
         <script src="script/script.js"></script>
     </div>
