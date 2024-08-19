@@ -13,7 +13,8 @@
     <nav>
         <dis class="navbar">
             <div class="header">
-                <div class="logo"><span style="color: gray;">Tech</span> <br><span style="color: DarkCyan;">HireHub</span></div>
+                <div class="logo"><span style="color: HoneyDew;">Tech</span> <br><span style="color: DarkCyan;">HireHub</span></div>
+
                 <a href="index.php"><button id="agent_reg_login" style=" color:DarkCyan; background: transparent; border: 2px solid DarkCyan ; border-radius: 10px; padding:.8rem; font-weight: bold;text-decoration: none; cursor: pointer;">LOGIN</button></a>
             </div>
         </dis>

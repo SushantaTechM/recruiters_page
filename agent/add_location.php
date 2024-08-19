@@ -134,35 +134,35 @@ if (isset($_POST["add"])) {
             <form method="post" action="add_location.php">
                 <div class="input-box">
                     <label for="locationName">Loc Name &nbsp;</label>
-                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required style="margin-left: 100px;">
+                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationState">Loc State &nbsp;</label>
-                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required style="margin-left: 107px;">
+                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadName">Loc Head Name &nbsp;</label>
                     <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName"
-                        required style="margin-left: 47px;">
+                        required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
                     <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail"
-                        required style="margin-left: 50px;">
+                        required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
                     <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number"
-                        id="locationHeadMobile" required style="margin-left: 19px;">
+                        id="locationHeadMobile" required>
 
                 </div>
-                <div class="button-container" style="display:flex; margin: 0 90px;">
+                <div class="button-container">
                     <button type="submit" name="add" class="login-btn btn">Create</button>
-                    <button type="reset" class="login-btn btn">Reset</button>
+                    <button type="reset" class="login-btn btn"><i class='bx bx-refresh'></i></button>
                 </div>
             </form>
         </div>

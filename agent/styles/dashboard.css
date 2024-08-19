@@ -46,11 +46,11 @@ body {
   color:darkcyan;
 }
  
-.currently_set{
+/* .currently_set{
   border: 4px solid blue;
 }
- 
-.dashboard-tabs >button{
+  */
+/* .dashboard-tabs >button{
   border-radius:8px;
   color:black;
   font-weight:bold;
@@ -58,7 +58,7 @@ body {
   width: 180px;
   height: 40px;
   cursor: pointer;
-}
+} */
  
 .modal-content button {
   border-radius:50px;
@@ -71,7 +71,7 @@ body {
   cursor: pointer;
 }
 
-.dashboard-main-tabs>a>button{
+/* .dashboard-main-tabs>a>button{
   border-radius:8px;
   color:black;
   font-weight:bold;
@@ -80,4 +80,4 @@ body {
   height: 40px;
   cursor: pointer;
 }
- 
+  */

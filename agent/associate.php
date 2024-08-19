@@ -29,7 +29,34 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 
 
     <style>
-
+        .dashboard-main-tabs{
+            padding-bottom: 0.5rem;
+            margin-left: 2rem;
+        }
+        .dashboard-main-tabs button{
+            font-weight: bold;
+            font-size: 18px;
+            color: black;
+            background-color: cyan;
+            border: 2px solid grey;
+            border-radius: 20px;
+            padding: 5px 12px;
+        }
+        .dashboard-tabs{
+            margin-left: 2rem;
+        }
+        .dashboard-tabs button{
+            font-weight: bold;
+            font-size: 18px;
+            color: black;
+            background-color: cyan;
+            border: 2px solid grey;
+            border-radius: 20px;
+            padding: 5px 12px;
+        }
+        button.currently_set{
+            border: 3px solid #267d60;
+        }
         .modal-content{
             background-color: black;
             border: 3px solid skyblue;
@@ -48,13 +75,13 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
             font-size: 20px;
             font-weight: 600;
         }
-    </style
+    </style>
 </head>
 
 <body>
     <!-- ----------------- Navbar --------------- -->
 
-    <div class="navbar" style="padding-bottom: 100px;">
+    <div class="navbar" style="padding-bottom: 45px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: darkcyan;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab active">Home</button></a>
@@ -97,8 +124,8 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         </div>
     </div>
     <div class="dashboard-main-tabs">
-        <a href="dashboard.php"><button class=''; style="color:black; background: cyan; border:2px solid grey; font-size: 18px; padding: 10px;margin-left:2%">Project</button></a>
-        <a href="associate.php"><button class='currently_set'; style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 7px;">Associates</button></a>
+        <a href="dashboard.php"><button class='';>Project</button></a>
+        <a href="associate.php"><button class='currently_set';>Associates</button></a>
     </div>
     <div class="dashboard-tabs">
         <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 13px; margin-top: 1%; margin-left: 2%;">SoftLock data</button>

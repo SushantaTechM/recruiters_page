@@ -17,7 +17,7 @@
   gap: 20px;
 }
 .nav-links > a > button {
-  color: white;
+  color: darkcyan;
   background: transparent;
   padding: 0.8rem 1rem;
   cursor: pointer;

@@ -17,8 +17,8 @@
         <li><a href="#contact">Contact</a></li>
     </ul> -->
     <div class="nav-list">
-        <li>
-            <div class="logo"><span style="color: gray; margin-left:7%;">Tech</span> <br><span style="color: DarkCyan;margin-left:7%; ">HireHub</span></div>
+        <li style="margin-left:2rem">
+            <div class="logo"><span style="color: HoneyDew; margin-left:7%;">Tech</span> <br><span style="color: DarkCyan;margin-left:7%; ">HireHub</span></div>
         </li>
         <!-- <div class="login-toggle">
                     <span id="user-login-label" class="active">USER LOGIN</span> -->

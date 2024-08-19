@@ -37,22 +37,29 @@ include("../database/dbconnect.php");
 
 </head>
 <style>
+
   .dashboard-tabs {
-    text-align: center;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+    /* text-align: center; */
   }
 
   .dashboard-tabs button {
-    background-color: transparent;
-    text-decoration: none;
-    border: 2px solid skyblue;
-    padding: 0.8rem;
-    border-radius: 10px;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    background-color: cyan;
+    border: 2px solid grey;
+    border-radius: 20px;
+    padding: 3px 12px;
   }
 
   .dashboard-tabs a {
     color: transparent;
     text-decoration: none;
+  }
+  button.currently_set{
+    border: 3px solid #267d60;
   }
 </style>
 
@@ -62,20 +69,20 @@ include("../database/dbconnect.php");
 
   <?php include('navbar.php') ?>
 
-  <div class="dashboard-tabs" style="margin-bottom: 10px;">
-    <a href="dashboard.php"><button style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 7px;">Project</button></a>
-    <a href="associate.php"><button style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 7px;">Associates</button></a>
+  <div class="dashboard-tabs">
+    <a href="dashboard.php" ><button style="border:3px solid #267d60";>Project</button></a>
+    <a href="associate.php"><button>Associates</button></a>
   </div>
 
   <!--------------- Modal -------------------->
 
 
   <div class="dashboard-tabs">
-    <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:black; background: cyan; border:2px solid grey; font-size: 14px; padding: 7px;">Active Project</button>
-    <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:black; background: cyan;border:2px solid grey; font-size: 14px; padding: 7px;">Closed Project</button>
+    <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>Active Project</button>
+    <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Closed Project</button>
 
   </div>
-
+  
   <div class="dashboard-tab-content">
     <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
 
