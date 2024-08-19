@@ -107,8 +107,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <label for="SkillDescription" style="font-size:20px">Description: </label>
                 <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: transparent;border: 2px solid skyblue; color:white;padding:0.2rem; text-align:center" required></textarea>
                 </div>
+                <div style="display:flex;margin-left:90px;">
+                  <button type="submit" class="btn btn-primary" style="margin: 0px 4px; width:30%; font-size:25px;border-radius:10px; border:2px solid skyblue;background-color:transparent">Create</button>
+                  <input class="login-btn btn" type="reset" value="Reset" style="color:white;margin: 0px 4px; width:30%; font-size:25px;border-radius:10px; border:2px solid skyblue;background-color:transparent">
 
-                <button type="submit" class="btn btn-primary" style="margin-top:10%; margin-left: 33%; width:30%; font-size:25px;border-radius:10px; border:2px solid skyblue;background-color:transparent">Create</button>
+                </div>
                 
 
         </form>

@@ -69,7 +69,7 @@ if (isset($_POST["add"])) {
         font-size: 20px;
         /* text-align: center; */
 
-        border: 2px solid white;
+        border: 1px solid white;
         /* border-radius: 10px; */
         width: 50%;
         padding: 0.3rem;
@@ -82,7 +82,7 @@ if (isset($_POST["add"])) {
 
     .btn {
         display: block;
-        margin: 50px auto;
+        margin: 30px 10px;
         width: fit-content;
         font-size: 20px;
         border: 1px solid #0fe9e9;
@@ -96,6 +96,7 @@ if (isset($_POST["add"])) {
 
 
     .wrapper {
+        border-radius: 16px;
         border: 2px solid skyblue;
         box-shadow: 1px 1px #0acad8;
         /* height: 450px; */
@@ -132,33 +133,37 @@ if (isset($_POST["add"])) {
             <form method="post" action="add_location.php">
                 <div class="input-box">
                     <label for="locationName">Loc Name &nbsp;</label>
-                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
+                    <input style="margin-left: 83px;" type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
                     <label for="locationState">Loc State &nbsp;</label>
-                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required>
+                    <input style="margin-left: 90px;" type="text" name="locationState" placeholder="Loc State" id="locationState" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
                     <label for="locationHeadName">Loc Head Name &nbsp;</label>
-                    <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName"
+                    <input style="margin-left: 30px;" type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName"
                         required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
                     <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
-                    <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail"
+                    <input style="margin-left: 32px;" type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail"
                         required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
                     <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
-                    <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number"
+                    <input  type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number"
                         id="locationHeadMobile" required>
                     <i class='bx bxs-user'></i>
                 </div>
-                <button type="submit" name="add" class="login-btn btn">Create</button>
+                <div style="display:flex;margin-left:90px;">
+                    <button type="submit" name="add" class="login-btn btn">Create</button>
+                    <input class="login-btn btn" type="reset" value="Reset">
+                </div>
+                
             </form>
         </div>
     </div>

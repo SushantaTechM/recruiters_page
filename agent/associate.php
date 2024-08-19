@@ -29,7 +29,35 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 
 
     <style>
-
+        .dashboard-main-tabs{
+            padding-bottom: 0.5rem;
+            margin-left: 2rem;
+        }
+        .dashboard-main-tabs button{
+            font-size: 18px;
+            color: skyblue;
+            background-color: transparent;
+            border: 2px solid skyblue;
+            border-radius: 20px;
+            padding: 5px 12px;
+        }
+        .dashboard-tabs{
+            margin-left: 2rem;
+        }
+        .dashboard-tabs button{
+            font-size: 18px;
+            color: skyblue;
+            background-color: transparent;
+            border: 2px solid skyblue;
+            border-radius: 20px;
+            padding: 5px 12px;
+        }
+        button.currently_set{
+            /* border: 3px solid #a382af; */
+            color: white;
+            background: skyblue;
+            font-weight:bold;
+        }
         .modal-content{
             background-color: black;
             border: 3px solid skyblue;
@@ -54,7 +82,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 <body>
     <!-- ----------------- Navbar --------------- -->
 
-    <div class="navbar" style="padding-bottom: 100px;">
+    <div class="navbar" style="padding-bottom: 45px;">
         <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab active">Home</button></a>
