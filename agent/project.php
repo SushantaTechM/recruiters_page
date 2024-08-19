@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <title>Project</title>
   <style>
     .container {
-      width: 60%;
+      width: 70%;
     }
     .form-group{
       margin-bottom: 15px;

@@ -45,6 +45,7 @@ if (isset($_POST["add"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Location</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 </head>
 <style>
@@ -122,7 +123,7 @@ if (isset($_POST["add"])) {
 <body>
     <!-- ----------------- Navbar --------------- -->
 
-    <?php include ('navbar.php') ?>
+    <?php include('navbar.php') ?>
 
     <!-- ------------- Form --------------- -->
 
@@ -133,32 +134,35 @@ if (isset($_POST["add"])) {
                 <div class="input-box">
                     <label for="locationName">Loc Name &nbsp;</label>
                     <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
-                    <i class='bx bxs-user'></i>
+
                 </div>
                 <div class="input-box">
                     <label for="locationState">Loc State &nbsp;</label>
                     <input type="text" name="locationState" placeholder="Loc State" id="locationState" required>
-                    <i class='bx bxs-user'></i>
+
                 </div>
                 <div class="input-box">
                     <label for="locationHeadName">Loc Head Name &nbsp;</label>
                     <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName"
                         required>
-                    <i class='bx bxs-user'></i>
+
                 </div>
                 <div class="input-box">
                     <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
                     <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail"
                         required>
-                    <i class='bx bxs-user'></i>
+
                 </div>
                 <div class="input-box">
                     <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
                     <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number"
                         id="locationHeadMobile" required>
-                    <i class='bx bxs-user'></i>
+
                 </div>
-                <button type="submit" name="add" class="login-btn btn">Create</button>
+                <div class="button-container">
+                    <button type="submit" name="add" class="login-btn btn">Create</button>
+                    <button type="reset" class="login-btn btn"><i class='bx bx-refresh'></i></button>
+                </div>
             </form>
         </div>
     </div>

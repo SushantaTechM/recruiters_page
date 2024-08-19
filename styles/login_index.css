@@ -10,7 +10,7 @@ body {
     /* align-items: center; */
     min-height: 100vh;
     /* background: red; */
-    background:url('../images/indexbg.jpg') no-repeat;
+    background:url('../images/Gradient-Mesh-26.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -163,7 +163,7 @@ input:checked + .slider:before {
     border: 2px solid rgba(255,255,255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0,0,0, .2);
-    color: white;
+    color: black;
     border-radius: 10px;
     padding: 30px 40px;
 }
@@ -183,14 +183,14 @@ input:checked + .slider:before {
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255,255,255, .2);
+    border: 2px solid;
     border-radius: 40px;
     font-size: 16px;
-    color: white;
+    color: black;
     padding: 20px 45px 20px 20px;
 }
 .input-box input::placeholder{
-    color: white;
+    color: black;
 }
 .input-box i{
     position: absolute;
@@ -210,7 +210,7 @@ input:checked + .slider:before {
     margin-right: 3px;
 }
 .remeber-forgot a{
-    color: white;
+    color: black;
     text-decoration: none;
 }
 .remeber-forgot a:hover{
@@ -221,7 +221,7 @@ input:checked + .slider:before {
     width: 100%;
     height : 45px;
     background: white;
-    border: none;
+    border: 2px solid;
     outline: none;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0,0,0, .1);
@@ -230,13 +230,18 @@ input:checked + .slider:before {
     color: #333;
     font-weight: 600;
 }
+.wrapper .btn:hover{
+    background-color: darkCyan;
+    color: white;
+}
+
 .wrapper .register-link{
     font-size: 14px;
     text-align: center;
     margin: 20px 0 15px;
 }
 .register-link p a{
-    color: white;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }
