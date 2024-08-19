@@ -8,9 +8,9 @@ body {
   margin: 1rem 2rem;
   border-radius: 1rem;
   padding: 1.5rem;
-  border: 3px solid skyblue;
+  border: 3px solid rgb(37, 38, 39);
   background-color: transparent;
-  color: white;
+  color: rgb(0, 0, 0);
   backdrop-filter: blur(15px);
 }
  
@@ -22,7 +22,7 @@ body {
 .dashboard-tab-content table,
 .dashboard-tab-content th,
 .dashboard-tab-content td {
-  border: 3px solid skyblue;
+  border: 3px solid grey;
   border-radius: 1rem;
 }
  
@@ -43,14 +43,14 @@ body {
  
 .btn:hover {
   background: red;
-  color: white;
+  color:darkcyan;
 }
  
-.currently_set{
+/* .currently_set{
   border: 4px solid blue;
 }
- 
-.dashboard-tabs >button{
+  */
+/* .dashboard-tabs >button{
   border-radius:8px;
   color:black;
   font-weight:bold;
@@ -58,7 +58,7 @@ body {
   width: 180px;
   height: 40px;
   cursor: pointer;
-}
+} */
  
 .modal-content button {
   border-radius:50px;
@@ -71,7 +71,7 @@ body {
   cursor: pointer;
 }
 
-.dashboard-main-tabs>a>button{
+/* .dashboard-main-tabs>a>button{
   border-radius:8px;
   color:black;
   font-weight:bold;
@@ -80,4 +80,4 @@ body {
   height: 40px;
   cursor: pointer;
 }
- 
+  */

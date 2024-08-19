@@ -87,37 +87,37 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 </head>
 <style>
     body {
-        background-image: url('../images/p (1).jpg');
+        /* background-image: url('../images/p (1).jpg');
         background-size: cover;
-        background-repeat: no-repeat;  
+        background-repeat: no-repeat;   */
     }
     .table{
-        color: white;
-        border: 2px solid white;
-        box-shadow:  1px 1px #0acad8;
+        color: black;
+        border: 2px solid black;
+        /* box-shadow:  1px 1px #0acad8; */
         margin: auto;
         width: 80%;
         margin-top: 5%;
         backdrop-filter: blur(20px);
-        box-shadow: 3px 3px 3px 3px skyblue;
+        /* box-shadow: 3px 3px 3px 3px skyblue; */
         /* font-size: 25px; */
         margin-bottom: 5%;
     }
     .modal-content{
-        background-color: transparent;
-        border: 2px solid white;
-        color: white;
+        /* background-color: transparent; */
+        border: 2px solid black;
+        color: black;
         backdrop-filter: blur(20px);
         font-size: 20px;
     }
     .form-group input{
         background-color: transparent;
-        border: 2px solid white;
-        border-radius: 15px;
-        color: white;
+        border: 2px solid black;
+        border-radius: 10px;
+        color: black;
     }
     h1 {
-        color: white;
+        color: black;
         font-weight: 600;
         font-size: 40px;
         text-align:center;
