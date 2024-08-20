@@ -111,8 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     crossorigin="anonymous"></script>
   <style>
     .wrapper {
-      border: 2px solid skyblue;
-      box-shadow: 1px 1px #0acad8;
+      border: 2px solid black;
+      /* box-shadow: 1px 1px #0acad8; */
       /* height: 450px; */
       margin: auto;
       width: 40%;

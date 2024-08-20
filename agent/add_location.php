@@ -49,11 +49,11 @@ if (isset($_POST["add"])) {
     <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 </head>
 <style>
-    /* body {
-        background-image: url('images/p (1).jpg');
+    body {
+        background-image: url('../images/gradient.jpg');
         background-size: cover;
         background-repeat: no-repeat;
-    } */
+    }
     .login-box h1 {
         color: black;
         font-weight: 600;
@@ -134,35 +134,35 @@ if (isset($_POST["add"])) {
             <form method="post" action="add_location.php">
                 <div class="input-box">
                     <label for="locationName">Loc Name &nbsp;</label>
-                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required>
+                    <input type="text" name="locationName" placeholder="Loc Name" id="locationName" required style="margin-left:100px">
 
                 </div>
                 <div class="input-box">
                     <label for="locationState">Loc State &nbsp;</label>
-                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required>
+                    <input type="text" name="locationState" placeholder="Loc State" id="locationState" required style="margin-left:107px">
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadName">Loc Head Name &nbsp;</label>
-                    <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName"
+                    <input type="text" name="locationHeadName" placeholder="Loc Head Name" id="locationHeadName" style="margin-left:47px"
                         required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
-                    <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail"
+                    <input type="text" name="locationHeadEmail" placeholder="Loc Head Email" id="locationHeadEmail" style="margin-left:51px"
                         required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
-                    <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number"
+                    <input type="text" name="locationHeadMobile" placeholder="Loc Head Mobile Number" style="margin-left:20px"
                         id="locationHeadMobile" required>
 
                 </div>
-                <div class="button-container">
+                <div class="button-container" style="display:flex; margin-left: 90px">
                     <button type="submit" name="add" class="login-btn btn">Create</button>
-                    <button type="reset" class="login-btn btn"><i class='bx bx-refresh'></i></button>
+                    <button type="reset" class="login-btn btn">Reset</button>
                 </div>
             </form>
         </div>
