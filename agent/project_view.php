@@ -3,11 +3,11 @@ if(!isset($_SESSION)){
   // Start Session it is not started yet
   session_start();
 }
-if(!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin']!=true)
-{
+if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
   header('location:../index.php');
   exit;
 }
+
 include ("../database/dbconnect.php");
 
 $sql1 = "SELECT * from `customermaster`";
