@@ -1,4 +1,3 @@
-
 <?php
 
 $showAlert = false;
@@ -39,7 +38,7 @@ if (isset($_POST["login"])) {
             $showError = true;
         }
     }
-    
+
 }
 ?>
 <!DOCTYPE html>
@@ -53,75 +52,81 @@ if (isset($_POST["login"])) {
     <link rel="stylesheet" href="styles/user_registration.css">
 </head>
 <?php include "partials/_registration_header.php"; ?>
+
 <body>
 
-<div class="container">
-    <?php
-    if ($showAlert) {
-        echo "<h1 class='popup'>Account created successfully !</h1>";
-    }
-    ?>
-    <div class="wrapper">
-        <div id="user-login-box" class="login-box">
-            <h1>Registration</h1>
-            <form method="post">
-                <div class="input-box">
-                    <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
-                        required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="email" name="email" id="email" maxlength="50" placeholder="Enter Email Id" required>
-                    <i class='bx bx-envelope'></i>
-                </div>
-                <div class="input-box">
-                    <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
-                    <i class='bx bxs-phone'></i>
-                </div>
-                <input type="hidden" name="type" value="User">
-                <div class="input-box">
-                    <input type="password" name="password" id="password" minlength="6" maxlength="25"
-                        placeholder="Enter Password" required>
-                    <i class='bx bxs-lock'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25"
-                        placeholder="Confirm Password" required>
-                    <i class='bx bxs-lock'></i>
-                </div>
-                <p id="error-message" style="color: red;"></p>
-                <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
-        
-            </form>
-            <script>
-                var password = document.getElementById("password");
-                var confirmPassword = document.getElementById("c_password");
+    <div class="container">
+        <?php
+        if ($showAlert) {
+            echo "<h1 class='popup1'>Account created successfully !</h1>";
+        }
+        ?>
+        <div class="wrapper">
+            <div id="user-login-box" class="login-box">
+                <h1>Registration</h1>
+                <form method="post">
+                    <div class="input-box">
+                        <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
+                            required>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" name="email" id="email" maxlength="50" placeholder="Enter Email Id"
+                            required>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
+                        <i class='bx bxs-phone'></i>
+                    </div>
+                    <input type="hidden" name="type" value="User">
+                    <div class="input-box">
+                        <input type="password" name="password" id="password" minlength="6" maxlength="25"
+                            placeholder="Enter Password" required>
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25"
+                            placeholder="Confirm Password" required>
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <p id="error-message" style="color: red;"></p>
+                    <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
+
+                </form>
+                <script>
+                    var password = document.getElementById("password");
+                    var confirmPassword = document.getElementById("c_password");
 
 
-                function checkPasswordMatch() {
-                    var errorMessage = document.getElementById("error-message");
+                    function checkPasswordMatch() {
+                        var errorMessage = document.getElementById("error-message");
 
-                    if (password.value !== confirmPassword.value) {
-                        errorMessage.textContent = "Passwords do not match!";
-                        return false;
+                        if (password.value !== confirmPassword.value) {
+                            errorMessage.textContent = "Passwords do not match!";
+                            return false;
+                        }
+                        errorMessage.textContent = "";
+                        return true;
                     }
-                    errorMessage.textContent = ""; 
-                    return true; 
-                }
 
-                confirmPassword.addEventListener('input', checkPasswordMatch);
+                    confirmPassword.addEventListener('input', checkPasswordMatch);
 
-                //hiding notification
-                document.addEventListener('DOMContentLoaded', function () {
-                    setTimeout(function () {
-                        var popups = document.querySelectorAll('.popup');
-                        popups.forEach(function (popup) {
-                            popup.remove();
-                        });
-                    }, 3000); // 3000 milliseconds = 3 seconds
-                });
-            </script>
+                    //hiding notification
+                    document.addEventListener('DOMContentLoaded', function () {
+                        setTimeout(function () {
+                            var popups1 = document.querySelectorAll('.popup1');
+                            popups1.forEach(function (popup1) {
+                                popup1.remove();
+                            });
+                            var popups = document.querySelectorAll('.popup');
+                            popups.forEach(function (popup) {
+                                popup.remove();
+                            });
+                        }, 3000); // 3000 milliseconds = 3 seconds
+                    });
+                </script>
+            </div>
         </div>
     </div>
-</div>
 </body>
