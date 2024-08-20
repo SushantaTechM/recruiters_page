@@ -1,5 +1,5 @@
 <?php
-include "partials/_login_header.php";
+
 
 if (isset($_POST["Login"])) {
 
@@ -66,6 +66,7 @@ if (isset($_POST["Login"])) {
 
 
 <body>
+    <?php include "partials/_login_header.php"; ?>
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
             <form action="index.php" method="post" onsubmit="return validateEmail()">
