@@ -4,11 +4,12 @@ include ('../../database/dbconnect.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $AgentId = $data['AgentId'];
 
-$sql="SELECT u.UserId,ud.FirstName, ud.LastName, ud.Email, u.Phone, p.ProjectName FROM `userdetails` ud 
+$sql="SELECT u.UserId,ud.FirstName, ud.LastName, ud.Email, u.Phone, p.ProjectName,upd.SkillId 
+FROM `userdetails` ud 
 join `users` u on ud.UserId=u.UserId 
 join `userprojectdetails` upd on upd.UserId=u.UserId 
-join `project` p on p.ProjectId=upd.ProjectId
-where upd.AgentId='$AgentId' and upd.status='softlock';";
+join `project` p on p.ProjectId=upd.ProjectId 
+where upd.AgentId='$AgentId' and upd.status='softlock'";
 
 $result = $conn->query($sql);
 

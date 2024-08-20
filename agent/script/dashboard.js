@@ -99,7 +99,8 @@ function dashboardSoftlockFetch() {
                 <td>${user.LastName}</td>
                 <td>${user.Email}</td>
                 <td>${user.Phone}</td>
-                <td>${user.ProjectName}</td>
+                <td id="projectname">${user.ProjectName}</td>
+                <input type="hidden" id="projectskill" value="${user.SkillId}">
                 <td><button class='dashboard-open-btn' data-user-email='${user.UserId}'>View</button>
                     <button class='dashboard-confirm-btn' data-user-email='${user.UserId}'>Confirm</button>
                     <button class='dashboard-release-btn' data-user-email='${user.UserId}'>Release</button>
@@ -127,7 +128,12 @@ function dashboardSoftlockFetch() {
             button.addEventListener("click", (event) => {
               // console.log(event.target.dataset.userEmail);
               if (confirm("Are you really want to confirm the Employee")) {
-                confirmDashboardUser(event.target.dataset.userEmail);
+                const row = event.target.closest('tr');
+                const projectname = row.querySelector('#projectname').innerText;
+                const projectskill = row.querySelector('#projectskill').value;
+                // console.log(projectname,projectskill);
+                
+                confirmDashboardUser(event.target.dataset.userEmail,projectname,projectskill);
               }
             });
           });
@@ -238,44 +244,7 @@ function dashboardAvailableFetch() {
             openModal(event.target.dataset.userEmail);
           });
         });
-        // document.querySelectorAll(".available-btn").forEach((button)=>{
-        //   button.addEventListener("click",(event)=>{
-        //     showProjectCard(event.target.dataset.userId, event.target.dataset.action);
-        //   });
-        // });
       }
-      
-    //   function showProjectCard(userId,action){
-    //     const cardDiv = document.createElement("div");
-    //     cardDiv.classList.add("project-card");
-
-    //     fetch("fetch/fetch_get_project.php")
-    //     .then(response => response.json())
-    //     .then(data=>{
-    //       let dropdownHTML = '<select id="projectDropdown">';
-    //       data.forEach(project => {
-    //         dropdownHTML += `<option value="${project.ProjetId}">${project.ProjectName}</option>`;
-    //       });
-    //       dropdownHTML +='</select>';
-
-    //       cardDiv.innerHTML = `<h3>${action === 'confirm'?'Confirm User': 'Softlock User'}</h3>
-    //       ${dropdownHTML}
-    //       <button id="confirmButton" data-user-id="${userId}" data-action="${action}">${action}</button>
-    //       <button id="cancelButton">Cancel</button>
-    //       `;
-
-    //       document.body.appendChild(cardDiv);
-    //       document.getElementById("confirmButton").addEventListener("click",(event)=>{
-    //         confirmSoftlockUser(event.target.dataset.userId, event.target.dataset.action);
-    //       });
-    //       document.getElementById("cancelButton").addEventListener("click",()=>{
-    //         cardDiv.remove();
-    //       });
-    //     })
-    //     .catch(error =>{
-    //       console.error("Error fetching projects:",error);
-    //     });
-    //   }
       
     });
 }
@@ -352,7 +321,8 @@ function dashboardConfirmFetch() {
                 <td>${user.LastName}</td>
                 <td>${user.Email}</td>
                 <td>${user.Phone}</td>
-                <td>${user.ProjectName}</td>
+                <td id="projectname">${user.ProjectName}</td>
+                <input type="hidden" id="projectskill" value="${user.SkillId}">
                 <td><button class='dashboard-open-btn' data-user-email='${user.UserId}'>View</button>
                     <button class='dashboard-release-btn' data-user-email='${user.UserId}'>Release</button>
                 </td>
@@ -388,7 +358,7 @@ function dashboardConfirmFetch() {
 
 
 
-function confirmDashboardUser(UserId) {
+function confirmDashboardUser(UserId,projectname,projectskill) {
   // console.log("confirmDashboardUser called");
   if (UserId != null) {
     const AgentId=getcookie('AgentId');
@@ -402,6 +372,8 @@ function confirmDashboardUser(UserId) {
       body: JSON.stringify({
         UserId: UserId,
         AgentId: AgentId,
+        projectname:projectname,
+        projectskill:projectskill
       }),
     })
       .then((response) => {

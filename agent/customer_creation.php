@@ -109,7 +109,7 @@ if (isset($_POST["btn"])) {
                 <label for="location" style="font-size:20px">Location: </label>
 
                 <select name="location" id="location" class="js-example-basic-single"
-                    style="width:50%; margin-left:35px;">
+                    style="width:50%; margin-left:35px; ">
                     <option value="" disabled selected hidden>Select Location</option>
 
                     <?php

@@ -25,6 +25,30 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/notification.css">
     <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/associate.css">
+
+
+    <style>
+
+        .modal-content{
+            background-color: black;
+            border: 3px solid skyblue;
+            border-radius: 10px;
+        }
+        .details span p{
+            padding: 0.8rem;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .head img{
+            margin: 1rem;
+        }
+        .about p{
+            margin-top: 1.5rem;
+            font-size: 20px;
+            font-weight: 600;
+        }
+    </style
 </head>
 
 <body>
@@ -73,8 +97,8 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         </div>
     </div>
     <div class="dashboard-main-tabs">
-        <a href="project_type.php"><button class=''>Project</button></a>
-        <a href="associate.php"><button class=''>Associates</button></a>
+        <a href="dashboard.php"><button class=''>Project</button></a>
+        <a href="associate.php"><button class='currently_set'>Associates</button></a>
     </div>
     <div class="dashboard-tabs">
         <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
@@ -84,35 +108,32 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 
     <div class="dashboard-tab-content">
         <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
-
-        <!------------------- Modal  --------------------->
-        <div class="modal" id="user-modal">
-            <div class="modal-content">
-                <span class="close-btn"
-                    onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
-                <div class="head">
-                    <img id="modal-image" height="100px" src="" alt="user-image" />
-                    <span class="about">
-                        <p id="modal-name"></p>
-                        <p id="modal-about"></p>
-                    </span>
-                </div>
-                <div class="details">
-                    <span>
-                        <p id="modal-email"></p>
-                        <p id="modal-qualification"></p>
-                        <p id="modal-skill"></p>
-                    </span>
-                    <span id="left">
-                        <p id="modal-gender"></p>
-                        <p id="modal-age"></p>
-                        <p id="modal-location"></p>
-                    </span>
-                </div>
-                <a href="#" id="modal-resume" download><button>Download Resume</button></a>
+    </div>
+    <!------------------- Modal  --------------------->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
+            <div class="head">
+                <img id="modal-image" height="150px" width="150px" src="" alt="user-image" />
+                <span class="about">
+                    <p id="modal-name"></p>
+                    <p id="modal-about"></p>
+                </span>
             </div>
+            <div class="details">
+                <span>
+                    <p id="modal-email"></p>
+                    <p id="modal-qualification"></p>
+                    <p id="modal-skill"></p>
+                </span>
+                <span id="left">
+                    <p id="modal-gender"></p>
+                    <p id="modal-age"></p>
+                    <p id="modal-location"></p>
+                </span>
+            </div>
+            <a href="#" id="modal-resume" download><button>Download Resume</button></a>
         </div>
-
     </div>
 
 

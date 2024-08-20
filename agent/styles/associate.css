@@ -1,0 +1,33 @@
+.dashboard-open-btn{
+    background-color: #004e4e;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 10px;
+}
+.dashboard-open-btn:hover{
+    background-color: #007272;
+    cursor: pointer;
+}
+.dashboard-confirm-btn{
+    background-color: #014c01;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 10px;
+}
+.dashboard-confirm-btn:hover{
+    background-color: #00851d;
+    cursor: pointer;
+}
+.dashboard-release-btn{
+    background-color: rgb(100, 0, 0);
+    border: none;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 10px;
+}
+.dashboard-release-btn:hover{
+    background-color: #a1051f;
+    cursor: pointer;
+}
