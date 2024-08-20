@@ -299,8 +299,8 @@ form input, form textarea{
 form button{
     margin-top: 1rem;
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, black 0%, red 100%);
-    color: #fff;
+    background: darkcyan;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -308,7 +308,7 @@ form button{
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 form button:hover{
-    background: linear-gradient(135deg, red 0%, black  100%);
+    background: linear-gradient(135deg, rgb(3, 69, 112) 0%, black 100%);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     transform: translateY(-5px);
 }
@@ -317,15 +317,15 @@ form button:hover{
     padding: 10px 20px;
     margin: 20px 0;
     font-size: 16px;
-    color: #fff;
-    background: linear-gradient(135deg, black 0%, red 100%);
+    color: #f5f5f5;
+    background: darkcyan;
     text-decoration: none;
     border-radius: 5px;
     transition: backround-color 0.3s, box-shadow 0.3s, transform, 0.3s;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .btn:hover{
-    background:linear-gradient(135deg, red 0%, black  100%);
+    background:linear-gradient(135deg, rgb(3, 69, 112) 0%, black  100%);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     transform: translateY(-5px);
     cursor: pointer;
@@ -342,6 +342,12 @@ form button:hover{
    overflow: hidden;
    animation: typing 3.5s steps(40), blink-caret 0.75s step-end infinite alternate;
 }
+.card{
+
+    background-color: transparent;
+    border: 2px solid grey;
+}
+
 
 @keyframes typing{
     from {width: 0;}
@@ -574,9 +580,9 @@ h2{
 }
 
 #profile-form {
-    background: transparent;
+    background:transparent;
     color: white;
-    border: 2px solid skyblue;
+    border: 2px solid grey;
     border-radius: 0.8rem;
     backdrop-filter: blur(15px);
     margin-bottom: 2rem;
@@ -584,21 +590,21 @@ h2{
 .form-group input {
     background: transparent;
     color: white;
-    border: 2px solid skyblue;
+    border: 2px solid grey;
     border-radius: 0.5rem;
     height: 7vh;
 }
 .form-group select {
     background: transparent;
     color: white;
-    border: 2px solid skyblue;
+    border: 2px solid grey;
     border-radius: 0.5rem;
     padding: 0.5rem;
 }
 .form-group textarea {
     background: transparent;
     color: white;
-    border: 2px solid skyblue;
+    border: 2px solid grey;
     border-radius: 0.5rem;
 }
 .form-group select option{

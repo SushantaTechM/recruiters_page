@@ -1,14 +1,15 @@
 <?php
 
-if(!isset($_SESSION)){
-    // Start Session it is not started yet
-    session_start();
+if (!isset($_SESSION)) {
+  // Start Session it is not started yet
+  session_start();
 }
-// session_start();
-if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
+
+include("../database/dbconnect.php");
 
 
 ?>
@@ -16,128 +17,127 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruitment Portal</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/notification.css">
-    <link rel="stylesheet" href="styles/dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruitment Portal</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <link rel="stylesheet" href="styles/index.css">
+  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="styles/project.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/modal.css">
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/notification.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+
 </head>
+<style>
 
-<!-- <body>
+  .dashboard-tabs {
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+    /* text-align: center; */
+  }
 
-    <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Confirmed data</button>
-    </div>
+  .dashboard-tabs button {
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    background-color: cyan;
+    border: 2px solid grey;
+    border-radius: 20px;
+    padding: 3px 12px;
+  }
 
-    <div class="dashboard-tab-content">
-        <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
-        <div class="dashboard-confirm-content"></div>
-    </div>
+  .dashboard-tabs a {
+    color: transparent;
+    text-decoration: none;
+  }
+  button.currently_set{
+    border: 3px solid #267d60;
+  }
+</style>
 
-    <div class="modal" id="user-modal">
-            <div class="modal-content">
-                <span class="close-btn"
-                    onclick="document.getElementById('user-modal').style.display='none'">&times;</span>
-                <div class="head">
-                    <img id="modal-image" height="200px" width="200px" src="" alt="user-image" />
-                    <span class="about">
-                        <p id="modal-name"></p>
-                        <p id="modal-about"></p>
-                    </span>
-                </div>
-                <div class="details">
-                    <span>
-                        <p id="modal-email"></p>
-                        <p id="modal-qualification"></p>
-                        <p id="modal-skill"></p>
-                    </span>
-                    <span id="left">
-                        <p id="modal-gender"></p>
-                        <p id="modal-age"></p>
-                        <p id="modal-location"></p>
-                    </span>
-                </div>
-                <a href="#" id="modal-resume" download><button>Download Resume</button>
-                </a>
-            </div>
-        </div>
-
-    <script src="script/dashboard.js"></script>
-
-</body> -->
 <body>
-<div class="navbar" style="padding-bottom: 100px;">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-        <div class="nav-links">
-            <a href="dashboard.php"><button  style="color: white;"  class="tab active">Dashboard</button></a>
-            <a href="project.php"><button style="color: white;" class="tab">Project</button></a>
-            <a href="search.php"><button style="color: white;" class="tab">Search</button></a>
-            <div class="skill-dropdown">
-                <button class="dropbtn tab" onclick="toggleSkillDropdown()">Skills</button>
-                <div id="dropdown-content" class="dropdown-content">
-                    <a href="skill.php">Create Skills</a>
-                    <a href="skill_dashboard.php">Dashboard</a>
-            </div>
-    </div>
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-            <div class="dropdown-menu" id="userDropdown">
-                <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-                <a href="#" id="log-out">Log Out</a>
-            </div>
-        </div>
-    </div>
- 
-    <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Confirmed data</button>
-    </div>
- 
-    <div class="dashboard-tab-content">
-        <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
-        <div class="dashboard-confirm-content"></div>
- 
- 
-        <div class="modal" id="user-modal">
-            <div class="modal-content">
-                <span class="close-btn"
-                    onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
-                <div class="head">
-                    <img id="modal-image" height="100px" src="" alt="user-image" />
-                    <span class="about">
-                        <p id="modal-name"></p>
-                        <p id="modal-about"></p>
-                    </span>
-                </div>
-                <div class="details">
-                    <span>
-                        <p id="modal-email"></p>
-                        <p id="modal-qualification"></p>
-                        <p id="modal-skill"></p>
-                    </span>
-                    <span id="left">
-                        <p id="modal-gender"></p>
-                        <p id="modal-age"></p>
-                        <p id="modal-location"></p>
-                    </span>
-                </div>
-                <a href="#" id="modal-resume" download><button>Download Resume</button></a>
-            </div>
-        </div>
- 
-    </div>
+
+  <!-- ----------------- Navbar --------------- -->
+
+  <?php include('navbar.php') ?>
+
+  <div class="dashboard-tabs">
+    <a href="dashboard.php" ><button style="border:3px solid #267d60";>Project</button></a>
+    <a href="associate.php"><button>Associates</button></a>
+  </div>
+
+  <!--------------- Modal -------------------->
 
 
-    <script src="script/script.js"></script>
-    <script src="script/modal.js"></script>
-    <script src="script/dashboard.js"></script>
+  <div class="dashboard-tabs">
+    <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>Active Project</button>
+    <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Closed Project</button>
+
+  </div>
+  
+  <div class="dashboard-tab-content">
+    <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
+
+    <!------------------- Modal  --------------------->
+    <div class="modal" id="user-modal">
+      <div class="modal-content">
+        <span class="close-btn"
+          onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
+        <div class="head">
+          <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
+          <span class="about">
+            <p id="modal-name"></p>
+
+          </span>
+        </div>
+        <div class="details">
+          <span>
+            <p id="modal-email"></p>
+
+          </span>
+          <span id="left">
+            <p id="modal-gender"></p>
+
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <script>
+    let table = new DataTable('#myTable');
+  </script>
+
+
+  <script src="script/script.js"></script>
+
+  <!-- <script src="script/project_modal.js"></script> -->
+  <script src="script/project_type.js"></script>
+  <script src="script/modal.js"></script>
+  <!-- <script src="script/dashboard.js"></script> -->
 </body>
+
 </html>

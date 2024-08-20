@@ -56,7 +56,7 @@ $conn->close();
         <link rel="stylesheet" href="style.css">
         <style>
           .navbar {
-              background-color: #333;
+              background-color: transparent;
               color: white;
               display: flex;
               justify-content: space-between;
@@ -102,7 +102,7 @@ $conn->close();
           } */
           #logout{
             padding-right: 20px;
-            color: red;
+            color: darkcyan;
             font-size: 18px;
           }
           #bell-icon{
@@ -132,9 +132,9 @@ $conn->close();
         
     </head>
 
-    <body style="background: url('../images/p (1).jpg') no-repeat; background-size: cover; background-position: center;">
+    <body style="background: url('../images/Gradient-Mesh-26.jpg') no-repeat; background-size: cover; background-position: center;">
      <div class="navbar">
-        <div class="navbar-brand">Tech <br> <span style="color: red;">HireHub</span></div>
+        <div class="navbar-brand">Tech <br> <span style="color: darkcyan;">HireHub</span></div>
         <div class="navbar-right">
           <div class="dropdown">
             <div id="bell-icon" class="dropbtn">

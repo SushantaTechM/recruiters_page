@@ -4,12 +4,7 @@ include ('../../database/dbconnect.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $AgentId = $data['AgentId'];
 
-$sql="SELECT u.UserId,ud.FirstName, ud.LastName, ud.Email, u.Phone, p.ProjectName,upd.SkillId 
-FROM `userdetails` ud 
-join `users` u on ud.UserId=u.UserId 
-join `userprojectdetails` upd on upd.UserId=u.UserId 
-join `project` p on p.ProjectId=upd.ProjectId 
-where upd.AgentId='$AgentId' and upd.status='confirm'";
+$sql="SELECT p.ProjectId,p.ProjectName,sm.SkillName,GROUP_CONCAT(CONCAT(ud.FirstName, ' ', ud.LastName) SEPARATOR ', ') AS Users FROM project p JOIN userprojectdetails upd ON p.ProjectId = upd.ProjectId JOIN skillmaster sm ON sm.SkillId = upd.SkillId JOIN userdetails ud ON ud.UserId = upd.UserId WHERE p.status = 'active' GROUP BY p.ProjectName, sm.SkillName;";
 
 $result = $conn->query($sql);
 
@@ -28,10 +23,6 @@ if($result){
 else{
     echo json_encode(["status"=>"error"]); 
 }
-
-// var_dump($response);
-
-
 
 
 
