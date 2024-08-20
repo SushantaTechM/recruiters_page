@@ -8,7 +8,7 @@ $filename = basename($parsedUrl);
 ?>
 <link rel="stylesheet" href="styles/navbar.css">
 <div class="navbar" style="padding-bottom: 10px;">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: darkcyan;">HireHub</span></div>
+    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: cyan;">HireHub</span></div>
     <div class="nav-links">
         <a href="dashboard.php"><button class="tab <?= ($filename == 'dashboard.php') ? 'active' : '' ?>">Home</button></a>
         <div class="project-dropdown">

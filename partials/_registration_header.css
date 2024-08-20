@@ -1,5 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .navbar{
-    background-color:#007bff;
+    background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
 }
 .logo {
     font-size: 18px;

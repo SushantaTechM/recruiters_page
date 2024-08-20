@@ -56,13 +56,14 @@ $conn->close();
         <link rel="stylesheet" href="style.css">
         <style>
           .navbar {
-              background-color: transparent;
+            background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+            /* border: 1px solid black; */
               color: white;
               display: flex;
               justify-content: space-between;
               align-items: center;
-              padding: 1em;
-              margin-bottom: 5px;
+              margin-bottom: 3%;
+              padding: 1px;
           }
           .navbar-brand {
               font-weight: bold;
@@ -102,7 +103,7 @@ $conn->close();
           } */
           #logout{
             padding-right: 20px;
-            color: darkcyan;
+            color: white;
             font-size: 18px;
           }
           #bell-icon{
@@ -132,9 +133,9 @@ $conn->close();
         
     </head>
 
-    <body style="background: url('../images/Gradient-Mesh-26.jpg') no-repeat; background-size: cover; background-position: center;">
+    <body style="background: url('../images/gradient.jpg') no-repeat; background-size: cover; background-position: center;">
      <div class="navbar">
-        <div class="navbar-brand">Tech <br> <span style="color: darkcyan;">HireHub</span></div>
+        <div class="navbar-brand">Tech<br><span style="color: cyan;">HireHub</span></div>
         <div class="navbar-right">
           <div class="dropdown">
             <div id="bell-icon" class="dropbtn">
@@ -300,7 +301,8 @@ $conn->close();
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a href="edit_profile.php" class="btn btn-primary edit-button">Edit Profile</a>
+                      <a href="edit_profile.php" class="btn btn-primary edit-button" style=" background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+                        border:2px solid black;">Edit Profile</a>
                       <!-- <button class="btn btn-primary edit-button" onclick="enableEditing()">Edit Profile</button> -->
                     <!-- <a class="btn btn-info " target="__blank" href="user_edit.php">Edit</a> -->
                     </div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,45 +37,46 @@ if (isset($_POST["verify"])) {
 }
 ?>
 
+<body style="background:url('images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+    <div class="container">
+        <div class="wrapper">
+            <div id="user-login-box" class="login-box">
+                <h1>Reset Password</h1>
+                <form method="post">
+                    <div class="input-box">
+                        <input type="text" name="email" placeholder="Email ID:" required>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="phone" name="phone" placeholder="Phone No.:" required>
+                        <i class='bx bxs-phone'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="password" id="password" minlength="6" maxlength="10"
+                            placeholder="Enter New Password">
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <button type="submit" name="verify" class="login-btn btn">VERIFY</button>
 
-<div class="container">
-    <div class="wrapper">
-        <div id="user-login-box" class="login-box">
-            <h1>Reset Password</h1>
-            <form method="post">
-                <div class="input-box">
-                    <input type="text" name="email" placeholder="Email ID:" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="phone" name="phone" placeholder="Phone No.:" required>
-                    <i class='bx bxs-phone'></i>
-                </div>
-                <div class="input-box">
-                    <input type="text" name="password" id="password" minlength="6" maxlength="10"
-                        placeholder="Enter New Password">
-                    <i class='bx bxs-lock'></i>
-                </div>
-                <button type="submit" name="verify" class="login-btn btn">VERIFY</button>
+                </form>
 
-            </form>
-
+            </div>
         </div>
     </div>
-
-</div>
-<script>
-    //hiding notification
-    document.addEventListener('DOMContentLoaded', function () {
-        setTimeout(function () {
-            var popups1 = document.querySelectorAll('.popup1');
-            popups1.forEach(function (popup1) {
-                popup1.remove();
-            });
-            var popups = document.querySelectorAll('.popup');
-            popups.forEach(function (popup) {
-                popup.remove();
-            });
-        }, 3000); // 3000 milliseconds = 3 seconds
-    });
-</script>
+    <script>
+        //hiding notification
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var popups1 = document.querySelectorAll('.popup1');
+                popups1.forEach(function (popup1) {
+                    popup1.remove();
+                });
+                var popups = document.querySelectorAll('.popup');
+                popups.forEach(function (popup) {
+                    popup.remove();
+                });
+            }, 3000); // 3000 milliseconds = 3 seconds
+        });
+    </script>
+</body>
+</html>

@@ -63,9 +63,15 @@ if (isset($_POST["Login"])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
+<style>
+    .input-box input {
+        background:transparent;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+</style>
 
-
-<body>
+<body style="background:url('images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
             <form action="index.php" method="post">
@@ -81,7 +87,7 @@ if (isset($_POST["Login"])) {
                 <input type="hidden" id="type" name="type">
                 <div class="remeber-forgot">
 
-                    <a href="reset_password_user.php" class="forgot-password"> Forgot password ?</a>
+                    <a href="reset_password_user.php" class="forgot-password"><strong>Forgot password ?</strong></a>
                 </div>
                 <button type="submit" class="btn" name="Login">Login</button>
                 <div class="register-link">

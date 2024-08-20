@@ -82,14 +82,16 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
  
     <title>Project</title>
 </head>
 <style>
     body {
-        /* background-image: url('../images/p (1).jpg');
+        background-image: url('../images/gradient.jpg');
         background-size: cover;
-        background-repeat: no-repeat;   */
+        background-repeat: no-repeat;  
+        background-position: center;
     }
     .table{
         color: black;
@@ -104,23 +106,23 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         margin-bottom: 5%;
     }
     .modal-content{
-        /* background-color: transparent; */
-        border: 2px solid black;
-        color: black;
-        backdrop-filter: blur(20px);
+        background: transparent;
+        /* border: 2px solid black; */
+        color: white;
+        backdrop-filter: blur(120px);
         font-size: 20px;
     }
     .form-group input{
         background-color: transparent;
-        border: 2px solid black;
+        border: 2px solid white;
         border-radius: 10px;
-        color: black;
+        color: white;
     }
     h1 {
         color: black;
-        font-weight: 600;
-        font-size: 40px;
+        font-weight: bold;
         text-align:center;
+        margin-top: 3%;
         /* text-shadow:4px 4px grey; */
     }
 </style>
@@ -207,8 +209,8 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                                 <td>" .$row['LocationHeadEmail']. "</td>
                                 <td>" .$row['LocationHeadMobile']. "</td>
                                 <td>
-                                <button class='edit btn btn-primary' id='".$row['LocationId']."'>Edit</button>    
-                                <button class='delete btn btn-danger' id='".$row['LocationId']."'>Delete</button></td>
+                                <button class='edit btn' id='".$row['LocationId']."'><i class='bx bx-edit-alt'></i></button>    
+                                <button class='delete btn' id='".$row['LocationId']."'><i class='bx bxs-trash'></i></button></td>
                                 </td>
                             </tr>";
                     }
@@ -246,7 +248,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         Array.from(edits).forEach((element) => {
             element.addEventListener("click", (e) => {
                 console.log("edit",);
-                tr = e.target.parentNode.parentNode;
+                tr = e.target.parentNode.parentNode.parentNode;
                 console.log(tr);
                 LocationId = tr.getElementsByTagName("td")[1].innerText;
                 LocationName = tr.getElementsByTagName("td")[2].innerText;

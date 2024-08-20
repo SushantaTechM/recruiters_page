@@ -1,57 +1,55 @@
 <?php
-
-
+ 
+ 
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
-
+ 
  
 $showAlert = false;
 $conn = new mysqli("localhost", "root", "", "recruitmentpage");
-if($conn->connect_error){
-    die("connection failed: ".$conn->connect_error);
+if ($conn->connect_error) {
+  die("connection failed: " . $conn->connect_error);
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
-  $addSkill=$_POST["skillName"];
-  $skillDescription=$_POST["skillDescription"];
-
+  $addSkill = $_POST["skillName"];
+  $skillDescription = $_POST["skillDescription"];
+ 
   $checkSkillName = "SELECT * FROM `skillmaster` WHERE `SkillName`='$addSkill'";
   $res7 = mysqli_query($conn, $checkSkillName);
-  if($res7->num_rows>0){
+  if ($res7->num_rows > 0) {
     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Alert!</strong> The skill name already exists so you can not add the same skill.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>';
-  }else{
+  } else {
     $query = "INSERT INTO `skillmaster`( `SkillName`, `SkillDescription`) VALUES ('$addSkill','$skillDescription')";
     $result = mysqli_query($conn, $query);
-
  
-  if ($result) {
-    $showAlert=true;
-  } else {
-    echo mysqli_error($conn);
-  }
-  if ($showAlert) {
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+ 
+    if ($result) {
+      $showAlert = true;
+    } else {
+      echo mysqli_error($conn);
+    }
+    if ($showAlert) {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Success!</strong> Skill is added succesfully.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
     </div>';
-        // echo "<a href='/recruiters_page/agent/dashboard.php'>back</a>";
+      // echo "<a href='/recruiters_page/agent/dashboard.php'>back</a>";
     }
-
   }
-
 }
  
 ?>
@@ -65,55 +63,56 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Recruitment Portal</title>
   <!-- Bootstrap CSS -->
-   <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
-   <link rel="stylesheet" href="styles/index.css">
-   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+  <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/navbar.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    
-    <!-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
+ 
+  <!-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script> -->
   <!-- <script src="script/dashboard.js"></script> -->
-
+ 
  
   <title>Skill</title>
 </head>
  
-<body>
-
-
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+ 
+ 
   <!---------------- Navbar  -----------==-->
-
-  <?php  include('navbar.php') ?>
+ 
+  <?php include('navbar.php') ?>
  
   <div class="container" style="width: 40%;
+    margin-top: 7%;
     background: transparent;
-    border: 2px solid skyblue;
+    border: 2px solid black;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: white;
     border-radius: 10px;
     padding: 30px 40px;">
-
-    <h2 style="text-align:center; text-shadow: 2px 2px grey"> Create Skill</h2>
-
-            <form action="skill.php" class="" method="post">
-                <div style="margin-top:12%;">
-                <label for="skillName" style="font-size:20px">Skill: </label>
-                <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:75%; background-color: transparent;border: 2px solid skyblue; color:white;padding:0.2rem; text-align:center" required>
-                </div>
-                <div style="margin-top:6%;">
-                <label for="SkillDescription" style="font-size:20px">Description: </label>
-                <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: transparent;border: 2px solid skyblue; color:white;padding:0.2rem; text-align:center" required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="margin-top:10%; margin-left: 33%; width:30%; font-size:25px;border-radius:10px; border:2px solid skyblue;background-color:transparent">Create</button>
-                
-
-        </form>
-        <script src="script/script.js"></script>
-</div>
+ 
+    <h2 style="text-align:center; color:black;"> Create Skill</h2>
+ 
+    <form action="skill.php" class="" method="post">
+      <div style="margin-top:12%;">
+        <label for="skillName" style="font-size:20px; color:black; margin-left:3.5%;">Skill: </label>
+        <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:59%; background-color: white;border: 2px solid black; color:black;padding:0.2rem; text-align:center;margin-left:20%;border-radius:10px;" required>
+      </div>
+      <div style="margin-top:6%;">
+        <label for="SkillDescription" style="font-size:20px; color:black;margin-left:3.5%;">Description: </label>
+        <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: white;border: 2px solid black; color:black;padding:0.2rem; text-align:center; margin-top:5%; margin-left:6%; border-radius:10px; " required></textarea>
+      </div>
+ 
+      <button type="submit" class="btn btn-primary" style="margin: 25px 160px; font-size: 20px; border: 2px solid black; padding: 10px 25px; border-radius: 10px; text-decoration: none; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); color: white; cursor: pointer;">Create</button>
+ 
+ 
+    </form>
+    <script src="script/script.js"></script>
+  </div>
  
  
   <!-- Optional JavaScript -->
@@ -132,3 +131,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </body>
  
 </html>
+ 
