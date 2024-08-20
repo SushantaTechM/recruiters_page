@@ -315,9 +315,9 @@ $IBU_outcome = mysqli_query($conn,$IBU_query);
         
             <th scope="col">ProjectId</th>
             <th scope="col">Project</th>
-            <th scope="col">SkillName</th>
-            <th scope="col">RequiredHeadcount</th>
-            <th scope="col">fullfill_headcount</th>
+            <th scope="col">Skill Name</th>
+            <th scope="col">Required Headcount</th>
+            <th scope="col">Fullfill Headcount</th>
           
             
             <th scope="col">Action</th>
