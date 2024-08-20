@@ -1,12 +1,10 @@
 <?php
 include "partials/_login_header.php";
-//Anjali
-// include "database/config.php";
+
 if (isset($_POST["Login"])) {
 
     $email = $_POST["email"];
     $password = $_POST["password"];
-    // $type = $_POST["type"];
 
     $connection = mysqli_connect('localhost', 'root', '', 'recruitmentpage');
     if (!$connection) {
@@ -16,13 +14,11 @@ if (isset($_POST["Login"])) {
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
 
-    if ($result) {
-
+    if ($row) {
         session_start();
 
         $_SESSION['UserId'] = $row['UserId'];
         $type = $row['Type'];
-        // $_SESSION['type'] = $row['Type'];
 
         if ($type == 'Admin') {
             $_SESSION['adminLogin'] = true;
@@ -44,7 +40,6 @@ if (isset($_POST["Login"])) {
             $_SESSION['agentLogin'] = true;
             $expiry = time() + (3600 * 24);
             setcookie("AgentId", $row['UserId'], $expiry);
-            // header("location: agent/dashboard.php");
             header("location: agent/dashboard.php");
         } else {
             echo "<h1 class='popup'>Invalid username or password</h1>";
@@ -71,8 +66,6 @@ if (isset($_POST["Login"])) {
 
 
 <body>
-
-
     <div class="wrapper">
         <div id="user-login-box" class="login-box">
             <form action="index.php" method="post">
@@ -108,10 +101,6 @@ if (isset($_POST["Login"])) {
         //hiding notification
         document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
-                var popups1 = document.querySelectorAll('.popup1');
-                popups1.forEach(function (popup1) {
-                    popup1.remove();
-                });
                 var popups = document.querySelectorAll('.popup');
                 popups.forEach(function (popup) {
                     popup.remove();

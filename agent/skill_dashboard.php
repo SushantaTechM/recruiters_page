@@ -132,6 +132,7 @@ $outcome1 = mysqli_query($conn, $sql1);
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
@@ -232,8 +233,10 @@ $outcome1 = mysqli_query($conn, $sql1);
 
                  
                   <td>
-                  <button class='edit btn btn-primary' id='edit-" . $row['SkillId'] . "'>Edit</button>
-                  <button class='delete btn btn-danger' id='" . $row['SkillId'] . "'>Delete</button></td>
+                  <button class='edit btn btn-primary' id='edit-" . $row['SkillId'] . "'><i class='bx bxs-edit'></i></button>
+                  
+                  <button class='delete btn btn-danger' id='" . $row['SkillId'] . "'><i class='bx bxs-trash-alt'></i></button>
+                  </td>
                 </tr>";
  
  
@@ -248,7 +251,7 @@ $outcome1 = mysqli_query($conn, $sql1);
     </div>
   </div>
  
- 
+ <img src="" alt="" srcset="">
  
  
   <!-- Optional JavaScript -->
@@ -271,8 +274,8 @@ $outcome1 = mysqli_query($conn, $sql1);
     // console.log(edits);
     Array.from(edits).forEach((element) => {
       element.addEventListener("click", (e) => {
-        // console.log("edit",);
-        tr = e.target.parentNode.parentNode;
+        // console.log(e);
+        tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
         SkillId = tr.getElementsByTagName("td")[0].innerText;
         SkillName = tr.getElementsByTagName("td")[1].innerText;
@@ -286,11 +289,11 @@ $outcome1 = mysqli_query($conn, $sql1);
     })
  
     deletes = document.getElementsByClassName("delete");
-    console.log(deletes);
+    // console.log(deletes);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
         const id = e.target.id;
-        console.log(id);
+        // console.log(id);
         if (confirm('Are you sure to delete')) {
           window.location = "skill_dashboard.php?delete=" + id;
         }
