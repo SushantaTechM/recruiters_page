@@ -9,7 +9,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     exit;
 }
 
-    // include "partials/_registration_header.php";
+
     $conn = mysqli_connect('localhost','root','','recruitmentpage');
     if (!$conn) {
         die("Something went wrong!");

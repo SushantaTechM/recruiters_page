@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login form</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
 <?php
-include "partials/_registration_header.php";
+
 $showAlert = false;
 $showError = false;
 
@@ -27,9 +18,6 @@ if (isset($_POST["login"])) {
     if (!$connection) {
         echo "Something went wrong";
 
-        // if(!$result){
-        //     die('User already exists');
-        // }
     } else {
         if ($password == $c_password) {
             $query = "INSERT INTO `users`(`Username`, `Email`, `Password`, `Phone`, `Type`)";
@@ -40,172 +28,105 @@ if (isset($_POST["login"])) {
                 $showAlert = true;
             } else {
                 if (substr($connection->error, 0, 10) == 'Duplicate ') {
-                    echo "<h1 id='popup1'class='popup1'>User already exists !</h1>";
+                    echo "<h1 id='popup'class='popup'>User already exists !</h1>";
                 } else {
                     echo $connection->error;
                 }
             }
         } else {
-            echo "<h1  id='popup1' class='popup1'>Password not matched !</h1>";
+            echo "<h1  id='popup' class='popup'>Password not matched !</h1>";
             $showError = true;
         }
     }
-    // $query="INSERT INTO user_credentials('First name',Last name,Email,Password,Phone_No,Organisation) ";
-    // $query .="VALUES('$first_name','$last_name','$email','$password','$mobile','$organization')";
-
 
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login form</title>
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
+    <link rel="stylesheet" href="styles/user_registration.css">
+</head>
+<?php include "partials/_registration_header.php"; ?>
+
+<body>
+
+    <div class="container">
+        <?php
+        if ($showAlert) {
+            echo "<h1 class='popup1'>Account created successfully !</h1>";
+        }
+        ?>
+        <div class="wrapper">
+            <div id="user-login-box" class="login-box">
+                <h1>Registration</h1>
+                <form method="post">
+                    <div class="input-box">
+                        <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
+                            required>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" name="email" id="email" maxlength="50" placeholder="Enter Email Id"
+                            required>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
+                        <i class='bx bxs-phone'></i>
+                    </div>
+                    <input type="hidden" name="type" value="User">
+                    <div class="input-box">
+                        <input type="password" name="password" id="password" minlength="6" maxlength="25"
+                            placeholder="Enter Password" required>
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25"
+                            placeholder="Confirm Password" required>
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <p id="error-message" style="color: red;"></p>
+                    <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
+
+                </form>
+                <script>
+                    var password = document.getElementById("password");
+                    var confirmPassword = document.getElementById("c_password");
 
 
+                    function checkPasswordMatch() {
+                        var errorMessage = document.getElementById("error-message");
 
-<!-- <div class="container">
-    <?php
-    //if ($showAlert) {
-    //     echo "<h1>your account is created successfully</h1>";
-    //     echo "<a href='/PHP/recruiters_page/index.php'>Login Here</a>";
-    // }
-    ?>
-    <div id="user-login-box" class="login-box">
-
-        <img src="images\computer-1331579_640.webp" width="100" height="100">
-        <h2>USER REGISTRATION</h2>
-        <form method="post">
-            <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
-                required>
-            
-            <input type="email" name="email" id="email" maxlength="50" placeholder="Enter Email Id" required>
-            <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
-            <input type="hidden" id="Type" name="Type" value="User">
-            <input type="text" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password"
-                required>
-            <input type="password" name="c_password" id="c_password" minlength="6" maxlength="10"
-                placeholder="Confirm Password" required>
-            <p id="error-message" style="color: red;"></p>
-            <button type="submit" name="login" class="login-btn">REGISTER NOW</button>
-            
-            <button type="reset" class="login-btn">RESET</button>
-
-
-        </form>
-        <script>
-            var password = document.getElementById("password");
-            var confirmPassword = document.getElementById("c_password");
-
-
-            function checkPasswordMatch() {
-                
-
-                var errorMessage = document.getElementById("error-message");
-
-                if (password.value !== confirmPassword.value) {
-                    errorMessage.textContent = "Passwords do not match!";
-                    return false;
-                }
-
-                errorMessage.textContent = ""; 
-                return true; 
-            }
-
-            confirmPassword.addEventListener('input', checkPasswordMatch);
-
-
-        </script>
-    </div>
-</div> -->
-
-<div class="container">
-    <?php
-    if ($showAlert) {
-        echo "<h1 class='popup'>Account created successfully !</h1>";
-    }
-    ?>
-    <div class="wrapper">
-        <div id="user-login-box" class="login-box">
-            <!-- <img src="images\computer-1331579_640.webp" width="100" height="100"> -->
-            <h1>Registration</h1>
-            <form method="post">
-                <div class="input-box">
-                    <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
-                        required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="email" name="email" id="email" maxlength="50" placeholder="Enter Email Id" required>
-                    <i class='bx bx-envelope'></i>
-                </div>
-                <div class="input-box">
-                    <input type="phone" name="mobile_no" placeholder="Mobile No.:" maxlength="13" required>
-                    <i class='bx bxs-phone'></i>
-                </div>
-                <!-- <input type="hidden" id="Type" name="Type" value="User">
-                <div class="input-box">
-                    <input type="text" name="password" id="password" minlength="6" maxlength="10" placeholder="Enter Password" required>
-                    <i class='bx bxs-lock'></i>
-                </div> -->
-                <!-- <div class="input-box">
-                <label for="type" class="input-box">Type</label>
-                    <select name="type" class="type" id="type" required>
-                                <option value="">Select Type</option>
-                                <option value="Admin">Admin</option>
-                                <option value="User">User</option>
-                                <option value="Agent">Agent</option>
-                                <option value="User">User</option> -->
-                <!-- </select> -->
-                <!-- <i class='bx bxs-user'></i> -->
-                <!-- </div> -->
-                <input type="hidden" name="type" value="User">
-                <div class="input-box">
-                    <input type="password" name="password" id="password" minlength="6" maxlength="25"
-                        placeholder="Enter Password" required>
-                    <i class='bx bxs-lock'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" name="c_password" id="c_password" minlength="6" maxlength="25"
-                        placeholder="Confirm Password" required>
-                    <i class='bx bxs-lock'></i>
-                </div>
-                <p id="error-message" style="color: red;"></p>
-                <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
-                <!-- <button type="reset" class="login-btn btn">RESET</button> -->
-
-
-            </form>
-            <script>
-                var password = document.getElementById("password");
-                var confirmPassword = document.getElementById("c_password");
-
-
-                function checkPasswordMatch() {
-                    // console.log(confirmPassword.value);
-
-                    var errorMessage = document.getElementById("error-message");
-
-                    if (password.value !== confirmPassword.value) {
-                        errorMessage.textContent = "Passwords do not match!";
-                        return false; // Prevent form submission
+                        if (password.value !== confirmPassword.value) {
+                            errorMessage.textContent = "Passwords do not match!";
+                            return false;
+                        }
+                        errorMessage.textContent = "";
+                        return true;
                     }
 
-                    errorMessage.textContent = ""; // Clear any previous error message
-                    return true; // Allow form submission
-                }
+                    confirmPassword.addEventListener('input', checkPasswordMatch);
 
-                confirmPassword.addEventListener('input', checkPasswordMatch);
-
-                //hiding notification
-                document.addEventListener('DOMContentLoaded', function () {
-                    setTimeout(function () {
-                        var popups1 = document.querySelectorAll('.popup1');
-                        popups1.forEach(function (popup1) {
-                            popup1.remove();
-                        });
-                        var popups = document.querySelectorAll('.popup');
-                        popups.forEach(function (popup) {
-                            popup.remove();
-                        });
-                    }, 3000); // 3000 milliseconds = 3 seconds
-                });
-            </script>
+                    //hiding notification
+                    document.addEventListener('DOMContentLoaded', function () {
+                        setTimeout(function () {
+                            var popups1 = document.querySelectorAll('.popup1');
+                            popups1.forEach(function (popup1) {
+                                popup1.remove();
+                            });
+                            var popups = document.querySelectorAll('.popup');
+                            popups.forEach(function (popup) {
+                                popup.remove();
+                            });
+                        }, 3000); // 3000 milliseconds = 3 seconds
+                    });
+                </script>
+            </div>
         </div>
     </div>
-</div>
+</body>

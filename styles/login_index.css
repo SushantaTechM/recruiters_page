@@ -107,7 +107,7 @@ input:checked + .slider:before {
 
 
 .nav-list{
-    background-color: #0000af;
+    background-color: #007bff;;
     width: 100%;
     position: fixed;
     height: 47px;    
