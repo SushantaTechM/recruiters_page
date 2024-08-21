@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <label for="skillName" style="font-size:20px; color:black; margin-left:3.5%;">Skill: </label>
         <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:60%; background: transparent;border: 2px solid black; color:black;padding:0.5rem; margin-left:91px;border-radius:10px;" required>
       </div>
-      <div style="margin-top:6%;">
+      <div style="margin-top:6%;display:flex;">
         <label for="SkillDescription" style="font-size:20px; color:black;margin-left:3.5%; margin-bottom:0;">Description: </label>
         <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background: transparent;border: 2px solid black; color:black;padding:0 0.5rem; margin-left:6%; border-radius:10px; " required></textarea>
       </div>
