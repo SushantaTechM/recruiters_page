@@ -27,11 +27,8 @@
 .modal-content button{
     border-radius:50px;
     margin: 0px 10px;
-    color:black;
+    padding: 10px 20px;
     font-weight:bold;
-    background: white;
-    width: 180px;
-    height: 40px;
     cursor: pointer;
 }
 .form-control{

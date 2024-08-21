@@ -10,7 +10,8 @@ $filename = basename($parsedUrl);
 <div class="navbar" style="padding-bottom: 10px;">
     <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: cyan;">HireHub</span></div>
     <div class="nav-links">
-        <a href="dashboard.php"><button class="tab <?= ($filename == 'dashboard.php') ? 'active' : '' ?>">Home</button></a>
+        <a href="dashboard.php"><button class="tab <?php
+                echo ($filename == 'dashboard.php' || $filename == 'associate.php' ) ? 'active' : ''; ?>">Home</button></a>
         <div class="project-dropdown">
             <button
                 class="dashboard-dropbtn tab <?php

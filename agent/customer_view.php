@@ -1,12 +1,12 @@
 <?php
 
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
 
 $conn = mysqli_connect('localhost', 'root', '', 'recruitmentpage');
@@ -28,8 +28,7 @@ if (isset($_GET["delete"])) {
   if ($res4->num_rows > 0) {
     $message = "There are some customer associated to this project, so you can not delete it!";
     echo "<script type='text/javascript'>alert('$message');</script>";
-  } 
-  else {
+  } else {
     $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
     $result = mysqli_query($conn, $query);
     if (!$result) {
@@ -90,13 +89,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
   <script>
     // .js-example-basic-single declare this class into your select box
-    $(document).ready(function () {
-      $('.js-example-basic-single').select2();
-    });
+    // $(document).ready(function () {
+    //   $('.js-example-basic-single').select2();
+    // });
   </script>
 
 
@@ -134,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <div class="modal-content" style="background-color: transparent;backdrop-filter: blur(120px);color: white;">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel" style='color:white;'>Edit</h5>
-          <button type="button" class="close" data-dismiss="modal"  style='color:white;' aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" style='color:white;' aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -147,18 +146,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <input type='hidden' id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
 
 
+
             </div>
 
             <div class="form-group">
               <label for="editCustomerName">Customer Name</label>
 
-              <input name="editCustomerName"  style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"  type="text" class="form-control" id="editCustomerName"
-                aria-describedby="emailHelp" placeholder="Enter Customer Name">
+              <input name="editCustomerName"
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white" type="text"
+                class="form-control" id="editCustomerName" aria-describedby="emailHelp"
+                placeholder="Enter Customer Name">
             </div>
 
             <div class="form-group">
               <label for="editLocationName">Location</label>
-              <select name="editLocationName" id="editLocationName" class="js-example-basic-single" style="background:transparent; color:white; border:1px solid white; padding:0.5rem; border-radius:10px;">
+              <select name="editLocationName" id="editLocationName" class="js-example-basic-single"
+                style="background:transparent; color:white; border:1px solid white; padding:0.5rem; border-radius:10px;">
                 <option value="" disabled selected hidden>Please select Location</option>
                 <?php
                 while ($row = mysqli_fetch_assoc($location_outcome)) {
@@ -184,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <!-- ----------------- Navbar --------------- -->
 
-  <?php  include('navbar.php') ?>
+  <?php include('navbar.php') ?>
 
   <div>
     <h1 style="text-align:center; margin-top:3%; font-weight:bold;">Customer Details</h1>
@@ -227,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </tbody>
     </table>
 
-    
+
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script>
       let table = new DataTable('#example');
@@ -256,8 +259,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       // console.log(edits);
       Array.from(deletes).forEach((element) => {
         element.addEventListener("click", (e) => {
-          id = e.target.id.substr();
-          // console.log(id);
+          let target = e.target;
+
+          // Check if the clicked element is the icon inside the button
+          if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+            target = target.parentElement; // Set target to the parent button
+          }
+
+          // Check if the target is the button with the class 'delete'
+          if (target.classList.contains('delete')) {
+            id = target.id;
+            console.log(id);
+          }
           if (confirm('Are you sure to delete')) {
             window.location = "customer_view.php?delete=" + id;
           }
@@ -271,9 +284,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </div>
   <script>
     // .js-example-basic-single declare this class into your select box
-    $(document).ready(function () {
-      $('.js-example-basic-single').select2();
-    });
+    // $(document).ready(function () {
+    //   $('.js-example-basic-single').select2();
+    // });
   </script>
   <script src="script/script.js"></script>
 </body>

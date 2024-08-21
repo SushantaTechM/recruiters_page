@@ -4,96 +4,96 @@ if (!isset($_SESSION)) {
     // Start Session it is not started yet
     session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
     header('location:../index.php');
     exit;
 }
 
 
-    $conn = mysqli_connect('localhost','root','','recruitmentpage');
-    if (!$conn) {
-        die("Something went wrong!");
-    }
+$conn = mysqli_connect('localhost', 'root', '', 'recruitmentpage');
+if (!$conn) {
+    die("Something went wrong!");
+}
 ?>
 
 <!-- -------------- Edit php code --------------- -->
- 
+
 <?php
-        if($_SERVER['REQUEST_METHOD'] == "POST") {
-            if(isset($_POST["update"])) {
-                $editLocationId = $_POST['editLocationId'];
-                $editLocationName = $_POST["editLocationName"];
-                $editLocationState = $_POST["editLocationState"];
-                $editLocationHeadName = $_POST["editLocationHeadName"];
-                $editLocationHeadEmail = $_POST["editLocationHeadEmail"];
-                $editLocationHeadMobile = $_POST["editLocationHeadMobile"];
-               
-                
-                $sql = "UPDATE `locationmaster` SET `LocationName` = '$editLocationName',`LocationState` = '$editLocationState',`LocationHeadName` = '$editLocationHeadName',`LocationHeadEmail` = '$editLocationHeadEmail',`LocationHeadMobile` = '$editLocationHeadMobile' where `LocationId` = '$editLocationId'";
-                $result = mysqli_query($conn, $sql);
-                if ($result) {
-                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST["update"])) {
+        $editLocationId = $_POST['editLocationId'];
+        $editLocationName = $_POST["editLocationName"];
+        $editLocationState = $_POST["editLocationState"];
+        $editLocationHeadName = $_POST["editLocationHeadName"];
+        $editLocationHeadEmail = $_POST["editLocationHeadEmail"];
+        $editLocationHeadMobile = $_POST["editLocationHeadMobile"];
+
+
+        $sql = "UPDATE `locationmaster` SET `LocationName` = '$editLocationName',`LocationState` = '$editLocationState',`LocationHeadName` = '$editLocationHeadName',`LocationHeadEmail` = '$editLocationHeadEmail',`LocationHeadMobile` = '$editLocationHeadMobile' where `LocationId` = '$editLocationId'";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Success!</strong> Location Updated Succesfully!
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         </div>';
-                }
-                else {
-                    echo mysqli_error($conn);
-                }
-            }
+        } else {
+            echo mysqli_error($conn);
         }
-    ?>
- 
-    <!-- ------------------------- Delete php code --------------------------------- -->
- 
-    <?php
-        if(isset($_GET["delete"])) {
-            $id= $_GET["delete"];
-            $cid="SELECT LocationName FROM `locationmaster` where `LocationId` = '$id'";
-            $res4=mysqli_query($conn,$cid);
-       
-            $query="DELETE FROM `locationmaster` WHERE `LocationId` = '$id'";
-            $result = mysqli_query($conn, $query);
-            if (!$result) {
-                $message="This location is assigned to somewhere, so you cannot delete it!";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-                // die(mysqli_error($conn));
-            }
-            else {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    }
+}
+?>
+
+<!-- ------------------------- Delete php code --------------------------------- -->
+
+<?php
+if (isset($_GET["delete"])) {
+    $id = $_GET["delete"];
+    $cid = "SELECT LocationName FROM `locationmaster` where `LocationId` = '$id'";
+    $res4 = mysqli_query($conn, $cid);
+
+    $query = "DELETE FROM `locationmaster` WHERE `LocationId` = '$id'";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        $message = "This location is assigned to somewhere, so you cannot delete it!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        // die(mysqli_error($conn));
+    } else {
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                       <strong>Success!</strong> Location Deleted Succesfully!
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>';
-            }
-        }
-    ?>
- 
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Location</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
- 
+
     <title>Project</title>
 </head>
 <style>
     body {
         background-image: url('../images/gradient.jpg');
         background-size: cover;
-        background-repeat: no-repeat;  
+        background-repeat: no-repeat;
         background-position: center;
     }
-    .table{
+
+    .table {
         color: black;
         border: 2px solid black;
         /* box-shadow:  1px 1px #0acad8; */
@@ -105,36 +105,41 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         /* font-size: 25px; */
         margin-bottom: 5%;
     }
-    .modal-content{
+
+    .modal-content {
         background: transparent;
         /* border: 2px solid black; */
         color: white;
         backdrop-filter: blur(120px);
         font-size: 20px;
     }
-    .form-group input{
+
+    .form-group input {
         background-color: transparent;
         border: 2px solid white;
         border-radius: 10px;
         color: white;
     }
+
     h1 {
         color: black;
         font-weight: bold;
-        text-align:center;
+        text-align: center;
         margin-top: 3%;
         /* text-shadow:4px 4px grey; */
     }
 </style>
+
 <body>
-    
+
     <!-- ----------------- Navbar --------------- -->
- 
-    <?php  include('navbar.php') ?>
- 
+
+    <?php include('navbar.php') ?>
+
     <!-- ----------- Modal -------------- -->
- 
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,23 +156,28 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                         </div>
                         <div class="form-group">
                             <label for="editLocationName">Loc Name</label>
-                            <input name="editLocationName" class="form-control" id="editLocationName" style="background-color: transparent;"readonly>
+                            <input name="editLocationName" class="form-control" id="editLocationName"
+                                style="background-color: transparent;" readonly>
                         </div>
                         <div class="form-group">
                             <label for="editLocationState">Loc State</label>
-                            <input name="editLocationState" class="form-control" id="editLocationState" placeholder="Loc State">
+                            <input name="editLocationState" class="form-control" id="editLocationState"
+                                placeholder="Loc State">
                         </div>
                         <div class="form-group">
                             <label for="editLocationHeadName">Loc Head Name</label>
-                            <input name="editLocationHeadName" class="form-control" id="editLocationHeadName" placeholder="LocEmail Head Name">
+                            <input name="editLocationHeadName" class="form-control" id="editLocationHeadName"
+                                placeholder="LocEmail Head Name">
                         </div>
                         <div class="form-group">
                             <label for="editLocationHeadEmail">Loc Head Email</label>
-                            <input name="editLocationHeadEmail" class="form-control" id="editLocationHeadEmail" placeholder="Loc Head Email">
+                            <input name="editLocationHeadEmail" class="form-control" id="editLocationHeadEmail"
+                                placeholder="Loc Head Email">
                         </div>
                         <div class="form-group">
                             <label for="editLocationHeadMobile">Loc Head Mobile</label>
-                            <input name="editLocationHeadMobile" class="form-control" id="editLocationHeadMobile" placeholder="Loc Head Mobile">
+                            <input name="editLocationHeadMobile" class="form-control" id="editLocationHeadMobile"
+                                placeholder="Loc Head Mobile">
                         </div>
                         <button type="submit" class="btn btn-primary" name="update">Update</button>
                     </form>
@@ -175,9 +185,9 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
             </div>
         </div>
     </div>
- 
+
     <!-- ----------------------------- Table -------------------------------- -->
- 
+
     <h1>Location Details</h1>
     <table class="table" id="myTable">
         <thead>
@@ -209,24 +219,24 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                                 <td>" .$row['LocationHeadEmail']. "</td>
                                 <td>" .$row['LocationHeadMobile']. "</td>
                                  <input type='hidden' id='LocationId' value=" . $row['LocationId'] . ">
+
                                 <td>
-                                <button class='edit btn' id='".$row['LocationId']."'><i class='bx bx-edit-alt'></i></button>    
-                                <button class='delete btn' id='".$row['LocationId']."'><i class='bx bxs-trash'></i></button></td>
+                                <button class='edit btn' id='" . $row['LocationId'] . "'><i class='bx bx-edit-alt'></i></button>    
+                                <button class='delete btn' id='" . $row['LocationId'] . "'><i class='bx bxs-trash'></i></button></td>
                                 </td>
                             </tr>";
-                    }
                 }
-                else{
-                    echo "0 results";
-                }
+            } else {
+                echo "0 results";
+            }
             ?>
         </tbody>
     </table>
- 
- 
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
- 
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -240,10 +250,10 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     <script>
         let table = new DataTable('#myTable');
     </script>
- 
+
     <script>
         // --------- Edit -------------
- 
+
         edits = document.getElementsByClassName("edit");
         // console.log(edits);
         Array.from(edits).forEach((element) => {
@@ -258,6 +268,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                 LocationHeadEmail = tr.getElementsByTagName("td")[4].innerText;
                 LocationHeadMobile = tr.getElementsByTagName("td")[5].innerText;
  
+
                 editLocationId.value = LocationId;
                 editLocationName.value = LocationName;
                 editLocationState.value = LocationState;
@@ -268,19 +279,29 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                 // console.log(LocationId);
             })
         })
- 
+
         // ----------------- Delete ----------------
- 
+
         deletes = document.getElementsByClassName("delete");
         // console.log(edits);
         Array.from(deletes).forEach((element) => {
             element.addEventListener("click", (e) => {
-                id=e.target.id.substr();
-                // console.log(id);
-                if(confirm('Are you sure to delete it?')){
-                    window.location="view_location.php?delete="+id;
+                let target = e.target;
+
+                // Check if the clicked element is the icon inside the button
+                if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+                    target = target.parentElement; // Set target to the parent button
                 }
-                else{
+
+                // Check if the target is the button with the class 'delete'
+                if (target.classList.contains('delete')) {
+                    id = target.id;
+                    console.log(id);
+                }
+                if (confirm('Are you sure to delete it?')) {
+                    window.location = "view_location.php?delete=" + id;
+                }
+                else {
                     console.log('no');
                 }
             })
@@ -288,4 +309,5 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     </script>
     <script src="script/script.js"></script>
 </body>
+
 </html>

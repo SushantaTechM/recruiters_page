@@ -1,5 +1,6 @@
 <?php
-
+$showAlert = false;
+$showError = false;
 
 if (isset($_POST["Login"])) {
 
@@ -42,10 +43,11 @@ if (isset($_POST["Login"])) {
             setcookie("AgentId", $row['UserId'], $expiry);
             header("location: agent/dashboard.php");
         } else {
-            echo "<h1 class='popup'>Invalid username or password</h1>";
+            $showError = true;
         }
     } else {
-        echo "<h1 class='popup'>Invalid username or password</h1>";
+        $showError = true;
+       
     }
 }
 
@@ -59,77 +61,78 @@ if (isset($_POST["Login"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login form</title>
-    <link rel="stylesheet" href="styles/login_index.css">
+    <!-- <link rel="stylesheet" href="styles/login_index.css"> -->
+    <link rel="stylesheet" href="styles/style2.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
-<style>
-    .input-box input {
-        background:transparent;
-        border: 2px solid black;
-        border-radius: 10px;
-    }
-</style>
 
 
-<body style="background:url('images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body >
 
-    <?php include "partials/_login_header.php"; ?>
+    <?php include "partials/_registration_header.php"; 
+    if($showError){
+        echo "<h1 class='popup'>Wrong Credential !</h1>";
+    }   
+    ?>
+    <div class="container">
+        <div class="wrapper">
+            <div id="user-login-box" class="login-box">
+                <form action="index.php" method="post" onsubmit="return validateEmail()">
+                    <h1> Login</h1>
+                    <div class="input-box">
+                        <input type="text" name="email" placeholder="Email Id" id='email' required>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" required>
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <input type="hidden" id="type" name="type">
+                    <div class="remeber-forgot">
 
-    <div class="wrapper">
-        <div id="user-login-box" class="login-box">
-            <form action="index.php" method="post" onsubmit="return validateEmail()">
-                <h1> Login</h1>
-                <div class="input-box">
-                    <input type="text" name="email" placeholder="Email Id" id='email' required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required>
-                    <i class='bx bxs-lock'></i>
-                </div>
-                <input type="hidden" id="type" name="type">
-                <div class="remeber-forgot">
+                        <a href="reset_password_user.php" class="forgot-password"><strong>Forgot password ?</strong></a>
+                    </div>
+                    <button type="submit" class="btn" name="Login">Login</button>
+                    <div class="register-link">
+                        <p>Don't have an account ?
+                            <a href="user_registration.php">Signup</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
 
-                    <a href="reset_password_user.php" class="forgot-password"><strong>Forgot password ?</strong></a>
-                </div>
-                <button type="submit" class="btn" name="Login">Login</button>
-                <div class="register-link">
-                    <p>Don't have an account ?
-                        <a href="user_registration.php">Signup</a>
-                    </p>
-                </div>
-            </form>
         </div>
-
-
 
     </div>
 
-    <script src="scripts/script.js"></script>
     <script>
         //hiding notification
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var popups1 = document.querySelectorAll('.popup1');
+                popups1.forEach(function(popup1) {
+                    popup1.remove();
+                });
                 var popups = document.querySelectorAll('.popup');
-                popups.forEach(function (popup) {
+                popups.forEach(function(popup) {
                     popup.remove();
                 });
             }, 3000); // 3000 milliseconds = 3 seconds
         });
 
-        //validating email id
-        function validateEmail() {
-            const emailInput = document.getElementById('email');
-            const email = emailInput.value;
-            const domain = '@gmail.com';
+        //validating techmahindra email id
+        // function validateEmail() {
+        //     const emailInput = document.getElementById('email');
+        //     const email = emailInput.value;
+        //     const domain = '@techmahindra.com';
 
-            if (!email.endsWith(domain)) {
-                alert('Email must end with @techmahindra.com');
-                return false; // Prevent form submission
-            }
-            return true; // Allow form submission
-        }
+        //     if (!email.endsWith(domain)) {
+        //         alert('Email must end with @techmahindra.com');
+        //         return false; // Prevent form submission
+        //     }
+        //     return true; // Allow form submission
+        // }
     </script>
 </body>
 

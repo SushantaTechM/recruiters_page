@@ -37,80 +37,81 @@ include("../database/dbconnect.php");
 
 </head>
 <style>
-
   .dashboard-tabs {
     margin-left: 2rem;
     margin-bottom: 0.5rem;
-    /* text-align: center; */
+    font-size: 15px;
+  }
+  .dashboard-tabs a button{
+    margin-top: 2rem;
   }
 
   .dashboard-tabs button {
     font-weight: bold;
-    font-size: 18px;
-    color: black;
-    background-color: cyan;
-    border: 2px solid grey;
-    border-radius: 20px;
-    padding: 3px 12px;
+    color: white;
+    background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 7px 15px;
   }
 
   .dashboard-tabs a {
     color: transparent;
     text-decoration: none;
   }
+
   button.currently_set{
-    border: 3px solid #267d60;
+    border: 3px solid gray;
+
   }
 </style>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
   <!-- ----------------- Navbar --------------- -->
 
   <?php include('navbar.php') ?>
 
   <div class="dashboard-tabs">
-    <a href="dashboard.php" ><button style="border:3px solid #267d60";>Project</button></a>
+    <a href="dashboard.php"><button style="border:3px solid #267d60" ;>Project</button></a>
     <a href="associate.php"><button>Associates</button></a>
   </div>
 
   <!--------------- Modal -------------------->
+  <div class="modal" id="user-modal">
+    <div class="modal-content" id="modal-content">
+      <span class="close-btn" onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
+      <div class="head">
+        <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
+        <span class="about">
+          <p id="modal-name"></p>
 
+        </span>
+      </div>
+      <div class="details">
+        <span>
+          <p id="modal-email"></p>
+
+        </span>
+        <span id="left">
+          <p id="modal-gender"></p>
+
+        </span>
+      </div>
+
+    </div>
+  </div>
 
   <div class="dashboard-tabs">
     <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>Active Project</button>
     <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Closed Project</button>
-
   </div>
-  
+
   <div class="dashboard-tab-content">
     <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
 
     <!------------------- Modal  --------------------->
-    <div class="modal" id="user-modal">
-      <div class="modal-content">
-        <span class="close-btn"
-          onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
-        <div class="head">
-          <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
-          <span class="about">
-            <p id="modal-name"></p>
 
-          </span>
-        </div>
-        <div class="details">
-          <span>
-            <p id="modal-email"></p>
-
-          </span>
-          <span id="left">
-            <p id="modal-gender"></p>
-
-          </span>
-        </div>
-
-      </div>
-    </div>
 
   </div>
 

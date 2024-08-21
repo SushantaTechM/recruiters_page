@@ -1,15 +1,15 @@
 <?php
 
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
 
-include ("../database/dbconnect.php");
+include("../database/dbconnect.php");
 
 
 if (isset($_GET["delete"])) {
@@ -23,16 +23,14 @@ if (isset($_GET["delete"])) {
   if ($res4->num_rows > 0) {
     $message = "There are some users assigned to this project, so you can not delete it!";
     echo "<script type='text/javascript'>alert('$message');</script>";
-  } 
-  else {
+  } else {
     if (!$result) {
       // die(mysqli_error($conn));
       $message = "There are some skill assigned to this project, so you can not delete it!";
       echo "<script type='text/javascript'>alert('$message');</script>";
 
-    }
-    else{
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    } else {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
               <strong>Success!</strong> Your Project Deleted Succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -74,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $row6 = mysqli_fetch_assoc($result6);
     $ibulId = $row6['id'];
 
-    $status=$_POST['editStatus'];
+    $status = $_POST['editStatus'];
 
 
 
@@ -116,16 +114,42 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <title>Project</title>
 </head>
 <style>
-  .tbl{
+  .tbl {
     width: 60%;
+  }
+  .modal-content {
+    border: 2px solid white;
+    backdrop-filter: blur(100px);
+    border-radius: 10px;
+  }
+  .modal h5 {
+    color: white;
+  }
+  .modal input {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    color-scheme: dark;
+  }
+  .modal select {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px;
+  }
+  .modal select option {
+    background: black;
+  }
+  .modal-body form{
+    border: none;
   }
 </style>
 
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
-  
+
   <!------------------------ Navbar  ------------->
-  <?php  include('navbar.php') ?>
-  
+  <?php include('navbar.php') ?>
+
   <!------------------------- Modal ---------------->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -134,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" style="color: white; opacity: 1;">&times;</span>
           </button>
         </div>
         <div class="modal-body">
@@ -210,16 +234,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 ?>
               </select>
             </div>
-            
+
             <div class="form-group">
               <label for="editStatus">Status</label>
               <select name="editStatus" id="editStatus">
                 <option value="" disabled selected hidden>Please select Status</option>
                 <option value="active">active</option>
                 <option value="closed">closed</option>
-                </select>
+              </select>
             </div>
-           
+
 
             <div class="form-group">
               <label for="editProjectName">ProjectName</label>
@@ -233,6 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
     </div>
   </div>
+
 
 
 <h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
@@ -265,6 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               if ($row['status']=='active') {
                 echo "<tr>
                     <td>" . $no . "</td>
+
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -282,6 +308,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               else {
                 echo "<tr>
                     <td>" . $no . "</td>
+
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -295,22 +322,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "'><i class='bx bxs-trash'></i></button></td>
                   </tr>";
-              }
-            }
-          } 
-          else {
-            echo "0 results";
           }
-          ?>
+        }
+      } else {
+        echo "0 results";
+      }
+      ?>
 
-          </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
   </div>
 
 
 
-<!-- Optional JavaScript -->
+  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -342,8 +368,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         Vertical = tr.getElementsByTagName("td")[6].innerText;
         Ibu = tr.getElementsByTagName("td")[7].innerText;
         Status = tr.getElementsByTagName("td")[8].innerText;
-    
-        
+
+
         editCustomerId.value = CustomerId;
         editLocationId.value = Location;
         editStart.value = StartDate;
@@ -361,8 +387,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // console.log(edits);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
-        id = e.target.id.substr();
-        // console.log(id);
+        let target = e.target;
+
+        // Check if the clicked element is the icon inside the button
+        if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+          target = target.parentElement; // Set target to the parent button
+        }
+
+        // Check if the target is the button with the class 'delete'
+        if (target.classList.contains('delete')) {
+          id = target.id;
+          console.log(id);
+        }
         if (confirm('Are you sure to delete')) {
           window.location = "project_dashboard.php?delete=" + id;
         }

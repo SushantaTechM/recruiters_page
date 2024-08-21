@@ -17,7 +17,6 @@ if (isset($_POST["login"])) {
 
     if (!$connection) {
         echo "Something went wrong";
-
     } else {
         if ($password == $c_password) {
             $query = "INSERT INTO `users`(`Username`, `Email`, `Password`, `Phone`, `Type`)";
@@ -28,17 +27,16 @@ if (isset($_POST["login"])) {
                 $showAlert = true;
             } else {
                 if (substr($connection->error, 0, 10) == 'Duplicate ') {
-                    echo "<h1 id='popup'class='popup'>User already exists !</h1>";
+                    $showError = true;
                 } else {
                     echo $connection->error;
                 }
             }
         } else {
-            echo "<h1  id='popup' class='popup'>Password not matched !</h1>";
+            echo "<h1 id='popup'class='popup'>Password not matched!</h1>";
             $showError = true;
         }
     }
-
 }
 ?>
 <!DOCTYPE html>
@@ -48,28 +46,22 @@ if (isset($_POST["login"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login form</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- <link rel="stylesheet" href="styles/style.css"> -->
-    <link rel="stylesheet" href="styles/user_registration.css">
+    <!-- <link rel="stylesheet" href="styles/user_registration.css"> -->
+    <link rel="stylesheet" href="styles/style2.css">
 </head>
-<?php include "partials/_registration_header.php"; ?>
-<style>
-    .input-box input{
-        background: transparent;
-        border: 2px solid black;
-        font-size: 15px;
-    }
-    /* .btn {
-        background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
-        border: 2px solid black;
-        border-radius: 10px;
-    } */
-</style>
-<body style="background:url('images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
+
+<body >
+    <?php include "partials/_registration_header.php"; ?>
     <div class="container">
         <?php
         if ($showAlert) {
-            echo "<h1 class='popup1'>Account created successfully !</h1>";
+            echo "<h1 class='popup1'>Account created successfully!</h1>";
+        }
+        if($showError){
+            echo "<h1 id='popup'class='popup'>User already exists!</h1>";
         }
         ?>
         <div class="wrapper">
@@ -105,7 +97,11 @@ if (isset($_POST["login"])) {
                     <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
 
                 </form>
-                <script>
+                
+            </div>
+        </div>
+    </div>
+    <script>
                     var password = document.getElementById("password");
                     var confirmPassword = document.getElementById("c_password");
 
@@ -124,34 +120,31 @@ if (isset($_POST["login"])) {
                     confirmPassword.addEventListener('input', checkPasswordMatch);
 
                     //hiding notification
-                    document.addEventListener('DOMContentLoaded', function () {
-                        setTimeout(function () {
+                    document.addEventListener('DOMContentLoaded', function() {
+                        setTimeout(function() {
                             var popups1 = document.querySelectorAll('.popup1');
-                            popups1.forEach(function (popup1) {
+                            popups1.forEach(function(popup1) {
                                 popup1.remove();
                             });
                             var popups = document.querySelectorAll('.popup');
-                            popups.forEach(function (popup) {
+                            popups.forEach(function(popup) {
                                 popup.remove();
                             });
                         }, 3000); // 3000 milliseconds = 3 seconds
                     });
 
 
-                    //validating email id
-                    function validateEmail() {
-                        const emailInput = document.getElementById('email');
-                        const email = emailInput.value;
-                        const domain = '@techmahindra.com';
+                    //validating techmahindra email id
+                    // function validateEmail() {
+                    //     const emailInput = document.getElementById('email');
+                    //     const email = emailInput.value;
+                    //     const domain = '@techmahindra.com';
 
-                        if (!email.endsWith(domain)) {
-                            alert('Email must end with @techmahindra.com');
-                            return false; // Prevent form submission
-                        }
-                        return true; // Allow form submission
-                    }
+                    //     if (!email.endsWith(domain)) {
+                    //         alert('Email must end with @techmahindra.com');
+                    //         return false; // Prevent form submission
+                    //     }
+                    //     return true; // Allow form submission
+                    // }
                 </script>
-            </div>
-        </div>
-    </div>
 </body>

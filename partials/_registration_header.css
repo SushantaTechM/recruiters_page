@@ -5,14 +5,15 @@
 .navbar{
     background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
 }
-.logo {
-    font-size: 18px;
-    font-weight: bold;
-}
 .header {
     display: flex;
     justify-content: space-between; 
     padding: 10px;
+    align-items: center;
+}
+.logo {
+    font-size: 18px;
+    font-weight: bold;
 }
 #agent_reg_login{
     border-radius: 10px;
