@@ -133,30 +133,30 @@ if (isset($_POST["add"])) {
             <h1>Create Location</h1>
             <form method="post" action="add_location.php">
                 <div class="input-box">
-                    <label for="locationName">Loc Name &nbsp;</label>
+                    <label for="locationName">Name &nbsp;</label>
                     <input type="text" name="locationName" id="locationName" required style="margin-left:100px">
 
                 </div>
                 <div class="input-box">
-                    <label for="locationState">Loc State &nbsp;</label>
+                    <label for="locationState">State &nbsp;</label>
                     <input type="text" name="locationState" id="locationState" required style="margin-left:107px">
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadName">Loc Head Name &nbsp;</label>
+                    <label for="locationHeadName">Head Name &nbsp;</label>
                     <input type="text" name="locationHeadName" id="locationHeadName" style="margin-left:47px"
                         required>
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
+                    <label for="locationHeadEmail">Head Email &nbsp;</label>
                     <input type="text" name="locationHeadEmail" id="locationHeadEmail" style="margin-left:51px"
                         required>
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
-                    <input type="text" name="locationHeadMobile" style="margin-left:20px"
+                    <label for="locationHeadMobile">Mobile No &nbsp;</label>
+                    <input type="text" name="locationHeadMobile" style="margin-left:62px"
                         id="locationHeadMobile" required>
 
                 </div>

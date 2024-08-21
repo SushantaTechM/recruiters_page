@@ -87,6 +87,26 @@ if (isset($_POST["btn"])) {
     <link rel="stylesheet" href="styles/index.css">
 
 </head>
+<style>
+  .btn {
+        /* display: block; */
+        margin: 30px 120px;
+        width: fit-content;
+        font-size: 20px;
+        border: 2px solid black;
+        padding: 10px 30px;
+        border-radius: 10px;
+        text-decoration: none;
+        background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+        color: white;
+        cursor: pointer;
+    }
+    .rset{
+      margin: -90px;
+      padding: 10px 30px; 
+    }
+</style>
+
 
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
     <!-- ----------------- Navbar --------------- -->
@@ -122,8 +142,8 @@ if (isset($_POST["btn"])) {
                 </select>
             </div>
 
-            <button type='submit' id='btn' name='btn' class="btn btn-primary"
-                style="margin-top:10%; margin-left: 33%; width:30%; font-size:15px; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border-radius:10px; color:white; padding: 0.5rem;font-size:20px; border:2px solid black;">Create</button>
+            <button type='submit' id='btn' name='btn' class="btn btn-primary">Create</button>
+            <button type="reset" class="login-btn btn rset">Reset</button>  
         </form>
         <script src="script/script.js"></script>
     </div>
