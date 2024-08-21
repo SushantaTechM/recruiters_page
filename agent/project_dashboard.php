@@ -119,6 +119,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   .tbl{
     width: 60%;
   }
+  .modal-content {
+    border: 2px solid white;
+    backdrop-filter: blur(100px);
+    border-radius: 10px;
+  }
+  .modal h5 {
+    color: white;
+  }
+  .modal input {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    color-scheme: dark;
+  }
+  .modal select {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px;
+  }
+  .modal select option {
+    background: black;
+  }
+  .modal-body form{
+    border: none;
+  }
 </style>
 
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
@@ -134,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" style="color: white; opacity: 1;">&times;</span>
           </button>
         </div>
         <div class="modal-body">

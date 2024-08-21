@@ -50,6 +50,7 @@ if (isset($_POST["login"])) {
     <title>Login form</title>
     <!-- <link rel="stylesheet" href="styles/style.css"> -->
     <link rel="stylesheet" href="styles/user_registration.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <?php include "partials/_registration_header.php"; ?>
 <style>

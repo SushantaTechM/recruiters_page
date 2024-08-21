@@ -31,7 +31,9 @@ include ("../database/dbconnect.php");
     <!-- <link rel="stylesheet" href="styles/project.css"> -->
     <!-- <link rel="stylesheet" href="styles/notification.css"> -->
     <link rel="stylesheet" href="styles/dashboard.css">
-    <style>.modal-header {
+
+<style>
+  .modal-header {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: start;
@@ -42,12 +44,48 @@ include ("../database/dbconnect.php");
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
-/ }
-
+  }
+  .modal-header h2 {
+    color:white;
+  }
+  table {
+    border: 2px solid black;
+  }
+  .btn {
+    background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+    padding: 10px 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .modal-content {
+    background: transparent;
+  }
+  .form-group {
+    margin-left: 2rem;
+  }
+  .form-group select {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 10px;
+    margin: 1rem;
+  }
+  .form-group select option {
+    background: black;
+    color: white;
+  }
+  .form-group label {
+    color: white;
+    font-size: 20px;  
+  }
 </style>
 </head>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover; color:black;">
 
     <?php  include('navbar.php') ?>
 
@@ -56,7 +94,7 @@ include ("../database/dbconnect.php");
     <div class="modal-dialog" role="document">
       <div class="modal-content" >
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Assign</h5>
+          <h2 class="modal-title" id="exampleModalLabel">Assign</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -108,7 +146,8 @@ include ("../database/dbconnect.php");
             </div>
 
            
-            <button type="submit" class="btn btn-primary" name="update">Update</button>
+            <!-- <button type="submit" class="btn btn-primary" name="update" style="background:lightgreen;">Update</button> -->
+            <button type="submit" class="btn btn-primary">Update</button>
           </form>
         </div>
       </div>
@@ -150,31 +189,7 @@ include ("../database/dbconnect.php");
           }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
   ?>
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="projectContainer">
       <table class="table " id="myTable">

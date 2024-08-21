@@ -32,15 +32,18 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         .dashboard-main-tabs{
             padding-bottom: 0.5rem;
             margin-left: 2rem;
+            margin-top: 2rem;
+            font-size: 15px;
         }
         .dashboard-main-tabs button{
             font-weight: bold;
-            font-size: 18px;
-            color: black;
-            background-color: cyan;
-            border: 2px solid grey;
-            border-radius: 20px;
-            padding: 5px 12px;
+            font-size: 15px;
+            color: white;
+            background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 7px 12px;
+            cursor: pointer;
         }
         .dashboard-tabs{
             margin-left: 2rem;
@@ -48,11 +51,12 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         .dashboard-tabs button{
             font-weight: bold;
             font-size: 18px;
-            color: black;
-            background-color: cyan;
-            border: 2px solid grey;
-            border-radius: 20px;
-            padding: 5px 12px;
+            color: white;
+            background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 7px 12px;
+            cursor: pointer;
         }
         button.currently_set{
             border: 3px solid #267d60;
@@ -78,15 +82,15 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     </style>
 </head>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
     <!-- ----------------- Navbar --------------- -->
 
-    <div class="navbar" style="padding-bottom: 45px;">
-        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: darkcyan;">HireHub</span></div>
+    <div class="navbar" style="padding-bottom: 10px;">
+        <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: cyan;">HireHub</span></div>
         <div class="nav-links">
             <a href="dashboard.php"><button class="tab active">Home</button></a>
             <div class="project-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()">Project</button>
+                <button class="dashboard-dropbtn tab" onclick="toggleProjectDropdown()" style="color:white;">Project</button>
                 <div id="project-dropdown-content" class="dropdown-menu">
                     <a href="project.php">Create Project</a>
                     <a href="project_dashboard.php">Search Project</a>
@@ -94,21 +98,21 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
             </div>
             <a href="search.php"><button class="tab">Employee</button></a>
             <div class="skill-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
+                <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()" style="color:white;">Skill</button>
                 <div id="dropdown-content" class="dropdown-menu">
                     <a href="skill.php">Create Skills</a>
                     <a href="skill_dashboard.php">Search Skill</a>
                 </div>
             </div>
             <div class="location-dropdown">
-                <button class="dashboard-dropbtn tab " onclick="toggleLocationDropdown()">Location</button>
+                <button class="dashboard-dropbtn tab " onclick="toggleLocationDropdown()" style="color:white;">Location</button>
                 <div id="location-dropdown-content" class="dropdown-menu">
                     <a href="add_location.php">Create Location</a>
                     <a href="view_location.php">Search Location</a>
                 </div>
             </div>
             <div class="customer-dropdown">
-                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
+                <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()" style="color:white;">Customer</button>
                 <div id="customer-dropdown-content" class="dropdown-menu">
                     <a href="customer_creation.php">Create Customer</a>
                     <a href="customer_view.php">Search Customer</a>
@@ -128,9 +132,9 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         <a href="associate.php"><button class='currently_set';>Associates</button></a>
     </div>
     <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 13px; margin-top: 1%; margin-left: 2%;">SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:black; background: cyan; border:2px solid grey;  font-size: 18px; padding: 13px;">Confirmed data</button>
-        <button name='dataset' value='Available Data' class='dashboard-available-tab' style="color:black; background: cyan; border:2px solid grey; font-size: 18px; padding: 7px;">Available data</button>
+        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">SoftLock data</button>
+        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">Confirmed data</button>
+        <button name='dataset' value='Available Data' class='dashboard-available-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black; font-size: 15px; padding: 7px 15px;">Available data</button>
     </div>
 
     <div class="dashboard-tab-content">
