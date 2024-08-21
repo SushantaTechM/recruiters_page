@@ -178,10 +178,22 @@ $conn->close();
             margin: 5px;
             padding: 5px;
         }
+        .delbtn {
+            margin-left: 2%;
+            background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+            border: 1px solid black;
+            padding: 0.5px 10px;
+        }
+ 
+        .skill-item1 {
+            color: black;
+            font-weight: bold;
+        }
+ 
     </style>
 </head>
 
-<body style="background: url('../images/Gradient-Mesh-26.jpg') no-repeat; background-size: cover; background-position: center;">
+<body style="background: url('../images/gradient.jpg') no-repeat; background-size: cover; background-position: center;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -247,7 +259,7 @@ $conn->close();
                                 <?php } ?>
                             </select>
 
-                            <button type="button" id="addSkillButton" onclick="addSkill()">Add Skill</button>
+                            <button type="button" id="addSkillButton" onclick="addSkill()" style="background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border: 2px solid black;">Add Skill</button>
                         </div>
 
 
@@ -284,7 +296,7 @@ $conn->close();
                             <label for="gender">Gender</label>
                             <input type="text" class="form-control" id="gender" name="gender" value="<?php echo htmlspecialchars($gender); ?>" required>
                         </div> -->
-                        <button type="submit" class="btn btn-success btn-block" style="background-color: darkcyan;" id="btn-save">Save Changes</button>
+                        <button type="submit" class="btn btn-success btn-block" style="background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border: 2px solid black;" id="btn-save">Save Changes</button>
                     </form>
                 </div>
             </div>

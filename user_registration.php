@@ -52,8 +52,19 @@ if (isset($_POST["login"])) {
     <link rel="stylesheet" href="styles/user_registration.css">
 </head>
 <?php include "partials/_registration_header.php"; ?>
-
-<body>
+<style>
+    .input-box input{
+        background: transparent;
+        border: 2px solid black;
+        font-size: 15px;
+    }
+    /* .btn {
+        background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+        border: 2px solid black;
+        border-radius: 10px;
+    } */
+</style>
+<body style="background:url('images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
     <div class="container">
         <?php

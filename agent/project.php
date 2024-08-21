@@ -138,8 +138,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
   </style>
 </head>
-
-<body>
+<style>
+  .form-group input {
+    background: transparent;
+    color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  .form-group label {
+    color: black;
+  }
+  .form-group select {
+    background: transparent;
+  }
+  .container form{
+    border: 2px solid black;
+    margin: 5%;
+  }
+</style>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
 
   <!-- ----------------- Navbar --------------- -->
@@ -150,10 +167,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <div class="container">
     <form action="Project.php" class="form" method="post">
-      <h1 style="text-align:center; text-shadow: 2px 2px grey;">Create Project</h1>
+      <h1 style="text-align:center; color:black; font-weight:bold;">Create Project</h1>
       <div class="form-group">
         <label for="title">Project Name</label>
-        <input style="background-color: transparent; color : white;" name="title" type="title" class="form-control"
+        <input name="title" type="title" class="form-control"
           id="title" aria-describedby="emailHelp" placeholder="Enter Project Name">
       </div>
       <div class="form-group">
@@ -173,12 +190,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <br>
       <div class="form-group">
         <label for="title4">Start Date</label>
-        <input style="background-color: transparent; color: white;color-scheme: dark;" name="title4" type="date" class="form-control"
+        <input style="background: transparent; color: black;" name="title4" type="date" class="form-control"
           id="title4" aria-describedby="emailHelp" placeholder="Enter Starting Date">
       </div>
       <div class="form-group">
         <label for="title5">End Date</label>
-        <input style="background-color: transparent; color: white;color-scheme: dark;" name="title5" type="date" class="form-control"
+        <input style="background-color: transparent; color: black;" name="title5" type="date" class="form-control"
           id="title5" aria-describedby="emailHelp" placeholder="Enter Ending Date">
       </div>
       <div class="form-group">

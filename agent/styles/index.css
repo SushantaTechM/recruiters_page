@@ -6,8 +6,8 @@
 body {
     font-family: Arial, sans-serif;
     color: black;
-    height: 100vh;
-    height: 100vh;
+    /* height: 100vh; */
+    /* height: 100vh; */
     background-size: cover; 
     background-position: center; 
 }

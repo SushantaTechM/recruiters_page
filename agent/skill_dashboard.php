@@ -141,27 +141,20 @@ $outcome1 = mysqli_query($conn, $sql1);
   <title>Project</title>
 </head>
  
-<body style="background-image: url('../images/p (1).jpg'); background-size: cover; color: white; font-size : 20px;">
-
-
-  
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<style>
+  .modal-body .form-group input {
+    background: transparent;
+    color: white;
+  }
+</style>
 <!------------------ Navbar  --------------->
 <?php  include('navbar.php') ?>
 
-
-  
- 
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="  
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px; font-weight: 500;">
+      <div class="modal-content" style="background: transparent; backdrop-filter: blur(20px); color: white; padding: 30px 40px; font-weight: 500;">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:red; width: 80px; padding: 5px;">
@@ -172,16 +165,16 @@ $outcome1 = mysqli_query($conn, $sql1);
           <form action="skill_dashboard.php" class="" method="post">
           
             <div class="form-group">
-              <label for="editSkillId">SkillId</label>
+              <label for="editSkillId">Skill Id</label>
  
-              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly>
+              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly style="padding:5px; border:1px solid white; border-radius:10px;">
  
             </div>
            
  
             <div class="form-group">
              
-              <label for="editSkillName">SkillName</label>
+              <label for="editSkillName">Skill Name</label>
               <input name="editSkillName" class="form-control" id="editSkillName" rows="3"
                 placeholder="please update skill..."></input>
             </div>
@@ -191,21 +184,20 @@ $outcome1 = mysqli_query($conn, $sql1);
              <input name="editdescription" class="form-control" id="editdescription" rows="3"
                placeholder="please update description..."></input>
            </div>
-            <button type="submit" class="btn btn-primary" name="update" style="border-radius:none; padding: 5px;">Update Skill</button>
+           <div>
+             <button type="submit" class="btn btn-primary" name="update" style="border-radius:5px; padding:5px 10px;">Update</button>
+           </div>
           </form>
         </div>
- 
       </div>
     </div>
   </div>
 
-  <h1 style="text-align:center;">Skill Details</h1>
+  <h1 style="text-align:center; margin-top:3%; font-weight:bold;">Skill Details</h1>
 
   <div class="container">
-    <hr style="margin-bottom: 2rem;">
- 
     <div class="projectContainer">
-      <table class="table " id="myTable">
+      <table class="table " id="myTable" style="border:2px solid black; color:black;">
         <thead>
           <tr>
  
@@ -233,9 +225,9 @@ $outcome1 = mysqli_query($conn, $sql1);
 
                  
                   <td>
-                  <button class='edit btn btn-primary' id='edit-" . $row['SkillId'] . "'><i class='bx bxs-edit'></i></button>
+                  <button class='edit btn' id='edit-" . $row['SkillId'] . "'><i class='bx bxs-edit'></i></button>
                   
-                  <button class='delete btn btn-danger' id='" . $row['SkillId'] . "'><i class='bx bxs-trash-alt'></i></button>
+                  <button class='delete btn' id='" . $row['SkillId'] . "'><i class='bx bxs-trash-alt'></i></button>
                   </td>
                 </tr>";
  
@@ -309,4 +301,3 @@ $outcome1 = mysqli_query($conn, $sql1);
 </body>
  
 </html>
-has context menu

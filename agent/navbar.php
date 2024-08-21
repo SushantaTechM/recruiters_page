@@ -7,15 +7,15 @@ $filename = basename($parsedUrl);
 
 ?>
 <link rel="stylesheet" href="styles/navbar.css">
-<div class="navbar" style="padding-bottom: 45px;">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: darkcyan;">HireHub</span></div>
+<div class="navbar" style="padding-bottom: 10px;">
+    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: cyan;">HireHub</span></div>
     <div class="nav-links">
         <a href="dashboard.php"><button class="tab <?= ($filename == 'dashboard.php') ? 'active' : '' ?>">Home</button></a>
         <div class="project-dropdown">
             <button
                 class="dashboard-dropbtn tab <?php
                 echo ($filename == 'project.php' || $filename == 'project_dashboard.php' || $filename == 'project_view.php') ? 'active' : ''; ?>"
-                onclick="toggleProjectDropdown()" style="color: darkcyan;">Project</button>
+                onclick="toggleProjectDropdown()" style="color: white;">Project</button>
             <div id="project-dropdown-content" class="dropdown-menu">
                 <a href="project.php">Create </a>
                 <a href="project_dashboard.php">Search </a>
@@ -27,7 +27,7 @@ $filename = basename($parsedUrl);
             <button
                 class="dashboard-dropbtn tab <?php
                 echo ($filename == 'skill.php' || $filename == 'skill_dashboard.php') ? 'active' : ''; ?>"
-                onclick="toggleSkillDropdown()" style="color: darkcyan;">Skill</button>
+                onclick="toggleSkillDropdown()" style="color: white;">Skill</button>
             <div id="dropdown-content" class="dropdown-menu">
                 <a href="skill.php">Create </a>
                 <a href="skill_dashboard.php">Search </a>
@@ -37,7 +37,7 @@ $filename = basename($parsedUrl);
             <button
                 class="dashboard-dropbtn tab <?php
                 echo ($filename == 'add_location.php' || $filename == 'view_location.php') ? 'active' : ''; ?>"
-                onclick="toggleLocationDropdown()" style="color: darkcyan;">Location</button>
+                onclick="toggleLocationDropdown()" style="color: white;">Location</button>
             <div id="location-dropdown-content" class="dropdown-menu">
                 <a href="add_location.php">Create </a>
                 <a href="view_location.php">Search </a>
@@ -47,7 +47,7 @@ $filename = basename($parsedUrl);
             <button
                 class="dashboard-dropbtn tab <?php
                 echo ($filename == 'customer_creation.php' || $filename == 'customer_view.php') ? 'active' : ''; ?> "
-                onclick="toggleCustomerDropdown()" style="color: darkcyan;">Customer</button>
+                onclick="toggleCustomerDropdown()" style="color: white;">Customer</button>
             <div id="customer-dropdown-content" class="dropdown-menu">
                 <a href="customer_creation.php">Create </a>
                 <a href="customer_view.php">Search </a>

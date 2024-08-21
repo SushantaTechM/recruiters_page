@@ -26,7 +26,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     <link rel="stylesheet" href="styles/notification.css">
 </head>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
     <!-- ----------------- Navbar --------------- -->
 

@@ -85,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 
 
@@ -111,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     crossorigin="anonymous"></script>
   <style>
     .wrapper {
-      border: 2px solid skyblue;
-      box-shadow: 1px 1px #0acad8;
+      border: 2px solid black;
+      /* box-shadow: 1px 1px #0acad8; */
       /* height: 450px; */
       margin: auto;
       width: 40%;
@@ -124,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 </head>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
   <!------------------ Modal  ------------------>
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -143,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <label for="editCustomerId">Customer</label>
 
 
-              <input id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
+              <input id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
 
 
             </div>
@@ -151,19 +152,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="form-group">
               <label for="editCustomerName">Customer Name</label>
 
-              <input name="editCustomerName"  style="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white"  type="text" class="form-control" id="editCustomerName"
+              <input name="editCustomerName"  style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"  type="text" class="form-control" id="editCustomerName"
                 aria-describedby="emailHelp" placeholder="Enter Customer Name">
             </div>
 
             <div class="form-group">
               <label for="editLocationName">Location</label>
-              <select name="editLocationName" id="editLocationName" class="js-example-basic-single">
+              <select name="editLocationName" id="editLocationName" class="js-example-basic-single" style="background:transparent; color:white; border:1px solid white; padding:0.5rem; border-radius:10px;">
                 <option value="" disabled selected hidden>Please select Location</option>
                 <?php
                 while ($row = mysqli_fetch_assoc($location_outcome)) {
 
                   $location = $row['LocationName'];
-                  echo "<option value='$location'>$location</option>";
+                  echo "<option value='$location' style='background:black;'>$location</option>";
                 }
                 ?>
               </select>
@@ -186,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <?php  include('navbar.php') ?>
 
   <div>
-    <h1 style="text-align:center;">Customer Details</h1>
+    <h1 style="text-align:center; margin-top:3%; font-weight:bold;">Customer Details</h1>
     <table id="example" class="display wrapper" style=>
       <thead>
         <tr>
@@ -212,8 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['LocationName'] . "</td>
                     <td>
-                    <button class='edit btn btn-primary id='" . $row['CustomerId'] . "'>Edit</button>
-                    <button class='delete btn btn-danger' id='" . $row['CustomerId'] . "'>Delete</button></td>
+                    <button class='edit btn'  id='" . $row['CustomerId'] . "'><i class='bx bx-edit-alt'></i></button>
+                    <button class='delete btn' id='" . $row['CustomerId'] . "'><i class='bx bxs-trash'></i></button></td>
                         
                     
                     </tr>";
@@ -237,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       Array.from(edits).forEach((element) => {
         element.addEventListener("click", (e) => {
           console.log("edit",);
-          tr = e.target.parentNode.parentNode;
+          tr = e.target.parentNode.parentNode.parentNode;
           // console.log(tr);
           CustomerId = tr.getElementsByTagName("td")[0].innerText;
           CustomerName = tr.getElementsByTagName("td")[1].innerText;

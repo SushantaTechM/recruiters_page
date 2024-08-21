@@ -1,7 +1,7 @@
 form{
     background: transparent;
     color: white;
-    border: 3px solid skyblue;
+    border: 1px solid white;
     border-radius: 10px;
     font-weight: 600;
     padding: 2rem;
@@ -10,7 +10,7 @@ form{
 .form-group{
     display:inline-block;
 }
-.table{
+/* .table{
     background: transparent;
     color: white;
     border: 3px solid skyblue;
@@ -18,53 +18,54 @@ form{
     font-weight: 600;
     padding: 2rem;
     backdrop-filter: blur(120px);
-}
+} */
 #customerid{
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     padding: 0.2rem 0.3rem;
-    border: 2px solid skyblue;
+    border: 2px solid black;
 }
 #title2{
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     padding: 0.2rem 0.3rem;
-    border: 2px solid skyblue;
+    border: 2px solid black;
 }
 
 #Vertical{
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     padding: 0.2rem 0.3rem;
-    border: 2px solid skyblue;
+    border: 2px solid black;
 }
 
 
 #IBU{
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     padding: 0.2rem 0.3rem;
-    border: 2px solid skyblue;
+    border: 2px solid black;
 }
 
 #status{
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     padding: 0.2rem 0.3rem;
-    border: 2px solid skyblue;
+    border: 2px solid black;
 }
 
 #skill{
-    background: black;
-    color: white;
+    background: transparent;
+    color: black;
     padding: 0.2rem 0.3rem;
-    border: 2px solid skyblue;
+    border: 2px solid black;
 }
 
 
 #title3 > option{
-    color: rgb(0, 0, 0);
+    color: black;
     background-color: black;
+    border: 2px solid black;
 }
 
 

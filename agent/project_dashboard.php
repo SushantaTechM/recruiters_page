@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
-
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 
   <title>Project</title>
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   }
 </style>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
   
   <!------------------------ Navbar  ------------->
   <?php  include('navbar.php') ?>
@@ -235,9 +235,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </div>
 
 
-<h1 style="text-align:center; text-shadow: 2px 2px grey;">Project Details</h1>
+<h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
 <div class="projectContainer">
-      <table class="table tbl" id="myTable">
+      <table class="table tbl" id="myTable" style="color:black; border:2px solid black;">
         <thead>
           <tr>
 
@@ -274,8 +274,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
                     <td>
-                    <button class='edit btn btn-primary'>Edit</button>
-                    <button class='delete btn btn-danger'  id='" . $row['ProjectID'] . "' disabled>Delete</button></td>
+                    <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
+                    <button class='delete btn'  id='" . $row['ProjectID'] . "' disabled><i class='bx bxs-trash'></i></button></td>
                   </tr>";
               }
               else {
@@ -290,8 +290,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
                     <td>
-                    <button class='edit btn btn-primary'>Edit</button>
-                    <button class='delete btn btn-danger'  id='" . $row['ProjectID'] . "'>Delete</button></td>
+                    <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
+                    <button class='delete btn'  id='" . $row['ProjectID'] . "'><i class='bx bxs-trash'></i></button></td>
                   </tr>";
               }
             }
@@ -329,7 +329,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     Array.from(edits).forEach((element) => {
       element.addEventListener("click", (e) => {
         //console.log("edit",);
-        tr = e.target.parentNode.parentNode;
+        tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
         ProjectId = tr.getElementsByTagName("td")[0].innerText;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;

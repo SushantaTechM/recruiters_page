@@ -4,8 +4,7 @@
   justify-content: space-between;
   align-items: centre;
   padding: 10px 20px;
-  background: #0000af;
-  height: 24px;
+  background:linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
 
 }
 .logo {
@@ -18,7 +17,7 @@
   gap: 20px;
 }
 .nav-links > a > button {
-  color: darkcyan;
+  color: white;
   background: transparent;
   padding: 0.8rem 1rem;
   cursor: pointer;
@@ -32,7 +31,7 @@
   font-weight: bold;
 }
 .tab.active {
-  border-bottom: 3px solid darkcyan;
+  border-bottom: 3px solid white;
 }
 /* .tab-content{
     display: none;
