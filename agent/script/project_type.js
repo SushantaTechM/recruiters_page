@@ -62,7 +62,7 @@ function dashboardSoftlockFetch() {
           no records found
         </tbody>`;
         softlockDiv.innerHTML = tableHTML;
-        showNotification(" Softlocked Fetched");
+        // showNotification(" Softlocked Fetched");
       } else {
         
 
@@ -96,7 +96,7 @@ function dashboardSoftlockFetch() {
                 </table>`;
 
         softlockDiv.innerHTML = tableHTML;
-        showNotification(" Softlocked Fetched");
+        // showNotification(" Softlocked Fetched");
 
         $("#myTable").DataTable();
 
@@ -124,7 +124,7 @@ function openModal1(ProjectId) {
     }else{
       // console.log(data);
       document.getElementById("modal-name").textContent= `Project Name: ${data.ProjectName}`;
-      document.getElementById("modal-email").textContent= `Skills: ${data.SkillNames}`;
+      document.getElementById("modal-email").textContent= `Skills: ${data.SkillName}`;
       document.getElementById("modal-gender").textContent= `Users: ${data.Users}`;
 
       //Show the modal
@@ -227,7 +227,7 @@ function dashboardConfirmFetch() {
                 </table>`;
 
         softlockDiv.innerHTML = tableHTML;
-        showNotification(" Confirm Fetched");
+        // showNotification(" Confirm Fetched");
         $("#myTable").DataTable();
 
         document.querySelectorAll(".dashboard-open-btn").forEach((button) => {
