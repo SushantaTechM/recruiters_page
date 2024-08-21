@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login form</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
 <?php
-include "partials/_registration_header.php";
+$showAlert=false;
+$showError=false;
 include "database/dbconnect.php";
 if (isset($_POST["verify"])) {
 
@@ -27,16 +18,38 @@ if (isset($_POST["verify"])) {
             $query = "UPDATE `Users` SET `Password`= '$password' WHERE `Email`='$email'";
             $result = mysqli_query($conn, $query);
             if ($result) {
-                echo "<h1 class='popup1'>Password Updated !</h1>";
+                $showAlert = true;
             }
         } else {
-            echo "<h1 class='popup1'>Wrong Credential !</h1>";
+            $showError = true;
         }
     }
 }
 ?>
 
-<body style="background:url('images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
+    <!-- <link rel="stylesheet" href="styles/reset_password.css"> -->
+    <link rel="stylesheet" href="styles/style2.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <?php include "partials/_registration_header.php"; ?>
+    <?php
+        if ($showAlert) {
+            echo "<h1 class='popup1'>Password Updated !</h1>";
+        }
+        if($showError){
+            echo "<h1 class='popup'>Wrong Credential !</h1>";
+        }
+    ?>
     <div class="container">
         <div class="wrapper">
             <div id="user-login-box" class="login-box">

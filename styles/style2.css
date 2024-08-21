@@ -81,3 +81,22 @@ body {
     border-radius: 10px;
     border: 2px black;
 }
+
+
+/* index.php */
+.wrapper .remeber-forgot {
+    display: flex;
+    font-size: 14px;
+    margin: -15px 0 15px;
+}
+.remeber-forgot a {
+    text-decoration: none;
+}
+.wrapper .register-link {
+    font-size: 14px;
+    margin: 20px 0 15px;
+}
+.register-link p a {
+    text-decoration: none;
+    font-weight: 600;
+}
