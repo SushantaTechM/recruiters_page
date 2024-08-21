@@ -16,15 +16,17 @@ $outcome1 = mysqli_query($conn, $sql1);
 ?>
 <?php
 
-if (isset($_GET["delete"])) {
-  $id = $_GET["delete"];
-  $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
-  $res4 = mysqli_query($conn, $cid);
-
-
-
-  if ($res4->num_rows > 0) {
-    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  if (isset($_GET["delete"])) {
+    $id = $_GET["delete"];
+    var_dump($id);
+    $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
+    $res4 = mysqli_query($conn, $cid);
+    
+ 
+   
+ 
+    if($res4->num_rows>0){
+      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
           There are some projects assigned with this skill so you can not delete this skill.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -48,26 +50,17 @@ if (isset($_GET["delete"])) {
 
     }
   }
+ 
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+      $editSkillName = $_POST['editSkillName'];
+        $id = $_POST['editSkillId'];
+       
+        $desc = $_POST['editdescription'];
+      $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
+      $res4 = mysqli_query($conn, $cid);
+      if($res4->num_rows>0){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-  // $result = mysqli_query($conn, $query);
-  // if ($res4->num_rows > 0) {
-  //   $message = "There are some users assigned to this project, so you can not delete it!";
-  //   echo "<script type='text/javascript'>alert('$message');</script>";
-  // } else {
-  //   if (!$result) {
-  //     die(mysqli_error($conn));
-  //   }
-
-}
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-  $editSkillName = $_POST['editSkillName'];
-  $id = $_POST['editSkillId'];
-  $desc = $_POST['editdescription'];
-  $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
-  $res4 = mysqli_query($conn, $cid);
-  if ($res4->num_rows > 0) {
-    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
             There are some projects assigned with this skill so you can not edit this skill.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -167,10 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           <form action="skill_dashboard.php" class="" method="post">
 
             <div class="form-group">
-              <label for="editSkillId">Skill Id</label>
-
-              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly
-                style="padding:5px; border:1px solid white; border-radius:10px;">
+              <input type='hidden' id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly style="padding:5px; border:1px solid white; border-radius:10px;">
+ 
 
             </div>
 
@@ -204,8 +195,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <table class="table " id="myTable" style="border:2px solid black; color:black;">
         <thead>
           <tr>
+ 
+            <th scope="col">Sl No.</th>
 
-            <th scope="col">Skill Id</th>
             <th scope="col">Skill Name</th>
             <th scope="col">Description</th>
             <th scope="col">Action</th>
@@ -222,10 +214,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             while ($row = $result->fetch_assoc()) {
               $no++;
               echo "<tr>
-                  <td>" . $row['SkillId'] . "</td>
+                  <td>" . $no . "</td>
+                 
                   <td>" . $row['SkillName'] . "</td>
 
-                  <td>" . $row['SkillDescription'] . "</td>
+                  <td>" . $row['SkillDescription']. "</td>
+                  <input type='hidden' id='SkillId' value=" . $row['SkillId'] . ">
 
                  
                   <td>
@@ -273,7 +267,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // console.log(e);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        SkillId = tr.getElementsByTagName("td")[0].innerText;
+        SkillId = tr.getElementsByTagName("input")[0].value;
+       
         SkillName = tr.getElementsByTagName("td")[1].innerText;
         SkillDescription = tr.getElementsByTagName("td")[2].innerText;
 

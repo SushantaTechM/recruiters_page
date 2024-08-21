@@ -259,36 +259,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </div>
 
 
-  <h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
-  <div class="projectContainer">
-    <table class="table tbl" id="myTable" style="color:black; border:2px solid black;">
-      <thead>
-        <tr>
 
-          <th scope="col">ProjectId</th>
-          <th scope="col">Project</th>
-          <th scope="col">Customer</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
-          <th scope="col">Location</th>
-          <th scope="col">Vertical</th>
-          <th scope="col">IBU</th>
-          <th scope="col">Status</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <?php
+<h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
+<div class="projectContainer">
+      <table class="table tbl" id="myTable" style="color:black; border:2px solid black;">
+        <thead>
+          <tr>
 
-      $sql = "SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-        $no = 0;
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-          $no++;
-          if ($row['status'] == 'active') {
-            echo "<tr>
-                    <td>" . $row['ProjectID'] . "</td>
+            <th scope="col">Sl No.</th>
+            <th scope="col">Project</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Location</th>
+            <th scope="col">Vertical</th>
+            <th scope="col">IBU</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+          <?php
+
+          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            $no = 0;
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+              $no++;
+              if ($row['status']=='active') {
+                echo "<tr>
+                    <td>" . $no . "</td>
+
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -297,13 +299,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['Vertical'] . "</td>
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
+                    <input type='hidden' id='ProjectID' value=" . $row['ProjectID'] . ">
                     <td>
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "' disabled><i class='bx bxs-trash'></i></button></td>
                   </tr>";
-          } else {
-            echo "<tr>
-                    <td>" . $row['ProjectID'] . "</td>
+              }
+              else {
+                echo "<tr>
+                    <td>" . $no . "</td>
+
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -312,6 +317,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['Vertical'] . "</td>
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
+                     <input type='hidden' id='ProjectID' value=" . $row['ProjectID'] . ">
                     <td>
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "'><i class='bx bxs-trash'></i></button></td>
@@ -353,7 +359,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         //console.log("edit",);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        ProjectId = tr.getElementsByTagName("td")[0].innerText;
+        ProjectId = tr.getElementsByTagName("input")[0].value;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         CustomerId = tr.getElementsByTagName("td")[2].innerText;
         StartDate = tr.getElementsByTagName("td")[3].innerText;
