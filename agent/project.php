@@ -127,35 +127,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     .skill-entry input {
       margin-right: 10px;
       background: black;
-      color: white;
+      color: black;
       padding: 0.2rem 0.3rem;
-      border: 2px solid skyblue;
+      border: 2px solid black;
       border-radius: 10px;
+      height: 40px;
     }
 
     .skill-entry button {
       margin-left: 10px;
     }
+    .form-group input {
+      background: transparent;
+      color: white;
+      border: 2px solid black;
+      border-radius: 10px;
+    }
+    .form-group label {
+      color: black;
+    }
+    .form-group select {
+      background: transparent;
+    }
+    .container form{
+      border: 2px solid black;
+      margin: 5%;
+    }
   </style>
 </head>
-<style>
-  .form-group input {
-    background: transparent;
-    color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-  }
-  .form-group label {
-    color: black;
-  }
-  .form-group select {
-    background: transparent;
-  }
-  .container form{
-    border: 2px solid black;
-    margin: 5%;
-  }
-</style>
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
 
@@ -170,13 +169,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <h1 style="text-align:center; color:black; font-weight:bold;">Create Project</h1>
       <div class="form-group">
         <label for="title">Project Name</label>
-        <input name="title" type="title" class="form-control"
-          id="title" aria-describedby="emailHelp" placeholder="Enter Project Name">
+        <input name="title" type="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Project Name" style="width:300px;">
       </div>
       <div class="form-group">
         <label for="customerid">Customer</label>
-        <select name="customerid" id="customerid">
-          <option value="" disabled selected hidden>Please select Customer</option>
+        <select name="customerid" id="customerid" style="width:318px;">
+          <option value="" disabled selected hidden>Select Customer</option>
           <?php
           $sql1 = "SELECT * from `customermaster`";
           $outcome1 = mysqli_query($conn, $sql1);
@@ -190,18 +188,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <br>
       <div class="form-group">
         <label for="title4">Start Date</label>
-        <input style="background: transparent; color: black;" name="title4" type="date" class="form-control"
+        <input style="background: transparent; color: black; width:200px;" name="title4" type="date" class="form-control"
           id="title4" aria-describedby="emailHelp" placeholder="Enter Starting Date">
       </div>
       <div class="form-group">
         <label for="title5">End Date</label>
-        <input style="background-color: transparent; color: black;" name="title5" type="date" class="form-control"
+        <input style="background-color: transparent; color: black; width:200px;" name="title5" type="date" class="form-control"
           id="title5" aria-describedby="emailHelp" placeholder="Enter Ending Date">
       </div>
       <div class="form-group">
         <label for="title2">Location</label>
-        <select name="title2" id="title2">
-          <option value="" disabled selected hidden>Please select Location</option>
+        <select name="title2" id="title2" style="width:199px; height:40px;">
+          <option value="" disabled selected hidden>Select Location</option>
           <?php
           $sql2 = "SELECT * from `locationmaster`";
           $outcome2 = mysqli_query($conn, $sql2);
@@ -215,8 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <br>
       <div class="form-group">
         <label for="Vertical">Vertical</label>
-        <select name="Vertical" id="Vertical">
-          <option value="" disabled selected hidden>Please select Vertical Name</option>
+        <select name="Vertical" id="Vertical" style="width:290px; height:40px;">
+          <option value="" disabled selected hidden>Select Vertical Name</option>
           <?php
           $vertical_query = "SELECT * FROM `verticalmaster`";
           $vertical_outcome = mysqli_query($conn, $vertical_query);
@@ -230,8 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
       <div class="form-group">
         <label for="IBU">IBU</label>
-        <select name="IBU" id="IBU">
-          <option value="" disabled selected hidden>Please select IBU head</option>
+        <select name="IBU" id="IBU" style="width:314px; height:40px;">
+          <option value="" disabled selected hidden>Select IBU head</option>
           <?php
           $IBU_query = "SELECT * FROM `IBUmaster`";
           $IBU_outcome = mysqli_query($conn, $IBU_query);
@@ -247,13 +245,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <div id="skillsContainer">
         <div class="form-group skill-entry">
           <label for="title3">Skill</label>&emsp;
-          <select name="title3[]" class="skill-select" id="skill">
-            <option value="" disabled selected hidden id="skill">Please select Skill</option>
+          <select name="title3[]" class="skill-select" id="skill" style="width:220px; height:40px;">
+            <option value="" disabled selected hidden id="skill">Select Skill</option>
             <?php echo $skillOptions; ?>
           </select>&emsp;&emsp;&emsp;
           <label for="headcount">Required Headcount</label>&emsp;
           <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount"
-            id="skill">
+            id="skill" style="height:40px;">
           <button type="button" class="remove-skill-btn">Remove</button>
         </div>
       </div>

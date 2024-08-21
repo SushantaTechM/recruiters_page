@@ -104,20 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
   <?php include('navbar.php') ?>
  
-  <div class="container" style="width: 40%;
-    margin-top: 7%;
-    background: transparent;
-    border: 2px solid black;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px;">
+  <div class="container" style="width: 40%; margin-top: 7%; background:transparent; border: 2px solid black; backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2); color: white; border-radius: 10px; padding: 30px 40px;">
  
-    <h2 style="text-align:center; color:black;"> Create Skill</h2>
+    <h2 style="text-align:center; color:black; font-weight:700;"> Create Skill</h2>
  
     <form action="skill.php" class="" method="post">
-      <div style="margin-top:12%;">
+      <div style="margin-top:8%;">
         <label for="skillName" style="font-size:20px; color:black; margin-left:3.5%;">Skill: </label>
         <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:59%; background-color: transparent;border: 2px solid black; color:black;padding:0.2rem; text-align:center;margin-left:90px;border-radius:10px;" required>
       </div>

@@ -8,8 +8,8 @@ body {
   margin: 1rem 2rem;
   border-radius: 1rem;
   padding: 1.5rem;
-  border: 3px solid rgb(37, 38, 39);
-  background-color: transparent;
+  border: 2px solid rgb(37, 38, 39);
+  background: transparent;
   color: rgb(0, 0, 0);
   backdrop-filter: blur(15px);
 }
@@ -19,32 +19,28 @@ body {
   border-collapse: collapse;
 }
  
-.dashboard-tab-content table,
-.dashboard-tab-content th,
-.dashboard-tab-content td {
-  border: 3px solid grey;
-  border-radius: 1rem;
+.dashboard-tab-content table{
+  border: 2px solid black;
 }
  
 .dashboard-tab-content th,
 .tab-content td {
   padding: 10px;
   text-align: left;
-  color: white;
 }
  
-.btn {
+/* .btn {
   padding: 1rem;
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 550;
   cursor: pointer;
-}
+} */
  
-.btn:hover {
+/* .btn:hover {
   background: red;
   color:darkcyan;
-}
+} */
  
 /* .currently_set{
   border: 4px solid blue;
@@ -61,13 +57,9 @@ body {
 } */
  
 .modal-content button {
-  border-radius:50px;
+  border-radius:5px;
   margin: 0px 10px;
-  color:black;
   font-weight:bold;
-  background: white;
-  width: 180px;
-  height: 40px;
   cursor: pointer;
 }
 
@@ -81,3 +73,9 @@ body {
   cursor: pointer;
 }
   */
+  .outerDiv{
+    display: flex;
+  }
+  .outerDiv> p{
+    margin: 5px;
+  }

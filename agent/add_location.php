@@ -31,8 +31,6 @@ if (isset($_POST["add"])) {
         }
     }
 }
-// $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-// var_dump($actual_link);
 
 ?>
 
@@ -46,7 +44,6 @@ if (isset($_POST["add"])) {
     <title>Add Location</title>
     <link rel="stylesheet" href="styles/index.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 </head>
 <style>
     body {
@@ -66,18 +63,14 @@ if (isset($_POST["add"])) {
     .input-box input {
         color: black;
         font-weight: 200;
-        font-size: 20px;
+        font-size: 15px;
         /* text-align: center; */
 
         border: 2px solid black;
         /* border-radius: 10px; */
         width: 50%;
-        padding: 0.3rem;
+        padding: 0.5rem;
         margin-bottom: 12px;
-    }
-
-    .input-box {
-        /* text-align: center;   */
     }
 
     .btn {
@@ -97,8 +90,6 @@ if (isset($_POST["add"])) {
 
     .wrapper {
         border: 2px solid black;
-        /* box-shadow: 2px 2px gray; */
-        /* height: 450px; */
         border-radius: 10px;
         margin: auto;
         width: 40%;
@@ -117,7 +108,6 @@ if (isset($_POST["add"])) {
     .input-box input {
         border-radius: 10px;
         background-color: transparent;
-
     }
 </style>
 
@@ -155,9 +145,8 @@ if (isset($_POST["add"])) {
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadMobile">Mobile No &nbsp;</label>
-                    <input type="text" name="locationHeadMobile" style="margin-left:62px"
-                        id="locationHeadMobile" required>
+                    <label for="locationHeadMobile">Mobile Number &nbsp;</label>
+                    <input type="text" name="locationHeadMobile" style="margin-left:20px"  placeholder="Enter Mobile Number" id="locationHeadMobile" required>
 
                 </div>
                 <div class="button-container" style="display:flex; margin-left: 130px">
