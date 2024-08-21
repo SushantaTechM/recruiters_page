@@ -77,6 +77,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
   <title>Skill</title>
 </head>
+<style>
+  .btn {
+        /* display: block; */
+        margin: 30px 5px;
+        width: fit-content;
+        font-size: 20px;
+        border: 2px solid black;
+        padding: 12px 30px;
+        border-radius: 10px;
+        text-decoration: none;
+        background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+        color: white;
+        cursor: pointer;
+    }
+    .rset{
+      margin: -125px;
+      padding: 10px 30px; 
+    }
+</style>
  
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
  
@@ -85,29 +104,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
   <?php include('navbar.php') ?>
  
-  <div class="container" style="width: 40%;
-    margin-top: 7%;
-    background: transparent;
-    border: 2px solid black;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px;">
+  <div class="container" style="width: 40%; margin-top: 7%; background:transparent; border: 2px solid black; backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2); color: white; border-radius: 10px; padding: 30px 40px;">
  
-    <h2 style="text-align:center; color:black;"> Create Skill</h2>
+    <h2 style="text-align:center; color:black; font-weight:700;"> Create Skill</h2>
  
     <form action="skill.php" class="" method="post">
-      <div style="margin-top:12%;">
+      <div style="margin-top:8%;">
         <label for="skillName" style="font-size:20px; color:black; margin-left:3.5%;">Skill: </label>
-        <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:59%; background-color: white;border: 2px solid black; color:black;padding:0.2rem; text-align:center;margin-left:20%;border-radius:10px;" required>
+        <input type="text" name="skillName" id="skillName" maxlength="30" placeholder="Enter Skill" style="max-width: 500px; width:59%; background-color: transparent;border: 2px solid black; color:black;padding:0.2rem; text-align:center;margin-left:90px;border-radius:10px;" required>
       </div>
       <div style="margin-top:6%;">
         <label for="SkillDescription" style="font-size:20px; color:black;margin-left:3.5%;">Description: </label>
-        <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: white;border: 2px solid black; color:black;padding:0.2rem; text-align:center; margin-top:5%; margin-left:6%; border-radius:10px; " required></textarea>
+        <textarea name="skillDescription" id="skillDescription" maxlength="500" placeholder="Enter Description" style="max-width: 400px; width:60%;background-color: transparent;border: 2px solid black; color:black;padding:0.2rem; text-align:center; margin-left:30px; border-radius:10px; " required></textarea>
       </div>
  
       <button type="submit" class="btn btn-primary" style="margin: 25px 160px; font-size: 20px; border: 2px solid black; padding: 10px 25px; border-radius: 10px; text-decoration: none; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); color: white; cursor: pointer;">Create</button>
+      <button type="reset" class="login-btn btn rset">Reset</button>
  
  
     </form>

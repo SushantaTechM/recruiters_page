@@ -1,30 +1,30 @@
 <?php
 
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
-include ("../database/dbconnect.php");
- 
+include("../database/dbconnect.php");
+
 $sql1 = "SELECT `SkillId`, `SkillName` FROM `skillmaster`";
 $outcome1 = mysqli_query($conn, $sql1);
- 
+
 ?>
 <?php
 
-  if (isset($_GET["delete"])) {
-    $id = $_GET["delete"];
-    $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
-    $res4 = mysqli_query($conn, $cid);
- 
-   
- 
-    if($res4->num_rows>0){
-      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+if (isset($_GET["delete"])) {
+  $id = $_GET["delete"];
+  $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
+  $res4 = mysqli_query($conn, $cid);
+
+
+
+  if ($res4->num_rows > 0) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
           There are some projects assigned with this skill so you can not delete this skill.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -32,13 +32,13 @@ $outcome1 = mysqli_query($conn, $sql1);
           </button>
         </div>';
 
-    }else{
-      $query = "DELETE FROM `skillmaster` where `skillmaster`.`skillId` = '$id'";
-      $result = mysqli_query($conn, $query);
-      if (!$result) {
-          die(mysqli_error($conn));
-        }else{
-          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  } else {
+    $query = "DELETE FROM `skillmaster` where `skillmaster`.`skillId` = '$id'";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+      die(mysqli_error($conn));
+    } else {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
 
          Your Skill Deleted Succesfully.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -46,28 +46,28 @@ $outcome1 = mysqli_query($conn, $sql1);
           </button>
         </div>';
 
-        }
     }
- 
-    // $result = mysqli_query($conn, $query);
-    // if ($res4->num_rows > 0) {
-    //   $message = "There are some users assigned to this project, so you can not delete it!";
-    //   echo "<script type='text/javascript'>alert('$message');</script>";
-    // } else {
-    //   if (!$result) {
-    //     die(mysqli_error($conn));
-    //   }
-   
   }
- 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-      $editSkillName = $_POST['editSkillName'];
-        $id = $_POST['editSkillId'];
-        $desc = $_POST['editdescription'];
-      $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
-      $res4 = mysqli_query($conn, $cid);
-      if($res4->num_rows>0){
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+  // $result = mysqli_query($conn, $query);
+  // if ($res4->num_rows > 0) {
+  //   $message = "There are some users assigned to this project, so you can not delete it!";
+  //   echo "<script type='text/javascript'>alert('$message');</script>";
+  // } else {
+  //   if (!$result) {
+  //     die(mysqli_error($conn));
+  //   }
+
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $editSkillName = $_POST['editSkillName'];
+  $id = $_POST['editSkillId'];
+  $desc = $_POST['editdescription'];
+  $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
+  $res4 = mysqli_query($conn, $cid);
+  if ($res4->num_rows > 0) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
             There are some projects assigned with this skill so you can not edit this skill.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -75,20 +75,20 @@ $outcome1 = mysqli_query($conn, $sql1);
             </button>
           </div>';
 
-      }else{
- 
-      if (isset($_POST["update"])) {
- 
-        $editSkillName = $_POST['editSkillName'];
-        $editSkillId = $_POST['editSkillId'];
-        $editdescription=$_POST['editdescription'];
+  } else {
 
-        //Check if the new skill name already exists or not
-        $checkSkillName = "SELECT * FROM `skillmaster` WHERE `SkillName`='$editSkillName'";
+    if (isset($_POST["update"])) {
 
-        $res7 = mysqli_query($conn, $checkSkillName);
-        if($res7->num_rows>0){
-          echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      $editSkillName = $_POST['editSkillName'];
+      $editSkillId = $_POST['editSkillId'];
+      $editdescription = $_POST['editdescription'];
+
+      //Check if the new skill name already exists or not
+      $checkSkillName = "SELECT * FROM `skillmaster` WHERE `SkillName`='$editSkillName'";
+
+      $res7 = mysqli_query($conn, $checkSkillName);
+      if ($res7->num_rows > 0) {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 
           The skill name already exists so you can not add the same skill.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -96,12 +96,12 @@ $outcome1 = mysqli_query($conn, $sql1);
           </button>
         </div>';
 
-        }else{
- 
-            $SQL = "UPDATE `skillmaster` SET `SkillName` = '$editSkillName', `SkillDescription`='$editdescription' WHERE `skillmaster`.`SkillId` = '$editSkillId'";
-            $result = mysqli_query($conn, $SQL);
-            if ($result) {
-              echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+      } else {
+
+        $SQL = "UPDATE `skillmaster` SET `SkillName` = '$editSkillName', `SkillDescription`='$editdescription' WHERE `skillmaster`.`SkillId` = '$editSkillId'";
+        $result = mysqli_query($conn, $SQL);
+        if ($result) {
+          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
 
                     Your Skill Updated Succesfully.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -109,30 +109,30 @@ $outcome1 = mysqli_query($conn, $sql1);
                     </button>
                   </div>';
 
-            } else {
-              echo mysqli_error($conn);
-            }
-          }
+        } else {
+          echo mysqli_error($conn);
+        }
       }
     }
   }
- 
-  ?>
- 
- 
+}
+
+?>
+
+
 
 <!doctype html>
 <html lang="en">
- 
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
@@ -140,53 +140,57 @@ $outcome1 = mysqli_query($conn, $sql1);
   <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
   <title>Project</title>
 </head>
- 
+
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
-<style>
-  .modal-body .form-group input {
-    background: transparent;
-    color: white;
-  }
-</style>
-<!------------------ Navbar  --------------->
-<?php  include('navbar.php') ?>
+  <style>
+    .modal-body .form-group input {
+      background: transparent;
+      color: white;
+    }
+  </style>
+  <!------------------ Navbar  --------------->
+  <?php include('navbar.php') ?>
 
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background: transparent; backdrop-filter: blur(20px); color: white; padding: 30px 40px; font-weight: 500;">
+      <div class="modal-content"
+        style="background: transparent; backdrop-filter: blur(20px); color: white; padding: 30px 40px; font-weight: 500;">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:red; width: 80px; padding: 5px;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            style="color:red; width: 80px; padding: 5px;">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <form action="skill_dashboard.php" class="" method="post">
-          
+
             <div class="form-group">
               <label for="editSkillId">Skill Id</label>
- 
-              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly style="padding:5px; border:1px solid white; border-radius:10px;">
- 
+
+              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly
+                style="padding:5px; border:1px solid white; border-radius:10px;">
+
             </div>
-           
- 
+
+
             <div class="form-group">
-             
+
               <label for="editSkillName">Skill Name</label>
               <input name="editSkillName" class="form-control" id="editSkillName" rows="3"
                 placeholder="please update skill..."></input>
             </div>
             <div class="form-group">
-             
-             <label for="editdescription">Skill Description</label>
-             <input name="editdescription" class="form-control" id="editdescription" rows="3"
-               placeholder="please update description..."></input>
-           </div>
-           <div>
-             <button type="submit" class="btn btn-primary" name="update" style="border-radius:5px; padding:5px 10px;">Update</button>
-           </div>
+
+              <label for="editdescription">Skill Description</label>
+              <input name="editdescription" class="form-control" id="editdescription" rows="3"
+                placeholder="please update description..."></input>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary" name="update"
+                style="border-radius:5px; padding:5px 10px;">Update</button>
+            </div>
           </form>
         </div>
       </div>
@@ -200,14 +204,14 @@ $outcome1 = mysqli_query($conn, $sql1);
       <table class="table " id="myTable" style="border:2px solid black; color:black;">
         <thead>
           <tr>
- 
+
             <th scope="col">Skill Id</th>
             <th scope="col">Skill Name</th>
             <th scope="col">Description</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
- 
+
         <b>
           <?php
           $sql = "SELECT `SkillId`, `SkillName`,`SkillDescription` FROM `skillmaster`";
@@ -221,7 +225,7 @@ $outcome1 = mysqli_query($conn, $sql1);
                   <td>" . $row['SkillId'] . "</td>
                   <td>" . $row['SkillName'] . "</td>
 
-                  <td>" . $row['SkillDescription']. "</td>
+                  <td>" . $row['SkillDescription'] . "</td>
 
                  
                   <td>
@@ -230,22 +234,22 @@ $outcome1 = mysqli_query($conn, $sql1);
                   <button class='delete btn' id='" . $row['SkillId'] . "'><i class='bx bxs-trash-alt'></i></button>
                   </td>
                 </tr>";
- 
- 
+
+
             }
           } else {
             echo "0 results";
           }
           ?>
- 
+
           </tbody>
       </table>
     </div>
   </div>
- 
- <img src="" alt="" srcset="">
- 
- 
+
+  <img src="" alt="" srcset="">
+
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -279,25 +283,35 @@ $outcome1 = mysqli_query($conn, $sql1);
         $('#myModal').modal('toggle')
       })
     })
- 
+
     deletes = document.getElementsByClassName("delete");
     // console.log(deletes);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
-        const id = e.target.id;
-        // console.log(id);
+        let target = e.target;
+
+        // Check if the clicked element is the icon inside the button
+        if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+          target = target.parentElement; // Set target to the parent button
+        }
+
+        // Check if the target is the button with the class 'delete'
+        if (target.classList.contains('delete')) {
+          id = target.id;
+          console.log(id);
+        }
         if (confirm('Are you sure to delete')) {
           window.location = "skill_dashboard.php?delete=" + id;
         }
         else {
           console.log('no');
         }
- 
+
       });
     });
   </script>
   <script src="script/script.js"></script>
   <!-- sushanta -->
 </body>
- 
+
 </html>

@@ -44,6 +44,7 @@
     font-weight: 600;
     margin-bottom: 20px;
 }
+
 .popup{
     display:inline-flex;
     background-color: red;
@@ -55,4 +56,12 @@
     padding:20px;
     border-radius:10px;
     border:  2px black;
+}
+
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
 }

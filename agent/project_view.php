@@ -126,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/modal.css"> -->
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
  
@@ -143,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <form action="project_view.php" method="post">
       <div class="form-group">
         <label for="ProjectName" style="color:black">Project Name</label>
-        <select name="ProjectName" id="ProjectName" tyle="background-color: transparent;border-radius: 10px;border:2px solid skyblue;color:white">
+        <select name="ProjectName" id="ProjectName" style=" background: transparent; border: 2px solid black; padding: 5px;">
           <option value="" disabled selected hidden>Please select Project</option>
           <?php
           $sql10 = "SELECT * from `project` where status='active'";
@@ -180,15 +181,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         .skill-entry button {
           margin-left: 10px;
         }
+        form {
+          border: 2px solid black;
+          margin: 20px;
+        }
       </style>
       <div id="skillsContainer">
         <div class="form-group skill-entry">
-          <label for="title3" style="color:black">Skill</label>&emsp;
+          <label for="title3" style="color:black;">Skill</label>&emsp;
           <select name="title3[]" class="skill-select" id="skill">
             <option value="" disabled selected hidden id="skill">Please select Skill</option>
             <?php echo $skillOptions; ?>
           </select>&emsp;&emsp;&emsp;
-          <label for="headcount" style="color:black" >Required Headcount</label>&emsp;
+          <label for="headcount" style="color:black;">Required Headcount</label>&emsp;
           <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount" id="skill" >
           <button type="button" class="remove-skill-btn">Remove</button>
         </div>
@@ -272,28 +277,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <label for="editSkillName">Skill</label>
  
  
-              <select name="editSkillName" id="editSkillName">
-                <option value="" disabled selected hidden>Please select Skill</option>
+              <select name="editSkillName" id="editSkillName" style="background:transparent; border:2px solid white; color:white; padding:5px;">
+                <option value="" disabled selected hidden>Select Skill</option>
                 <?php
                 $sql4 = "SELECT * from `skillmaster`";
                 $outcome4 = mysqli_query($conn, $sql4);
                 while ($row = mysqli_fetch_assoc($outcome4)) {
                   $Customer = $row['SkillName'];
-                  echo "<option value='$Customer'>$Customer</option>";
+                  echo "<option value='$Customer' style='background:black;'>$Customer</option>";
                 }
                 ?>
               </select>
             </div>
  
             <div class="form-group">
-              <label for="editRequiredHeadcount">RequiredHeadcount</label>
+              <label for="editRequiredHeadcount">Required Headcount</label>
               <input name="editRequiredHeadcount" class="form-control" id="editRequiredHeadcount" rows="3"
-                placeholder="please add description..."></input>
+                placeholder="please add description..." style="background:transparent; border:2px solid white; color:white;"></input>
             </div>
             <div class="form-group">
-              <label for="editFullfillHeadcount">FullfillHeadcount</label>
+              <label for="editFullfillHeadcount">Fullfill Headcount</label>
               <input name="editFullfillHeadcount" class="form-control" id="editFullfillHeadcount" rows="3"
-                placeholder="please add description..."></input>
+                placeholder="please add description..." style="background:transparent; border:2px solid white; color:white;"></input>
             </div>
             <button type="submit" class="btn btn-primary" name="update">Update</button>
           </form>
@@ -302,37 +307,37 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
     </div>
   </div>
-
-
-
-
-<div class="projectContainer">
-      <table class="table " id="myTable">
-        <thead>
-          <tr>
-        
-            <th scope="col">ProjectId</th>
-            <th scope="col">Project</th>
-            <th scope="col">Skill Name</th>
-            <th scope="col">Required Headcount</th>
-            <th scope="col">Fullfill Headcount</th>
-          
-            
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-
-        <b>
-          <?php
-         
-          $sql="SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            $no = 0;
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-              $no++;
-              echo "<tr>
+ 
+ 
+ 
+ 
+  <div class="projectContainer">
+    <table class="table " style="color: black; border:2px solid black;" id="myTable">
+      <thead>
+        <tr>
+ 
+          <th scope="col" style="color: black">ProjectId</th>
+          <th scope="col" style="color: black">Project</th>
+          <th scope="col" style="color: black">SkillName</th>
+          <th scope="col" style="color: black">RequiredHeadcount</th>
+          <th scope="col" style="color: black">fullfill_headcount</th>
+ 
+ 
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+ 
+      <b>
+        <?php
+ 
+        $sql = "SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+          $no = 0;
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+            $no++;
+            echo "<tr>
                   <td>" . $row['ProjectId'] . "</td>
                   <td>" . $row['ProjectName'] . "</td>
                   <td>" . $row['Skillname'] . "</td>
@@ -340,8 +345,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                   <td>" . $row['fullfill_headcount'] . "</td>
                   <input type='hidden' id='skillid' value=" . $row['SkillId'] . ">
                   <td>
-                  <button class='edit btn btn-primary' id='" . $row['SkillId'] . "'>Edit</button>
-                  <button class='delete btn btn-danger'  id='skillid=" . $row['SkillId'] . "projectId=" . $row['ProjectId'] . "'>Delete</button></td>
+                  <button class='edit btn' id='" . $row['SkillId'] . "'><i class='bx bx-edit-alt'></i></button>
+                  <button class='delete btn'  id='skillid=" . $row['SkillId'] . "projectId=" . $row['ProjectId'] . "'><i class='bx bxs-trash'></i></button></td>
                 </tr>";
           }
         } else {
@@ -377,7 +382,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     Array.from(edits).forEach((element) => {
       element.addEventListener("click", (e) => {
         console.log("edit", );
-        tr = e.target.parentNode.parentNode;
+        tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
         ProjectId = tr.getElementsByTagName("td")[0].innerText;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
@@ -433,13 +438,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     document.getElementById('addSkillBtn').addEventListener('click', function() {
       const skillEntryTemplate = `
         <div class="form-group skill-entry">
-          <label for="title3">Skill</label>&emsp;
+          <label for="title3" style="color:black;">Skill</label>&emsp;
           <select name="title3[]" class="skill-select" id="skill">
             <option value="" disabled selected hidden>Please select Skill</option>
             ${skillOptions}
           </select>&emsp;&emsp;&emsp;
-          <label for="headcount">Required Headcount</label>&emsp;
-          <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount">
+          <label for="headcount" style="color:black;">Required Headcount</label>&emsp;
+          <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount" style="border:2px solid black;">
           <button type="button" class="remove-skill-btn">Remove</button>
         </div>
       `;
