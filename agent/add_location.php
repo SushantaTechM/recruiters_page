@@ -31,8 +31,6 @@ if (isset($_POST["add"])) {
         }
     }
 }
-// $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-// var_dump($actual_link);
 
 ?>
 
@@ -46,7 +44,6 @@ if (isset($_POST["add"])) {
     <title>Add Location</title>
     <link rel="stylesheet" href="styles/index.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 </head>
 <style>
     body {

@@ -3,12 +3,14 @@ if (!isset($_SESSION)) {
   // Start Session it is not started yet
   session_start();
 }
-if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
+
+if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
   header('location:../index.php');
   exit;
 }
-include("../database/dbconnect.php");
- 
+
+include ("../database/dbconnect.php");
+
 $sql1 = "SELECT * from `customermaster`";
 $outcome1 = mysqli_query($conn, $sql1);
  
@@ -300,37 +302,37 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
     </div>
   </div>
- 
- 
- 
- 
-  <div class="projectContainer">
-    <table class="table " style="color: black" id="myTable">
-      <thead>
-        <tr>
- 
-          <th scope="col" style="color: black">ProjectId</th>
-          <th scope="col" style="color: black">Project</th>
-          <th scope="col" style="color: black">SkillName</th>
-          <th scope="col" style="color: black">RequiredHeadcount</th>
-          <th scope="col" style="color: black">fullfill_headcount</th>
- 
- 
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
- 
-      <b>
-        <?php
- 
-        $sql = "SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-          $no = 0;
-          // output data of each row
-          while ($row = $result->fetch_assoc()) {
-            $no++;
-            echo "<tr>
+
+
+
+
+<div class="projectContainer">
+      <table class="table " id="myTable">
+        <thead>
+          <tr>
+        
+            <th scope="col">ProjectId</th>
+            <th scope="col">Project</th>
+            <th scope="col">Skill Name</th>
+            <th scope="col">Required Headcount</th>
+            <th scope="col">Fullfill Headcount</th>
+          
+            
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+
+        <b>
+          <?php
+         
+          $sql="SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            $no = 0;
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+              $no++;
+              echo "<tr>
                   <td>" . $row['ProjectId'] . "</td>
                   <td>" . $row['ProjectName'] . "</td>
                   <td>" . $row['Skillname'] . "</td>

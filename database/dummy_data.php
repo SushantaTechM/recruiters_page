@@ -52,19 +52,19 @@ $sql = "INSERT INTO `locationmaster` (`LocationId`, `LocationName`,`LocationStat
       INSERT INTO `projectskilldetails` (`slno`, `project`, `skill`, `required_headcount`, `fullfill_headcount`) VALUES (NULL, '1', '5', '10', '0');
       
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'agent', '12345678', 'Agent', 'agent@gmail.com', '1234567890', '1', '1');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'agent', '12345678', 'Agent', 'agent@techmahindra.com', '1234567890', '1', '1');
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'admin', '12345678', 'Admin', 'admin@gmail.com', '1234567890', '', '');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'admin', '12345678', 'Admin', 'admin@techmahindra.com', '1234567890', '', '');
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Riju Dasgupta', '12345678', 'User', 'riju@gmail.com', '1234567890', '', '');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Riju Dasgupta', '12345678', 'User', 'riju@techmahindra.com', '1234567890', '', '');
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Santanu Nayak', '12345678', 'User', 'santanu@gmail.com', '1234567890', '', '');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Santanu Nayak', '12345678', 'User', 'santanu@techmahindra.com', '1234567890', '', '');
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Soumita Maity', '12345678', 'User', 'soumita@gmail.com', '1234567890', '', '');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Soumita Maity', '12345678', 'User', 'soumita@techmahindra.com', '1234567890', '', '');
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Harsh Harshit', '12345678', 'User', 'harsh@gmail.com', '1234567890', '', '');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Harsh Harshit', '12345678', 'User', 'harsh@techmahindra.com', '1234567890', '', '');
 
-      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Anjali Kumari', '12345678', 'User', 'anjali@gmail.com', '1234567890', '', '');
+      INSERT INTO `users` (`UserId`, `UserName`, `Password`, `Type`, `Email`, `Phone`, `VerticalId`, `IBUId`) VALUES (NULL, 'Anjali Kumari', '12345678', 'User', 'anjali@techmahindra.com', '1234567890', '', '');
 
 
 

@@ -75,7 +75,7 @@ if (isset($_POST["login"])) {
         <div class="wrapper">
             <div id="user-login-box" class="login-box">
                 <h1>Registration</h1>
-                <form method="post">
+                <form method="post" onsubmit="return validateEmail()">
                     <div class="input-box">
                         <input type="text" name="Username" id="Username" maxlength="30" placeholder="Enter Your Name"
                             required>
@@ -136,6 +136,20 @@ if (isset($_POST["login"])) {
                             });
                         }, 3000); // 3000 milliseconds = 3 seconds
                     });
+
+
+                    //validating email id
+                    function validateEmail() {
+                        const emailInput = document.getElementById('email');
+                        const email = emailInput.value;
+                        const domain = '@techmahindra.com';
+
+                        if (!email.endsWith(domain)) {
+                            alert('Email must end with @techmahindra.com');
+                            return false; // Prevent form submission
+                        }
+                        return true; // Allow form submission
+                    }
                 </script>
             </div>
         </div>
