@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login form</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <?php
 include "partials/_registration_header.php";
@@ -27,13 +29,10 @@ if (isset($_POST["verify"])) {
             if ($result) {
                 echo "<h1 class='popup1'>Password Updated !</h1>";
             }
-
         } else {
             echo "<h1 class='popup1'>Wrong Credential !</h1>";
         }
-
     }
-
 }
 ?>
 
@@ -65,18 +64,19 @@ if (isset($_POST["verify"])) {
     </div>
     <script>
         //hiding notification
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
                 var popups1 = document.querySelectorAll('.popup1');
-                popups1.forEach(function (popup1) {
+                popups1.forEach(function(popup1) {
                     popup1.remove();
                 });
                 var popups = document.querySelectorAll('.popup');
-                popups.forEach(function (popup) {
+                popups.forEach(function(popup) {
                     popup.remove();
                 });
             }, 3000); // 3000 milliseconds = 3 seconds
         });
     </script>
 </body>
+
 </html>

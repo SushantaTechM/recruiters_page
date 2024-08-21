@@ -26,6 +26,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     <link rel="stylesheet" href="styles/notification.css">
 </head>
 
+
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
     <!-- ----------------- Navbar --------------- -->
@@ -60,7 +61,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
     </div>
 
     <div class="smallModal" id="project-softlock-modal" >
-        <div class="smallModal-content" style="">
+        <div class="smallModal-content" >
             <span class="close-btn"
                 onclick="document.getElementById('project-softlock-modal').style.display='none'">&times;</span>
             <h2>Select Project</h2>

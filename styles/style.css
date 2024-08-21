@@ -186,7 +186,7 @@ input:checked + .slider:before {
  
  
 .wrapper{
-    margin: 5rem;
+    margin-top: 12px;
     width: 25%;
     background: transparent;
     border: 2px solid rgba(255,255,255, .2);
@@ -231,7 +231,7 @@ input:checked + .slider:before {
     font-size: 20px;
 }
 .wrapper .btn{
-    width: 60%;
+    width: 100%;
     height : 45px;
     background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
     border:2px solid black;
@@ -246,65 +246,31 @@ input:checked + .slider:before {
     color: white;
 }
 
-.popup{
-    display:inline-flex;
-    color: black;
-    background-color: transparent;
-    font-size: 16px;;
-    position:absolute;
-    top:12%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    padding:20px;
-    border-radius:10px;
-    /* box-shadow : 10px 10px 5px rgb(224, 216, 216); */
-    /* z-index:1000; */
-    border:  3px solid black;
-    /* text-shadow: 0 0 3px #FF0000; */
- 
+.popup {
+    display: inline-flex;
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    ;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px black;
 }
- 
-.popup1{
-    display:inline-flex;
-    color: black;
-    background-color: transparent;
-    font-size: 16px;;
-    position:absolute;
-    top:12%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    padding:20px;
-    border-radius:10px;
-    /* box-shadow : 10px 10px 5px rgb(224, 216, 216); */
-    /* z-index:1000; */
-    border:  3px solid black;
-    /* text-shadow: 0 0 3px #FF0000; */
- 
-}
-/* The animation code */
-@keyframes example {
-    from {background-color: transparent;}
-    to {background-color: white;}
-}
- 
-  /* The element to apply the animation to */
-.popup1{
-    /* width: 100px;
-    height: 100px; */
-    background-color: transparent;
-    animation-name: example;
-    animation-duration: 1s;
-    animation-iteration-count: 3;
-    /* animation-direction: r; */
-}
- 
-.popup{
-    /* width: 100px;
-    height: 100px; */
-    background-color: transparent;
-    animation-name: example;
-    animation-duration: 1s;
-    animation-iteration-count: 3;
+.popup1 {
+    display: inline-flex;
+    background-color: rgb(10, 141, 6);
+    color: white;
+    font-size: 16px;
+    ;
+    position: absolute;
+    top: 10%;
+    left: 86%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px black;
 }
  
  

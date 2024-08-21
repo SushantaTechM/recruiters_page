@@ -86,7 +86,7 @@
     padding: 0.5rem 0.5rem;
     border-radius: 0.5rem;
     color: white;
-    background-color: #0000af;
+    background:linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
     border: 1px solid black;
     cursor: pointer;
 }
@@ -95,8 +95,8 @@
     padding: 0.5rem 0.5rem;
     border-radius: 0.5rem;
     color: white;
-    background-color: #0000af;
-    border: 1px solid black;;
+    background:linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+    border: 1px solid black;
     cursor: pointer;
 }
 .search-confirm-btn:disabled{

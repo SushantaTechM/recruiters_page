@@ -22,14 +22,20 @@ form{
 #customerid{
     background: transparent;
     color: black;
-    padding: 0.2rem 0.3rem;
+    padding: 0.3rem 0.4rem;
     border: 2px solid black;
+    height: 40px;   
 }
 #title2{
     background: transparent;
     color: black;
-    padding: 0.2rem 0.3rem;
+    padding: 0.2rem 0.4rem;
     border: 2px solid black;
+    margin-left: 10px;
+}
+
+#title4 input{
+    width:200px;
 }
 
 #Vertical{

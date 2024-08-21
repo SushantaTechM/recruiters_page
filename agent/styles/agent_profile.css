@@ -5,7 +5,7 @@ body {
 }
 
 .navbar {
-    background: transparent;
+    background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
     color: white;
     display: flex;
     justify-content: space-between;
