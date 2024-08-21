@@ -73,3 +73,9 @@ body {
   cursor: pointer;
 }
   */
+  .outerDiv{
+    display: flex;
+  }
+  .outerDiv> p{
+    margin: 5px;
+  }
