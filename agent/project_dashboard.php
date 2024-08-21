@@ -1,15 +1,15 @@
 <?php
 
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
 
-include ("../database/dbconnect.php");
+include("../database/dbconnect.php");
 
 
 if (isset($_GET["delete"])) {
@@ -23,16 +23,14 @@ if (isset($_GET["delete"])) {
   if ($res4->num_rows > 0) {
     $message = "There are some users assigned to this project, so you can not delete it!";
     echo "<script type='text/javascript'>alert('$message');</script>";
-  } 
-  else {
+  } else {
     if (!$result) {
       // die(mysqli_error($conn));
       $message = "There are some skill assigned to this project, so you can not delete it!";
       echo "<script type='text/javascript'>alert('$message');</script>";
 
-    }
-    else{
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    } else {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
               <strong>Success!</strong> Your Project Deleted Succesfully.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -74,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $row6 = mysqli_fetch_assoc($result6);
     $ibulId = $row6['id'];
 
-    $status=$_POST['editStatus'];
+    $status = $_POST['editStatus'];
 
 
 
@@ -116,16 +114,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <title>Project</title>
 </head>
 <style>
-  .tbl{
+  .tbl {
     width: 60%;
   }
 </style>
 
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
-  
+
   <!------------------------ Navbar  ------------->
-  <?php  include('navbar.php') ?>
-  
+  <?php include('navbar.php') ?>
+
   <!------------------------- Modal ---------------->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -210,16 +208,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 ?>
               </select>
             </div>
-            
+
             <div class="form-group">
               <label for="editStatus">Status</label>
               <select name="editStatus" id="editStatus">
                 <option value="" disabled selected hidden>Please select Status</option>
                 <option value="active">active</option>
                 <option value="closed">closed</option>
-                </select>
+              </select>
             </div>
-           
+
 
             <div class="form-group">
               <label for="editProjectName">ProjectName</label>
@@ -235,35 +233,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </div>
 
 
-<h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
-<div class="projectContainer">
-      <table class="table tbl" id="myTable" style="color:black; border:2px solid black;">
-        <thead>
-          <tr>
+  <h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
+  <div class="projectContainer">
+    <table class="table tbl" id="myTable" style="color:black; border:2px solid black;">
+      <thead>
+        <tr>
 
-            <th scope="col">ProjectId</th>
-            <th scope="col">Project</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Location</th>
-            <th scope="col">Vertical</th>
-            <th scope="col">IBU</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-          <?php
+          <th scope="col">ProjectId</th>
+          <th scope="col">Project</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Location</th>
+          <th scope="col">Vertical</th>
+          <th scope="col">IBU</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <?php
 
-          $sql="SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            $no = 0;
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-              $no++;
-              if ($row['status']=='active') {
-                echo "<tr>
+      $sql = "SELECT p.ProjectID, p.ProjectName, c.CustomerName, p.StartDate, p.EndDate, l.LocationName, v.Vertical, i.IBUname, p.status FROM project p JOIN customermaster c ON p.CustomerId=c.CustomerId JOIN verticalmaster v ON p.VerticalId=v.id JOIN locationmaster l ON p.Location=l.LocationId JOIN ibumaster i ON p.IBUId=i.id";
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+        $no = 0;
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+          $no++;
+          if ($row['status'] == 'active') {
+            echo "<tr>
                     <td>" . $row['ProjectID'] . "</td>
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
@@ -277,9 +275,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "' disabled><i class='bx bxs-trash'></i></button></td>
                   </tr>";
-              }
-              else {
-                echo "<tr>
+          } else {
+            echo "<tr>
                     <td>" . $row['ProjectID'] . "</td>
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
@@ -293,22 +290,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "'><i class='bx bxs-trash'></i></button></td>
                   </tr>";
-              }
-            }
-          } 
-          else {
-            echo "0 results";
           }
-          ?>
+        }
+      } else {
+        echo "0 results";
+      }
+      ?>
 
-          </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
   </div>
 
 
 
-<!-- Optional JavaScript -->
+  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -340,8 +336,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         Vertical = tr.getElementsByTagName("td")[6].innerText;
         Ibu = tr.getElementsByTagName("td")[7].innerText;
         Status = tr.getElementsByTagName("td")[8].innerText;
-    
-        
+
+
         editCustomerId.value = CustomerId;
         editLocationId.value = Location;
         editStart.value = StartDate;
@@ -359,8 +355,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // console.log(edits);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
-        id = e.target.id.substr();
-        // console.log(id);
+        let target = e.target;
+
+        // Check if the clicked element is the icon inside the button
+        if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+          target = target.parentElement; // Set target to the parent button
+        }
+
+        // Check if the target is the button with the class 'delete'
+        if (target.classList.contains('delete')) {
+          id = target.id;
+          console.log(id);
+        }
         if (confirm('Are you sure to delete')) {
           window.location = "project_dashboard.php?delete=" + id;
         }

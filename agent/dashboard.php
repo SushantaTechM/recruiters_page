@@ -37,7 +37,6 @@ include("../database/dbconnect.php");
 
 </head>
 <style>
-
   .dashboard-tabs {
     margin-left: 2rem;
     margin-bottom: 0.5rem;
@@ -58,7 +57,8 @@ include("../database/dbconnect.php");
     color: transparent;
     text-decoration: none;
   }
-  button.currently_set{
+
+  button.currently_set {
     border: 3px solid #267d60;
   }
 </style>
@@ -70,47 +70,46 @@ include("../database/dbconnect.php");
   <?php include('navbar.php') ?>
 
   <div class="dashboard-tabs">
-    <a href="dashboard.php" ><button style="border:3px solid #267d60";>Project</button></a>
+    <a href="dashboard.php"><button style="border:3px solid #267d60" ;>Project</button></a>
     <a href="associate.php"><button>Associates</button></a>
   </div>
 
   <!--------------- Modal -------------------->
+  <div class="modal" id="user-modal">
+    <div class="modal-content" id="modal-content">
+      <span class="close-btn" onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
+      <div class="head">
+        <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
+        <span class="about">
+          <p id="modal-name"></p>
 
+        </span>
+      </div>
+      <div class="details">
+        <span>
+          <p id="modal-email"></p>
+
+        </span>
+        <span id="left">
+          <p id="modal-gender"></p>
+
+        </span>
+      </div>
+
+    </div>
+  </div>
 
   <div class="dashboard-tabs">
     <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>Active Project</button>
     <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Closed Project</button>
 
   </div>
-  
+
   <div class="dashboard-tab-content">
     <div class="dashboard-softlock-content" id="dashboard-softlock-content"></div>
 
     <!------------------- Modal  --------------------->
-    <div class="modal" id="user-modal">
-      <div class="modal-content">
-        <span class="close-btn"
-          onclick="document.getElementById('user-modal2').style.display='none'">&times;</span>
-        <div class="head">
-          <!-- <img id="modal-image" height="100px" src="" alt="user-image" /> -->
-          <span class="about">
-            <p id="modal-name"></p>
 
-          </span>
-        </div>
-        <div class="details">
-          <span>
-            <p id="modal-email"></p>
-
-          </span>
-          <span id="left">
-            <p id="modal-gender"></p>
-
-          </span>
-        </div>
-
-      </div>
-    </div>
 
   </div>
 
