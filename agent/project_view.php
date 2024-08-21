@@ -311,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <thead>
           <tr>
         
-            <th scope="col">ProjectId</th>
+            <th scope="col">Sl No.</th>
             <th scope="col">Project</th>
             <th scope="col">Skill Name</th>
             <th scope="col">Required Headcount</th>
@@ -333,12 +333,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             while ($row = $result->fetch_assoc()) {
               $no++;
               echo "<tr>
-                  <td>" . $row['ProjectId'] . "</td>
+                  <td>" . $no . "</td>
                   <td>" . $row['ProjectName'] . "</td>
                   <td>" . $row['Skillname'] . "</td>
                   <td>" . $row['required_headcount'] . "</td>
                   <td>" . $row['fullfill_headcount'] . "</td>
                   <input type='hidden' id='skillid' value=" . $row['SkillId'] . ">
+                  <input type='hidden' id='ProjectId' value=" . $row['ProjectId'] . ">
                   <td>
                   <button class='edit btn btn-primary' id='" . $row['SkillId'] . "'>Edit</button>
                   <button class='delete btn btn-danger'  id='skillid=" . $row['SkillId'] . "projectId=" . $row['ProjectId'] . "'>Delete</button></td>
@@ -379,7 +380,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         console.log("edit", );
         tr = e.target.parentNode.parentNode;
         // console.log(tr);
-        ProjectId = tr.getElementsByTagName("td")[0].innerText;
+        ProjectId =tr.getElementsByTagName("input")[0].value ;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         SkillName = tr.getElementsByTagName("td")[2].innerText;
         RequiredHeadcount = tr.getElementsByTagName("td")[3].innerText;

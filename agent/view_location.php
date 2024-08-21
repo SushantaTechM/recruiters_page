@@ -146,8 +146,8 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                 <div class="modal-body">
                     <form action="view_location.php" method="post">
                         <div class="form-group">
-                            <label for="editLocationId">Loc Id</label>
-                            <input id="editLocationId" name="editLocationId" value='' readonly>
+                            <!-- <label for="editLocationId">Loc Id</label> -->
+                            <input type='hidden' id="editLocationId" name="editLocationId" value='' readonly>
                         </div>
                         <div class="form-group">
                             <label for="editLocationName">Loc Name</label>
@@ -183,7 +183,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         <thead>
             <tr>
                 <th>Sl No.</th>
-                <th>Loc Id</th>
+              
                 <th>Loc Name</th>
                 <th>Loc State</th>
                 <th>Loc Head Name</th>
@@ -202,12 +202,13 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                         $no++;
                         echo "<tr>
                                 <td>" .$no. "</td>
-                                <td>" .$row['LocationId']. "</td>
+                                
                                 <td>" .$row['LocationName']. "</td>
                                 <td>" .$row['LocationState']. "</td>
                                 <td>" .$row['LocationHeadName']. "</td>
                                 <td>" .$row['LocationHeadEmail']. "</td>
                                 <td>" .$row['LocationHeadMobile']. "</td>
+                                 <input type='hidden' id='LocationId' value=" . $row['LocationId'] . ">
                                 <td>
                                 <button class='edit btn' id='".$row['LocationId']."'><i class='bx bx-edit-alt'></i></button>    
                                 <button class='delete btn' id='".$row['LocationId']."'><i class='bx bxs-trash'></i></button></td>
@@ -250,12 +251,12 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
                 console.log("edit",);
                 tr = e.target.parentNode.parentNode.parentNode;
                 console.log(tr);
-                LocationId = tr.getElementsByTagName("td")[1].innerText;
-                LocationName = tr.getElementsByTagName("td")[2].innerText;
-                LocationState = tr.getElementsByTagName("td")[3].innerText;
-                LocationHeadName = tr.getElementsByTagName("td")[4].innerText;
-                LocationHeadEmail = tr.getElementsByTagName("td")[5].innerText;
-                LocationHeadMobile = tr.getElementsByTagName("td")[6].innerText;
+                LocationId = tr.getElementsByTagName("input")[0].value;
+                LocationName = tr.getElementsByTagName("td")[1].innerText;
+                LocationState = tr.getElementsByTagName("td")[2].innerText;
+                LocationHeadName = tr.getElementsByTagName("td")[3].innerText;
+                LocationHeadEmail = tr.getElementsByTagName("td")[4].innerText;
+                LocationHeadMobile = tr.getElementsByTagName("td")[5].innerText;
  
                 editLocationId.value = LocationId;
                 editLocationName.value = LocationName;

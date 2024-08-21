@@ -18,8 +18,10 @@ $outcome1 = mysqli_query($conn, $sql1);
 
   if (isset($_GET["delete"])) {
     $id = $_GET["delete"];
+    var_dump($id);
     $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
     $res4 = mysqli_query($conn, $cid);
+    
  
    
  
@@ -63,6 +65,7 @@ $outcome1 = mysqli_query($conn, $sql1);
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $editSkillName = $_POST['editSkillName'];
         $id = $_POST['editSkillId'];
+       
         $desc = $_POST['editdescription'];
       $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
       $res4 = mysqli_query($conn, $cid);
@@ -165,9 +168,9 @@ $outcome1 = mysqli_query($conn, $sql1);
           <form action="skill_dashboard.php" class="" method="post">
           
             <div class="form-group">
-              <label for="editSkillId">Skill Id</label>
+              <!-- <label for="editSkillId">Skill Id</label> -->
  
-              <input id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly style="padding:5px; border:1px solid white; border-radius:10px;">
+              <input type='hidden' id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly style="padding:5px; border:1px solid white; border-radius:10px;">
  
             </div>
            
@@ -201,7 +204,7 @@ $outcome1 = mysqli_query($conn, $sql1);
         <thead>
           <tr>
  
-            <th scope="col">Skill Id</th>
+            <th scope="col">Sl No.</th>
             <th scope="col">Skill Name</th>
             <th scope="col">Description</th>
             <th scope="col">Action</th>
@@ -218,11 +221,11 @@ $outcome1 = mysqli_query($conn, $sql1);
             while ($row = $result->fetch_assoc()) {
               $no++;
               echo "<tr>
-                  <td>" . $row['SkillId'] . "</td>
+                  <td>" . $no . "</td>
+                 
                   <td>" . $row['SkillName'] . "</td>
-
                   <td>" . $row['SkillDescription']. "</td>
-
+                  <input type='hidden' id='SkillId' value=" . $row['SkillId'] . ">
                  
                   <td>
                   <button class='edit btn' id='edit-" . $row['SkillId'] . "'><i class='bx bxs-edit'></i></button>
@@ -269,7 +272,8 @@ $outcome1 = mysqli_query($conn, $sql1);
         // console.log(e);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        SkillId = tr.getElementsByTagName("td")[0].innerText;
+        SkillId = tr.getElementsByTagName("input")[0].value;
+       
         SkillName = tr.getElementsByTagName("td")[1].innerText;
         SkillDescription = tr.getElementsByTagName("td")[2].innerText;
 

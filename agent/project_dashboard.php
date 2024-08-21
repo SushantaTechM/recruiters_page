@@ -241,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <thead>
           <tr>
 
-            <th scope="col">ProjectId</th>
+            <th scope="col">Sl No.</th>
             <th scope="col">Project</th>
             <th scope="col">Customer</th>
             <th scope="col">Start Date</th>
@@ -264,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               $no++;
               if ($row['status']=='active') {
                 echo "<tr>
-                    <td>" . $row['ProjectID'] . "</td>
+                    <td>" . $no . "</td>
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -273,6 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['Vertical'] . "</td>
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
+                    <input type='hidden' id='ProjectID' value=" . $row['ProjectID'] . ">
                     <td>
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "' disabled><i class='bx bxs-trash'></i></button></td>
@@ -280,7 +281,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               }
               else {
                 echo "<tr>
-                    <td>" . $row['ProjectID'] . "</td>
+                    <td>" . $no . "</td>
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -289,6 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['Vertical'] . "</td>
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
+                     <input type='hidden' id='ProjectID' value=" . $row['ProjectID'] . ">
                     <td>
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "'><i class='bx bxs-trash'></i></button></td>
@@ -331,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         //console.log("edit",);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        ProjectId = tr.getElementsByTagName("td")[0].innerText;
+        ProjectId = tr.getElementsByTagName("input")[0].value;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         CustomerId = tr.getElementsByTagName("td")[2].innerText;
         StartDate = tr.getElementsByTagName("td")[3].innerText;
