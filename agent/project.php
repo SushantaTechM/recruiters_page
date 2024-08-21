@@ -241,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           ?>
         </select>
       </div>
-
+      <br>
       <div id="skillsContainer">
         <div class="form-group skill-entry">
           <label for="title3">Skill</label>&emsp;

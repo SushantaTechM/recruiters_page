@@ -52,7 +52,7 @@ include("../database/dbconnect.php");
     background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
     border: 2px solid black;
     border-radius: 5px;
-    padding: 7px 15px;
+    padding: 4px 15px;
   }
 
   .dashboard-tabs a {
@@ -61,7 +61,7 @@ include("../database/dbconnect.php");
   }
 
   button.currently_set{
-    border: 3px solid gray;
+    border: 3px solid #ffffff;
 
   }
 </style>
@@ -73,7 +73,7 @@ include("../database/dbconnect.php");
   <?php include('navbar.php') ?>
 
   <div class="dashboard-tabs">
-    <a href="dashboard.php"><button style="border:3px solid #267d60" ;>Project</button></a>
+    <a href="dashboard.php"><button style="border:3px solid #ffffff" ;>Project</button></a>
     <a href="associate.php"><button>Associates</button></a>
   </div>
 

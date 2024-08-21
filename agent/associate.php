@@ -59,22 +59,24 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         }
         .dashboard-tabs button{
             font-weight: bold;
-            font-size: 18px;
+            /* font-size: 18px; */
             color: white;
+            background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+            border:2px solid black;
+            border-radius: 5px;
+            padding: 7px 12px;
+            cursor: pointer;
+            /* color: white;
             background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
             border: 2px solid black;
             border-radius: 5px;
             padding: 7px 12px;
-            cursor: pointer;
-            color: white;
-            background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
-            border: 2px solid black;
-            border-radius: 5px;
-            padding: 7px 12px;
-            cursor: pointer;
+            cursor: pointer; */
+            font-size: 15px; 
+            /* padding: 7px 15px; */
         }
         button.currently_set{
-            border: 3px solid #267d60;
+            border: 3px solid #ffffff;
         }
         .modal-content{
             background-color: black;
@@ -107,12 +109,9 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         <a href="associate.php"><button class='currently_set';>Associates</button></a>
     </div>
     <div class="dashboard-tabs">
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">Confirmed data</button>
-        <button name='dataset' value='Available Data' class='dashboard-available-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black; font-size: 15px; padding: 7px 15px;">Available data</button>
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">Confirmed data</button>
-        <button name='dataset' value='Available Data' class='dashboard-available-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black; font-size: 15px; padding: 7px 15px;">Available data</button>
+        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>SoftLock data</button>
+        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Confirmed data</button>
+        <button name='dataset' value='Available Data' class='dashboard-available-tab' >Available data</button>
     </div>
 
     <div class="dashboard-tab-content">
