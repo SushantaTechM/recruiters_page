@@ -63,18 +63,14 @@ if (isset($_POST["add"])) {
     .input-box input {
         color: black;
         font-weight: 200;
-        font-size: 20px;
+        font-size: 15px;
         /* text-align: center; */
 
         border: 2px solid black;
         /* border-radius: 10px; */
         width: 50%;
-        padding: 0.3rem;
+        padding: 0.5rem;
         margin-bottom: 12px;
-    }
-
-    .input-box {
-        /* text-align: center;   */
     }
 
     .btn {
@@ -94,8 +90,6 @@ if (isset($_POST["add"])) {
 
     .wrapper {
         border: 2px solid black;
-        /* box-shadow: 2px 2px gray; */
-        /* height: 450px; */
         border-radius: 10px;
         margin: auto;
         width: 40%;
@@ -114,7 +108,6 @@ if (isset($_POST["add"])) {
     .input-box input {
         border-radius: 10px;
         background-color: transparent;
-
     }
 </style>
 
@@ -130,31 +123,30 @@ if (isset($_POST["add"])) {
             <h1>Create Location</h1>
             <form method="post" action="add_location.php">
                 <div class="input-box">
-                    <label for="locationName">Loc Name &nbsp;</label>
-                    <input type="text" name="locationName" id="locationName" required style="margin-left:100px">
+                    <label for="locationName">Location &nbsp;</label>
+                    <input type="text" name="locationName" id="locationName" placeholder="Enter Location" required style="margin-left:78px">
 
                 </div>
                 <div class="input-box">
-                    <label for="locationState">Loc State &nbsp;</label>
-                    <input type="text" name="locationState" id="locationState" required style="margin-left:107px">
+                    <label for="locationState">State &nbsp;</label>
+                    <input type="text" name="locationState" id="locationState" placeholder="Enter State" required style="margin-left:107px">
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadName">Loc Head Name &nbsp;</label>
-                    <input type="text" name="locationHeadName" id="locationHeadName" style="margin-left:47px"
+                    <label for="locationHeadName">Head Name &nbsp;</label>
+                    <input type="text" name="locationHeadName" id="locationHeadName" placeholder="Enter Head Name" style="margin-left:47px"
                         required>
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadEmail">Loc Head Email &nbsp;</label>
-                    <input type="text" name="locationHeadEmail" id="locationHeadEmail" style="margin-left:51px"
+                    <label for="locationHeadEmail">Head Email &nbsp;</label>
+                    <input type="text" name="locationHeadEmail" id="locationHeadEmail" placeholder="Enter Head Email" style="margin-left:51px"
                         required>
 
                 </div>
                 <div class="input-box">
-                    <label for="locationHeadMobile">Loc Mobile Number &nbsp;</label>
-                    <input type="text" name="locationHeadMobile" style="margin-left:20px"
-                        id="locationHeadMobile" required>
+                    <label for="locationHeadMobile">Mobile Number &nbsp;</label>
+                    <input type="text" name="locationHeadMobile" style="margin-left:20px"  placeholder="Enter Mobile Number" id="locationHeadMobile" required>
 
                 </div>
                 <div class="button-container" style="display:flex; margin-left: 130px">

@@ -40,17 +40,19 @@ include("../database/dbconnect.php");
   .dashboard-tabs {
     margin-left: 2rem;
     margin-bottom: 0.5rem;
-    /* text-align: center; */
+    font-size: 15px;
+  }
+  .dashboard-tabs a button{
+    margin-top: 2rem;
   }
 
   .dashboard-tabs button {
     font-weight: bold;
-    font-size: 18px;
-    color: black;
-    background-color: cyan;
-    border: 2px solid grey;
-    border-radius: 20px;
-    padding: 3px 12px;
+    color: white;
+    background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 7px 15px;
   }
 
   .dashboard-tabs a {
@@ -58,12 +60,13 @@ include("../database/dbconnect.php");
     text-decoration: none;
   }
 
-  button.currently_set {
-    border: 3px solid #267d60;
+  button.currently_set{
+    border: 3px solid gray;
+
   }
 </style>
 
-<body>
+<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
 
   <!-- ----------------- Navbar --------------- -->
 
@@ -102,7 +105,6 @@ include("../database/dbconnect.php");
   <div class="dashboard-tabs">
     <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab'>Active Project</button>
     <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab'>Closed Project</button>
-
   </div>
 
   <div class="dashboard-tab-content">
