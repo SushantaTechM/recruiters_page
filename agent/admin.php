@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
            
             <!-- <button type="submit" class="btn btn-primary" name="update" style="background:lightgreen;">Update</button> -->
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary" name='update'>Update</button>
           </form>
         </div>
       </div>

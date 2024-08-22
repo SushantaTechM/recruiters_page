@@ -40,6 +40,8 @@ while ($row = mysqli_fetch_assoc($skill_outcome)) {
 if (isset($_GET["projectid"]) && isset($_GET["skillid"])) {
   $projectId = $_GET["projectid"];
   $skillid = $_GET["skillid"];
+  echo $projectId;
+  echo $skillid;
  
   $query1 = "SELECT * FROM `projectskilldetails` WHERE `Project`='$projectId' and `skill`='$skillid' and `fullfill_headcount`='0'";
   $result1 = mysqli_query($conn, $query1);
@@ -89,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
     $check1 = "SELECT skill from `projectskilldetails` where `Project`='$editProjectId' and `skill`='$Skillid'";
     $project_result11 = mysqli_query($conn, $check1);
-    if ($project_result11->num_rows > 0) {
-      $message = "Skill already exist!";
-      echo "<script type='text/javascript'>alert('$message');</script>";
-    } else {
+    // if ($project_result11->num_rows > 0) {
+    //   $message = "Skill already exist!";
+    //   echo "<script type='text/javascript'>alert('$message');</script>";
+    // } else {
       $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
       $result = mysqli_query($conn, $SQL);
       if ($result) {
@@ -107,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       }
     }
   }
-}
+
  
  
 ?>
@@ -244,6 +246,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       } else {
         $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
         $project_result2 = mysqli_query($conn, $project_query2);
+        if ($project_result2) {
+          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong>Success!</strong> Your Skill Added Succesfully.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
+        } else {
+          echo mysqli_error($conn);
+        }
       }
     }
  
@@ -276,19 +288,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
             <div class="form-group">
               <label for="editSkillName">Skill</label>
+              <input name="editSkillName" type="text" class="form-control" id="editSkillName" aria-describedby="emailHelp" readonly>
+
  
- 
-              <select name="editSkillName" id="editSkillName" style="background:transparent; border:2px solid white; color:white; padding:5px;">
-                <option value="" disabled selected hidden>Select Skill</option>
-                <?php
-                $sql4 = "SELECT * from `skillmaster`";
-                $outcome4 = mysqli_query($conn, $sql4);
-                while ($row = mysqli_fetch_assoc($outcome4)) {
-                  $Customer = $row['SkillName'];
-                  echo "<option value='$Customer' style='background:black;'>$Customer</option>";
-                }
-                ?>
-              </select>
+              
             </div>
  
             <div class="form-group">
@@ -388,7 +391,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         console.log("edit", );
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        ProjectId =tr.getElementsByTagName("input")[0].value ;
+        ProjectId =tr.getElementsByTagName("input")[1].value ;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         SkillName = tr.getElementsByTagName("td")[2].innerText;
         RequiredHeadcount = tr.getElementsByTagName("td")[3].innerText;
@@ -415,7 +418,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // console.log(edits);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
-        id = e.target.id.substr();
+        // id = e.target.id.substr();
+        let target = e.target;
+ 
+                // Check if the clicked element is the icon inside the button
+                if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+                    target = target.parentElement; // Set target to the parent button
+                }
+ 
+                // Check if the target is the button with the class 'delete'
+                if (target.classList.contains('delete')) {
+                    id = target.id;
+                    console.log(id);
+                }
         console.log(id);
         // const id='skillid=1projectid=1';
         const regex = /skillid=(\d+)projectid=(\d+)/i;
