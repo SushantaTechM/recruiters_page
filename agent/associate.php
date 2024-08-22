@@ -73,7 +73,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
             padding: 7px 12px;
             cursor: pointer;
         }
-        button.currently_set{
+        .currently_set{
             border: 3px solid #267d60;
         }
         .modal-content{
@@ -98,7 +98,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
 </head>
 
 <body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+
     <!-- ----------------- Navbar --------------- -->
     <?php include('navbar.php') ?>
     
@@ -110,9 +110,7 @@ if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
         <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">SoftLock data</button>
         <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">Confirmed data</button>
         <button name='dataset' value='Available Data' class='dashboard-available-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black; font-size: 15px; padding: 7px 15px;">Available data</button>
-        <button name='dataset' value='Softlock Data' class='dashboard-softlock-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">SoftLock data</button>
-        <button name='dataset' value='Confirmed Data' class='dashboard-confirm-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black;  font-size: 15px; padding: 7px 15px;">Confirmed data</button>
-        <button name='dataset' value='Available Data' class='dashboard-available-tab' style="color:white; background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219)); border:2px solid black; font-size: 15px; padding: 7px 15px;">Available data</button>
+        
     </div>
 
     <div class="dashboard-tab-content">

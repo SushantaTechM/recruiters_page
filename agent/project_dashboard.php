@@ -21,21 +21,17 @@ if (isset($_GET["delete"])) {
   $result = mysqli_query($conn, $query);
 
   if ($res4->num_rows > 0) {
-    $message = "There are some users assigned to this project, so you can not delete it!";
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    header("Location: project_dashboard.php?user_exists=true");
+    exit();
   } else {
     if (!$result) {
       // die(mysqli_error($conn));
-      $message = "There are some skill assigned to this project, so you can not delete it!";
-      echo "<script type='text/javascript'>alert('$message');</script>";
+      header("Location: project_dashboard.php?skill_exists=true");
+      exit();
 
     } else {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project Deleted Succesfully.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>';
+      header("Location: project_dashboard.php?delete_success=true");
+      exit();
     }
   }
 }
@@ -79,12 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $SQL = "UPDATE `Project` SET `CustomerId` = '$editcustid',`StartDate` = '$editStart',`EndDate` = '$editEnd',`Location`='$locationid6',`ProjectName`='$editProjectName',`VerticalId`=$verticalId,`IBUId`=$ibulId,`status`='$status' WHERE `Project`.`ProjectId` = '$editProjectId'";
     $result = mysqli_query($conn, $SQL);
     if ($result) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Your Project Updated Succesfully.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>';
+      header("Location: project_dashboard.php?success=true");
+      exit();
     } else {
       echo mysqli_error($conn);
     }
@@ -108,8 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
+  <link rel="stylesheet" href="styles/notification.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+
+
+  <script src="script/script.js"></script>
 
   <title>Project</title>
 </head>
@@ -117,38 +113,57 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   .tbl {
     width: 60%;
   }
+
   .modal-content {
     border: 2px solid white;
     backdrop-filter: blur(100px);
     border-radius: 10px;
   }
+
   .modal h5 {
     color: white;
   }
+
   .modal input {
     background: transparent;
     color: white;
     border: 2px solid white;
     color-scheme: dark;
   }
+
   .modal select {
     background: transparent;
     color: white;
     border: 2px solid white;
     padding: 5px;
   }
+
   .modal select option {
     background: black;
   }
-  .modal-body form{
+
+  .modal-body form {
     border: none;
   }
 </style>
 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body>
 
   <!------------------------ Navbar  ------------->
   <?php include('navbar.php') ?>
+
+  <!-- ---------------Notification -------------->
+  <?php
+  if (isset($_GET['success']) && $_GET['success'] == 'true') {
+    echo '<script>showNotification("Project Edited Successfully!");</script>';
+  } elseif (isset($_GET['user_exists']) && $_GET['user_exists'] == 'true') {
+    echo '<script>showNotification("Please release the users assigned to this project!","error");</script>';
+  } elseif (isset($_GET['skill_exists']) && $_GET['skill_exists'] == 'true') {
+    echo '<script>showNotification("Please release the skills mapped to this project!","error");</script>';
+  } elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'true') {
+    echo '<script>showNotification("Project Deleted Successfully!");</script>';
+  }
+  ?>
 
   <!------------------------- Modal ---------------->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -248,7 +263,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="form-group">
               <label for="editProjectName">ProjectName</label>
               <input name="editProjectName" class="form-control" id="editProjectName" rows="3"
-                placeholder="please add description..."></input>
+                placeholder="please add description..." style="background: transparent;" readonly></input>
             </div>
             <button type="submit" class="btn btn-primary" name="update">Update Project</button>
           </form>
@@ -259,13 +274,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </div>
 
 
+
   <h1 style="text-align:center; text-shadow: 2px 2px grey; margin-top:3%;">Project Details</h1>
   <div class="projectContainer">
     <table class="table tbl" id="myTable" style="color:black; border:2px solid black;">
       <thead>
         <tr>
 
-          <th scope="col">ProjectId</th>
+          <th scope="col">Sl No.</th>
           <th scope="col">Project</th>
           <th scope="col">Customer</th>
           <th scope="col">Start Date</th>
@@ -288,7 +304,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           $no++;
           if ($row['status'] == 'active') {
             echo "<tr>
-                    <td>" . $row['ProjectID'] . "</td>
+                    <td>" . $no . "</td>
+
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -297,13 +314,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['Vertical'] . "</td>
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
+                    <input type='hidden' id='ProjectID' value=" . $row['ProjectID'] . ">
                     <td>
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "' disabled><i class='bx bxs-trash'></i></button></td>
                   </tr>";
           } else {
             echo "<tr>
-                    <td>" . $row['ProjectID'] . "</td>
+                    <td>" . $no . "</td>
+
                     <td>" . $row['ProjectName'] . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['StartDate'] . "</td>
@@ -312,6 +331,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $row['Vertical'] . "</td>
                     <td>" . $row['IBUname'] . "</td>
                     <td>" . $row['status'] . "</td>
+                     <input type='hidden' id='ProjectID' value=" . $row['ProjectID'] . ">
                     <td>
                     <button class='edit btn'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn'  id='" . $row['ProjectID'] . "'><i class='bx bxs-trash'></i></button></td>
@@ -353,7 +373,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         //console.log("edit",);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        ProjectId = tr.getElementsByTagName("td")[0].innerText;
+        ProjectId = tr.getElementsByTagName("input")[0].value;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         CustomerId = tr.getElementsByTagName("td")[2].innerText;
         StartDate = tr.getElementsByTagName("td")[3].innerText;

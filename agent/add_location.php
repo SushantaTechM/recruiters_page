@@ -1,5 +1,4 @@
 <?php
-//hello
 if (!isset($_SESSION)) {
     // Start Session it is not started yet
     session_start();
@@ -10,6 +9,8 @@ if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
 }
 ?>
 <?php
+// $showAlert = false;
+// $showError = false;
 if (isset($_POST["add"])) {
     $locationName = $_POST["locationName"];
     $locationState = $_POST["locationState"];
@@ -25,9 +26,14 @@ if (isset($_POST["add"])) {
         $query = "INSERT INTO locationmaster (`LocationName`,`LocationState`,`LocationHeadName`,`LocationHeadEmail`,`LocationHeadMobile`) VALUES ('$locationName','$locationState','$locationHeadName','$locationHeadEmail','$locationHeadMobile');";
         $result = mysqli_query($conn, $query);
         if ($result) {
-            echo "<script>alert('Location Added Successfully!');</script>";
+            // $showAlert = true;
+            header("Location: add_location.php?success=true");
+            exit();
+
         } else {
-            echo "<script>alert('Same name location exists already!');</script>";
+            // $showError = true;
+            header("Location: add_location.php?success=false");
+            exit();
         }
     }
 }
@@ -43,79 +49,29 @@ if (isset($_POST["add"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Location</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/notification.css">
+    <link rel="stylesheet" href="styles/individual_css/add_location.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <script src="script/script.js"></script>
 </head>
-<style>
-    body {
-        background-image: url('../images/gradient.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-    .login-box h1 {
-        color: black;
-        font-weight: 600;
-        font-size: 40px;
-        text-align: center;
-        margin: 2rem 0;
-        /* text-shadow:4px 4px grey; */
-    }
 
-    .input-box input {
-        color: black;
-        font-weight: 200;
-        font-size: 15px;
-        /* text-align: center; */
-
-        border: 2px solid black;
-        /* border-radius: 10px; */
-        width: 50%;
-        padding: 0.5rem;
-        margin-bottom: 12px;
-    }
-
-    .btn {
-        display: block;
-        margin: 30px 5px;
-        width: fit-content;
-        font-size: 20px;
-        border: 2px solid black;
-        padding: 12px 30px;
-        border-radius: 10px;
-        text-decoration: none;
-        background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
-        color: white;
-        cursor: pointer;
-    }
-
-
-    .wrapper {
-        border: 2px solid black;
-        border-radius: 10px;
-        margin: auto;
-        width: 40%;
-        padding: 1rem;
-        margin-top: 2%;
-        backdrop-filter: blur(20px);
-        margin-bottom: 10%;
-    }
-
-    label {
-        color: black;
-        font-size: 20px;
-        margin-left: 20px;
-    }
-
-    .input-box input {
-        border-radius: 10px;
-        background-color: transparent;
-    }
-</style>
 
 <body>
     <!-- ----------------- Navbar --------------- -->
 
     <?php include('navbar.php') ?>
 
+    <!-- ---------------Notification -------------->
+    <?php
+    if (isset($_GET['success']) && $_GET['success'] == 'true') {
+        echo '<script>showNotification("Location Added Successfully!");</script>';
+    }
+    elseif (isset($_GET['success']) && $_GET['success'] == 'false') {
+        echo '<script>showNotification("Location Already Exists!","error");</script>';
+    }
+    ?>
     <!-- ------------- Form --------------- -->
 
     <div class="wrapper">
@@ -124,29 +80,32 @@ if (isset($_POST["add"])) {
             <form method="post" action="add_location.php">
                 <div class="input-box">
                     <label for="locationName">Name &nbsp;</label>
-                    <input type="text" name="locationName" id="locationName" required style="margin-left:100px">
+                    <input type="text" name="locationName" placeholder="Enter Name" id="locationName" required
+                        style="margin-left:100px">
 
                 </div>
                 <div class="input-box">
                     <label for="locationState">State &nbsp;</label>
-                    <input type="text" name="locationState" id="locationState" required style="margin-left:107px">
+                    <input type="text" name="locationState" id="locationState" placeholder="Enter State name" required
+                        style="margin-left:107px">
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadName">Head Name &nbsp;</label>
                     <input type="text" name="locationHeadName" id="locationHeadName" style="margin-left:47px"
-                        required>
+                        placeholder="Enter Head Name" required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadEmail">Head Email &nbsp;</label>
-                    <input type="text" name="locationHeadEmail" id="locationHeadEmail" style="margin-left:51px"
-                        required>
+                    <input type="email" name="locationHeadEmail" id="locationHeadEmail" style="margin-left:51px"
+                        placeholder="Enter Email Id" required>
 
                 </div>
                 <div class="input-box">
                     <label for="locationHeadMobile">Mobile Number &nbsp;</label>
-                    <input type="text" name="locationHeadMobile" style="margin-left:20px"  placeholder="Enter Mobile Number" id="locationHeadMobile" required>
+                    <input type="text" name="locationHeadMobile" style="margin-left:20px"
+                        placeholder="Enter Mobile Number" id="locationHeadMobile" required>
 
                 </div>
                 <div class="button-container" style="display:flex; margin-left: 130px">
@@ -159,7 +118,7 @@ if (isset($_POST["add"])) {
 
 
 
-    <script src="script/script.js"></script>
+    
 </body>
 
 </html>

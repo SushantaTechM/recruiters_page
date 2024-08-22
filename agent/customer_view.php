@@ -140,12 +140,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="modal-body">
           <form action="customer_view.php" class="" method="post">
             <div class="form-group">
-              <label for="editCustomerId">Customer</label>
+              <!-- <label for="editCustomerId">Customer</label> -->
 
 
-              <input id='editCustomerId'
-                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"
-                name='editCustomerId' value='<?php $id ?>' readonly>
+              <input type='hidden' id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
+
 
 
             </div>
@@ -195,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <table id="example" class="display wrapper" style=>
       <thead>
         <tr>
-          <th>CustomerId</th>
+         <th>Sl No.</th>
           <th>CustomerName</th>
           <th>Location</th>
           <th scope="col">Action</th>
@@ -213,9 +212,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             while ($row = $result->fetch_assoc()) {
               $no++;
               echo "<tr>
-                    <td>" . $row['CustomerId'] . "</td>
+                    <td>" . $no . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['LocationName'] . "</td>
+                    <input type='hidden' id='CustomerId' value=" . $row['CustomerId'] . ">
                     <td>
                     <button class='edit btn'  id='" . $row['CustomerId'] . "'><i class='bx bx-edit-alt'></i></button>
                     <button class='delete btn' id='" . $row['CustomerId'] . "'><i class='bx bxs-trash'></i></button></td>
@@ -244,7 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           console.log("edit",);
           tr = e.target.parentNode.parentNode.parentNode;
           // console.log(tr);
-          CustomerId = tr.getElementsByTagName("td")[0].innerText;
+          CustomerId = tr.getElementsByTagName("input")[0].value;
           CustomerName = tr.getElementsByTagName("td")[1].innerText;
           LocationName = tr.getElementsByTagName("td")[2].innerText;
 

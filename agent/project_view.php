@@ -307,43 +307,46 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
     </div>
   </div>
- 
- 
- 
- 
-  <div class="projectContainer">
-    <table class="table " style="color: black; border:2px solid black;" id="myTable">
-      <thead>
-        <tr>
- 
-          <th scope="col" style="color: black">ProjectId</th>
-          <th scope="col" style="color: black">Project</th>
-          <th scope="col" style="color: black">SkillName</th>
-          <th scope="col" style="color: black">RequiredHeadcount</th>
-          <th scope="col" style="color: black">fullfill_headcount</th>
- 
- 
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
- 
-      <b>
-        <?php
- 
-        $sql = "SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-          $no = 0;
-          // output data of each row
-          while ($row = $result->fetch_assoc()) {
-            $no++;
-            echo "<tr>
-                  <td>" . $row['ProjectId'] . "</td>
+
+
+
+
+
+<div class="projectContainer">
+      <table class="table " id="myTable">
+        <thead>
+          <tr>
+        
+            <th scope="col">Sl No.</th>
+            <th scope="col">Project</th>
+            <th scope="col">Skill Name</th>
+            <th scope="col">Required Headcount</th>
+            <th scope="col">Fullfill Headcount</th>
+          
+            
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+
+        <b>
+          <?php
+         
+          $sql="SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            $no = 0;
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+              $no++;
+              echo "<tr>
+                  <td>" . $no . "</td>
+
                   <td>" . $row['ProjectName'] . "</td>
                   <td>" . $row['Skillname'] . "</td>
                   <td>" . $row['required_headcount'] . "</td>
                   <td>" . $row['fullfill_headcount'] . "</td>
                   <input type='hidden' id='skillid' value=" . $row['SkillId'] . ">
+                  <input type='hidden' id='ProjectId' value=" . $row['ProjectId'] . ">
                   <td>
                   <button class='edit btn' id='" . $row['SkillId'] . "'><i class='bx bx-edit-alt'></i></button>
                   <button class='delete btn'  id='skillid=" . $row['SkillId'] . "projectId=" . $row['ProjectId'] . "'><i class='bx bxs-trash'></i></button></td>
@@ -384,7 +387,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         console.log("edit", );
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        ProjectId = tr.getElementsByTagName("td")[0].innerText;
+        ProjectId =tr.getElementsByTagName("input")[0].value ;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         SkillName = tr.getElementsByTagName("td")[2].innerText;
         RequiredHeadcount = tr.getElementsByTagName("td")[3].innerText;

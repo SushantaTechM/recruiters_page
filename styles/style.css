@@ -1,15 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    /* background-image: url("images/p (1).jpg");  */
-     /* background-color: red;  */
+    background:url('../images/gradient.jpg') no-repeat; 
+    background-position:center; 
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* height: 100vh; */  
 }
+
 nav{
     background: transparent;
 }
@@ -23,21 +18,16 @@ nav{
     background-position: center;
 }
  
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;  
-    padding: 14px 25px 0 25px;
-}
+
  
-.logo {
+/* .logo {
     font-size: 18px;
     font-weight: bold;
-}
+} */
  
-.logo span {
+/* .logo span {
     color: red;
-}
+} */
  
 .login-toggle {
     display: flex;

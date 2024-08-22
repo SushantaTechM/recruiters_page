@@ -1,5 +1,5 @@
 <?php
-include "../partials/_login_header.php";
+include "../partials/_registration_header.php";
 
 session_start();
 if(!isset($_SESSION['login']))
