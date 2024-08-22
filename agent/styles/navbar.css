@@ -19,7 +19,7 @@
 .nav-links > a > button {
   color: white;
   background: transparent;
-  padding: 0.8rem 1rem;
+  /* padding: 0.8rem 1rem; */
   cursor: pointer;
 }
 .tab {
