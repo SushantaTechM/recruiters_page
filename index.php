@@ -1,4 +1,5 @@
 <?php
+include "database/config.php";
 $showAlert = false;
 $showError = false;
 
