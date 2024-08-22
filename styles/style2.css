@@ -81,7 +81,12 @@ body {
     border-radius: 10px;
     border: 2px black;
 }
-
+.popup.fade-out{
+    opacity: 0;
+}
+.popup1.fade-out{
+    opacity: 0;
+}
 
 /* index.php */
 .wrapper .remeber-forgot {

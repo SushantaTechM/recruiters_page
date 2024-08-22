@@ -1,6 +1,6 @@
 <?php
  
- 
+
 if (!isset($_SESSION)) {
   // Start Session it is not started yet
   session_start();
@@ -24,31 +24,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $checkSkillName = "SELECT * FROM `skillmaster` WHERE `SkillName`='$addSkill'";
   $res7 = mysqli_query($conn, $checkSkillName);
   if ($res7->num_rows > 0) {
-    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Alert!</strong> The skill name already exists so you can not add the same skill.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>';
+    header("Location: skill.php?success=false");
+    exit();
   } else {
     $query = "INSERT INTO `skillmaster`( `SkillName`, `SkillDescription`) VALUES ('$addSkill','$skillDescription')";
     $result = mysqli_query($conn, $query);
  
  
     if ($result) {
-      $showAlert = true;
+      header("Location: skill.php?success=true");
+      exit();
     } else {
       echo mysqli_error($conn);
     }
-    if ($showAlert) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> Skill is added succesfully.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    </div>';
-      // echo "<a href='/recruiters_page/agent/dashboard.php'>back</a>";
-    }
+    
   }
 }
  
@@ -62,18 +51,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Recruitment Portal</title>
-  <!-- Bootstrap CSS -->
-  <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+  
   <link rel="stylesheet" href="styles/index.css">
-  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/notification.css">
+
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- 
- 
-  <!-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script> -->
-  <!-- <script src="script/dashboard.js"></script> -->
- 
+  
+  <script src="script/script.js"></script>
  
   <title>Skill</title>
 </head>
@@ -96,13 +83,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       padding: 10px 30px; 
     }
 </style>
- 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
- 
+
+
+<body>
  
   <!---------------- Navbar  -----------==-->
  
   <?php include('navbar.php') ?>
+
+   <!-- ---------------Notification -------------->
+   <?php
+    if (isset($_GET['success']) && $_GET['success'] == 'true') {
+        echo '<script>showNotification("Skill Added Successfully!");</script>';
+    }
+    elseif (isset($_GET['success']) && $_GET['success'] == 'false') {
+        echo '<script>showNotification("Skill Already Exists!","error");</script>';
+    }
+    ?>
+
+  <!-- -------------Container-----------  -->
  
   <div class="container" style="width: 40%; margin-top: 7%; background:transparent; border: 2px solid black; backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2); color: white; border-radius: 10px; padding: 30px 40px;">
@@ -124,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
  
     </form>
-    <script src="script/script.js"></script>
+    
   </div>
  
  

@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
   </style>
 </head>
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body>
 
 
   <!-- ----------------- Navbar --------------- -->
@@ -252,10 +252,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           <label for="headcount">Required Headcount</label>&emsp;
           <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount"
             id="skill" style="height:40px;">
-          <button type="button" class="remove-skill-btn">Remove</button>
+            <button type="button" id="addSkillBtn">+</button><br><br>
         </div>
       </div>
-      <button type="button" id="addSkillBtn">+</button><br><br>
+      
 
       <button type="submit" class="btn btn-primary">Add Project</button>
     </form>
@@ -288,7 +288,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           </select>&emsp;&emsp;&emsp;
           <label for="headcount">Required Headcount</label>&emsp;
           <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount">
-          <button type="button" class="remove-skill-btn">Remove</button>
+          <button type="button" class="remove-skill-btn">-</button>
         </div>
       `;
 

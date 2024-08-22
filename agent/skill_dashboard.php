@@ -16,23 +16,15 @@ $outcome1 = mysqli_query($conn, $sql1);
 ?>
 <?php
 
-  if (isset($_GET["delete"])) {
-    $id = $_GET["delete"];
-    var_dump($id);
-    $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
-    $res4 = mysqli_query($conn, $cid);
-    
- 
-   
- 
-    if($res4->num_rows>0){
-      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+if (isset($_GET["delete"])) {
+  $id = $_GET["delete"];
+  // var_dump($id);
+  $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
+  $res4 = mysqli_query($conn, $cid);
 
-          There are some projects assigned with this skill so you can not delete this skill.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>';
+  if ($res4->num_rows > 0) {
+    header("Location: skill_dashboard.php?delete_success=false");
+    exit();
 
   } else {
     $query = "DELETE FROM `skillmaster` where `skillmaster`.`skillId` = '$id'";
@@ -40,73 +32,28 @@ $outcome1 = mysqli_query($conn, $sql1);
     if (!$result) {
       die(mysqli_error($conn));
     } else {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-
-         Your Skill Deleted Succesfully.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>';
+        header("Location: skill_dashboard.php?delete_success=true");
+        exit();
 
     }
   }
- 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-      $editSkillName = $_POST['editSkillName'];
-        $id = $_POST['editSkillId'];
-       
-        $desc = $_POST['editdescription'];
-      $cid = "SELECT * FROM `projectskilldetails` WHERE `projectskilldetails`.`skill`=$id";
-      $res4 = mysqli_query($conn, $cid);
-      if($res4->num_rows>0){
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+}
 
 
-            There are some projects assigned with this skill so you can not edit this skill.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>';
+if (isset($_POST["update"])) {
+
+  $editSkillName = $_POST['editSkillName'];
+  $editSkillId = $_POST['editSkillId'];
+  $editdescription = $_POST['editdescription'];
+
+  $SQL = "UPDATE `skillmaster` SET `SkillName` = '$editSkillName', `SkillDescription`='$editdescription' WHERE `skillmaster`.`SkillId` = '$editSkillId'";
+  $result = mysqli_query($conn, $SQL);
+  if ($result) {
+    header("Location: skill_dashboard.php?success=true");
+    exit();
 
   } else {
-
-    if (isset($_POST["update"])) {
-
-      $editSkillName = $_POST['editSkillName'];
-      $editSkillId = $_POST['editSkillId'];
-      $editdescription = $_POST['editdescription'];
-
-      //Check if the new skill name already exists or not
-      $checkSkillName = "SELECT * FROM `skillmaster` WHERE `SkillName`='$editSkillName'";
-
-      $res7 = mysqli_query($conn, $checkSkillName);
-      if ($res7->num_rows > 0) {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-
-          The skill name already exists so you can not add the same skill.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>';
-
-      } else {
-
-        $SQL = "UPDATE `skillmaster` SET `SkillName` = '$editSkillName', `SkillDescription`='$editdescription' WHERE `skillmaster`.`SkillId` = '$editSkillId'";
-        $result = mysqli_query($conn, $SQL);
-        if ($result) {
-          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-
-                    Your Skill Updated Succesfully.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>';
-
-        } else {
-          echo mysqli_error($conn);
-        }
-      }
-    }
+    echo mysqli_error($conn);
   }
 }
 
@@ -128,13 +75,13 @@ $outcome1 = mysqli_query($conn, $sql1);
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
-  <link rel="stylesheet" href="styles/project.css">
-  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
-  <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+  <link rel="stylesheet" href="styles/notification.css">
   <title>Project</title>
+
+  <script src="script/script.js"></script>
 </head>
 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body>
   <style>
     .modal-body .form-group input {
       background: transparent;
@@ -143,6 +90,21 @@ $outcome1 = mysqli_query($conn, $sql1);
   </style>
   <!------------------ Navbar  --------------->
   <?php include('navbar.php') ?>
+
+
+  <!-- ---------------Notification -------------->
+  <?php
+    if (isset($_GET['success']) && $_GET['success'] == 'true') {
+        echo '<script>showNotification("Skill Edited Successfully!");</script>';
+    }
+    elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'false') {
+        echo '<script>showNotification("Skill is assigned, You cannot delete it!","error");</script>';
+    }
+    elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'true') {
+      echo '<script>showNotification("Skill deleted successfully!");</script>';
+    }
+    ?>
+    <!-- ------------- Modal --------------- -->
 
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -160,8 +122,9 @@ $outcome1 = mysqli_query($conn, $sql1);
           <form action="skill_dashboard.php" class="" method="post">
 
             <div class="form-group">
-              <input type='hidden' id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly style="padding:5px; border:1px solid white; border-radius:10px;">
- 
+              <input type='hidden' id='editSkillId' name='editSkillId' value='<?php $id ?>' readonly
+                style="padding:5px; border:1px solid white; border-radius:10px;">
+
 
             </div>
 
@@ -170,7 +133,7 @@ $outcome1 = mysqli_query($conn, $sql1);
 
               <label for="editSkillName">Skill Name</label>
               <input name="editSkillName" class="form-control" id="editSkillName" rows="3"
-                placeholder="please update skill..."></input>
+                placeholder="please update skill..." readonly></input>
             </div>
             <div class="form-group">
 
@@ -195,7 +158,7 @@ $outcome1 = mysqli_query($conn, $sql1);
       <table class="table " id="myTable" style="border:2px solid black; color:black;">
         <thead>
           <tr>
- 
+
             <th scope="col">Sl No.</th>
 
             <th scope="col">Skill Name</th>
@@ -204,7 +167,7 @@ $outcome1 = mysqli_query($conn, $sql1);
           </tr>
         </thead>
 
-        <b>
+        <tbody>
           <?php
           $sql = "SELECT `SkillId`, `SkillName`,`SkillDescription` FROM `skillmaster`";
           $result = $conn->query($sql);
@@ -218,7 +181,7 @@ $outcome1 = mysqli_query($conn, $sql1);
                  
                   <td>" . $row['SkillName'] . "</td>
 
-                  <td>" . $row['SkillDescription']. "</td>
+                  <td>" . $row['SkillDescription'] . "</td>
                   <input type='hidden' id='SkillId' value=" . $row['SkillId'] . ">
 
                  
@@ -236,7 +199,7 @@ $outcome1 = mysqli_query($conn, $sql1);
           }
           ?>
 
-          </tbody>
+        </tbody>
       </table>
     </div>
   </div>
@@ -268,7 +231,7 @@ $outcome1 = mysqli_query($conn, $sql1);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
         SkillId = tr.getElementsByTagName("input")[0].value;
-       
+
         SkillName = tr.getElementsByTagName("td")[1].innerText;
         SkillDescription = tr.getElementsByTagName("td")[2].innerText;
 
@@ -305,7 +268,7 @@ $outcome1 = mysqli_query($conn, $sql1);
       });
     });
   </script>
-  <script src="script/script.js"></script>
+
   <!-- sushanta -->
 </body>
 
