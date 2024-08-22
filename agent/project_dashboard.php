@@ -82,8 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
   }
 }
-
-
 ?>
 
 <!doctype html>
@@ -95,16 +93,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+  <!------------------ My CSS ------------>
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
   <link rel="stylesheet" href="styles/notification.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
-
-
+  
+  <!-------------- My JavaScript ----------->
   <script src="script/script.js"></script>
 
   <title>Project</title>
@@ -152,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <!------------------------ Navbar  ------------->
   <?php include('navbar.php') ?>
 
+
   <!-- ---------------Notification -------------->
   <?php
   if (isset($_GET['success']) && $_GET['success'] == 'true') {
@@ -164,6 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     echo '<script>showNotification("Project Deleted Successfully!");</script>';
   }
   ?>
+  
 
   <!------------------------- Modal ---------------->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
