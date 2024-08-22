@@ -1,0 +1,30 @@
+.table {
+    color: black;
+    border: 2px solid black;
+    margin: auto;
+    width: 80%;
+    margin-top: 5%;
+    backdrop-filter: blur(20px);
+    margin-bottom: 5%;
+}
+
+.modal-content {
+    background: transparent;
+    color: white;
+    backdrop-filter: blur(120px);
+    font-size: 20px;
+}
+
+.form-group input {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+}
+
+h1 {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 3%;
+}
