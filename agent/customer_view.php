@@ -50,15 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $editCustomerName = $_POST['editCustomerName'];
     $editLocationName = $_POST['editLocationName'];
+    $editCustomerEmail = $_POST['editCustomerEmail'];
+    $editCustomerPhone = $_POST['editCustomerPhone'];
     $query6 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$editLocationName'";
     $result6 = mysqli_query($conn, $query6);
     $row6 = mysqli_fetch_assoc($result6);
     $locationid6 = $row6['LocationId'];
 
+    // var_dump($editCustomerId, $editCustomerName, $locationid6, $editCustomerEmail, $editCustomerPhone);
 
-
-    $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6' WHERE CustomerId='$editCustomerId'";
+    $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6', `Email`='$editCustomerEmail', `Phone_no`='$editCustomerPhone' WHERE CustomerId='$editCustomerId'";
     $result = mysqli_query($conn, $SQL);
+    // print_r($result);
     if ($result) {
       echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
               <strong>Success!</strong> Customer Updated Succesfully.
@@ -173,6 +176,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               </select>
             </div>
 
+            <div class="form-group">
+              <label for="editCustomerEmail">Email</label>
+
+              <input name="editCustomerEmail"
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white" type="text"
+                class="form-control" id="editCustomerEmail" aria-describedby="emailHelp"
+                placeholder="Enter Customer Email">
+            </div>
+
+            <div class="form-group">
+              <label for="editCustomerPhone">Phone No</label>
+
+              <input name="editCustomerPhone"
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white" type="text"
+                class="form-control" id="editCustomerPhone" aria-describedby="emailHelp"
+                placeholder="Enter Customer Phone No">
+            </div>
+
 
             <button type="submit" class="btn btn-primary" name="update">Update </button>
           </form>
@@ -197,6 +218,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
          <th>Sl No.</th>
           <th>CustomerName</th>
           <th>Location</th>
+          <th>Email</th>
+          <th>Phone No</th>
           <th scope="col">Action</th>
 
         </tr>
@@ -204,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <tbody>
         <b>
           <?php
-          $sql = "SELECT cm.CustomerId, cm.CustomerName,l.LocationName FROM customermaster cm, locationmaster l where cm.CustomerLocation=l.LocationId";
+          $sql = "SELECT cm.CustomerId, cm.CustomerName,l.LocationName, cm.Email, cm.Phone_no  FROM customermaster cm, locationmaster l where cm.CustomerLocation=l.LocationId";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
             $no = 0;
@@ -215,6 +238,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $no . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['LocationName'] . "</td>
+                    <td>" . $row['Email'] . "</td>
+                    <td>" . $row['Phone_no'] . "</td>
                     <input type='hidden' id='CustomerId' value=" . $row['CustomerId'] . ">
                     <td>
                     <button class='edit btn'  id='" . $row['CustomerId'] . "'><i class='bx bx-edit-alt'></i></button>
@@ -247,10 +272,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           CustomerId = tr.getElementsByTagName("input")[0].value;
           CustomerName = tr.getElementsByTagName("td")[1].innerText;
           LocationName = tr.getElementsByTagName("td")[2].innerText;
+          CustomerEmail = tr.getElementsByTagName("td")[3].innerText;
+          CustomerPhone = tr.getElementsByTagName("td")[4].innerText;
 
           editCustomerId.value = CustomerId;
           editCustomerName.value = CustomerName;
           editLocationName.value = LocationName;
+          editCustomerEmail.value = CustomerEmail;
+          editCustomerPhone.value = CustomerPhone;
 
           $('#myModal').modal('toggle')
         })
