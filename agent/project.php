@@ -48,28 +48,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`VerticalId`,`IBUId`,`ProjectName`,`status`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$verticalid','$IBUid','$projectname','$status')";
   // var_dump($query);
-  $result = mysqli_query($conn, $query);
+  try {
+    $result = mysqli_query($conn, $query);
 
-  $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
-  $project_result = mysqli_query($conn, $project_query);
-  $project_row = mysqli_fetch_assoc($project_result);
-  $projectid = $project_row['ProjectId'];
+    $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
+    $project_result = mysqli_query($conn, $project_query);
+    $project_row = mysqli_fetch_assoc($project_result);
+    $projectid = $project_row['ProjectId'];
 
-  $skills = $_POST['title3'];
-  $headcounts = $_POST['headcount'];
+    $skills = $_POST['title3'];
+    $headcounts = $_POST['headcount'];
 
-  for ($x = 0; $x < count($skills); $x++) {
-    $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
-    $project_result2 = mysqli_query($conn, $project_query2);
+    for ($x = 0; $x < count($skills); $x++) {
+      $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
+      $project_result2 = mysqli_query($conn, $project_query2);
+    }
 
-  }
-
-  if ($result) {
-    header("Location: project.php?success=true");
-    exit();
-  } else {
-    header("Location: project.php?success=false");
-    exit();
+    if ($result) {
+      header("Location: project.php?success=true");
+      exit();
+    }
+  } catch (mysqli_sql_exception $e) {
+    if ($e->getCode() == 1062) { // 1062 is the error code for duplicate entry
+      header("Location: project.php?error=duplicate");
+      exit();
+    } else {
+      // Handle other types of errors
+      header("Location: project.php?error=unknown");
+      exit();
+    }
   }
 
 
@@ -174,8 +181,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <?php
   if (isset($_GET['success']) && $_GET['success'] == 'true') {
     echo '<script>showNotification("Your Project created succesfully.!");</script>';
-  } elseif (isset($_GET['success']) && $_GET['success'] == 'false') {
+  } elseif (isset($_GET['error']) && $_GET['error'] == 'duplicate') {
     echo '<script>showNotification("Project Name Already Exists!","error");</script>';
+  }
+  elseif (isset($_GET['error']) && $_GET['error'] == 'unknown') {
+    echo '<script>showNotification("Unknown error occurred!","error");</script>';
   }
   ?>
   <!-- ------------- Form --------------- -->
