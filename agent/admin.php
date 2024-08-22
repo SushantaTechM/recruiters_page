@@ -15,24 +15,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $editType = $_POST["editType"];
 
 
-    $editVertical = $_POST['editVertical'];
-    $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$editVertical'";
-    $result6 = mysqli_query($conn, $query6);
-    $row6 = mysqli_fetch_assoc($result6);
-    $locationid6 = $row6['id'];
+    $editVertical = $_POST['editVerticalId'];
+    // $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$editVertical'";
+    // $result6 = mysqli_query($conn, $query6);
+    // $row6 = mysqli_fetch_assoc($result6);
+    // $locationid6 = $row6['id'];
 
-    $editIBU = $_POST['editIBU'];
-    $query6 = "SELECT * FROM `ibumaster` WHERE `IBUname` LIKE '$editIBU'";
-    $result6 = mysqli_query($conn, $query6);
-    $row6 = mysqli_fetch_assoc($result6);
-    $IBU = $row6['id'];
+    $editIBU = $_POST['editIBUId'];
+    // $query6 = "SELECT * FROM `ibumaster` WHERE `IBUname` LIKE '$editIBU'";
+    // $result6 = mysqli_query($conn, $query6);
+    // $row6 = mysqli_fetch_assoc($result6);
+    // $IBU = $row6['id'];
 
     //   $editProjectName = $_POST['editProjectName'];
     $editUserId = $_POST['editUserId'];
     // echo $editTitle,$editDescription,$editSno;
 
-    $SQL = "UPDATE `users` SET `Type` = '$editType',`VerticalId`='$locationid6',`IBUId`='$IBU' WHERE `Users`.`UserId` = '$editUserId'";
+    $SQL = "UPDATE `users` SET `Type` = '$editType',`VerticalId`='$editVertical',`IBUId`='$editIBU' WHERE `Users`.`UserId` = '$editUserId'";
     $result = mysqli_query($conn, $SQL);
+
+    // var_dump($SQL);
     if ($result) {
       echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                   <strong>Success!</strong> Your Project Updated Succesfully.
@@ -149,39 +151,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               </select>
             </div>
             <div class="form-group">
-              <label for="editVertical">Vertical</label>
-
-              <select name="editVertical" id="editVertical" required>
-                <option value="">Please select Vertical</option>
+            <label for="editVerticalId">Vertical</label>
+              <select name="editVerticalId" id="editVerticalId" onchange="fetchIBUs()"> 
+                <option value="" disabled selected hidden>Please select Vertical</option> 
                 <?php
-                $sql4 = "SELECT * from `verticalmaster`";
-                $outcome4 = mysqli_query($conn, $sql4);
-                while ($row = mysqli_fetch_assoc($outcome4)) {
-                  $Customer = $row['Vertical'];
-                  echo "<option value='$Customer'>$Customer</option>";
+                $sql5 = "SELECT * from `verticalmaster`";
+                $vertical_outcome = mysqli_query($conn, $sql5);
+                while ($row = mysqli_fetch_assoc($vertical_outcome)) {
+                  $VerticalId = $row['id'];
+                  $Vertical = $row['Vertical'];
+                  echo "<option value='$VerticalId'>$Vertical</option>";
                 }
                 ?>
               </select>
             </div>
             <div class="form-group">
-              <label for="editIBU">IBU</label>
-
-              <select name="editIBU" id="editIBU">
+            <label for="editIBUId">IBU</label>
+              <select name="editIBUId" id="editIBUId">
                 <option value="" disabled selected hidden>Please select IBU</option>
-                <?php
-                $sql4 = "SELECT * from `ibumaster`";
-                $outcome4 = mysqli_query($conn, $sql4);
-                while ($row = mysqli_fetch_assoc($outcome4)) {
-                  $Customer = $row['IBUname'];
-                  echo "<option value='$Customer'>$Customer</option>";
-                }
-                ?>
+                
               </select>
             </div>
 
            
             <!-- <button type="submit" class="btn btn-primary" name="update" style="background:lightgreen;">Update</button> -->
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
           </form>
         </div>
       </div>
@@ -325,13 +319,41 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // console.log(IBU)
         
         editType.value = Type;
-        editIBU.value = IBU;
-        editVertical.value = Vertical;
+        editIBUId.value = IBU;
+        editVerticalId.value = Vertical;
 
         editUserId.value = UserId;
         $('#myModal').modal('toggle')
       })
     })
+
+    function fetchIBUs(){
+      var verticalId = document.getElementById('editVerticalId').value;
+      var ibuSelect = document.getElementById('editIBUId');
+
+      //Clear previous options
+      ibuSelect.innerHTML = '<option value="" disabled selected hidden>Please select IBU</option>';
+
+      if(verticalId){
+        //create an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'fetch/fetch_ibumaster.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200){
+            var response = JSON.parse(xhr.responseText);
+            response.forEach(function(ibu){
+              var option = document.createElement('option');
+              option.value = ibu.id;
+              option.text = ibu.IBUname;
+              ibuSelect.appendChild(option);
+            });
+          }
+        };
+        xhr.send('verticalId=' + verticalId);
+      }
+
+    }
   </script>
 
 

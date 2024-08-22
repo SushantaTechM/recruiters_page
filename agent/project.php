@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $row5 = mysqli_fetch_assoc($result5);
   $locationid = $row5['LocationId'];
 
-  $verticalid = $_POST['Vertical'];
+  $verticalid = $_POST['editVerticalId'];
 
-  $IBUid = $_POST['IBU'];
+  $IBUid = $_POST['editIBUId'];
 
   $Startdate = $_POST['title4'];
   $Enddate = $_POST['title5'];
@@ -212,34 +212,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
       <br>
       <div class="form-group">
-        <label for="Vertical">Vertical</label>
-        <select name="Vertical" id="Vertical" style="width:290px; height:40px;">
-          <option value="" disabled selected hidden>Select Vertical Name</option>
-          <?php
-          $vertical_query = "SELECT * FROM `verticalmaster`";
-          $vertical_outcome = mysqli_query($conn, $vertical_query);
-          while ($row = mysqli_fetch_assoc($vertical_outcome)) {
-            $Customer = $row['id'];
-            $vertiical_name = $row['Vertical'];
-            echo "<option value='$Customer'>$vertiical_name</option>";
-          }
-          ?>
-        </select>
+      <label for="editVerticalId">Vertical</label>
+              <select name="editVerticalId" id="editVerticalId" onchange="fetchIBUs()" style="width:290px; height:40px;"> 
+                <option value="" disabled selected hidden>Please select Vertical</option> 
+                <?php
+                $sql5 = "SELECT * from `verticalmaster`";
+                $vertical_outcome = mysqli_query($conn, $sql5);
+                while ($row = mysqli_fetch_assoc($vertical_outcome)) {
+                  $VerticalId = $row['id'];
+                  $Vertical = $row['Vertical'];
+                  echo "<option value='$VerticalId'>$Vertical</option>";
+                }
+                ?>
+              </select>
       </div>
       <div class="form-group">
-        <label for="IBU">IBU</label>
-        <select name="IBU" id="IBU" style="width:314px; height:40px;">
-          <option value="" disabled selected hidden>Select IBU head</option>
-          <?php
-          $IBU_query = "SELECT * FROM `IBUmaster`";
-          $IBU_outcome = mysqli_query($conn, $IBU_query);
-          while ($row = mysqli_fetch_assoc($IBU_outcome)) {
-            $Customer = $row['id'];
-            $IBU_name = $row['IBUname'];
-            echo "<option value='$Customer'>$IBU_name</option>";
-          }
-          ?>
-        </select>
+      <label for="editIBUId">IBU</label>
+              <select name="editIBUId" id="editIBUId" style="width:314px; height:40px;">
+                <option value="" disabled selected hidden>Please select IBU</option>
+                
+              </select>
       </div>
 
       <div id="skillsContainer">
@@ -301,6 +293,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           event.target.parentElement.remove();
         }
       });
+
+      function fetchIBUs(){
+      var verticalId = document.getElementById('editVerticalId').value;
+      var ibuSelect = document.getElementById('editIBUId');
+
+      //Clear previous options
+      ibuSelect.innerHTML = '<option value="" disabled selected hidden>Please select IBU</option>';
+
+      if(verticalId){
+        //create an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'fetch/fetch_ibumaster.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200){
+            var response = JSON.parse(xhr.responseText);
+            response.forEach(function(ibu){
+              var option = document.createElement('option');
+              option.value = ibu.id;
+              option.text = ibu.IBUname;
+              ibuSelect.appendChild(option);
+            });
+          }
+        };
+        xhr.send('verticalId=' + verticalId);
+      }
+
+    }
     </script>
     <script src="script/script.js"></script>
   </div> <!-- sushanta -->

@@ -56,23 +56,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $editProjectId = $_POST['editProjectId'];
 
     $editVerticalId = $_POST["editVerticalId"];
-    $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$editVerticalId'";
-    $result6 = mysqli_query($conn, $query6);
-    $row6 = mysqli_fetch_assoc($result6);
-    $verticalId = $row6['id'];
+    // $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$editVerticalId'";
+    // $result6 = mysqli_query($conn, $query6);
+    // $row6 = mysqli_fetch_assoc($result6);
+    // $verticalId = $row6['id'];
 
 
     $editIBUId = $_POST["editIBUId"];
-    $query6 = "SELECT * FROM `ibumaster` WHERE `IBUname` LIKE '$editIBUId'";
-    $result6 = mysqli_query($conn, $query6);
-    $row6 = mysqli_fetch_assoc($result6);
-    $ibulId = $row6['id'];
+    // $query6 = "SELECT * FROM `ibumaster` WHERE `IBUname` LIKE '$editIBUId'";
+    // $result6 = mysqli_query($conn, $query6);
+    // $row6 = mysqli_fetch_assoc($result6);
+    // $ibulId = $row6['id'];
 
     $status = $_POST['editStatus'];
 
 
 
-    $SQL = "UPDATE `Project` SET `CustomerId` = '$editcustid',`StartDate` = '$editStart',`EndDate` = '$editEnd',`Location`='$locationid6',`ProjectName`='$editProjectName',`VerticalId`=$verticalId,`IBUId`=$ibulId,`status`='$status' WHERE `Project`.`ProjectId` = '$editProjectId'";
+    $SQL = "UPDATE `Project` SET `CustomerId` = '$editcustid',`StartDate` = '$editStart',`EndDate` = '$editEnd',`Location`='$locationid6',`ProjectName`='$editProjectName',`VerticalId`='$editVerticalId',`IBUId`= '$editIBUId',`status`='$status' WHERE `Project`.`ProjectId` = '$editProjectId'";
+    // var_dump($SQL);
     $result = mysqli_query($conn, $SQL);
     if ($result) {
       header("Location: project_dashboard.php?success=true");
@@ -221,15 +222,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
 
             <div class="form-group">
+              
               <label for="editVerticalId">Vertical</label>
-              <select name="editVerticalId" id="editVerticalId">
-                <option value="" disabled selected hidden>Please select Vertical</option>
+              <select name="editVerticalId" id="editVerticalId" onchange="fetchIBUs()"> 
+                <option value="" disabled selected hidden>Please select Vertical</option> 
                 <?php
                 $sql5 = "SELECT * from `verticalmaster`";
                 $vertical_outcome = mysqli_query($conn, $sql5);
                 while ($row = mysqli_fetch_assoc($vertical_outcome)) {
-                  $Customer = $row['Vertical'];
-                  echo "<option value='$Customer'>$Customer</option>";
+                  $VerticalId = $row['id'];
+                  $Vertical = $row['Vertical'];
+                  echo "<option value='$VerticalId'>$Vertical</option>";
                 }
                 ?>
               </select>
@@ -239,14 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <label for="editIBUId">IBU</label>
               <select name="editIBUId" id="editIBUId">
                 <option value="" disabled selected hidden>Please select IBU</option>
-                <?php
-                $sql6 = "SELECT * from `IBUmaster`";
-                $IBU_outcome = mysqli_query($conn, $sql6);
-                while ($row = mysqli_fetch_assoc($IBU_outcome)) {
-                  $Customer = $row['IBUname'];
-                  echo "<option value='$Customer'>$Customer</option>";
-                }
-                ?>
+                
               </select>
             </div>
 
@@ -422,6 +418,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
       })
     })
+
+    function fetchIBUs(){
+      var verticalId = document.getElementById('editVerticalId').value;
+      var ibuSelect = document.getElementById('editIBUId');
+
+      //Clear previous options
+      ibuSelect.innerHTML = '<option value="" disabled selected hidden>Please select IBU</option>';
+
+      if(verticalId){
+        //create an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'fetch/fetch_ibumaster.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200){
+            var response = JSON.parse(xhr.responseText);
+            response.forEach(function(ibu){
+              var option = document.createElement('option');
+              option.value = ibu.id;
+              option.text = ibu.IBUname;
+              ibuSelect.appendChild(option);
+            });
+          }
+        };
+        xhr.send('verticalId=' + verticalId);
+      }
+
+    }
   </script>
   <script src="script/script.js"></script>
   <!-- sushanta -->
