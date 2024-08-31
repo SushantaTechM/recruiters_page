@@ -17,13 +17,15 @@ if (isset($_GET["delete"])) {
   $cid = "SELECT * FROM `UserProjectDetails` where `UserProjectDetails`.`ProjectId` = '$id'";
   $res4 = mysqli_query($conn, $cid);
 
-  $query = "DELETE FROM `Project` WHERE `Project`.`ProjectId` = '$id'";
-  $result = mysqli_query($conn, $query);
-
   if ($res4->num_rows > 0) {
     header("Location: project_dashboard.php?user_exists=true");
     exit();
   } else {
+    $query1="DELETE FROM `ProjectSkillDetails` WHERE `ProjectSkillDetails`.`project` = '$id' and `ProjectSkillDetails`.`fullfill_headcount` = '0'";
+    $result1 = mysqli_query($conn, $query1);
+    
+    $query = "DELETE FROM `Project` WHERE `Project`.`ProjectId` = '$id'";
+    $result = mysqli_query($conn, $query);
     if (!$result) {
       // die(mysqli_error($conn));
       header("Location: project_dashboard.php?skill_exists=true");
@@ -93,7 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
@@ -101,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
   <link rel="stylesheet" href="styles/notification.css">
-  
+
   <!-------------- My JavaScript ----------->
   <script src="script/script.js"></script>
 
@@ -163,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     echo '<script>showNotification("Project Deleted Successfully!");</script>';
   }
   ?>
-  
+
 
   <!------------------------- Modal ---------------->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

@@ -13,8 +13,10 @@ if (isset($_POST["Login"])) {
         echo "Something went wrong";
     }
     $sql = "SELECT Type,UserId FROM `Users` WHERE Email LIKE '$email' AND Password = '$password'";
+    var_dump($sql);
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
+    var_dump($row);
 
     if ($row) {
         session_start();

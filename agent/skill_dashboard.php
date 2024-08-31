@@ -32,8 +32,8 @@ if (isset($_GET["delete"])) {
     if (!$result) {
       die(mysqli_error($conn));
     } else {
-        header("Location: skill_dashboard.php?delete_success=true");
-        exit();
+      header("Location: skill_dashboard.php?delete_success=true");
+      exit();
 
     }
   }
@@ -69,9 +69,14 @@ if (isset($_POST["update"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
+  <!------------------ Bootstrap CSS -------------->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- --------- Datatables CSS ----------------- -->
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+  <!-- -------------  My CSS  ------------------------->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="styles/index.css">
@@ -94,17 +99,15 @@ if (isset($_POST["update"])) {
 
   <!-- ---------------Notification -------------->
   <?php
-    if (isset($_GET['success']) && $_GET['success'] == 'true') {
-        echo '<script>showNotification("Skill Edited Successfully!");</script>';
-    }
-    elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'false') {
-        echo '<script>showNotification("Skill is assigned, You cannot delete it!","error");</script>';
-    }
-    elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'true') {
-      echo '<script>showNotification("Skill deleted successfully!");</script>';
-    }
-    ?>
-    <!-- ------------- Modal --------------- -->
+  if (isset($_GET['success']) && $_GET['success'] == 'true') {
+    echo '<script>showNotification("Skill Edited Successfully!");</script>';
+  } elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'false') {
+    echo '<script>showNotification("Skill is assigned, You cannot delete it!","error");</script>';
+  } elseif (isset($_GET['delete_success']) && $_GET['delete_success'] == 'true') {
+    echo '<script>showNotification("Skill deleted successfully!");</script>';
+  }
+  ?>
+  <!-- ------------- Modal --------------- -->
 
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

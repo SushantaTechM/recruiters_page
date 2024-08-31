@@ -55,16 +55,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment Portal</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <script src="../script.js"></script>
+
+    <!------------------ Bootstrap CSS -------------->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- --------- Datatables CSS ----------------- -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+    <!-- -------------  My CSS  ------------------------->
+
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="styles/navbar.css">
+    <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
     <!-- <link rel="stylesheet" href="styles/project.css"> -->
-    <!-- <link rel="stylesheet" href="styles/notification.css"> -->
-    <link rel="stylesheet" href="styles/dashboard.css">
+
+    <link rel="stylesheet" href="styles/notification.css">
+    <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+
+    <!--  -- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <!-- ---------------My JavaScript-------------- -->
+    <script src="script/script.js"></script>
 
 <style>
   .modal-header {
@@ -119,10 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </style>
 </head>
 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover; color:black;">
-
+<body>
+  <!----------------- Navbar  ---------->
   <?php include('navbar.php') ?>
 
+
+
+  <!-- --------------Modal ---------- -->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -336,7 +352,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-  <script src="script/script.js"></script>
+  
   <!-- <script src="script/modal.js"></script> -->
   <script src="script/dashboard.js"></script>
 </body>

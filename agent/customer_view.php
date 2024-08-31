@@ -80,9 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Document</title>
+  
+  <!------------------ Bootstrap CSS -------------->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- --------- Datatables CSS ----------------- -->
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+  <!-- -------------  My CSS  ------------------------->
   <link rel="stylesheet" href="styles/index.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
@@ -143,7 +149,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <!-- <label for="editCustomerId">Customer</label> -->
 
 
-              <input type='hidden' id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
+              <input type='hidden' id='editCustomerId'
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"
+                name='editCustomerId' value='<?php $id ?>' readonly>
 
 
 
@@ -194,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <table id="example" class="display wrapper" style=>
       <thead>
         <tr>
-         <th>Sl No.</th>
+          <th>Sl No.</th>
           <th>CustomerName</th>
           <th>Location</th>
           <th scope="col">Action</th>

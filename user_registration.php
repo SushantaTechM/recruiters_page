@@ -21,19 +21,22 @@ if (isset($_POST["login"])) {
         if ($password == $c_password) {
             $query = "INSERT INTO `users`(`Username`, `Email`, `Password`, `Phone`, `Type`)";
             $query .= "VALUES ('$user_name','$email','$password','$mobile','$type')";
-
-            $result = mysqli_query($connection, $query);
-            if ($result) {
-                $showAlert = true;
-            } else {
-                if (substr($connection->error, 0, 10) == 'Duplicate ') {
+            
+            try {
+                $result = mysqli_query($connection, $query);
+                if ($result) {
+                    $showAlert = true;
+                }
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() == 1062) { // 1062 is the error code for duplicate entry
                     $showError = true;
                 } else {
+                    // Handle other types of errors
                     echo $connection->error;
                 }
             }
+
         } else {
-            echo "<h1 id='popup'class='popup'>Password not matched!</h1>";
             $showError = true;
         }
     }
@@ -53,14 +56,14 @@ if (isset($_POST["login"])) {
 </head>
 
 
-<body >
+<body>
     <?php include "partials/_registration_header.php"; ?>
     <div class="container">
         <?php
         if ($showAlert) {
             echo "<h1 class='popup1'>Account created successfully!</h1>";
         }
-        if($showError){
+        if ($showError) {
             echo "<h1 id='popup'class='popup'>User already exists!</h1>";
         }
         ?>
@@ -97,54 +100,54 @@ if (isset($_POST["login"])) {
                     <button type="submit" name="login" class="login-btn btn">REGISTER NOW</button>
 
                 </form>
-                
+
             </div>
         </div>
     </div>
     <script>
-                    var password = document.getElementById("password");
-                    var confirmPassword = document.getElementById("c_password");
+        var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("c_password");
 
 
-                    function checkPasswordMatch() {
-                        var errorMessage = document.getElementById("error-message");
+        function checkPasswordMatch() {
+            var errorMessage = document.getElementById("error-message");
 
-                        if (password.value !== confirmPassword.value) {
-                            errorMessage.textContent = "Passwords do not match!";
-                            return false;
-                        }
-                        errorMessage.textContent = "";
-                        return true;
-                    }
+            if (password.value !== confirmPassword.value) {
+                errorMessage.textContent = "Passwords do not match!";
+                return false;
+            }
+            errorMessage.textContent = "";
+            return true;
+        }
 
-                    confirmPassword.addEventListener('input', checkPasswordMatch);
+        confirmPassword.addEventListener('input', checkPasswordMatch);
 
-                    //hiding notification
-                    document.addEventListener('DOMContentLoaded', function() {
-                        setTimeout(function() {
-                            var popups1 = document.querySelectorAll('.popup1');
-                            popups1.forEach(function(popup1) {
-                                popup1.remove();
-                            });
-                            var popups = document.querySelectorAll('.popup');
-                            popups.forEach(function(popup) {
-                                popup.remove();
-                            });
-                        }, 3000); // 3000 milliseconds = 3 seconds
-                    });
+        //hiding notification
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var popups1 = document.querySelectorAll('.popup1');
+                popups1.forEach(function (popup1) {
+                    popup1.remove();
+                });
+                var popups = document.querySelectorAll('.popup');
+                popups.forEach(function (popup) {
+                    popup.remove();
+                });
+            }, 3000); // 3000 milliseconds = 3 seconds
+        });
 
 
-                    //validating techmahindra email id
-                    // function validateEmail() {
-                    //     const emailInput = document.getElementById('email');
-                    //     const email = emailInput.value;
-                    //     const domain = '@techmahindra.com';
+        //validating techmahindra email id
+        // function validateEmail() {
+        //     const emailInput = document.getElementById('email');
+        //     const email = emailInput.value;
+        //     const domain = '@techmahindra.com';
 
-                    //     if (!email.endsWith(domain)) {
-                    //         alert('Email must end with @techmahindra.com');
-                    //         return false; // Prevent form submission
-                    //     }
-                    //     return true; // Allow form submission
-                    // }
-                </script>
+        //     if (!email.endsWith(domain)) {
+        //         alert('Email must end with @techmahindra.com');
+        //         return false; // Prevent form submission
+        //     }
+        //     return true; // Allow form submission
+        // }
+    </script>
 </body>
