@@ -55,7 +55,7 @@ function dashboardSoftlockFetch() {
           no records found
         </tbody>`;
         softlockDiv.innerHTML = tableHTML;
-        // showNotification(" Softlocked Fetched");
+        showNotification("Active projects Fetched");
       } else {
         const softlockDiv = document.getElementById(
           "dashboard-softlock-content"
@@ -87,7 +87,7 @@ function dashboardSoftlockFetch() {
                 </table>`;
 
         softlockDiv.innerHTML = tableHTML;
-        // showNotification(" Softlocked Fetched");
+        showNotification("Active projects Fetched");
 
         $("#myTable").DataTable();
 
@@ -212,7 +212,7 @@ function dashboardConfirmFetch() {
           no records found
         </tbody>`;
         softlockDiv.innerHTML = tableHTML;
-        showNotification(" Confirm Fetched");
+        showNotification("Close projects Fetched");
       } else {
         // console.log(data);
 
@@ -246,7 +246,7 @@ function dashboardConfirmFetch() {
                 </table>`;
 
         softlockDiv.innerHTML = tableHTML;
-        // showNotification(" Confirm Fetched");
+        showNotification("Close projects Fetched");
         $("#myTable").DataTable();
 
         document.querySelectorAll(".dashboard-open-btn").forEach((button) => {

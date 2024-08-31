@@ -138,16 +138,16 @@ if (isset($_POST["login"])) {
 
 
         //validating techmahindra email id
-        // function validateEmail() {
-        //     const emailInput = document.getElementById('email');
-        //     const email = emailInput.value;
-        //     const domain = '@techmahindra.com';
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
+            const domain = '@techmahindra.com';
 
-        //     if (!email.endsWith(domain)) {
-        //         alert('Email must end with @techmahindra.com');
-        //         return false; // Prevent form submission
-        //     }
-        //     return true; // Allow form submission
-        // }
+            if (!email.endsWith(domain)) {
+                alert('Email must end with @techmahindra.com');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
     </script>
 </body>

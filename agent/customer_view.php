@@ -26,20 +26,18 @@ if (isset($_GET["delete"])) {
   // $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
   // $result = mysqli_query($conn, $query);
   if ($res4->num_rows > 0) {
-    $message = "There are some customer associated to this project, so you can not delete it!";
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    header("Location: customer_view.php?delete=false");
+    exit();
   } else {
     $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
     $result = mysqli_query($conn, $query);
+
     if (!$result) {
       die(mysqli_error($conn));
+    } else {
+      // header("Location: customer_view.php?delete=true");
+      // exit();
     }
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Customer Deleted Succesfully.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
   }
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -60,12 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6' WHERE CustomerId='$editCustomerId'";
     $result = mysqli_query($conn, $SQL);
     if ($result) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Customer Updated Succesfully.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>';
+      header("Location: customer_view.php?update=true");
+      exit();
     } else {
       echo mysqli_error($conn);
     }
@@ -79,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Document</title>
-  
+  <title>Customer View</title>
+
   <!------------------ Bootstrap CSS -------------->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -90,6 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <!-- -------------  My CSS  ------------------------->
   <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/notification.css">
+
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 
@@ -127,10 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       backdrop-filter: blur(20px);
     }
   </style>
+  <script src="script/script.js"></script>
 
 </head>
 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body>
 
   <!------------------ Modal  ------------------>
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -197,13 +194,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <?php include('navbar.php') ?>
 
+  <!-- ---------------Notification -------------->
+  <?php
+  if (isset($_GET['update']) && $_GET['update'] == 'true') {
+    echo '<script>showNotification("Customer Updated Succesfully!");</script>';
+  }elseif (isset($_GET['delete']) && $_GET['delete'] == 'false') {
+    echo '<script>showNotification("Customer is associated with project, you cannot delete it!","error");</script>';
+  } 
+  elseif (isset($_GET['delete'])) {
+    echo '<script>showNotification("Customer deleted Succesfully!");</script>';
+  }
+  ?>
   <div>
     <h1 style="text-align:center; margin-top:3%; font-weight:bold;">Customer Details</h1>
     <table id="example" class="display wrapper" style=>
       <thead>
         <tr>
           <th>Sl No.</th>
-          <th>CustomerName</th>
+          <th>Customer Name</th>
           <th>Location</th>
           <th scope="col">Action</th>
 

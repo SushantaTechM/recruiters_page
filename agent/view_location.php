@@ -80,11 +80,11 @@ if (isset($_GET["delete"])) {
     <link rel="stylesheet" href="styles/notification.css">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/individual_css/view_location.css">
+    <script src="script/script.js"></script>
 
-    <title>Project</title>
 </head>
 
-<script src="script/script.js"></script>
+
 <body>
 
     <!-- ----------------- Navbar --------------- -->

@@ -34,12 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $SQL = "UPDATE `users` SET `Type` = '$editType',`VerticalId`='$locationid6',`IBUId`='$IBU' WHERE `Users`.`UserId` = '$editUserId'";
     $result = mysqli_query($conn, $SQL);
     if ($result) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>Success!</strong> Your Project Updated Succesfully.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>';
+      header("Location: admin.php?assign=true");
+      exit();
     } else {
       echo mysqli_error($conn);
     }
@@ -52,97 +48,111 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruitment Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruitment Portal</title>
 
-    <!------------------ Bootstrap CSS -------------->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!------------------ Bootstrap CSS -------------->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- --------- Datatables CSS ----------------- -->
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <!-- --------- Datatables CSS ----------------- -->
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
-    <!-- -------------  My CSS  ------------------------->
+  <!-- -------------  My CSS  ------------------------->
 
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
-    <!-- <link rel="stylesheet" href="styles/project.css"> -->
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/modal.css">
+  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+  <!-- <link rel="stylesheet" href="styles/project.css"> -->
 
-    <link rel="stylesheet" href="styles/notification.css">
-    <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+  <link rel="stylesheet" href="styles/notification.css">
+  <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
 
-    <!--  -- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <!--  -- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 
-    <!-- ---------------My JavaScript-------------- -->
-    <script src="script/script.js"></script>
+  <!-- ---------------My JavaScript-------------- -->
+  <script src="script/script.js"></script>
 
-<style>
-  .modal-header {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 1rem 1rem;
-    border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: .3rem;
-    border-top-right-radius: .3rem;
-  }
-  .modal-header h2 {
-    color:white;
-  }
-  table {
-    border: 2px solid black;
-  }
-  .btn {
-    background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
-    padding: 10px 20px;
-    color: white;
-    font-size: 15px;
-    font-weight: 600;
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .modal-content {
-    background: transparent;
-  }
-  .form-group {
-    margin-left: 2rem;
-  }
-  .form-group select {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    padding: 10px;
-    margin: 1rem;
-  }
-  .form-group select option {
-    background: black;
-    color: white;
-  }
-  .form-group label {
-    color: white;
-    font-size: 20px;  
-  }
-</style>
+  <style>
+    .modal-header {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: start;
+      align-items: flex-start;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 1rem 1rem;
+      border-bottom: 1px solid #dee2e6;
+      border-top-left-radius: .3rem;
+      border-top-right-radius: .3rem;
+    }
+
+    .modal-header h2 {
+      color: white;
+    }
+
+    table {
+      border: 2px solid black;
+    }
+
+    .btn {
+      background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+      padding: 10px 20px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      border: 2px solid black;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .modal-content {
+      background: transparent;
+    }
+
+    .form-group {
+      margin-left: 2rem;
+    }
+
+    .form-group select {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 10px;
+      margin: 1rem;
+    }
+
+    .form-group select option {
+      background: black;
+      color: white;
+    }
+
+    .form-group label {
+      color: white;
+      font-size: 20px;
+    }
+  </style>
 </head>
 
 <body>
   <!----------------- Navbar  ---------->
   <?php include('navbar.php') ?>
-
+  <!-- ---------------Notification -------------->
+  <?php
+  if (isset($_GET['assign']) && $_GET['assign'] == 'true') {
+    echo '<script>showNotification("User Assigned Successfully!");</script>';
+  }
+  ?>
 
 
   <!-- --------------Modal ---------- -->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" style="width:100%">
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Assign</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -156,7 +166,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="form-group">
 
               <label for="editType">Type</label>
-
               <select name="editType" id="editType">
                 <option value="" disabled selected hidden>Please select Type</option>
                 <option value="User">User</option>
@@ -195,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               </select>
             </div>
 
-           
+
             <!-- <button type="submit" class="btn btn-primary" name="update" style="background:lightgreen;">Update</button> -->
             <button type="submit" class="btn btn-primary" name='update'>Update</button>
           </form>
@@ -203,43 +212,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
     </div>
   </div>
-  <?php
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_POST["update"])) {
-          $editType = $_POST["editType"];
-        
-    
-          $editVertical = $_POST['editVertical'];
-          $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$editVertical'";
-          $result6 = mysqli_query($conn, $query6);
-          $row6 = mysqli_fetch_assoc($result6);
-          $locationid6 = $row6['id'];
-
-          $editIBU = $_POST['editIBU'];
-          $query6 = "SELECT * FROM `ibumaster` WHERE `IBUname` LIKE '$editIBU'";
-          $result6 = mysqli_query($conn, $query6);
-          $row6 = mysqli_fetch_assoc($result6);
-          $IBU = $row6['id'];
-    
-        //   $editProjectName = $_POST['editProjectName'];
-          $editUserId = $_POST['editUserId'];
-          // echo $editTitle,$editDescription,$editSno;
-      
-          $SQL = "UPDATE `users` SET `Type` = '$editType',`VerticalId`='$locationid6',`IBUId`='$IBU' WHERE `Users`.`UserId` = '$editUserId'";
-          $result = mysqli_query($conn, $SQL);
-          if ($result) {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>Success!</strong> Your Project Updated Succesfully.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>';
-          } else {
-            echo mysqli_error($conn);
-          }
-        }
-    }
-  ?>
 
   <div class="projectContainer">
     <table class="table " id="myTable">
@@ -339,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         Vertical = tr.getElementsByTagName("td")[5].innerText;
         // console.log(Vertical);
         // console.log(IBU)
-        
+
         editType.value = Type;
         editIBU.value = IBU;
         editVertical.value = Vertical;
@@ -352,7 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-  
+
   <!-- <script src="script/modal.js"></script> -->
   <script src="script/dashboard.js"></script>
 </body>
