@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST["update"])) {
         $editType = $_POST["editType"];
 
-
         $editVertical = $_POST['editVertical'];
         $query6 = "SELECT * FROM `verticalmaster` WHERE `Vertical` LIKE '$editVertical'";
         $result6 = mysqli_query($conn, $query6);
@@ -109,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         .form-group {
             margin-left: 2rem;
         }
-
         .form-group select {
             background: transparent;
             color: white;
