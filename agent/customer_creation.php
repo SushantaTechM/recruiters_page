@@ -26,6 +26,10 @@ if (isset($_POST["btn"])) {
 
     $location = $_POST['location'];
 
+    $Customer_email = $_POST["Customeremail"];
+
+    $Customer_phone = $_POST["Customerphone"];
+
 
     if (!$connection) {
         echo "Something went wrong";
@@ -34,7 +38,7 @@ if (isset($_POST["btn"])) {
         $result6 = mysqli_query($connection, $query6);
         $row6 = mysqli_fetch_assoc($result6);
         $locationid = $row6['LocationId'];
-        $sql3 = "INSERT INTO `customermaster`(`CustomerName`, `CustomerLocation`) VALUES ('$Customer_name','$locationid')";
+        $sql3 = "INSERT INTO `customermaster`(`CustomerName`, `CustomerLocation`, `Email`, `Phone_no`) VALUES ('$Customer_name','$locationid','$Customer_email','$Customer_phone')";
         $result7 = mysqli_query($connection, $sql3);
         if ($result7) {
             $showAlert = true;
@@ -139,7 +143,7 @@ if (isset($_POST["btn"])) {
         <h2 style="text-align:center; font-weight:bold; margin:5%;">Create Customer</h2>
         <form action="customer_creation.php" class="" method="post">
             <div style="margin-top:12%;">
-                <label for="Name" style="font-size:20px; margin-left:55px;">Name: </label>
+                <label for="Customername" style="font-size:20px; margin-left:55px;">Name: </label>
                 <input type="text" name="Customername" id="Customername" maxlength="30" placeholder="Enter Name"
                     style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:20px;"
                     required>
@@ -161,6 +165,19 @@ if (isset($_POST["btn"])) {
                     }
                     ?>
                 </select>
+            </div>
+
+
+            <div style="margin-top:6%;">
+                <label for="Customeremail" style="font-size:20px; margin-left:55px;">Email: </label>
+                <input type="text" name="Customeremail" id="Customeremail" maxlength="30" placeholder="Enter Email"
+                    style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:20px;" required>
+            </div>
+
+            <div style="margin-top:6%;">
+                <label for="Customerphone" style="font-size:20px; margin-left:55px;">Phone: </label>
+                <input type="text" name="Customerphone" id="Customerphone" maxlength="30" placeholder="Enter Phone No"
+                    style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:12px;" required>
             </div>
 
             <button type='submit' id='btn' name='btn' class="btn btn-primary">Create</button>
