@@ -1,4 +1,5 @@
 <?php
+include "database/config.php";
 $showAlert = false;
 $showError = false;
 
@@ -12,8 +13,10 @@ if (isset($_POST["Login"])) {
         echo "Something went wrong";
     }
     $sql = "SELECT Type,UserId FROM `Users` WHERE Email LIKE '$email' AND Password = '$password'";
+    var_dump($sql);
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
+    var_dump($row);
 
     if ($row) {
         session_start();
@@ -122,17 +125,17 @@ if (isset($_POST["Login"])) {
         });
 
         //validating techmahindra email id
-        // function validateEmail() {
-        //     const emailInput = document.getElementById('email');
-        //     const email = emailInput.value;
-        //     const domain = '@techmahindra.com';
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
+            const domain = '@techmahindra.com';
 
-        //     if (!email.endsWith(domain)) {
-        //         alert('Email must end with @techmahindra.com');
-        //         return false; // Prevent form submission
-        //     }
-        //     return true; // Allow form submission
-        // }
+            if (!email.endsWith(domain)) {
+                alert('Email must end with @techmahindra.com');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
     </script>
 </body>
 

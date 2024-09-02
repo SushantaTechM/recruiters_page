@@ -26,20 +26,18 @@ if (isset($_GET["delete"])) {
   // $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
   // $result = mysqli_query($conn, $query);
   if ($res4->num_rows > 0) {
-    $message = "There are some customer associated to this project, so you can not delete it!";
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    header("Location: customer_view.php?delete=false");
+    exit();
   } else {
     $query = "DELETE FROM `customermaster` WHERE `customermaster`.`CustomerId` = '$id'";
     $result = mysqli_query($conn, $query);
+
     if (!$result) {
       die(mysqli_error($conn));
+    } else {
+      // header("Location: customer_view.php?delete=true");
+      // exit();
     }
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Customer Deleted Succesfully.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
   }
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -50,22 +48,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $editCustomerName = $_POST['editCustomerName'];
     $editLocationName = $_POST['editLocationName'];
+    $editCustomerEmail = $_POST['editCustomerEmail'];
+    $editCustomerPhone = $_POST['editCustomerPhone'];
     $query6 = "SELECT * FROM `LocationMaster` WHERE `LocationName` LIKE '$editLocationName'";
     $result6 = mysqli_query($conn, $query6);
     $row6 = mysqli_fetch_assoc($result6);
     $locationid6 = $row6['LocationId'];
 
+    // var_dump($editCustomerId, $editCustomerName, $locationid6, $editCustomerEmail, $editCustomerPhone);
 
-
-    $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6' WHERE CustomerId='$editCustomerId'";
+    $SQL = "UPDATE `customermaster` SET `CustomerName`='$editCustomerName',`CustomerLocation`='$locationid6', `Email`='$editCustomerEmail', `Phone_no`='$editCustomerPhone' WHERE CustomerId='$editCustomerId'";
     $result = mysqli_query($conn, $SQL);
+    // print_r($result);
     if ($result) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Customer Updated Succesfully.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>';
+      header("Location: customer_view.php?update=true");
+      exit();
     } else {
       echo mysqli_error($conn);
     }
@@ -79,11 +76,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Document</title>
+  <title>Customer View</title>
+
+  <!------------------ Bootstrap CSS -------------->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- --------- Datatables CSS ----------------- -->
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+  <!-- -------------  My CSS  ------------------------->
   <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/notification.css">
+
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
 
@@ -121,10 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       backdrop-filter: blur(20px);
     }
   </style>
+  <script src="script/script.js"></script>
 
 </head>
 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body>
 
   <!------------------ Modal  ------------------>
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -143,7 +149,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <!-- <label for="editCustomerId">Customer</label> -->
 
 
-              <input type='hidden' id='editCustomerId' style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"   name='editCustomerId' value='<?php $id ?>' readonly>
+              <input type='hidden' id='editCustomerId'
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white"
+                name='editCustomerId' value='<?php $id ?>' readonly>
 
 
 
@@ -173,6 +181,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               </select>
             </div>
 
+            <div class="form-group">
+              <label for="editCustomerEmail">Email</label>
+
+              <input name="editCustomerEmail"
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white" type="text"
+                class="form-control" id="editCustomerEmail" aria-describedby="emailHelp"
+                placeholder="Enter Customer Email">
+            </div>
+
+            <div class="form-group">
+              <label for="editCustomerPhone">Phone No</label>
+
+              <input name="editCustomerPhone"
+                style="background-color: transparent;border-radius: 10px;border:2px solid white;color:white" type="text"
+                class="form-control" id="editCustomerPhone" aria-describedby="emailHelp"
+                placeholder="Enter Customer Phone No">
+            </div>
+
 
             <button type="submit" class="btn btn-primary" name="update">Update </button>
           </form>
@@ -189,14 +215,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   <?php include('navbar.php') ?>
 
+  <!-- ---------------Notification -------------->
+  <?php
+  if (isset($_GET['update']) && $_GET['update'] == 'true') {
+    echo '<script>showNotification("Customer Updated Succesfully!");</script>';
+  }elseif (isset($_GET['delete']) && $_GET['delete'] == 'false') {
+    echo '<script>showNotification("Customer is associated with project, you cannot delete it!","error");</script>';
+  } 
+  elseif (isset($_GET['delete'])) {
+    echo '<script>showNotification("Customer deleted Succesfully!");</script>';
+  }
+  ?>
   <div>
     <h1 style="text-align:center; margin-top:3%; font-weight:bold;">Customer Details</h1>
     <table id="example" class="display wrapper" style=>
       <thead>
         <tr>
-         <th>Sl No.</th>
-          <th>CustomerName</th>
+          <th>Sl No.</th>
+          <th>Customer Name</th>
           <th>Location</th>
+          <th>Email</th>
+          <th>Phone No</th>
           <th scope="col">Action</th>
 
         </tr>
@@ -204,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <tbody>
         <b>
           <?php
-          $sql = "SELECT cm.CustomerId, cm.CustomerName,l.LocationName FROM customermaster cm, locationmaster l where cm.CustomerLocation=l.LocationId";
+          $sql = "SELECT cm.CustomerId, cm.CustomerName,l.LocationName, cm.Email, cm.Phone_no  FROM customermaster cm, locationmaster l where cm.CustomerLocation=l.LocationId";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
             $no = 0;
@@ -215,6 +254,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>" . $no . "</td>
                     <td>" . $row['CustomerName'] . "</td>
                     <td>" . $row['LocationName'] . "</td>
+                    <td>" . $row['Email'] . "</td>
+                    <td>" . $row['Phone_no'] . "</td>
                     <input type='hidden' id='CustomerId' value=" . $row['CustomerId'] . ">
                     <td>
                     <button class='edit btn'  id='" . $row['CustomerId'] . "'><i class='bx bx-edit-alt'></i></button>
@@ -247,10 +288,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           CustomerId = tr.getElementsByTagName("input")[0].value;
           CustomerName = tr.getElementsByTagName("td")[1].innerText;
           LocationName = tr.getElementsByTagName("td")[2].innerText;
+          CustomerEmail = tr.getElementsByTagName("td")[3].innerText;
+          CustomerPhone = tr.getElementsByTagName("td")[4].innerText;
 
           editCustomerId.value = CustomerId;
           editCustomerName.value = CustomerName;
           editLocationName.value = LocationName;
+          editCustomerEmail.value = CustomerEmail;
+          editCustomerPhone.value = CustomerPhone;
 
           $('#myModal').modal('toggle')
         })

@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
     // Start Session it is not started yet
     session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
     header('location:../index.php');
     exit;
 }
@@ -26,6 +26,10 @@ if (isset($_POST["btn"])) {
 
     $location = $_POST['location'];
 
+    $Customer_email = $_POST["Customeremail"];
+
+    $Customer_phone = $_POST["Customerphone"];
+
 
     if (!$connection) {
         echo "Something went wrong";
@@ -34,23 +38,18 @@ if (isset($_POST["btn"])) {
         $result6 = mysqli_query($connection, $query6);
         $row6 = mysqli_fetch_assoc($result6);
         $locationid = $row6['LocationId'];
-        $sql3 = "INSERT INTO `customermaster`(`CustomerName`, `CustomerLocation`) VALUES ('$Customer_name','$locationid')";
+        $sql3 = "INSERT INTO `customermaster`(`CustomerName`, `CustomerLocation`, `Email`, `Phone_no`) VALUES ('$Customer_name','$locationid','$Customer_email','$Customer_phone')";
         $result7 = mysqli_query($connection, $sql3);
         if ($result7) {
             $showAlert = true;
         } else {
-            echo "Customer already exists in database";
+                echo mysqli_error($connection);
         }
     }
 
     if ($showAlert) {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-
-            <strong>Success!</strong> Customer is created succesfully.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            </div>';
+        header("Location: customer_creation.php?success=true");
+        exit();
 
         // echo "<a href='/recruiters_page/agent/dashboard.php'>back</a>";
     }
@@ -68,8 +67,14 @@ if (isset($_POST["btn"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Customer</title>
 
-    <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+    <!------------------ Bootstrap CSS -------------->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- --------- Datatables CSS ----------------- -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+    <!-- -------------  My CSS  ------------------------->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -82,7 +87,7 @@ if (isset($_POST["btn"])) {
         });
     </script>
     <style>
-        .select2-container--default .select2-selection--single{
+        .select2-container--default .select2-selection--single {
             background: transparent;
             border-radius: 5px;
             color: black;
@@ -90,13 +95,16 @@ if (isset($_POST["btn"])) {
         }
     </style>
     <!-- add -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/notification.css">
+    <script src="script/script.js"></script>
 
 </head>
 <style>
-  .btn {
+    .btn {
         /* display: block; */
         margin: 30px 120px;
         width: fit-content;
@@ -105,21 +113,29 @@ if (isset($_POST["btn"])) {
         padding: 10px 30px;
         border-radius: 10px;
         text-decoration: none;
-        background: linear-gradient(to right,rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
+        background: linear-gradient(to right, rgb(83, 73, 219), rgb(148, 95, 141), rgb(51, 62, 219));
         color: white;
         cursor: pointer;
     }
-    .rset{
-      margin: -90px;
-      padding: 10px 30px; 
+
+    .rset {
+        margin: -90px;
+        padding: 10px 30px;
     }
 </style>
 
 
-<body style="background:url('../images/gradient.jpg') no-repeat; background-position:center; background-size: cover;">
+<body >
     <!-- ----------------- Navbar --------------- -->
 
-    <?php  include('navbar.php') ?>
+    <?php include('navbar.php') ?>
+
+    <!-- ---------------Notification -------------->
+    <?php
+    if (isset($_GET['success']) && $_GET['success'] == 'true') {
+        echo '<script>showNotification("Customer Created Successfully!");</script>';
+    }
+    ?>
 
     <!-------------------- Content ----------------->
     <div class="container"
@@ -127,9 +143,10 @@ if (isset($_POST["btn"])) {
         <h2 style="text-align:center; font-weight:bold; margin:5%;">Create Customer</h2>
         <form action="customer_creation.php" class="" method="post">
             <div style="margin-top:12%;">
-                <label for="Name" style="font-size:20px; margin-left:55px;">Name: </label>
+                <label for="Customername" style="font-size:20px; margin-left:55px;">Name: </label>
                 <input type="text" name="Customername" id="Customername" maxlength="30" placeholder="Enter Name"
-                    style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:20px;" required>
+                    style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:20px;"
+                    required>
             </div>
 
 
@@ -150,8 +167,21 @@ if (isset($_POST["btn"])) {
                 </select>
             </div>
 
+
+            <div style="margin-top:6%;">
+                <label for="Customeremail" style="font-size:20px; margin-left:55px;">Email: </label>
+                <input type="text" name="Customeremail" id="Customeremail" maxlength="30" placeholder="Enter Email"
+                    style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:20px;" required>
+            </div>
+
+            <div style="margin-top:6%;">
+                <label for="Customerphone" style="font-size:20px; margin-left:55px;">Phone: </label>
+                <input type="text" name="Customerphone" id="Customerphone" maxlength="30" placeholder="Enter Phone No"
+                    style="max-width: 300px; width:51%; background:transparent; border-radius:5px; color:black; border: 2px solid black; padding: 3px; margin-left:12px;" required>
+            </div>
+
             <button type='submit' id='btn' name='btn' class="btn btn-primary">Create</button>
-            <button type="reset" class="login-btn btn rset">Reset</button>  
+            <button type="reset" class="login-btn btn rset">Reset</button>
         </form>
         <script src="script/script.js"></script>
     </div>

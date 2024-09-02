@@ -1,13 +1,13 @@
 <?php
 if (!isset($_SESSION)) {
-    // Start Session it is not started yet
-    session_start();
+  // Start Session it is not started yet
+  session_start();
 }
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
-    header('location:../index.php');
-    exit;
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
+  header('location:../index.php');
+  exit;
 }
-include ("../database/dbconnect.php");
+include("../database/dbconnect.php");
 
 
 $skill_query = "SELECT * FROM `skillmaster`";
@@ -48,34 +48,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   $query = "INSERT INTO `Project` (`CustomerId`,`StartDate`,`EndDate`,`Location`,`VerticalId`,`IBUId`,`ProjectName`,`status`) VALUE ('$custid','$Startdate','$Enddate','$locationid','$verticalid','$IBUid','$projectname','$status')";
   // var_dump($query);
-  $result = mysqli_query($conn, $query);
+  try {
+    $result = mysqli_query($conn, $query);
 
-  if ($result) {
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your Project created succesfully.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>';
-  } else {
-    echo mysqli_error($conn);
+    $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
+    $project_result = mysqli_query($conn, $project_query);
+    $project_row = mysqli_fetch_assoc($project_result);
+    $projectid = $project_row['ProjectId'];
+
+    $skills = $_POST['title3'];
+    $headcounts = $_POST['headcount'];
+
+    for ($x = 0; $x < count($skills); $x++) {
+      $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
+      $project_result2 = mysqli_query($conn, $project_query2);
+    }
+
+    if ($result) {
+      header("Location: project.php?success=true");
+      exit();
+    }
+  } catch (mysqli_sql_exception $e) {
+    if ($e->getCode() == 1062) { // 1062 is the error code for duplicate entry
+      header("Location: project.php?error=duplicate");
+      exit();
+    } else {
+      // Handle other types of errors
+      header("Location: project.php?error=unknown");
+      exit();
+    }
   }
 
-  $project_query = "SELECT `ProjectId` FROM `project` WHERE `ProjectName` LIKE '$projectname'";
-  $project_result = mysqli_query($conn, $project_query);
-  $project_row = mysqli_fetch_assoc($project_result);
-  $projectid = $project_row['ProjectId'];
 
-  $skills = $_POST['title3'];
-  $headcounts = $_POST['headcount'];
-
-  for ($x = 0; $x < count($skills); $x++) {
-    $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
-    // var_dump($project_query2);
-    $project_result2 = mysqli_query($conn, $project_query2);
-
-    // echo($skills[$x]);
-  }
 }
 
 ?>
@@ -89,22 +93,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+  <!------------------- My CSS  ----------------->
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
-  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+  <link rel="stylesheet" href="styles/notification.css">
+
+  <!-- --------------- My JavaScript ------------>
+  <script src="script/script.js"></script>
 
   <title>Project</title>
   <style>
     .container {
       width: 70%;
     }
-    .form-group{
+
+    .form-group {
       margin-bottom: 15px;
-      padding : 6px;
+      padding: 6px;
     }
-    .form-group select{
+
+    .form-group select {
       border-radius: 10px;
       height: 2rem;
     }
@@ -113,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       width: 60%;
 
     } */
-    .form{
+    .form {
       margin-left: 90px;
     }
 
@@ -137,39 +148,54 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     .skill-entry button {
       margin-left: 10px;
     }
+
     .form-group input {
       background: transparent;
-      color: white;
+      /* color: white; */
       border: 2px solid black;
       border-radius: 10px;
     }
+
     .form-group label {
       color: black;
     }
+
     .form-group select {
       background: transparent;
     }
-    .container form{
+
+    .container form {
       border: 2px solid black;
       margin: 5%;
     }
   </style>
 </head>
+
 <body>
 
 
   <!-- ----------------- Navbar --------------- -->
+  <?php include('navbar.php') ?>
 
-
-  <?php  include('navbar.php') ?>
-
-
+  <!-- ---------------Notification -------------->
+  <?php
+  if (isset($_GET['success']) && $_GET['success'] == 'true') {
+    echo '<script>showNotification("Your Project created succesfully.!");</script>';
+  } elseif (isset($_GET['error']) && $_GET['error'] == 'duplicate') {
+    echo '<script>showNotification("Project Name Already Exists!","error");</script>';
+  }
+  elseif (isset($_GET['error']) && $_GET['error'] == 'unknown') {
+    echo '<script>showNotification("Unknown error occurred!","error");</script>';
+  }
+  ?>
+  <!-- ------------- Form --------------- -->
   <div class="container">
     <form action="Project.php" class="form" method="post">
       <h1 style="text-align:center; color:black; font-weight:bold;">Create Project</h1>
       <div class="form-group">
         <label for="title">Project Name</label>
-        <input name="title" type="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Project Name" style="width:300px;">
+        <input name="title" type="title" class="form-control" id="title" aria-describedby="emailHelp"
+          placeholder="Enter Project Name" style="width:300px;">
       </div>
       <div class="form-group">
         <label for="customerid">Customer</label>
@@ -188,13 +214,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       <br>
       <div class="form-group">
         <label for="title4">Start Date</label>
-        <input style="background: transparent; color: black; width:200px;" name="title4" type="date" class="form-control"
-          id="title4" aria-describedby="emailHelp" placeholder="Enter Starting Date">
+        <input style="background: transparent; color: black; width:200px;" name="title4" type="date"
+          class="form-control" id="title4" aria-describedby="emailHelp" placeholder="Enter Starting Date">
       </div>
       <div class="form-group">
         <label for="title5">End Date</label>
-        <input style="background-color: transparent; color: black; width:200px;" name="title5" type="date" class="form-control"
-          id="title5" aria-describedby="emailHelp" placeholder="Enter Ending Date">
+        <input style="background-color: transparent; color: black; width:200px;" name="title5" type="date"
+          class="form-control" id="title5" aria-describedby="emailHelp" placeholder="Enter Ending Date">
       </div>
       <div class="form-group">
         <label for="title2">Location</label>
@@ -244,10 +270,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           <label for="headcount">Required Headcount</label>&emsp;
           <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount"
             id="skill" style="height:40px;">
-            <button type="button" id="addSkillBtn">+</button><br><br>
+          <button type="button" id="addSkillBtn">+</button><br><br>
         </div>
       </div>
-      
+
 
       <button type="submit" class="btn btn-primary">Add Project</button>
     </form>
@@ -322,7 +348,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     }
     </script>
-    <script src="script/script.js"></script>
+
   </div> <!-- sushanta -->
 </body>
 

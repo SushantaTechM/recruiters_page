@@ -2,10 +2,13 @@
   margin: 0;
   padding: 0;
 }
+html {
+  overflow-y: scroll;
+}
 body {
   font-family: Arial, sans-serif;
   color: black;
   background-image: url("../../images/gradient.jpg");
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
 }

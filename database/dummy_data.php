@@ -68,15 +68,15 @@ $sql = "INSERT INTO `locationmaster` (`LocationId`, `LocationName`,`LocationStat
 
 
 
-      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '3', 'Riju', 'Dasgupta', '23', '1', 'riju@gmail.com', 'B. Tech', '1yr', 'Hii, I am Riju ', 'M');
+      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '3', 'Riju', 'Dasgupta', '23', '1', 'riju@techmahindra.com', 'B. Tech', '1yr', 'Hii, I am Riju ', 'M');
 
-      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '4', 'Santanu', 'Nayak', '23', '2', 'santanu@gmail.com', 'B. Tech', '1yr', 'Hii, I am Santanu ', 'M');
+      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '4', 'Santanu', 'Nayak', '23', '2', 'santanu@techmahindra.com', 'B. Tech', '1yr', 'Hii, I am Santanu ', 'M');
 
-      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '5', 'Soumita', 'Maity', '22', '3', 'soumita@gmail.com', 'B. Tech', '1yr', 'Hii, I am Soumita ', 'F');
+      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '5', 'Soumita', 'Maity', '22', '3', 'soumita@techmahindra.com', 'B. Tech', '1yr', 'Hii, I am Soumita ', 'F');
 
-      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '6', 'Harsh', 'Harshit', '23', '4', 'harsh@gmail.com', 'B. Tech', '2yr', 'Hii, I am Harsh ', 'M');
+      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '6', 'Harsh', 'Harshit', '23', '4', 'harsh@techmahindra.com', 'B. Tech', '2yr', 'Hii, I am Harsh ', 'M');
 
-      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '7', 'Anjali', 'Kumari', '22', '5', 'anjali@gmail.com', 'B. Tech', '4yr', 'Hii, I am Anjali ', 'F');
+      INSERT INTO `userdetails` (`SlNo`, `UserId`, `FirstName`, `LastName`, `Age`, `Location`, `Email`, `HighestQualification`, `Experience`, `About`, `Gender`) VALUES (NULL, '7', 'Anjali', 'Kumari', '22', '5', 'anjali@techmahindra.com', 'B. Tech', '4yr', 'Hii, I am Anjali ', 'F');
 
 
 

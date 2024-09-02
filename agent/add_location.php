@@ -24,16 +24,21 @@ if (isset($_POST["add"])) {
         echo "Something went wrong!";
     } else {
         $query = "INSERT INTO locationmaster (`LocationName`,`LocationState`,`LocationHeadName`,`LocationHeadEmail`,`LocationHeadMobile`) VALUES ('$locationName','$locationState','$locationHeadName','$locationHeadEmail','$locationHeadMobile');";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            // $showAlert = true;
-            header("Location: add_location.php?success=true");
-            exit();
-
-        } else {
-            // $showError = true;
-            header("Location: add_location.php?success=false");
-            exit();
+        try {
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                header("Location: add_location.php?success=true");
+                exit();
+            }
+        } catch (mysqli_sql_exception $e) {
+            if ($e->getCode() == 1062) { // 1062 is the error code for duplicate entry
+                header("Location: add_location.php?error=duplicate");
+                exit();
+            } else {
+                // Handle other types of errors
+                header("Location: add_location.php?error=unknown");
+                exit();
+            }
         }
     }
 }
@@ -48,6 +53,15 @@ if (isset($_POST["add"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Location</title>
+
+    <!------------------ Bootstrap CSS -------------->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- --------- Datatables CSS ----------------- -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+    <!-- -------------  My CSS  ------------------------->
+
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/notification.css">
     <link rel="stylesheet" href="styles/individual_css/add_location.css">
@@ -67,9 +81,10 @@ if (isset($_POST["add"])) {
     <?php
     if (isset($_GET['success']) && $_GET['success'] == 'true') {
         echo '<script>showNotification("Location Added Successfully!");</script>';
-    }
-    elseif (isset($_GET['success']) && $_GET['success'] == 'false') {
+    } elseif (isset($_GET['error']) && $_GET['error'] == 'duplicate') {
         echo '<script>showNotification("Location Already Exists!","error");</script>';
+    } elseif (isset($_GET['error']) && $_GET['error'] == 'unknown') {
+        echo '<script>showNotification("Unknown Error occurred!","error");</script>';
     }
     ?>
     <!-- ------------- Form --------------- -->
@@ -118,7 +133,7 @@ if (isset($_POST["add"])) {
 
 
 
-    
+
 </body>
 
 </html>

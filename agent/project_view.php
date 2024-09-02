@@ -4,62 +4,84 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-if ( !isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])  )  {
+if (!isset($_SESSION['agentLogin']) && !isset($_SESSION['adminLogin'])) {
   header('location:../index.php');
   exit;
 }
 
-include ("../database/dbconnect.php");
+include("../database/dbconnect.php");
 
 $sql1 = "SELECT * from `customermaster`";
 $outcome1 = mysqli_query($conn, $sql1);
- 
+
 $sql2 = "SELECT * from `locationmaster`";
 $outcome2 = mysqli_query($conn, $sql2);
- 
+
 $skill_query = "SELECT * FROM `skillmaster`";
 $skill_outcome = mysqli_query($conn, $skill_query);
- 
+
 $vertical_query = "SELECT * FROM `verticalmaster`";
 $vertical_outcome = mysqli_query($conn, $vertical_query);
- 
+
 $IBU_query = "SELECT * FROM `IBUmaster`";
 $IBU_outcome = mysqli_query($conn, $IBU_query);
- 
- 
+
+
 $skill_query = "SELECT * FROM `skillmaster`";
 $skill_outcome = mysqli_query($conn, $skill_query);
- 
+
 $skillOptions = "";
 while ($row = mysqli_fetch_assoc($skill_outcome)) {
   $Customer = $row['SkillName'];
- 
+
   $skillid = $row['SkillId'];
   $skillOptions .= "<option value='$skillid'>$Customer</option>";
+}
+if (isset($_POST["updateSkillBtn"])) {
+  $projectid = $_POST['ProjectName'];
+  $skills = $_POST['title3'];
+  $headcounts = $_POST['headcount'];
+  for ($x = 0; $x < count($skills); $x++) {
+    $check = "SELECT skill FROM `projectskilldetails` WHERE `project`='$projectid' and `skill`='$skills[$x]'";
+    $project_result4 = mysqli_query($conn, $check);
+    if ($project_result4->num_rows > 0) {
+      $message = "Skill already exist!";
+      echo "<script type='text/javascript'>alert('$message');</script>";
+
+      break;
+    } else {
+      $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
+      $project_result2 = mysqli_query($conn, $project_query2);
+      if ($project_result2) {
+        header("Location: project_view.php?added=success");
+        exit();
+      } else {
+        echo mysqli_error($conn);
+      }
+    }
+  }
+
 }
 if (isset($_GET["projectid"]) && isset($_GET["skillid"])) {
   $projectId = $_GET["projectid"];
   $skillid = $_GET["skillid"];
- 
+  // echo $projectId;
+  // echo $skillid;
+
   $query1 = "SELECT * FROM `projectskilldetails` WHERE `Project`='$projectId' and `skill`='$skillid' and `fullfill_headcount`='0'";
   $result1 = mysqli_query($conn, $query1);
   if ($result1->num_rows > 0) {
     $query = "DELETE FROM `projectskilldetails` WHERE `Projectskilldetails`.`Project` = '$projectId' and `Projectskilldetails`.`skill`='$skillid' and `Projectskilldetails`.`fullfill_headcount`='0'";
- 
+
     $result = mysqli_query($conn, $query);
- 
+
     if ($result) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>Success!</strong> Skill Deleted Succesfully.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>';
+      header("Location: project_view.php?delete=success");
+      exit();
     }
   } else {
- 
-    $message = "There are some users assigned to this Skill, so you can not delete it!";
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    header("Location: project_view.php?delete=error");
+    exit();
   }
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -71,57 +93,54 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $result7 = mysqli_query($conn, $query7);
     $row7 = mysqli_fetch_assoc($result7);
     $editcustid = $row7['ProjectId'];
- 
- 
+
+
     $skillid_old = $_POST['skillid_old'];
- 
+
     $editSkillName1 = $_POST['editSkillName'];
     $editSkillName = $_POST['editSkillName'];
     $query6 = "SELECT * FROM `skillMaster` WHERE `SkillName` LIKE '$editSkillName'";
     $result6 = mysqli_query($conn, $query6);
     $row6 = mysqli_fetch_assoc($result6);
     $Skillid = $row6['SkillId'];
- 
+
     $RequiredHeadcount = $_POST['editRequiredHeadcount'];
     $FullfillHeadcount = $_POST['editFullfillHeadcount'];
- 
+
     $editProjectId = $_POST['editProjectId'];
- 
+
     $check1 = "SELECT skill from `projectskilldetails` where `Project`='$editProjectId' and `skill`='$Skillid'";
     $project_result11 = mysqli_query($conn, $check1);
-    if ($project_result11->num_rows > 0) {
-      $message = "Skill already exist!";
-      echo "<script type='text/javascript'>alert('$message');</script>";
+    // if ($project_result11->num_rows > 0) {
+    //   $message = "Skill already exist!";
+    //   echo "<script type='text/javascript'>alert('$message');</script>";
+    // } else {
+    $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
+    $result = mysqli_query($conn, $SQL);
+    if ($result) {
+      header("Location: project_view.php?update=success");
+      exit();
     } else {
-      $SQL = "UPDATE `Projectskilldetails` SET `Skill` = '$Skillid',`required_headcount`='$RequiredHeadcount',`fullfill_headcount`= '$FullfillHeadcount' WHERE `Projectskilldetails`.`Project` = '$editProjectId'and `Projectskilldetails`.`skill`='$skillid_old'";
-      $result = mysqli_query($conn, $SQL);
-      if ($result) {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Your Project Updated Succesfully.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
-      } else {
-        echo mysqli_error($conn);
-      }
+      echo mysqli_error($conn);
     }
   }
 }
- 
- 
+
+
+
 ?>
- 
+
 <!doctype html>
 <html lang="en">
- 
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
+
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
@@ -130,50 +149,61 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
   <style>
-        .form-group {
-          margin-bottom: 15px;
-        }
- 
-        .skill-entry {
-          display: flex;
-          align-items: center;
-          margin-bottom: 10px;
-        }
- 
-        .skill-entry select,
-        .skill-entry input {
-          margin-right: 10px;
-          background: transparent;
-          color: white;
-          padding: 0.2rem 0.3rem;
-          border: 2px solid skyblue;
-        }
- 
-        .skill-entry button {
-          margin-left: 10px;
-        }
-        form {
-          border: 2px solid black;
-          margin: 20px;
-        }
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .skill-entry {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .skill-entry select,
+    .skill-entry input {
+      margin-right: 10px;
+      background: transparent;
+      color: white;
+      padding: 0.2rem 0.3rem;
+      border: 2px solid skyblue;
+    }
+
+    .skill-entry button {
+      margin-left: 10px;
+    }
+
+    form {
+      border: 2px solid black;
+      margin: 20px;
+    }
   </style>
-  
-  <!-- <link rel="stylesheet" href="styles/modal.css"> -->
-  <!-- <link rel="stylesheet" href="styles/navbar.css"> -->
+
 
   <!---------------- My JavaScript ------>
   <script src="script/script.js"></script>
- 
+
   <title>Project</title>
 </head>
- 
+
 <body>
 
- 
+
   <!------------------------ Navbar  ------------->
   <?php include('navbar.php') ?>
- 
+
   <!------------------------ Notification  ------------->
+  <?php
+  if (isset($_GET['update']) && $_GET['update'] == 'success') {
+    echo '<script>showNotification("Skill updated successfully!");</script>';
+  } elseif (isset($_GET['delete']) && $_GET['delete'] == 'success') {
+    echo '<script>showNotification("Skill deleted successfully!");</script>';
+  } elseif (isset($_GET['delete']) && $_GET['delete'] == 'error') {
+    echo '<script>showNotification("This Skill is assigned, you cannot delete it!","error");</script>';
+  }
+  elseif (isset($_GET['added']) && $_GET['added'] == 'success') {
+    echo '<script>showNotification("Skill mapped succesfully!");</script>';
+  }
+  ?>
 
 
   <!------------------------- Form   ------------------->
@@ -181,7 +211,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <form action="project_view.php" method="post">
       <div class="form-group">
         <label for="ProjectName" style="color:black">Project Name</label>
-        <select name="ProjectName" id="ProjectName" style=" background: transparent; border: 2px solid black; padding: 5px;">
+        <select name="ProjectName" id="ProjectName"
+          style=" background: transparent; border: 2px solid black; padding: 5px;">
           <option value="" disabled selected hidden>Please select Project</option>
           <?php
           $sql10 = "SELECT * from `project` where status='active'";
@@ -194,8 +225,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           ?>
         </select>
       </div>
- 
-      
+
+
       <div id="skillsContainer">
         <div class="form-group skill-entry">
           <label for="title3" style="color:black;">Skill</label>&emsp;
@@ -204,58 +235,44 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php echo $skillOptions; ?>
           </select>&emsp;&emsp;&emsp;
           <label for="headcount" style="color:black;">Required Headcount</label>&emsp;
-          <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount" id="skill" >
+          <input type="number" name="headcount[]" class="headcount-input" min="1" placeholder="Enter headcount"
+            id="skill">
           <button type="button" id="addSkillBtn">+</button><br><br>
         </div>
       </div>
-      
-      <button type="submit" id="updateSkillBtn" name="updateSkillBtn" style="color: #fff;background-color: #007bff;border-color: #007bff;border-radius: .25rem;width: 80px;height: 40px;">Map Skill</button><br><br>
+
+      <button type="submit" id="updateSkillBtn" name="updateSkillBtn"
+        style="color: #fff;background-color: #007bff;border-color: #007bff;border-radius: .25rem;width: 80px;height: 40px;">Map
+        Skill</button><br><br>
       <?php
       $skill_query = "SELECT * FROM `skillmaster`";
       $skill_outcome = mysqli_query($conn, $skill_query);
- 
+
       $skillOptions = "";
       while ($row = mysqli_fetch_assoc($skill_outcome)) {
         $Customer = $row['SkillName'];
- 
+
         $skillid = $row['SkillId'];
         $skillOptions .= "<option value='$skillid'>$Customer</option>";
       }
       ?>
- 
+
     </form>
   </div>
- 
+
   <?php
- 
- 
-  if (isset($_POST["updateSkillBtn"])) {
-    $projectid = $_POST['ProjectName'];
-    $skills = $_POST['title3'];
-    $headcounts = $_POST['headcount'];
-    for ($x = 0; $x < count($skills); $x++) {
-      $check = "SELECT skill FROM `projectskilldetails` WHERE `project`='$projectid' and `skill`='$skills[$x]'";
-      $project_result4 = mysqli_query($conn, $check);
-      if ($project_result4->num_rows > 0) {
-        $message = "Skill already exist!";
-        echo "<script type='text/javascript'>alert('$message');</script>";
- 
-        break;
-      } else {
-        $project_query2 = "INSERT INTO `projectskilldetails` (`project`, `skill`, `required_headcount`,`fullfill_headcount`) VALUES ('$projectid', '$skills[$x]' ,'$headcounts[$x]','0')";
-        $project_result2 = mysqli_query($conn, $project_query2);
-      }
-    }
- 
-  }
-   
- 
+
+
+
+
+
   ?>
   <!-- Modal -->
   <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background-color: transparent;border: 2px solid white;color: white;backdrop-filter: blur(20px);font-size: 20px;">
+      <div class="modal-content"
+        style="background-color: transparent;border: 2px solid white;color: white;backdrop-filter: blur(20px);font-size: 20px;">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -264,47 +281,42 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class="modal-body">
           <form action="project_view.php" class="" method="post">
- 
+
             <input type="hidden" name="editProjectId" id="editProjectId">
             <input type="hidden" name="skillid_old" id="skillid_old">
             <!-- <input type="hidden" name="editSkillName" id="editSkillName"> -->
             <div class="form-group">
               <label for="editProjectName">Project Name</label>
-              <input name="editProjectName" type="text" class="form-control" id="editProjectName" aria-describedby="emailHelp" readonly>
+              <input name="editProjectName" type="text" class="form-control" id="editProjectName"
+                aria-describedby="emailHelp" readonly>
             </div>
- 
- 
+
+
             <div class="form-group">
               <label for="editSkillName">Skill</label>
- 
- 
-              <select name="editSkillName" id="editSkillName" style="background:transparent; border:2px solid white; color:white; padding:5px;">
-                <option value="" disabled selected hidden>Select Skill</option>
-                <?php
-                $sql4 = "SELECT * from `skillmaster`";
-                $outcome4 = mysqli_query($conn, $sql4);
-                while ($row = mysqli_fetch_assoc($outcome4)) {
-                  $Customer = $row['SkillName'];
-                  echo "<option value='$Customer' style='background:black;'>$Customer</option>";
-                }
-                ?>
-              </select>
+              <input name="editSkillName" type="text" class="form-control" id="editSkillName"
+                aria-describedby="emailHelp" readonly>
+
+
+
             </div>
- 
+
             <div class="form-group">
               <label for="editRequiredHeadcount">Required Headcount</label>
               <input name="editRequiredHeadcount" class="form-control" id="editRequiredHeadcount" rows="3"
-                placeholder="please add description..." style="background:transparent; border:2px solid white; color:white;"></input>
+                placeholder="please add description..."
+                style="background:transparent; border:2px solid white; color:white;"></input>
             </div>
             <div class="form-group">
               <label for="editFullfillHeadcount">Fullfill Headcount</label>
               <input name="editFullfillHeadcount" class="form-control" id="editFullfillHeadcount" rows="3"
-                placeholder="please add description..." style="background:transparent; border:2px solid white; color:white;"></input>
+                placeholder="please add description..."
+                style="background:transparent; border:2px solid white; color:white;"></input>
             </div>
             <button type="submit" class="btn btn-primary" name="update">Update</button>
           </form>
         </div>
- 
+
       </div>
     </div>
   </div>
@@ -313,33 +325,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-<div class="projectContainer">
-      <table class="table " id="myTable">
-        <thead>
-          <tr>
-        
-            <th scope="col">Sl No.</th>
-            <th scope="col">Project</th>
-            <th scope="col">Skill Name</th>
-            <th scope="col">Required Headcount</th>
-            <th scope="col">Fullfill Headcount</th>
-          
-            
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
+  <div class="projectContainer">
+    <table class="table " id="myTable">
+      <thead>
+        <tr>
 
-        <b>
-          <?php
-         
-          $sql="SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            $no = 0;
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-              $no++;
-              echo "<tr>
+          <th scope="col">Sl No.</th>
+          <th scope="col">Project</th>
+          <th scope="col">Skill Name</th>
+          <th scope="col">Required Headcount</th>
+          <th scope="col">Fullfill Headcount</th>
+
+
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+      <b>
+        <?php
+
+        $sql = "SELECT p.ProjectId,p.ProjectName,s.Skillname,s.SkillId,psd.required_headcount,psd.fullfill_headcount ,psd.skill FROM projectskilldetails psd JOIN project p ON psd.project=p.ProjectId JOIN skillmaster s ON psd.skill=s.SkillId";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+          $no = 0;
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+            $no++;
+            echo "<tr>
                   <td>" . $no . "</td>
 
                   <td>" . $row['ProjectName'] . "</td>
@@ -357,14 +369,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           echo "0 results";
         }
         ?>
- 
+
         </tbody>
     </table>
   </div>
   </div>
- 
- 
- 
+
+
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -385,10 +397,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // console.log(edits);
     Array.from(edits).forEach((element) => {
       element.addEventListener("click", (e) => {
-        console.log("edit", );
+        console.log("edit",);
         tr = e.target.parentNode.parentNode.parentNode;
         // console.log(tr);
-        ProjectId =tr.getElementsByTagName("input")[0].value ;
+        ProjectId = tr.getElementsByTagName("input")[1].value;
         ProjectName = tr.getElementsByTagName("td")[1].innerText;
         SkillName = tr.getElementsByTagName("td")[2].innerText;
         RequiredHeadcount = tr.getElementsByTagName("td")[3].innerText;
@@ -396,9 +408,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // StartDate = tr.getElementsByTagName("td")[3].innerText;
         // EndDate = tr.getElementsByTagName("td")[4].innerText;
         FullfillHeadcount = tr.getElementsByTagName("td")[4].innerText;
- 
- 
- 
+
+
+
         skillid = tr.getElementsByTagName("input")[0].value;
         // console.log(skillid);
         // console.log(title,description,sno);
@@ -415,7 +427,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // console.log(edits);
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
-        id = e.target.id.substr();
+        // id = e.target.id.substr();
+        let target = e.target;
+
+        // Check if the clicked element is the icon inside the button
+        if (target.tagName === 'I' && target.parentElement.classList.contains('delete')) {
+          target = target.parentElement; // Set target to the parent button
+        }
+
+        // Check if the target is the button with the class 'delete'
+        if (target.classList.contains('delete')) {
+          id = target.id;
+          console.log(id);
+        }
         console.log(id);
         // const id='skillid=1projectid=1';
         const regex = /skillid=(\d+)projectid=(\d+)/i;
@@ -431,15 +455,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } else {
           console.log('no');
         }
- 
+
       })
     })
   </script>
-  
+
   <script>
     const skillOptions = `<?php echo $skillOptions; ?>`;
- 
-    document.getElementById('addSkillBtn').addEventListener('click', function() {
+
+    document.getElementById('addSkillBtn').addEventListener('click', function () {
       const skillEntryTemplate = `
         <div class="form-group skill-entry">
           <label for="title3" style="color:black;">Skill</label>&emsp;
@@ -452,12 +476,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           <button type="button" class="remove-skill-btn">-</button>
         </div>
       `;
- 
+
       const skillsContainer = document.getElementById('skillsContainer');
       skillsContainer.insertAdjacentHTML('beforeend', skillEntryTemplate);
     });
- 
-    document.getElementById('skillsContainer').addEventListener('click', function(event) {
+
+    document.getElementById('skillsContainer').addEventListener('click', function (event) {
       if (event.target.classList.contains('remove-skill-btn')) {
         event.target.parentElement.remove();
       }
@@ -465,6 +489,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </script>
   <!-- sushanta -->
 </body>
- 
+
 </html>
- 

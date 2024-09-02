@@ -7,7 +7,7 @@ if (!isset($_SESSION['agentLogin']) || $_SESSION['agentLogin'] != true) {
   header('location:../index.php');
   exit;
 }
-include ("../database/dbconnect.php");
+include("../database/dbconnect.php");
 
 $sql1 = "SELECT * from `project`";
 $outcome1 = mysqli_query($conn, $sql1);
@@ -26,10 +26,14 @@ $outcome2 = mysqli_query($conn, $sql2);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
+  <!------------------ Bootstrap CSS -------------->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- --------- Datatables CSS ----------------- -->
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+
+  <!-- -------------  My CSS  ------------------------->
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/project.css">
   <link rel="stylesheet" href="styles/navbar.css">
@@ -40,48 +44,7 @@ $outcome2 = mysqli_query($conn, $sql2);
 <body>
   <!-- ----------------- Navbar --------------- -->
 
-  <div class="navbar" style="padding-bottom: 100px;">
-    <div class="logo"><span style="color: white;">Tech</span> <br><span style="color: skyblue;">HireHub</span></div>
-    <div class="nav-links">
-      <a href="dashboard.php"><button class="tab active">Home</button></a>
-      <div class="project-dropdown">
-        <button class="dashboard-dropbtn tab " onclick="toggleProjectDropdown()">Project</button>
-        <div id="project-dropdown-content" class="dropdown-menu">
-          <a href="project.php">Create Project</a>
-          <a href="project_dashboard.php">Search Project</a>
-        </div>
-      </div>
-      <a href="search.php"><button class="tab">Employee</button></a>
-      <div class="skill-dropdown">
-        <button class="dashboard-dropbtn tab" onclick="toggleSkillDropdown()">Skill</button>
-        <div id="dropdown-content" class="dropdown-menu">
-          <a href="skill.php">Create Skills</a>
-          <a href="skill_dashboard.php">Search Skill</a>
-        </div>
-      </div>
-      <div class="location-dropdown">
-        <button class="dashboard-dropbtn tab " onclick="toggleLocationDropdown()">Location</button>
-        <div id="location-dropdown-content" class="dropdown-menu">
-          <a href="add_location.php">Create Location</a>
-          <a href="view_location.php">Search Location</a>
-        </div>
-      </div>
-      <div class="customer-dropdown">
-        <button class="dashboard-dropbtn tab" onclick="toggleCustomerDropdown()">Customer</button>
-        <div id="customer-dropdown-content" class="dropdown-menu">
-          <a href="customer_creation.php">Create Customer</a>
-          <a href="customer_view.php">Search Customer</a>
-        </div>
-      </div>
-    </div>
-    <div class="user-menu" onclick="toggleDropdown()">
-      <img src="../images/hamburger_icon.png" alt="Icon" class="user-icon">
-      <div class="dropdown-menu" id="userDropdown">
-        <a href="agent_profile.php" id="edit-profile">Edit Profile</a>
-        <a href="agent_logout.php" id="log-out">Log Out</a>
-      </div>
-    </div>
-  </div>
+  <?php include('navbar.php') ?>
 
   <!-- Modal -->
 
@@ -118,7 +81,7 @@ $outcome2 = mysqli_query($conn, $sql2);
       <div class="form-group">
         <label for="setstatus">Status</label>
         <select name="setstatus" id="setstatus">
-          <option value="" disabled selected hidden >Please select Project</option>
+          <option value="" disabled selected hidden>Please select Project</option>
           <option value="open">Open</option>
           <option value="closed">Closed</option>
 

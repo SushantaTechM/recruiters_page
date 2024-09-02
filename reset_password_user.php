@@ -13,7 +13,7 @@ if (isset($_POST["verify"])) {
     $result = mysqli_query($conn, $sql);
     $row = $result->fetch_assoc();
     // var_dump($row);
-    if ($result) {
+    if ($row) {
         if ($phone == $row['Phone']) {
             $query = "UPDATE `Users` SET `Password`= '$password' WHERE `Email`='$email'";
             $result = mysqli_query($conn, $query);
@@ -23,6 +23,9 @@ if (isset($_POST["verify"])) {
         } else {
             $showError = true;
         }
+    }
+    else{
+        $showError = true;
     }
 }
 ?>
