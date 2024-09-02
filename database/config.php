@@ -35,7 +35,7 @@ if ($conn->query($locationmaster) === FALSE) {
 }
 
 //                       CustomerMaster table
-$customermaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`customermaster` ( `CustomerId` INT(20) NOT NULL AUTO_INCREMENT , `CustomerName` VARCHAR(25) NOT NULL , `CustomerLocation` INT(25) NOT NULL , PRIMARY KEY (`CustomerId`) , FOREIGN KEY (`CustomerLocation`) REFERENCES `locationmaster`(`LocationId`)) ENGINE = InnoDB;
+$customermaster = "CREATE TABLE if NOT EXISTS `recruitmentpage`.`customermaster` ( `CustomerId` INT(20) NOT NULL AUTO_INCREMENT , `CustomerName` VARCHAR(25) NOT NULL , `CustomerLocation` INT(25) NOT NULL ,`Email` VARCHAR(100) NOT NULL,`Phone_no` VARCHAR(13) NOT NULL, PRIMARY KEY (`CustomerId`) , FOREIGN KEY (`CustomerLocation`) REFERENCES `locationmaster`(`LocationId`)) ENGINE = InnoDB;
 ";
 
 if ($conn->query($customermaster) === FALSE) {
